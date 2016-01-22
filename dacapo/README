@@ -1,0 +1,52 @@
+Benchmark timeline in various dacapo versions
+
+FINAL=dacapo=9.12
+MIDDLE=dacapo-9.10-beta0
+INITIAL=dacapo-2006-10-MR2
+
+INTRODUCED IN FINAL:
+avrora
+batik
+tradebeans
+tradesoap
+tomcat
+sunflow
+h2
+
+INTRODUCED IN MIDDLE, DELETED IN FINAL: 
+derby
+
+INTRODUCED IN INITIAL, DELETED IN FINAL:
+antlr
+bloat
+chart
+hsqldb
+
+INTRODUCED IN INITIAL, RETAINED IN FINAL:
+eclipse
+fop
+jython
+luindex 
+lusearch
+pmd 
+xalan
+
+=====
+
+In the original dacapo-9.12 distribution, the entry point of each benchmark is the main method in:
+
+shared/dacapo-9.12/src/Harness.java
+
+which simply calls the main method in:
+
+shared/dacapo-9.12/src/org/dacapo/harness/TestHarness.java
+
+I have instead copied the above TestHarness.java to:
+
+benchmarks/<benchmark-name>/adaptor/org/dacapo/harness/ChordHarness.java
+
+specialized the TestHarness to the benchmark (namely, invoke the benchmark's main method directly
+instead of via reflection), and made the main method in ChordHarness as the entry point in
+chord.properties
+
+

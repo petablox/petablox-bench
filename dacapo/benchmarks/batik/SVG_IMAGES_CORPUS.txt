@@ -1,0 +1,5 @@
+To get svg images to use as input to batik, go to:
+
+http://download.openclipart.org/downloads/
+
+and get the file: daily_SVG_snapshot.tar.bz2

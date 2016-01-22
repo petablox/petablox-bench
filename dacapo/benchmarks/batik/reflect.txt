@@ -1,0 +1,27 @@
+# resolvedClsForNameSites
+44!getImplClass:()Ljava/lang/Class;@java.security.Provider$Service->sun.security.provider.SHA
+43!getSpiClass:(Ljava/lang/String;)Ljava/lang/Class;@java.security.Security->java.security.MessageDigestSpi
+32!createURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@sun.misc.Launcher$Factory->sun.net.www.protocol.jar.Handler
+2!run:()Ljava/lang/Object;@java.util.Currency$1->java.util.CurrencyData
+24!getLocalGraphicsEnvironment:()Ljava/awt/GraphicsEnvironment;@java.awt.GraphicsEnvironment->sun.awt.X11GraphicsEnvironment
+1!getWriteAdapter:(Ljava/lang/String;)Lorg/apache/batik/transcoder/image/PNGTranscoder$WriteAdapter;@org.apache.batik.transcoder.image.PNGTranscoder->org.apache.batik.ext.awt.image.codec.png.PNGTranscoderInternalCodecWriteAdapter
+5!createCSSEngine:(Lorg/apache/batik/dom/AbstractStylableDocument;Lorg/apache/batik/css/engine/CSSContext;)Lorg/apache/batik/css/engine/CSSEngine;@org.apache.batik.dom.ExtensibleDOMImplementation->org.apache.batik.css.parser.Parser
+1!class$:(Ljava/lang/String;)Ljava/lang/Class;@org.apache.crimson.parser.Parser2$Catalog->org.apache.crimson.parser.Parser2
+2!run:()Ljava/lang/Void;@sun.nio.ch.Util$4->java.nio.DirectByteBufferR
+# resolvedObjNewInstSites
+125!lookup:(Ljava/lang/String;)Ljava/nio/charset/Charset;@sun.nio.cs.FastCharsetProvider->sun.nio.cs.UTF_16
+42!newBundle:(Ljava/lang/String;Ljava/util/Locale;Ljava/lang/String;Ljava/lang/ClassLoader;Z)Ljava/util/ResourceBundle;@java.util.ResourceBundle$Control->sun.text.resources.FormatData,sun.text.resources.FormatData_en,sun.text.resources.FormatData_en_US,sun.util.resources.CurrencyNames,sun.util.resources.CurrencyNames_en_US,sun.text.resources.FormatData_en_AU,sun.util.resources.CurrencyNames_en_AU,sun.awt.resources.awt
+151!newInstance:(Ljava/lang/Object;)Ljava/lang/Object;@java.security.Provider$Service->sun.security.provider.SHA
+245!providers:(Ljava/lang/Class;)Ljava/util/Iterator;@org.apache.batik.util.Service->org.apache.batik.extension.svg.BatikDomExtension,org.apache.batik.script.rhino.RhinoInterpreterFactory,org.apache.batik.extension.svg.BatikBridgeExtension
+37!createURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@sun.misc.Launcher$Factory->sun.net.www.protocol.jar.Handler
+79!run:()Ljava/lang/Object;@sun.security.jca.ProviderConfig$3->sun.security.provider.Sun
+27!getLocalGraphicsEnvironment:()Ljava/awt/GraphicsEnvironment;@java.awt.GraphicsEnvironment->sun.awt.X11GraphicsEnvironment
+6!getWriteAdapter:(Ljava/lang/String;)Lorg/apache/batik/transcoder/image/PNGTranscoder$WriteAdapter;@org.apache.batik.transcoder.image.PNGTranscoder->org.apache.batik.ext.awt.image.codec.png.PNGTranscoderInternalCodecWriteAdapter
+8!createCSSEngine:(Lorg/apache/batik/dom/AbstractStylableDocument;Lorg/apache/batik/css/engine/CSSContext;)Lorg/apache/batik/css/engine/CSSEngine;@org.apache.batik.dom.ExtensibleDOMImplementation->org.apache.batik.css.parser.Parser
+8!newInstance:(Ljava/lang/String;Ljava/lang/ClassLoader;Z)Ljava/lang/Object;@javax.xml.parsers.FactoryFinder->org.apache.crimson.jaxp.SAXParserFactoryImpl
+# resolvedConNewInstSites
+118!newInstance0:()Ljava/lang/Object;@java.lang.Class->sun.text.resources.FormatData,sun.text.resources.FormatData_en,sun.text.resources.FormatData_en_US,sun.net.www.protocol.jar.Handler,sun.util.resources.CurrencyNames,sun.util.resources.CurrencyNames_en_US,sun.text.resources.FormatData_en_AU,sun.util.resources.CurrencyNames_en_AU,org.apache.batik.extension.svg.BatikDomExtension,org.apache.crimson.jaxp.SAXParserFactoryImpl,org.apache.batik.script.rhino.RhinoInterpreterFactory,sun.awt.resources.awt,org.apache.batik.extension.svg.BatikBridgeExtension,org.apache.batik.css.parser.Parser,sun.awt.X11GraphicsEnvironment,sun.nio.cs.UTF_16,org.apache.batik.ext.awt.image.codec.png.PNGTranscoderInternalCodecWriteAdapter,sun.security.provider.Sun,sun.security.provider.SHA
+42!newMappedByteBufferR:(IJLjava/lang/Runnable;)Ljava/nio/MappedByteBuffer;@sun.nio.ch.Util->java.nio.DirectByteBufferR
+# resolvedAryNewInstSites
+22!copyOf:([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;@java.util.Arrays->java.lang.String[],sun.security.jca.ProviderConfig[]
+23!toArray:([Ljava/lang/Object;)[Ljava/lang/Object;@java.util.AbstractCollection->java.lang.String[],java.lang.Short[],sun.font.PhysicalFont[]

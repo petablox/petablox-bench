@@ -1,0 +1,21 @@
+# resolvedClsForNameSites
+44!getImplClass:()Ljava/lang/Class;@java.security.Provider$Service->sun.security.provider.SHA
+43!getSpiClass:(Ljava/lang/String;)Ljava/lang/Class;@java.security.Security->java.security.MessageDigestSpi
+600!main:([Ljava/lang/String;)V@dacapo.hsqldb.PseudoJDBCBench->org.hsqldb.jdbcDriver
+32!createURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@sun.misc.Launcher$Factory->sun.net.www.protocol.jar.Handler
+2!run:()Ljava/lang/Object;@java.util.Currency$1->java.util.CurrencyData
+97!<init>:(Ljava/lang/String;Ljava/lang/String;Z)V@org.hsqldb.Function->org.hsqldb.Library
+4!newDatabaseInformation:(Lorg/hsqldb/Database;)Lorg/hsqldb/DatabaseInformation;@org.hsqldb.DatabaseInformation->org.hsqldb.DatabaseInformationFull
+# resolvedObjNewInstSites
+42!newBundle:(Ljava/lang/String;Ljava/util/Locale;Ljava/lang/String;Ljava/lang/ClassLoader;Z)Ljava/util/ResourceBundle;@java.util.ResourceBundle$Control->sun.util.resources.CalendarData,sun.util.resources.CalendarData_en,sun.text.resources.FormatData,sun.text.resources.FormatData_en,sun.text.resources.FormatData_en_US,sun.util.resources.CurrencyNames,sun.util.resources.CurrencyNames_en_US
+151!newInstance:(Ljava/lang/Object;)Ljava/lang/Object;@java.security.Provider$Service->sun.security.provider.SHA
+37!createURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@sun.misc.Launcher$Factory->sun.net.www.protocol.jar.Handler
+34!next:()Ljava/lang/Object;@sun.misc.Service$LazyIterator->sun.jdbc.odbc.JdbcOdbcDriver
+79!run:()Ljava/lang/Object;@sun.security.jca.ProviderConfig$3->sun.security.provider.Sun
+# resolvedConNewInstSites
+118!newInstance0:()Ljava/lang/Object;@java.lang.Class->sun.net.www.protocol.jar.Handler,sun.jdbc.odbc.JdbcOdbcDriver,sun.util.resources.CalendarData,sun.util.resources.CalendarData_en,sun.text.resources.FormatData,sun.text.resources.FormatData_en,sun.text.resources.FormatData_en_US,sun.util.resources.CurrencyNames,sun.util.resources.CurrencyNames_en_US,sun.security.provider.Sun,sun.security.provider.SHA
+52!newDatabaseInformation:(Lorg/hsqldb/Database;)Lorg/hsqldb/DatabaseInformation;@org.hsqldb.DatabaseInformation->org.hsqldb.DatabaseInformationFull
+# resolvedAryNewInstSites
+22!copyOf:([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;@java.util.Arrays->java.lang.String[],java.lang.reflect.Method[],java.lang.Thread[],sun.security.jca.ProviderConfig[]
+17!toAdjustedArray:(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object;@org.hsqldb.lib.ArrayUtil->org.hsqldb.Index[],org.hsqldb.Constraint[]
+8!resizeArray:(Ljava/lang/Object;I)Ljava/lang/Object;@org.hsqldb.lib.ArrayUtil->int[],org.hsqldb.Expression[]

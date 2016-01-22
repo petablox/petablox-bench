@@ -1,0 +1,16 @@
+# resolvedClsForNameSites
+44!getImplClass:()Ljava/lang/Class;@java.security.Provider$Service->sun.security.provider.SHA
+43!getSpiClass:(Ljava/lang/String;)Ljava/lang/Class;@java.security.Security->java.security.MessageDigestSpi
+172!doEverything:([Ljava/lang/String;)I@antlr.Tool->antlr.JavaCodeGenerator
+2!setTokenObjectClass:(Ljava/lang/String;)V@antlr.CharScanner->antlr.CommonToken
+32!createURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@sun.misc.Launcher$Factory->sun.net.www.protocol.jar.Handler
+# resolvedObjNewInstSites
+151!newInstance:(Ljava/lang/Object;)Ljava/lang/Object;@java.security.Provider$Service->sun.security.provider.SHA
+179!doEverything:([Ljava/lang/String;)I@antlr.Tool->antlr.JavaCodeGenerator
+4!makeToken:(I)Lantlr/Token;@antlr.CharScanner->antlr.CommonToken
+37!createURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@sun.misc.Launcher$Factory->sun.net.www.protocol.jar.Handler
+79!run:()Ljava/lang/Object;@sun.security.jca.ProviderConfig$3->sun.security.provider.Sun
+# resolvedConNewInstSites
+118!newInstance0:()Ljava/lang/Object;@java.lang.Class->sun.net.www.protocol.jar.Handler,antlr.CommonToken,antlr.JavaCodeGenerator,sun.security.provider.Sun,sun.security.provider.SHA
+# resolvedAryNewInstSites
+22!copyOf:([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;@java.util.Arrays->java.lang.String[],sun.security.jca.ProviderConfig[]
