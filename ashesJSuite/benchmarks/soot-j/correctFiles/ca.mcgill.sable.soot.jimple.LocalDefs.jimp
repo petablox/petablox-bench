@@ -1,0 +1,5 @@
+public interface ca.mcgill.sable.soot.jimple.LocalDefs extends java.lang.Object
+{
+
+    public abstract ca.mcgill.sable.util.List getDefsOfAt(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Stmt);
+}

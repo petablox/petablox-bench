@@ -1,0 +1,5 @@
+FILES=`find executionInput -name "*.java"`
+BENCHMARK_ARGS='-d $EXECUTION_OUTPUT_DIR $FILES'
+
+#BENCHMARK_ARGS='-d $EXECUTION_OUTPUT_DIR executionInput/soot/Main.java'
+

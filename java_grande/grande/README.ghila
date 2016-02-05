@@ -1,0 +1,7 @@
+For connection analysis, the following two benchmarks were used in the SAS'15 paper:
+
+grande section 2 -  (orig location: extra/bench/grande/src/section2)
+grande section 3 -  (orig location: extra/bench/grande/src/section3)
+
+To compile them, first run ant compile in src/jfutil and then in the src/section2 and src/section3 
+

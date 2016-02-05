@@ -1,0 +1,110 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractConstantSwitch extends java.lang.Object implements ca.mcgill.sable.soot.jimple.ConstantSwitch
+{
+    java.lang.Object result;
+
+    public void caseDoubleConstant(ca.mcgill.sable.soot.jimple.DoubleConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        ca.mcgill.sable.soot.jimple.DoubleConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseFloatConstant(ca.mcgill.sable.soot.jimple.FloatConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        ca.mcgill.sable.soot.jimple.FloatConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseIntConstant(ca.mcgill.sable.soot.jimple.IntConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        ca.mcgill.sable.soot.jimple.IntConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseLongConstant(ca.mcgill.sable.soot.jimple.LongConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        ca.mcgill.sable.soot.jimple.LongConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNullConstant(ca.mcgill.sable.soot.jimple.NullConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        ca.mcgill.sable.soot.jimple.NullConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseStringConstant(ca.mcgill.sable.soot.jimple.StringConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        ca.mcgill.sable.soot.jimple.StringConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void defaultCase(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        return;
+    }
+
+    public java.lang.Object getResult()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 = r0.result;
+        return r1;
+    }
+
+    public void setResult(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r1;
+        return;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractConstantSwitch r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

@@ -1,0 +1,168 @@
+class ca.mcgill.sable.soot.jimple.ClassHierarchy extends java.lang.Object
+{
+    private static java.util.Hashtable classHierarchyHashtable;
+    ca.mcgill.sable.soot.SootClassManager classManager;
+    private java.util.Vector typeNodeInstances;
+    private java.util.Hashtable typeNodeHashtable;
+    private ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt transform;
+    private ca.mcgill.sable.soot.jimple.ClassHierarchy$ConstructorChooser make;
+
+    private void <init>(ca.mcgill.sable.soot.SootClassManager)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r0;
+        ca.mcgill.sable.soot.SootClassManager r1;
+        java.util.Vector r2;
+        java.util.Hashtable r3, r7;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r4;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ConstructorChooser r5;
+        java.lang.NullPointerException r6;
+        java.lang.Object r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r2 = new java.util.Vector;
+        specialinvoke r2.<init>();
+        r0.typeNodeInstances = r2;
+        r3 = new java.util.Hashtable;
+        specialinvoke r3.<init>();
+        r0.typeNodeHashtable = r3;
+        r4 = new ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt;
+        specialinvoke r4.<init>(r0);
+        r0.transform = r4;
+        r5 = new ca.mcgill.sable.soot.jimple.ClassHierarchy$ConstructorChooser;
+        specialinvoke r5.<init>(r0);
+        r0.make = r5;
+        if r1 != null goto label0;
+
+        r6 = new java.lang.NullPointerException;
+        specialinvoke r6.<init>();
+        throw r6;
+
+     label0:
+        r0.classManager = r1;
+        r7 = ca.mcgill.sable.soot.jimple.ClassHierarchy.classHierarchyHashtable;
+        r8 = r7.put(r1, r0);
+        return;
+    }
+
+    public static ca.mcgill.sable.soot.jimple.ClassHierarchy getClassHierarchy(ca.mcgill.sable.soot.SootClassManager)
+    {
+        ca.mcgill.sable.soot.SootClassManager r0;
+        java.util.Hashtable r1;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r2, r4, r5;
+        java.lang.Object r3;
+
+        r0 := @parameter0;
+        r1 = ca.mcgill.sable.soot.jimple.ClassHierarchy.classHierarchyHashtable;
+        r3 = r1.get(r0);
+        r4 = (ca.mcgill.sable.soot.jimple.ClassHierarchy) r3;
+        r2 = r4;
+        if r4 != null goto label0;
+
+        r5 = new ca.mcgill.sable.soot.jimple.ClassHierarchy;
+        specialinvoke r5.<init>(r0);
+        r2 = r5;
+
+     label0:
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode getTypeNode(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r0;
+        ca.mcgill.sable.soot.Type r1, r4;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r2, r7;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r3;
+        java.util.Hashtable r5;
+        java.lang.Object r6;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ConstructorChooser r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.transform;
+        r4 = r3.toInt(r1);
+        r5 = r0.typeNodeHashtable;
+        r6 = r5.get(r4);
+        r7 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r6;
+        r2 = r7;
+        if r7 != null goto label0;
+
+        r8 = r0.make;
+        r2 = r8.typeNode(r4);
+
+     label0:
+        return r2;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r0;
+        java.lang.StringBuffer r1, r2, r5, r7, r8;
+        int i0, i1;
+        java.util.Vector r3;
+        java.util.Enumeration r4;
+        java.lang.Object r6;
+        java.lang.String r9;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>();
+        i0 = 0;
+        r2 = r1.append("ClassHierarchy:{");
+        r3 = r0.typeNodeInstances;
+        r4 = r3.elements();
+        goto label3;
+
+     label0:
+        if i0 == 0 goto label1;
+
+        r5 = r1.append(",");
+        goto label2;
+
+     label1:
+        i0 = 1;
+
+     label2:
+        r6 = r4.nextElement();
+        r7 = r1.append(r6);
+
+     label3:
+        i1 = r4.hasMoreElements();
+        if i1 != 0 goto label0;
+
+        r8 = r1.append("}");
+        r9 = r1.toString();
+        return r9;
+    }
+
+    static java.util.Vector access$0(ca.mcgill.sable.soot.jimple.ClassHierarchy)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r0;
+        java.util.Vector r1;
+
+        r0 := @parameter0;
+        r1 = r0.typeNodeInstances;
+        return r1;
+    }
+
+    static java.util.Hashtable access$1(ca.mcgill.sable.soot.jimple.ClassHierarchy)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r0;
+        java.util.Hashtable r1;
+
+        r0 := @parameter0;
+        r1 = r0.typeNodeHashtable;
+        return r1;
+    }
+
+    static void <clinit>()
+    {
+        java.util.Hashtable r0;
+
+        r0 = new java.util.Hashtable;
+        specialinvoke r0.<init>();
+        ca.mcgill.sable.soot.jimple.ClassHierarchy.classHierarchyHashtable = r0;
+        return;
+    }
+}

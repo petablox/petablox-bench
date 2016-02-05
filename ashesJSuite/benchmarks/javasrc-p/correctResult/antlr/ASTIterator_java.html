@@ -1,0 +1,89 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ASTIterator');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ASTIterator';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>import antlr.collections.AST;
+<a name=4 class="linenum">4	</SPAN><span class="comment">/**
+<a name=5 class="linenum">5	</SPAN> */</span>
+<a name=6 class="linenum">6	</SPAN>public class <a class="classDef" name=ASTIterator href=ASTIterator_java_ref.html#ASTIterator>ASTIterator</a> {
+<a name=7 class="linenum">7	</SPAN>	protected <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="varDef" name=cursor href=ASTIterator_java_ref.html#cursor>cursor</a> = null;
+<a name=8 class="linenum">8	</SPAN>	protected <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="varDef" name=original href=ASTIterator_java_ref.html#original>original</a> = null;
+<a name=9 class="linenum">9	</SPAN>
+<a name=10 class="linenum">10	</SPAN>
+<a name=11 class="linenum">11	</SPAN>	public <a class="methodDef" name=ASTIterator(AST) href=ASTIterator_java_ref.html#ASTIterator(AST)>ASTIterator</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t) {
+<a name=12 class="linenum">12	</SPAN>		<a class="varRef" href=ASTIterator_java.html#original>original</a> = <a class="varRef" href=ASTIterator_java.html#cursor>cursor</a> = t;
+<a name=13 class="linenum">13	</SPAN>	}
+<a name=14 class="linenum">14	</SPAN><span class="comment">/** Is 'sub' a subtree of 't' beginning at the root? */</span>
+<a name=15 class="linenum">15	</SPAN>public boolean <a class="methodDef" name=isSubtree(AST,AST) href=ASTIterator_java_ref.html#isSubtree(AST,AST)>isSubtree</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t, <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> sub) {
+<a name=16 class="linenum">16	</SPAN>	<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> sibling;
+<a name=17 class="linenum">17	</SPAN>
+<a name=18 class="linenum">18	</SPAN>	<span class="comment">// the empty tree is always a subset of any tree.
+<a name=19 class="linenum">19	</SPAN></span>	if ( sub==null ) {
+<a name=20 class="linenum">20	</SPAN>		return true;
+<a name=21 class="linenum">21	</SPAN>	}
+<a name=22 class="linenum">22	</SPAN>	
+<a name=23 class="linenum">23	</SPAN>	<span class="comment">// if the tree is empty, return true if the subtree template is too. 	
+<a name=24 class="linenum">24	</SPAN></span>	if ( t==null ) {
+<a name=25 class="linenum">25	</SPAN>		if ( sub!=null ) return false;
+<a name=26 class="linenum">26	</SPAN>		return true;
+<a name=27 class="linenum">27	</SPAN>	}	
+<a name=28 class="linenum">28	</SPAN>
+<a name=29 class="linenum">29	</SPAN>	<span class="comment">// Otherwise, start walking sibling lists.  First mismatch, return false.
+<a name=30 class="linenum">30	</SPAN></span>	for (sibling=t;
+<a name=31 class="linenum">31	</SPAN>		  sibling!=null&&sub!=null;
+<a name=32 class="linenum">32	</SPAN>		  sibling=sibling.<a class="methodRef" href=../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>(), sub=sub.<a class="methodRef" href=../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>())
+<a name=33 class="linenum">33	</SPAN>	{
+<a name=34 class="linenum">34	</SPAN>		<span class="comment">// as a quick optimization, check roots first.
+<a name=35 class="linenum">35	</SPAN></span>		if ( sibling.<a class="methodRef" href=../antlr/collections/AST_java.html#getType()>getType</a>() != sub.<a class="methodRef" href=../antlr/collections/AST_java.html#getType()>getType</a>() ) return false;
+<a name=36 class="linenum">36	</SPAN>		<span class="comment">// if roots match, do full match test on children.
+<a name=37 class="linenum">37	</SPAN></span>		if ( sibling.<a class="methodRef" href=../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>()!=null ) {
+<a name=38 class="linenum">38	</SPAN>			if ( !<a class="methodRef" href=ASTIterator_java.html#isSubtree(AST,AST)>isSubtree</a>(sibling.<a class="methodRef" href=../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>(), sub.<a class="methodRef" href=../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>()) ) return false;
+<a name=39 class="linenum">39	</SPAN>		}	
+<a name=40 class="linenum">40	</SPAN>	}
+<a name=41 class="linenum">41	</SPAN>	return true;
+<a name=42 class="linenum">42	</SPAN>}
+<a name=43 class="linenum">43	</SPAN>	<span class="comment">/** Find the next subtree with structure and token types equal to
+<a name=44 class="linenum">44	</SPAN>	 * those of 'template'.
+<a name=45 class="linenum">45	</SPAN>	 */</span>
+<a name=46 class="linenum">46	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=next(AST) href=ASTIterator_java_ref.html#next(AST)>next</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> template) {
+<a name=47 class="linenum">47	</SPAN>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t = null;
+<a name=48 class="linenum">48	</SPAN>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> sibling = null;
+<a name=49 class="linenum">49	</SPAN>		
+<a name=50 class="linenum">50	</SPAN>		if ( <a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>==null ) {	<span class="comment">// do nothing if no tree to work on
+<a name=51 class="linenum">51	</SPAN></span>			return null;
+<a name=52 class="linenum">52	</SPAN>		}
+<a name=53 class="linenum">53	</SPAN>		
+<a name=54 class="linenum">54	</SPAN>		<span class="comment">// Start walking sibling list looking for subtree matches.
+<a name=55 class="linenum">55	</SPAN></span>		for ( ; <a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>!=null; <a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>=<a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>.<a class="methodRef" href=../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>())
+<a name=56 class="linenum">56	</SPAN>		{
+<a name=57 class="linenum">57	</SPAN>			<span class="comment">// as a quick optimization, check roots first.
+<a name=58 class="linenum">58	</SPAN></span>			if ( <a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>.<a class="methodRef" href=../antlr/collections/AST_java.html#getType()>getType</a>() == template.<a class="methodRef" href=../antlr/collections/AST_java.html#getType()>getType</a>() ) {
+<a name=59 class="linenum">59	</SPAN>				<span class="comment">// if roots match, do full match test on children.
+<a name=60 class="linenum">60	</SPAN></span>				if ( <a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>.<a class="methodRef" href=../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>()!=null ) {
+<a name=61 class="linenum">61	</SPAN>					if ( <a class="methodRef" href=ASTIterator_java.html#isSubtree(AST,AST)>isSubtree</a>(<a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>.<a class="methodRef" href=../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>(), template.<a class="methodRef" href=../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>()) ) {
+<a name=62 class="linenum">62	</SPAN>						return <a class="varRef" href=ASTIterator_java.html#cursor>cursor</a>;
+<a name=63 class="linenum">63	</SPAN>					}	
+<a name=64 class="linenum">64	</SPAN>				}
+<a name=65 class="linenum">65	</SPAN>			}	
+<a name=66 class="linenum">66	</SPAN>		}
+<a name=67 class="linenum">67	</SPAN>		return t;	
+<a name=68 class="linenum">68	</SPAN>	}
+<a name=69 class="linenum">69	</SPAN>}
+<a name=70 class="linenum">70	</SPAN></pre>

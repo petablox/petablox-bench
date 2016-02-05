@@ -1,0 +1,57 @@
+public class ca.mcgill.sable.soot.jimple.StmtBox extends java.lang.Object implements ca.mcgill.sable.soot.jimple.UnitBox
+{
+    private ca.mcgill.sable.soot.jimple.Stmt stmt;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.Stmt)
+    {
+        ca.mcgill.sable.soot.jimple.StmtBox r0;
+        ca.mcgill.sable.soot.jimple.Stmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.setUnit(r1);
+        return;
+    }
+
+    public void setUnit(ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.StmtBox r0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.Stmt r2, r3, r4, r6, r7;
+        ca.mcgill.sable.util.List r5, r8;
+        int i0, i1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.Stmt) r1;
+        r3 = r0.stmt;
+        if r3 == null goto label0;
+
+        r4 = r0.stmt;
+        r5 = r4.getBoxesPointingToThis();
+        i0 = r5.remove(r0);
+
+     label0:
+        r0.stmt = r2;
+        r6 = r0.stmt;
+        if r6 == null goto label1;
+
+        r7 = r0.stmt;
+        r8 = r7.getBoxesPointingToThis();
+        i1 = r8.add(r0);
+
+     label1:
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Unit getUnit()
+    {
+        ca.mcgill.sable.soot.jimple.StmtBox r0;
+        ca.mcgill.sable.soot.jimple.Stmt r1;
+
+        r0 := @this;
+        r1 = r0.stmt;
+        return r1;
+    }
+}

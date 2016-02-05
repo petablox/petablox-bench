@@ -1,0 +1,3 @@
+public interface ca.mcgill.sable.soot.jimple.NeExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.ConditionExpr
+{
+}

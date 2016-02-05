@@ -1,0 +1,11 @@
+Benchmark: soot-j
+
+Author: Sable Research Group (www.sable.mcgill.ca/soot) 
+
+Packaged by: Raja Vallee-Rai (rvalleerai@sable.mcgill.ca)
+Packaged on: June 1, 1999
+
+Description: This is a frozen version of the Soot framework.  This run processes
+all of the jimple sub package.
+
+

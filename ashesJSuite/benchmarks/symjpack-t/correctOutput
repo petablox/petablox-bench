@@ -1,0 +1,14 @@
+(((2*x)*exp(x^2))+((exp(-x^2)*x)*2))/2
+(2*((sin(x)*x)+cos(x)))-(x^2*cos(x))
+-(((x/(50*cos(ln(x)/2)^2))+(((2*x)*tan(ln(x)/2))/25))*5)
+(x*t^(x-1))*cos(t^x)
+((8*y)*x)/(x^2+y^2)^3
+((4*((x^3*sin(pi*x))-((3*((2*(((sin(pi*x)*x)/pi)+(cos(pi*x)/pi^2)))-(x^2*cos(pi*x))))/pi)))/pi^2)-((x^4*cos(pi*x))/pi)
+(3077/5)-cos(4)
+8771
+0.4272110746807519
+0.3821416754970512
+33
+1572833+(y^3*7)
+x^2+(x^6/6)
+(2*((((subst(int(cos((x*pi)*12),x),x,1)+subst(int(int(cos((x*pi)*12),x),x),x,0))-subst(int(int(cos((x*pi)*12),x),x),x,1))*cos((12*pi)*x))+(((subst(int(sin((x*pi)*12),x),x,1)+subst(int(int(sin((x*pi)*12),x),x),x,0))-subst(int(int(sin((x*pi)*12),x),x),x,1))*sin((12*pi)*x))))+(2*((((subst(int(cos((x*pi)*8),x),x,1)+subst(int(int(cos((x*pi)*8),x),x),x,0))-subst(int(int(cos((x*pi)*8),x),x),x,1))*cos((8*pi)*x))+(((subst(int(sin((x*pi)*8),x),x,1)+subst(int(int(sin((x*pi)*8),x),x),x,0))-subst(int(int(sin((x*pi)*8),x),x),x,1))*sin((8*pi)*x))))+(2*((((subst(int(cos((x*pi)*4),x),x,1)+subst(int(int(cos((x*pi)*4),x),x),x,0))-subst(int(int(cos((x*pi)*4),x),x),x,1))*cos((4*pi)*x))+(((subst(int(sin((x*pi)*4),x),x,1)+subst(int(int(sin((x*pi)*4),x),x),x,0))-subst(int(int(sin((x*pi)*4),x),x),x,1))*sin((4*pi)*x))))+(1/2)+(2*((((subst(int(cos((x*pi)*2),x),x,1)+subst(int(int(cos((x*pi)*2),x),x),x,0))-subst(int(int(cos((x*pi)*2),x),x),x,1))*cos((2*pi)*x))+(((subst(int(sin((x*pi)*2),x),x,1)+subst(int(int(sin((x*pi)*2),x),x),x,0))-subst(int(int(sin((x*pi)*2),x),x),x,1))*sin((2*pi)*x))))+(2*((((subst(int(cos((x*pi)*6),x),x,1)+subst(int(int(cos((x*pi)*6),x),x),x,0))-subst(int(int(cos((x*pi)*6),x),x),x,1))*cos((6*pi)*x))+(((subst(int(sin((x*pi)*6),x),x,1)+subst(int(int(sin((x*pi)*6),x),x),x,0))-subst(int(int(sin((x*pi)*6),x),x),x,1))*sin((6*pi)*x))))+(2*((((subst(int(cos((x*pi)*10),x),x,1)+subst(int(int(cos((x*pi)*10),x),x),x,0))-subst(int(int(cos((x*pi)*10),x),x),x,1))*cos((10*pi)*x))+(((subst(int(sin((x*pi)*10),x),x,1)+subst(int(int(sin((x*pi)*10),x),x),x,0))-subst(int(int(sin((x*pi)*10),x),x),x,1))*sin((10*pi)*x))))

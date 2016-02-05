@@ -1,0 +1,139 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractFloatBinopExpr extends ca.mcgill.sable.soot.jimple.AbstractBinopExpr
+{
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractFloatBinopExpr r0;
+        ca.mcgill.sable.soot.IntType r1, r16, r25;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r4;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6, r7, r9, r11, r13, r15, r17, r19, r21, r23, r26, r28, r31, r33, r36, r38;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15;
+        ca.mcgill.sable.soot.ByteType r8, r18;
+        ca.mcgill.sable.soot.ShortType r10, r20;
+        ca.mcgill.sable.soot.CharType r12, r22;
+        ca.mcgill.sable.soot.BooleanType r14, r24;
+        ca.mcgill.sable.soot.LongType r27, r29, r30;
+        ca.mcgill.sable.soot.DoubleType r32, r34, r35;
+        ca.mcgill.sable.soot.FloatType r37, r39, r40;
+        ca.mcgill.sable.soot.UnknownType r41;
+
+        r0 := @this;
+        r2 = r0.op1Box;
+        r3 = r2.getValue();
+        r4 = r0.op1Box;
+        r5 = r4.getValue();
+        r6 = r3.getType();
+        r1 = ca.mcgill.sable.soot.IntType.v();
+        i0 = r6.equals(r1);
+        if i0 != 0 goto label0;
+
+        r7 = r3.getType();
+        r8 = ca.mcgill.sable.soot.ByteType.v();
+        i1 = r7.equals(r8);
+        if i1 != 0 goto label0;
+
+        r9 = r3.getType();
+        r10 = ca.mcgill.sable.soot.ShortType.v();
+        i2 = r9.equals(r10);
+        if i2 != 0 goto label0;
+
+        r11 = r3.getType();
+        r12 = ca.mcgill.sable.soot.CharType.v();
+        i3 = r11.equals(r12);
+        if i3 != 0 goto label0;
+
+        r13 = r3.getType();
+        r14 = ca.mcgill.sable.soot.BooleanType.v();
+        i4 = r13.equals(r14);
+        if i4 == 0 goto label2;
+
+     label0:
+        r15 = r5.getType();
+        r16 = ca.mcgill.sable.soot.IntType.v();
+        i5 = r15.equals(r16);
+        if i5 != 0 goto label1;
+
+        r17 = r5.getType();
+        r18 = ca.mcgill.sable.soot.ByteType.v();
+        i6 = r17.equals(r18);
+        if i6 != 0 goto label1;
+
+        r19 = r5.getType();
+        r20 = ca.mcgill.sable.soot.ShortType.v();
+        i7 = r19.equals(r20);
+        if i7 != 0 goto label1;
+
+        r21 = r5.getType();
+        r22 = ca.mcgill.sable.soot.CharType.v();
+        i8 = r21.equals(r22);
+        if i8 != 0 goto label1;
+
+        r23 = r5.getType();
+        r24 = ca.mcgill.sable.soot.BooleanType.v();
+        i9 = r23.equals(r24);
+        if i9 == 0 goto label2;
+
+     label1:
+        r25 = ca.mcgill.sable.soot.IntType.v();
+        return r25;
+
+     label2:
+        r26 = r3.getType();
+        r27 = ca.mcgill.sable.soot.LongType.v();
+        i10 = r26.equals(r27);
+        if i10 != 0 goto label3;
+
+        r28 = r5.getType();
+        r29 = ca.mcgill.sable.soot.LongType.v();
+        i11 = r28.equals(r29);
+        if i11 == 0 goto label4;
+
+     label3:
+        r30 = ca.mcgill.sable.soot.LongType.v();
+        return r30;
+
+     label4:
+        r31 = r3.getType();
+        r32 = ca.mcgill.sable.soot.DoubleType.v();
+        i12 = r31.equals(r32);
+        if i12 != 0 goto label5;
+
+        r33 = r5.getType();
+        r34 = ca.mcgill.sable.soot.DoubleType.v();
+        i13 = r33.equals(r34);
+        if i13 == 0 goto label6;
+
+     label5:
+        r35 = ca.mcgill.sable.soot.DoubleType.v();
+        return r35;
+
+     label6:
+        r36 = r3.getType();
+        r37 = ca.mcgill.sable.soot.FloatType.v();
+        i14 = r36.equals(r37);
+        if i14 != 0 goto label7;
+
+        r38 = r5.getType();
+        r39 = ca.mcgill.sable.soot.FloatType.v();
+        i15 = r38.equals(r39);
+        if i15 == 0 goto label8;
+
+     label7:
+        r40 = ca.mcgill.sable.soot.FloatType.v();
+        return r40;
+
+     label8:
+        r41 = ca.mcgill.sable.soot.UnknownType.v();
+        return r41;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractFloatBinopExpr r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

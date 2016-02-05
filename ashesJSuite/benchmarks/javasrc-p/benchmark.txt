@@ -1,0 +1,18 @@
+Benchmark: javasrc
+
+Author: Keith Johnston (kjohnston@iname.com)
+
+Packaged by: Jerome Barreau (jbarre5@sable.mcgill.ca)
+Packaged on: June 2, 1999
+
+
+Description:
+Javasrc creates a set of HTML pages out of your Java source code. 
+The format looks like javadoc, so you should find navigation very familiar. 
+The methods and classes are cross-referenced, so you can easily navigate 
+through the code by following the links. When you click on a definition of 
+a class or method, you can see all the places in the code that reference 
+that class or method.
+
+
+                                  

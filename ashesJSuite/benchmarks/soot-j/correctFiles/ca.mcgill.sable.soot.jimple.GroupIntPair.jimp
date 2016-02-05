@@ -1,0 +1,67 @@
+class ca.mcgill.sable.soot.jimple.GroupIntPair extends java.lang.Object
+{
+    java.lang.Object group;
+    int x;
+
+    void <init>(java.lang.Object, int)
+    {
+        ca.mcgill.sable.soot.jimple.GroupIntPair r0;
+        java.lang.Object r1;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.group = r1;
+        r0.x = i0;
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.GroupIntPair r0, r2, r5;
+        java.lang.Object r1, r3, r4;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.GroupIntPair;
+        if i0 == 0 goto label2;
+
+        r2 = (ca.mcgill.sable.soot.jimple.GroupIntPair) r1;
+        r3 = r2.group;
+        r4 = r0.group;
+        i1 = r3.equals(r4);
+        if i1 == 0 goto label0;
+
+        r5 = (ca.mcgill.sable.soot.jimple.GroupIntPair) r1;
+        i2 = r5.x;
+        i3 = r0.x;
+        if i2 == i3 goto label1;
+
+     label0:
+        return 0;
+
+     label1:
+        return 1;
+
+     label2:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        ca.mcgill.sable.soot.jimple.GroupIntPair r0;
+        java.lang.Object r1;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+        r1 = r0.group;
+        i0 = r1.hashCode();
+        i1 = r0.x;
+        i2 = 1013 * i1;
+        i3 = i0 + i2;
+        return i3;
+    }
+}

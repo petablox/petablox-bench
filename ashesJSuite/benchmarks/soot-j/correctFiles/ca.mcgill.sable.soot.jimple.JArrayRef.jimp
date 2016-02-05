@@ -1,0 +1,282 @@
+public class ca.mcgill.sable.soot.jimple.JArrayRef extends java.lang.Object implements ca.mcgill.sable.soot.jimple.ArrayRef
+{
+    ca.mcgill.sable.soot.jimple.ValueBox baseBox;
+    ca.mcgill.sable.soot.jimple.ValueBox indexBox;
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.Jimple r3, r5;
+        ca.mcgill.sable.soot.jimple.ValueBox r4, r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r4 = r3.newLocalBox(r1);
+        r5 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r6 = r5.newImmediateBox(r2);
+        specialinvoke r0.<init>(r4, r6);
+        return;
+    }
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox, ca.mcgill.sable.soot.jimple.ValueBox)
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1, r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.baseBox = r1;
+        r0.indexBox = r2;
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        java.lang.Object r1;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.Value r2, r4, r5, r7;
+        ca.mcgill.sable.soot.jimple.ArrayRef r3, r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.ArrayRef;
+        if i0 == 0 goto label2;
+
+        r2 = r0.getBase();
+        r3 = (ca.mcgill.sable.soot.jimple.ArrayRef) r1;
+        r4 = r3.getBase();
+        i1 = r2.equals(r4);
+        if i1 == 0 goto label0;
+
+        r5 = r0.getIndex();
+        r6 = (ca.mcgill.sable.soot.jimple.ArrayRef) r1;
+        r7 = r6.getIndex();
+        i2 = r5.equals(r7);
+        if i2 != 0 goto label1;
+
+     label0:
+        return 0;
+
+     label1:
+        return 1;
+
+     label2:
+        return 0;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        java.lang.StringBuffer r1, r6, r10, r11;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r7;
+        ca.mcgill.sable.soot.jimple.Value r3, r8;
+        java.lang.String r4, r5, r9, r12;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        r2 = r0.baseBox;
+        r3 = r2.getValue();
+        r4 = r3.toString();
+        r5 = java.lang.String.valueOf(r4);
+        specialinvoke r1.<init>(r5);
+        r6 = r1.append("[");
+        r7 = r0.indexBox;
+        r8 = r7.getValue();
+        r9 = r8.toString();
+        r10 = r6.append(r9);
+        r11 = r10.append("]");
+        r12 = r11.toString();
+        return r12;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        java.lang.StringBuffer r1, r7, r12, r13;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r9;
+        ca.mcgill.sable.soot.ToBriefString r4, r10;
+        java.lang.String r5, r6, r11, r14;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        r2 = r0.baseBox;
+        r3 = r2.getValue();
+        r4 = (ca.mcgill.sable.soot.ToBriefString) r3;
+        r5 = r4.toBriefString();
+        r6 = java.lang.String.valueOf(r5);
+        specialinvoke r1.<init>(r6);
+        r7 = r1.append("[");
+        r8 = r0.indexBox;
+        r9 = r8.getValue();
+        r10 = (ca.mcgill.sable.soot.ToBriefString) r9;
+        r11 = r10.toBriefString();
+        r12 = r7.append(r11);
+        r13 = r12.append("]");
+        r14 = r13.toString();
+        return r14;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getBase()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.baseBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public void setBase(ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.baseBox;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getBaseBox()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.baseBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getIndex()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.indexBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public void setIndex(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.indexBox;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getIndexBox()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.indexBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5, r6, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r7;
+        ca.mcgill.sable.util.List r4, r8;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.baseBox;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i0 = r1.addAll(r4);
+        r5 = r0.baseBox;
+        i1 = r1.add(r5);
+        r6 = r0.indexBox;
+        r7 = r6.getValue();
+        r8 = r7.getUseBoxes();
+        i2 = r1.addAll(r8);
+        r9 = r0.indexBox;
+        i3 = r1.add(r9);
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.soot.UnknownType r1, r5;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.soot.Type r4;
+        int i0, i1, i2, i3, i4;
+        ca.mcgill.sable.soot.NullType r6, r7;
+        ca.mcgill.sable.soot.ArrayType r8, r11;
+        ca.mcgill.sable.soot.BaseType r9, r10;
+
+        r0 := @this;
+        r2 = r0.baseBox;
+        r3 = r2.getValue();
+        r4 = r3.getType();
+        r1 = ca.mcgill.sable.soot.UnknownType.v();
+        i0 = r4.equals(r1);
+        if i0 == 0 goto label0;
+
+        r5 = ca.mcgill.sable.soot.UnknownType.v();
+        return r5;
+
+     label0:
+        r6 = ca.mcgill.sable.soot.NullType.v();
+        i1 = r4.equals(r6);
+        if i1 == 0 goto label1;
+
+        r7 = ca.mcgill.sable.soot.NullType.v();
+        return r7;
+
+     label1:
+        r8 = (ca.mcgill.sable.soot.ArrayType) r4;
+        i2 = r8.numDimensions;
+        if i2 != 1 goto label2;
+
+        r9 = r8.baseType;
+        return r9;
+
+     label2:
+        r10 = r8.baseType;
+        i3 = r8.numDimensions;
+        i4 = i3 - 1;
+        r11 = ca.mcgill.sable.soot.ArrayType.v(r10, i4);
+        return r11;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.JArrayRef r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.RefSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.RefSwitch) r1;
+        r2.caseArrayRef(r0);
+        return;
+    }
+}

@@ -1,0 +1,1570 @@
+final class ca.mcgill.sable.soot.jimple.JasminClass$17 extends ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch
+{
+    private final ca.mcgill.sable.soot.jimple.JasminClass this$0;
+
+    public void caseAddExpr(ca.mcgill.sable.soot.jimple.AddExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.AddExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$18 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$18;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseAndExpr(ca.mcgill.sable.soot.jimple.AndExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.AndExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$19 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$19;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseArrayRef(ca.mcgill.sable.soot.jimple.ArrayRef)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.ArrayRef r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$20 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getBase();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getIndex();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$20;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseCastExpr(ca.mcgill.sable.soot.jimple.CastExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.CastExpr r1;
+        ca.mcgill.sable.soot.Type r2, r4;
+        ca.mcgill.sable.soot.jimple.Value r3, r6;
+        ca.mcgill.sable.soot.jimple.JasminClass r5, r7, r9, r14, r16, r21;
+        int i0, i1;
+        java.lang.StringBuffer r8, r12, r15, r18;
+        java.lang.String r10, r11, r13, r17, r19;
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r20;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getCastType();
+        r3 = r1.getOp();
+        r4 = r3.getType();
+        r5 = r0.this$0;
+        r6 = r1.getOp();
+        r5.emitValue(r6);
+        i0 = r2 instanceof ca.mcgill.sable.soot.RefType;
+        if i0 == 0 goto label0;
+
+        r7 = r0.this$0;
+        r8 = new java.lang.StringBuffer;
+        specialinvoke r8.<init>("checkcast ");
+        r9 = r0.this$0;
+        r10 = r2.toString();
+        r11 = r9.slashify(r10);
+        r12 = r8.append(r11);
+        r13 = r12.toString();
+        r7.emit(r13, 0);
+        return;
+
+     label0:
+        i1 = r2 instanceof ca.mcgill.sable.soot.ArrayType;
+        if i1 == 0 goto label1;
+
+        r14 = r0.this$0;
+        r15 = new java.lang.StringBuffer;
+        specialinvoke r15.<init>("checkcast ");
+        r16 = r0.this$0;
+        r17 = r16.jasminDescriptorOf(r2);
+        r18 = r15.append(r17);
+        r19 = r18.toString();
+        r14.emit(r19, 0);
+        return;
+
+     label1:
+        r20 = new ca.mcgill.sable.soot.jimple.JasminClass$21;
+        r21 = r0.this$0;
+        specialinvoke r20.<init>(r4, r21, r2, r1);
+        r4.apply(r20);
+        return;
+    }
+
+    public void caseCmpExpr(ca.mcgill.sable.soot.jimple.CmpExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.CmpExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r6;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r0.this$0;
+        r6.emit("lcmp", -3);
+        return;
+    }
+
+    public void caseCmpgExpr(ca.mcgill.sable.soot.jimple.CmpgExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.CmpgExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9, r10;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.FloatType r8;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = ca.mcgill.sable.soot.FloatType.v();
+        i0 = r7.equals(r8);
+        if i0 == 0 goto label0;
+
+        r9 = r0.this$0;
+        r9.emit("fcmpg", -1);
+        return;
+
+     label0:
+        r10 = r0.this$0;
+        r10.emit("dcmpg", -3);
+        return;
+    }
+
+    public void caseCmplExpr(ca.mcgill.sable.soot.jimple.CmplExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.CmplExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9, r10;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.FloatType r8;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = ca.mcgill.sable.soot.FloatType.v();
+        i0 = r7.equals(r8);
+        if i0 == 0 goto label0;
+
+        r9 = r0.this$0;
+        r9.emit("fcmpl", -1);
+        return;
+
+     label0:
+        r10 = r0.this$0;
+        r10.emit("dcmpl", -3);
+        return;
+    }
+
+    public void defaultCase(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        java.lang.RuntimeException r2;
+        java.lang.StringBuffer r3, r4;
+        java.lang.String r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new java.lang.RuntimeException;
+        r3 = new java.lang.StringBuffer;
+        specialinvoke r3.<init>("Can't load value: ");
+        r4 = r3.append(r1);
+        r5 = r4.toString();
+        specialinvoke r2.<init>(r5);
+        throw r2;
+    }
+
+    public void caseDivExpr(ca.mcgill.sable.soot.jimple.DivExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.DivExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$22 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$22;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseDoubleConstant(ca.mcgill.sable.soot.jimple.DoubleConstant)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.DoubleConstant r1;
+        java.lang.String r2, r5, r9;
+        double d0, d1;
+        int i0, i1, i2, i3;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r4, r6;
+        java.lang.StringBuffer r7, r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        d0 = r1.value;
+        i0 = d0 cmpl 0.0;
+        if i0 != 0 goto label0;
+
+        r3 = r0.this$0;
+        r3.emit("dconst_0", 2);
+        return;
+
+     label0:
+        d1 = r1.value;
+        i1 = d1 cmpl 1.0;
+        if i1 != 0 goto label1;
+
+        r4 = r0.this$0;
+        r4.emit("dconst_1", 2);
+        return;
+
+     label1:
+        r5 = r1.toString();
+        r2 = r5;
+        i2 = r5.equals("Infinity");
+        if i2 == 0 goto label2;
+
+        r2 = "+DoubleInfinity";
+
+     label2:
+        i3 = r2.equals("-Infinity");
+        if i3 == 0 goto label3;
+
+        r2 = "-DoubleInfinity";
+
+     label3:
+        r6 = r0.this$0;
+        r7 = new java.lang.StringBuffer;
+        specialinvoke r7.<init>("ldc2_w ");
+        r8 = r7.append(r2);
+        r9 = r8.toString();
+        r6.emit(r9, 2);
+        return;
+    }
+
+    public void caseFloatConstant(ca.mcgill.sable.soot.jimple.FloatConstant)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.FloatConstant r1;
+        java.lang.String r2, r6, r10;
+        float f0, f1, f2;
+        int i0, i1, i2, i3, i4;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r4, r5, r7;
+        java.lang.StringBuffer r8, r9;
+
+        r0 := @this;
+        r1 := @parameter0;
+        f0 = r1.value;
+        i0 = f0 cmpl 0.0F;
+        if i0 != 0 goto label0;
+
+        r3 = r0.this$0;
+        r3.emit("fconst_0", 1);
+        return;
+
+     label0:
+        f1 = r1.value;
+        i1 = f1 cmpl 1.0F;
+        if i1 != 0 goto label1;
+
+        r4 = r0.this$0;
+        r4.emit("fconst_1", 1);
+        return;
+
+     label1:
+        f2 = r1.value;
+        i2 = f2 cmpl 2.0F;
+        if i2 != 0 goto label2;
+
+        r5 = r0.this$0;
+        r5.emit("fconst_2", 1);
+        return;
+
+     label2:
+        r6 = r1.toString();
+        r2 = r6;
+        i3 = r6.equals("InfinityF");
+        if i3 == 0 goto label3;
+
+        r2 = "+FloatInfinity";
+
+     label3:
+        i4 = r2.equals("-InfinityF");
+        if i4 == 0 goto label4;
+
+        r2 = "-FloatInfinity";
+
+     label4:
+        r7 = r0.this$0;
+        r8 = new java.lang.StringBuffer;
+        specialinvoke r8.<init>("ldc ");
+        r9 = r8.append(r2);
+        r10 = r9.toString();
+        r7.emit(r10, 1);
+        return;
+    }
+
+    public void caseInstanceFieldRef(ca.mcgill.sable.soot.jimple.InstanceFieldRef)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.InstanceFieldRef r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r6, r17, r23;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        java.lang.StringBuffer r5, r11, r12, r15, r16, r21;
+        ca.mcgill.sable.soot.SootField r7, r13, r18, r24;
+        ca.mcgill.sable.soot.SootClass r8;
+        java.lang.String r9, r10, r14, r20, r22;
+        ca.mcgill.sable.soot.Type r19, r25;
+        int i0, i1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getBase();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("getfield ");
+        r6 = r0.this$0;
+        r7 = r1.getField();
+        r8 = r7.getDeclaringClass();
+        r9 = r8.getName();
+        r10 = r6.slashify(r9);
+        r11 = r5.append(r10);
+        r12 = r11.append("/");
+        r13 = r1.getField();
+        r14 = r13.getName();
+        r15 = r12.append(r14);
+        r16 = r15.append(" ");
+        r17 = r0.this$0;
+        r18 = r1.getField();
+        r19 = r18.getType();
+        r20 = r17.jasminDescriptorOf(r19);
+        r21 = r16.append(r20);
+        r22 = r21.toString();
+        r23 = r0.this$0;
+        r24 = r1.getField();
+        r25 = r24.getType();
+        i0 = r23.sizeOfType(r25);
+        i1 = -1 + i0;
+        r4.emit(r22, i1);
+        return;
+    }
+
+    public void caseInstanceOfExpr(ca.mcgill.sable.soot.jimple.InstanceOfExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.InstanceOfExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r5, r7, r12, r14;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.soot.Type r4;
+        int i0, i1;
+        java.lang.StringBuffer r6, r10, r13, r16;
+        java.lang.String r8, r9, r11, r15, r17;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp();
+        r2.emitValue(r3);
+        r4 = r1.getCheckType();
+        i0 = r4 instanceof ca.mcgill.sable.soot.RefType;
+        if i0 == 0 goto label0;
+
+        r5 = r0.this$0;
+        r6 = new java.lang.StringBuffer;
+        specialinvoke r6.<init>("instanceof ");
+        r7 = r0.this$0;
+        r8 = r4.toString();
+        r9 = r7.slashify(r8);
+        r10 = r6.append(r9);
+        r11 = r10.toString();
+        r5.emit(r11, 0);
+        return;
+
+     label0:
+        i1 = r4 instanceof ca.mcgill.sable.soot.ArrayType;
+        if i1 == 0 goto label1;
+
+        r12 = r0.this$0;
+        r13 = new java.lang.StringBuffer;
+        specialinvoke r13.<init>("instanceof ");
+        r14 = r0.this$0;
+        r15 = r14.jasminDescriptorOf(r4);
+        r16 = r13.append(r15);
+        r17 = r16.toString();
+        r12.emit(r17, 0);
+
+     label1:
+        return;
+    }
+
+    public void caseIntConstant(ca.mcgill.sable.soot.jimple.IntConstant)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.IntConstant r1;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r3, r7, r11, r15;
+        java.lang.StringBuffer r4, r5, r8, r9, r12, r13, r16, r18;
+        java.lang.String r6, r10, r14, r17, r19;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1.value;
+        if i0 != -1 goto label0;
+
+        r2 = r0.this$0;
+        r2.emit("iconst_m1", 1);
+        return;
+
+     label0:
+        i1 = r1.value;
+        if i1 < 0 goto label1;
+
+        i2 = r1.value;
+        if i2 > 5 goto label1;
+
+        r3 = r0.this$0;
+        r4 = new java.lang.StringBuffer;
+        specialinvoke r4.<init>("iconst_");
+        i3 = r1.value;
+        r5 = r4.append(i3);
+        r6 = r5.toString();
+        r3.emit(r6, 1);
+        return;
+
+     label1:
+        i4 = r1.value;
+        if i4 < -128 goto label2;
+
+        i5 = r1.value;
+        if i5 > 127 goto label2;
+
+        r7 = r0.this$0;
+        r8 = new java.lang.StringBuffer;
+        specialinvoke r8.<init>("bipush ");
+        i6 = r1.value;
+        r9 = r8.append(i6);
+        r10 = r9.toString();
+        r7.emit(r10, 1);
+        return;
+
+     label2:
+        i7 = r1.value;
+        if i7 < -32768 goto label3;
+
+        i8 = r1.value;
+        if i8 > 32767 goto label3;
+
+        r11 = r0.this$0;
+        r12 = new java.lang.StringBuffer;
+        specialinvoke r12.<init>("sipush ");
+        i9 = r1.value;
+        r13 = r12.append(i9);
+        r14 = r13.toString();
+        r11.emit(r14, 1);
+        return;
+
+     label3:
+        r15 = r0.this$0;
+        r16 = new java.lang.StringBuffer;
+        specialinvoke r16.<init>("ldc ");
+        r17 = r1.toString();
+        r18 = r16.append(r17);
+        r19 = r18.toString();
+        r15.emit(r19, 1);
+        return;
+    }
+
+    public void caseInterfaceInvokeExpr(ca.mcgill.sable.soot.jimple.InterfaceInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.InterfaceInvokeExpr r1;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r5, r7, r9, r17, r21, r24, r25;
+        ca.mcgill.sable.soot.jimple.Value r4, r6;
+        java.lang.StringBuffer r8, r13, r14, r16, r19, r20, r22;
+        ca.mcgill.sable.soot.SootClass r10;
+        java.lang.String r11, r12, r15, r18, r23;
+        ca.mcgill.sable.soot.Type r26;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getMethod();
+        r3 = r0.this$0;
+        r4 = r1.getBase();
+        r3.emitValue(r4);
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r5 = r0.this$0;
+        r6 = r1.getArg(i0);
+        r5.emitValue(r6);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r2.getParameterCount();
+        if i0 < i1 goto label0;
+
+        r7 = r0.this$0;
+        r8 = new java.lang.StringBuffer;
+        specialinvoke r8.<init>("invokeinterface ");
+        r9 = r0.this$0;
+        r10 = r2.getDeclaringClass();
+        r11 = r10.getName();
+        r12 = r9.slashify(r11);
+        r13 = r8.append(r12);
+        r14 = r13.append("/");
+        r15 = r2.getName();
+        r16 = r14.append(r15);
+        r17 = r0.this$0;
+        r18 = r17.jasminDescriptorOf(r2);
+        r19 = r16.append(r18);
+        r20 = r19.append(" ");
+        r21 = r0.this$0;
+        i2 = r21.argCountOf(r2);
+        i3 = i2 + 1;
+        r22 = r20.append(i3);
+        r23 = r22.toString();
+        r24 = r0.this$0;
+        i4 = r24.argCountOf(r2);
+        i5 = i4 + 1;
+        i6 = -i5;
+        r25 = r0.this$0;
+        r26 = r2.getReturnType();
+        i7 = r25.sizeOfType(r26);
+        i8 = i6 + i7;
+        r7.emit(r23, i8);
+        return;
+    }
+
+    public void caseLengthExpr(ca.mcgill.sable.soot.jimple.LengthExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.LengthExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4;
+        ca.mcgill.sable.soot.jimple.Value r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r4.emit("arraylength", 0);
+        return;
+    }
+
+    public void caseLocal(ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emitLocal(r1);
+        return;
+    }
+
+    public void caseLongConstant(ca.mcgill.sable.soot.jimple.LongConstant)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.LongConstant r1;
+        long l0, l1;
+        int i0, i1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r3, r4;
+        java.lang.StringBuffer r5, r7;
+        java.lang.String r6, r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        l0 = r1.value;
+        i0 = l0 cmp 0L;
+        if i0 != 0 goto label0;
+
+        r2 = r0.this$0;
+        r2.emit("lconst_0", 2);
+        return;
+
+     label0:
+        l1 = r1.value;
+        i1 = l1 cmp 1L;
+        if i1 != 0 goto label1;
+
+        r3 = r0.this$0;
+        r3.emit("lconst_1", 2);
+        return;
+
+     label1:
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("ldc2_w ");
+        r6 = r1.toString();
+        r7 = r5.append(r6);
+        r8 = r7.toString();
+        r4.emit(r8, 2);
+        return;
+    }
+
+    public void caseMulExpr(ca.mcgill.sable.soot.jimple.MulExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.MulExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$23 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$23;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseLtExpr(ca.mcgill.sable.soot.jimple.LtExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.LtExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.jimple.JasminClass$24 r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = new ca.mcgill.sable.soot.jimple.JasminClass$24;
+        r9 = r0.this$0;
+        specialinvoke r8.<init>(r9);
+        r7.apply(r8);
+        return;
+    }
+
+    public void caseLeExpr(ca.mcgill.sable.soot.jimple.LeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.LeExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.jimple.JasminClass$25 r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = new ca.mcgill.sable.soot.jimple.JasminClass$25;
+        r9 = r0.this$0;
+        specialinvoke r8.<init>(r9);
+        r7.apply(r8);
+        return;
+    }
+
+    public void caseGtExpr(ca.mcgill.sable.soot.jimple.GtExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.GtExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.jimple.JasminClass$26 r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = new ca.mcgill.sable.soot.jimple.JasminClass$26;
+        r9 = r0.this$0;
+        specialinvoke r8.<init>(r9);
+        r7.apply(r8);
+        return;
+    }
+
+    public void caseGeExpr(ca.mcgill.sable.soot.jimple.GeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.GeExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.jimple.JasminClass$27 r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = new ca.mcgill.sable.soot.jimple.JasminClass$27;
+        r9 = r0.this$0;
+        specialinvoke r8.<init>(r9);
+        r7.apply(r8);
+        return;
+    }
+
+    public void caseNeExpr(ca.mcgill.sable.soot.jimple.NeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.NeExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.jimple.JasminClass$28 r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = new ca.mcgill.sable.soot.jimple.JasminClass$28;
+        r9 = r0.this$0;
+        specialinvoke r8.<init>(r9);
+        r7.apply(r8);
+        return;
+    }
+
+    public void caseEqExpr(ca.mcgill.sable.soot.jimple.EqExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.EqExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r6;
+        ca.mcgill.sable.soot.Type r7;
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getOp1();
+        r7 = r6.getType();
+        r8 = new ca.mcgill.sable.soot.jimple.JasminClass$29;
+        r9 = r0.this$0;
+        specialinvoke r8.<init>(r9);
+        r7.apply(r8);
+        return;
+    }
+
+    public void caseNegExpr(ca.mcgill.sable.soot.jimple.NegExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.NegExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r6;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.soot.Type r4;
+        ca.mcgill.sable.soot.jimple.JasminClass$30 r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp();
+        r2.emitValue(r3);
+        r4 = r1.getType();
+        r5 = new ca.mcgill.sable.soot.jimple.JasminClass$30;
+        r6 = r0.this$0;
+        specialinvoke r5.<init>(r6);
+        r4.apply(r5);
+        return;
+    }
+
+    public void caseNewArrayExpr(ca.mcgill.sable.soot.jimple.NewArrayExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.NewArrayExpr r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r5, r7, r14, r16, r21;
+        ca.mcgill.sable.soot.Type r4, r8, r13, r17, r23;
+        int i0, i1;
+        java.lang.StringBuffer r6, r11, r15, r19, r22, r25;
+        java.lang.String r9, r10, r12, r18, r20, r24, r26;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getSize();
+        r3 = r0.this$0;
+        r3.emitValue(r2);
+        r4 = r1.getBaseType();
+        i0 = r4 instanceof ca.mcgill.sable.soot.RefType;
+        if i0 == 0 goto label0;
+
+        r5 = r0.this$0;
+        r6 = new java.lang.StringBuffer;
+        specialinvoke r6.<init>("anewarray ");
+        r7 = r0.this$0;
+        r8 = r1.getBaseType();
+        r9 = r8.toString();
+        r10 = r7.slashify(r9);
+        r11 = r6.append(r10);
+        r12 = r11.toString();
+        r5.emit(r12, 0);
+        return;
+
+     label0:
+        r13 = r1.getBaseType();
+        i1 = r13 instanceof ca.mcgill.sable.soot.ArrayType;
+        if i1 == 0 goto label1;
+
+        r14 = r0.this$0;
+        r15 = new java.lang.StringBuffer;
+        specialinvoke r15.<init>("anewarray ");
+        r16 = r0.this$0;
+        r17 = r1.getBaseType();
+        r18 = r16.jasminDescriptorOf(r17);
+        r19 = r15.append(r18);
+        r20 = r19.toString();
+        r14.emit(r20, 0);
+        return;
+
+     label1:
+        r21 = r0.this$0;
+        r22 = new java.lang.StringBuffer;
+        specialinvoke r22.<init>("newarray ");
+        r23 = r1.getBaseType();
+        r24 = r23.toString();
+        r25 = r22.append(r24);
+        r26 = r25.toString();
+        r21.emit(r26, 0);
+        return;
+    }
+
+    public void caseNewMultiArrayExpr(ca.mcgill.sable.soot.jimple.NewMultiArrayExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.NewMultiArrayExpr r1;
+        int i0, i1, i2, i3, i4, i5;
+        ca.mcgill.sable.util.List r2;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r6, r8;
+        java.lang.Object r4;
+        ca.mcgill.sable.soot.jimple.Value r5;
+        java.lang.StringBuffer r7, r11, r12, r13;
+        ca.mcgill.sable.soot.ArrayType r9;
+        java.lang.String r10, r14;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getSizes();
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r3 = r0.this$0;
+        r4 = r2.get(i0);
+        r5 = (ca.mcgill.sable.soot.jimple.Value) r4;
+        r3.emitValue(r5);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r2.size();
+        if i0 < i1 goto label0;
+
+        r6 = r0.this$0;
+        r7 = new java.lang.StringBuffer;
+        specialinvoke r7.<init>("multianewarray ");
+        r8 = r0.this$0;
+        r9 = r1.getBaseType();
+        r10 = r8.jasminDescriptorOf(r9);
+        r11 = r7.append(r10);
+        r12 = r11.append(" ");
+        i2 = r2.size();
+        r13 = r12.append(i2);
+        r14 = r13.toString();
+        i3 = r2.size();
+        i4 = -i3;
+        i5 = i4 + 1;
+        r6.emit(r14, i5);
+        return;
+    }
+
+    public void caseNewExpr(ca.mcgill.sable.soot.jimple.NewExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.NewExpr r1;
+        java.lang.StringBuffer r2, r8;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r4;
+        ca.mcgill.sable.soot.RefType r5;
+        java.lang.String r6, r7, r9;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.this$0;
+        r2 = new java.lang.StringBuffer;
+        specialinvoke r2.<init>("new ");
+        r4 = r0.this$0;
+        r5 = r1.getBaseType();
+        r6 = r5.toString();
+        r7 = r4.slashify(r6);
+        r8 = r2.append(r7);
+        r9 = r8.toString();
+        r3.emit(r9, 1);
+        return;
+    }
+
+    public void caseNewInvokeExpr(ca.mcgill.sable.soot.jimple.NewInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.NewInvokeExpr r1;
+        java.lang.StringBuffer r2, r8, r15, r20, r21, r23, r26;
+        int i0, i1, i2, i3, i4, i5, i6;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r4, r10, r12, r14, r16, r24, r28, r29;
+        ca.mcgill.sable.soot.RefType r5;
+        java.lang.String r6, r7, r9, r18, r19, r22, r25, r27;
+        ca.mcgill.sable.soot.SootMethod r11;
+        ca.mcgill.sable.soot.jimple.Value r13;
+        ca.mcgill.sable.soot.SootClass r17;
+        ca.mcgill.sable.soot.Type r30;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.this$0;
+        r2 = new java.lang.StringBuffer;
+        specialinvoke r2.<init>("new ");
+        r4 = r0.this$0;
+        r5 = r1.getBaseType();
+        r6 = r5.toString();
+        r7 = r4.slashify(r6);
+        r8 = r2.append(r7);
+        r9 = r8.toString();
+        r3.emit(r9, 1);
+        r10 = r0.this$0;
+        r10.emit("dup", 1);
+        r11 = r1.getMethod();
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r12 = r0.this$0;
+        r13 = r1.getArg(i0);
+        r12.emitValue(r13);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r11.getParameterCount();
+        if i0 < i1 goto label0;
+
+        r14 = r0.this$0;
+        r15 = new java.lang.StringBuffer;
+        specialinvoke r15.<init>("invokespecial ");
+        r16 = r0.this$0;
+        r17 = r11.getDeclaringClass();
+        r18 = r17.getName();
+        r19 = r16.slashify(r18);
+        r20 = r15.append(r19);
+        r21 = r20.append("/");
+        r22 = r11.getName();
+        r23 = r21.append(r22);
+        r24 = r0.this$0;
+        r25 = r24.jasminDescriptorOf(r11);
+        r26 = r23.append(r25);
+        r27 = r26.toString();
+        r28 = r0.this$0;
+        i2 = r28.argCountOf(r11);
+        i3 = i2 + 1;
+        i4 = -i3;
+        r29 = r0.this$0;
+        r30 = r11.getReturnType();
+        i5 = r29.sizeOfType(r30);
+        i6 = i4 + i5;
+        r14.emit(r27, i6);
+        return;
+    }
+
+    public void caseNullConstant(ca.mcgill.sable.soot.jimple.NullConstant)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.NullConstant r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("aconst_null", 1);
+        return;
+    }
+
+    public void caseOrExpr(ca.mcgill.sable.soot.jimple.OrExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.OrExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$31 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$31;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseRemExpr(ca.mcgill.sable.soot.jimple.RemExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.RemExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$32 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$32;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseShlExpr(ca.mcgill.sable.soot.jimple.ShlExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.ShlExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$33 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$33;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseShrExpr(ca.mcgill.sable.soot.jimple.ShrExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.ShrExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$34 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$34;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseSpecialInvokeExpr(ca.mcgill.sable.soot.jimple.SpecialInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.SpecialInvokeExpr r1;
+        int i0, i1, i2, i3, i4, i5, i6;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r5, r7, r9, r17, r21, r22;
+        ca.mcgill.sable.soot.jimple.Value r4, r6;
+        java.lang.StringBuffer r8, r13, r14, r16, r19;
+        ca.mcgill.sable.soot.SootClass r10;
+        java.lang.String r11, r12, r15, r18, r20;
+        ca.mcgill.sable.soot.Type r23;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getMethod();
+        r3 = r0.this$0;
+        r4 = r1.getBase();
+        r3.emitValue(r4);
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r5 = r0.this$0;
+        r6 = r1.getArg(i0);
+        r5.emitValue(r6);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r2.getParameterCount();
+        if i0 < i1 goto label0;
+
+        r7 = r0.this$0;
+        r8 = new java.lang.StringBuffer;
+        specialinvoke r8.<init>("invokespecial ");
+        r9 = r0.this$0;
+        r10 = r2.getDeclaringClass();
+        r11 = r10.getName();
+        r12 = r9.slashify(r11);
+        r13 = r8.append(r12);
+        r14 = r13.append("/");
+        r15 = r2.getName();
+        r16 = r14.append(r15);
+        r17 = r0.this$0;
+        r18 = r17.jasminDescriptorOf(r2);
+        r19 = r16.append(r18);
+        r20 = r19.toString();
+        r21 = r0.this$0;
+        i2 = r21.argCountOf(r2);
+        i3 = i2 + 1;
+        i4 = -i3;
+        r22 = r0.this$0;
+        r23 = r2.getReturnType();
+        i5 = r22.sizeOfType(r23);
+        i6 = i4 + i5;
+        r7.emit(r20, i6);
+        return;
+    }
+
+    public void caseStaticInvokeExpr(ca.mcgill.sable.soot.jimple.StaticInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.StaticInvokeExpr r1;
+        int i0, i1, i2, i3, i4, i5;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r5, r7, r15, r19, r20;
+        ca.mcgill.sable.soot.jimple.Value r4;
+        java.lang.StringBuffer r6, r11, r12, r14, r17;
+        ca.mcgill.sable.soot.SootClass r8;
+        java.lang.String r9, r10, r13, r16, r18;
+        ca.mcgill.sable.soot.Type r21;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getMethod();
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r3 = r0.this$0;
+        r4 = r1.getArg(i0);
+        r3.emitValue(r4);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r2.getParameterCount();
+        if i0 < i1 goto label0;
+
+        r5 = r0.this$0;
+        r6 = new java.lang.StringBuffer;
+        specialinvoke r6.<init>("invokestatic ");
+        r7 = r0.this$0;
+        r8 = r2.getDeclaringClass();
+        r9 = r8.getName();
+        r10 = r7.slashify(r9);
+        r11 = r6.append(r10);
+        r12 = r11.append("/");
+        r13 = r2.getName();
+        r14 = r12.append(r13);
+        r15 = r0.this$0;
+        r16 = r15.jasminDescriptorOf(r2);
+        r17 = r14.append(r16);
+        r18 = r17.toString();
+        r19 = r0.this$0;
+        i2 = r19.argCountOf(r2);
+        i3 = -i2;
+        r20 = r0.this$0;
+        r21 = r2.getReturnType();
+        i4 = r20.sizeOfType(r21);
+        i5 = i3 + i4;
+        r5.emit(r18, i5);
+        return;
+    }
+
+    public void caseStaticFieldRef(ca.mcgill.sable.soot.jimple.StaticFieldRef)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.StaticFieldRef r1;
+        java.lang.StringBuffer r2, r9, r10, r13, r14, r19;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r4, r15, r21;
+        ca.mcgill.sable.soot.SootField r5, r11, r16, r22;
+        ca.mcgill.sable.soot.SootClass r6;
+        java.lang.String r7, r8, r12, r18, r20;
+        ca.mcgill.sable.soot.Type r17, r23;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.this$0;
+        r2 = new java.lang.StringBuffer;
+        specialinvoke r2.<init>("getstatic ");
+        r4 = r0.this$0;
+        r5 = r1.getField();
+        r6 = r5.getDeclaringClass();
+        r7 = r6.getName();
+        r8 = r4.slashify(r7);
+        r9 = r2.append(r8);
+        r10 = r9.append("/");
+        r11 = r1.getField();
+        r12 = r11.getName();
+        r13 = r10.append(r12);
+        r14 = r13.append(" ");
+        r15 = r0.this$0;
+        r16 = r1.getField();
+        r17 = r16.getType();
+        r18 = r15.jasminDescriptorOf(r17);
+        r19 = r14.append(r18);
+        r20 = r19.toString();
+        r21 = r0.this$0;
+        r22 = r1.getField();
+        r23 = r22.getType();
+        i0 = r21.sizeOfType(r23);
+        r3.emit(r20, i0);
+        return;
+    }
+
+    public void caseStringConstant(ca.mcgill.sable.soot.jimple.StringConstant)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.StringConstant r1;
+        java.lang.StringBuffer r2, r4, r5, r6, r7, r8, r10, r11, r13, r14;
+        int i0, i1, i2, i3, i4, i5;
+        java.lang.String r3, r12, r15;
+        ca.mcgill.sable.soot.jimple.JasminClass r9;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new java.lang.StringBuffer;
+        r3 = r1.value;
+        specialinvoke r2.<init>(r3);
+        r4 = new java.lang.StringBuffer;
+        specialinvoke r4.<init>();
+        i0 = 0;
+        goto label5;
+
+     label0:
+        i1 = r2.charAt(i0);
+        if i1 != 34 goto label1;
+
+        r5 = r4.append("\"");
+        goto label4;
+
+     label1:
+        i2 = r2.charAt(i0);
+        if i2 != 39 goto label2;
+
+        r6 = r4.append("\'");
+        goto label4;
+
+     label2:
+        i3 = r2.charAt(i0);
+        if i3 != 92 goto label3;
+
+        r7 = r4.append("\\");
+        goto label4;
+
+     label3:
+        i4 = r2.charAt(i0);
+        r8 = r4.append(i4);
+
+     label4:
+        i0 = i0 + 1;
+
+     label5:
+        i5 = r2.length();
+        if i0 < i5 goto label0;
+
+        r9 = r0.this$0;
+        r10 = new java.lang.StringBuffer;
+        specialinvoke r10.<init>("ldc ");
+        r11 = r10.append(34);
+        r12 = r4.toString();
+        r13 = r11.append(r12);
+        r14 = r13.append(34);
+        r15 = r14.toString();
+        r9.emit(r15, 1);
+        return;
+    }
+
+    public void caseSubExpr(ca.mcgill.sable.soot.jimple.SubExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.SubExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$35 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$35;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseUshrExpr(ca.mcgill.sable.soot.jimple.UshrExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.UshrExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$36 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$36;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseVirtualInvokeExpr(ca.mcgill.sable.soot.jimple.VirtualInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.VirtualInvokeExpr r1;
+        int i0, i1, i2, i3, i4, i5, i6;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r5, r7, r9, r17, r21, r22;
+        ca.mcgill.sable.soot.jimple.Value r4, r6;
+        java.lang.StringBuffer r8, r13, r14, r16, r19;
+        ca.mcgill.sable.soot.SootClass r10;
+        java.lang.String r11, r12, r15, r18, r20;
+        ca.mcgill.sable.soot.Type r23;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getMethod();
+        r3 = r0.this$0;
+        r4 = r1.getBase();
+        r3.emitValue(r4);
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r5 = r0.this$0;
+        r6 = r1.getArg(i0);
+        r5.emitValue(r6);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r2.getParameterCount();
+        if i0 < i1 goto label0;
+
+        r7 = r0.this$0;
+        r8 = new java.lang.StringBuffer;
+        specialinvoke r8.<init>("invokevirtual ");
+        r9 = r0.this$0;
+        r10 = r2.getDeclaringClass();
+        r11 = r10.getName();
+        r12 = r9.slashify(r11);
+        r13 = r8.append(r12);
+        r14 = r13.append("/");
+        r15 = r2.getName();
+        r16 = r14.append(r15);
+        r17 = r0.this$0;
+        r18 = r17.jasminDescriptorOf(r2);
+        r19 = r16.append(r18);
+        r20 = r19.toString();
+        r21 = r0.this$0;
+        i2 = r21.argCountOf(r2);
+        i3 = i2 + 1;
+        i4 = -i3;
+        r22 = r0.this$0;
+        r23 = r2.getReturnType();
+        i5 = r22.sizeOfType(r23);
+        i6 = i4 + i5;
+        r7.emit(r20, i6);
+        return;
+    }
+
+    public void caseXorExpr(ca.mcgill.sable.soot.jimple.XorExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.XorExpr r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$37 r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getOp1();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getOp2();
+        r4.emitValue(r5);
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$37;
+        r8 = r0.this$0;
+        specialinvoke r7.<init>(r8);
+        r6.apply(r7);
+        return;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.JasminClass)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$17 r0;
+        ca.mcgill.sable.soot.jimple.JasminClass r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        return;
+    }
+}

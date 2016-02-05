@@ -1,0 +1,701 @@
+class ca.mcgill.sable.soot.jimple.ArrayPackedSet extends java.lang.Object implements ca.mcgill.sable.soot.jimple.BoundedFlowSet
+{
+    ca.mcgill.sable.soot.jimple.FlowUniverse map;
+    int[] bits;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.FlowUniverse)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r1;
+        int i0, i1, i2, i3, i4, i5;
+        int[] r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1.getSize();
+        i1 = i0 / 32;
+        i2 = r1.getSize();
+        i3 = i2 % 32;
+        if i3 == 0 goto label0;
+
+        i4 = 1;
+        goto label1;
+
+     label0:
+        i4 = 0;
+
+     label1:
+        i5 = i1 + i4;
+        r2 = new int[i5];
+        specialinvoke r0.<init>(r1, r2);
+        return;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.FlowUniverse, int[])
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r1;
+        java.lang.Object r2, r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.map = r1;
+        r3 = r2.clone();
+        r0.bits = (int[]) r3;
+        return;
+    }
+
+    public java.lang.Object clone()
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r1;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r2;
+        int[] r3;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.soot.jimple.ArrayPackedSet;
+        r2 = r0.map;
+        r3 = r0.bits;
+        specialinvoke r1.<init>(r2, r3);
+        return r1;
+    }
+
+    public int size()
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        int i0, i1, i2, i3, i4, i5, i6;
+        int[] r1, r2;
+
+        r0 := @this;
+        i0 = 0;
+        i1 = 0;
+        goto label4;
+
+     label0:
+        r1 = r0.bits;
+        i3 = r1[i1];
+        i2 = 0;
+        goto label3;
+
+     label1:
+        i4 = 1 << i2;
+        i5 = i3 & i4;
+        if i5 == 0 goto label2;
+
+        i0 = i0 + 1;
+
+     label2:
+        i2 = i2 + 1;
+
+     label3:
+        if i2 < 32 goto label1;
+
+        i1 = i1 + 1;
+
+     label4:
+        r2 = r0.bits;
+        i6 = r2.length;
+        if i1 < i6 goto label0;
+
+        return i0;
+    }
+
+    public boolean isEmpty()
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        int i0, i1, i2;
+        int[] r1, r2;
+
+        r0 := @this;
+        i0 = 0;
+        goto label2;
+
+     label0:
+        r1 = r0.bits;
+        i1 = r1[i0];
+        if i1 == 0 goto label1;
+
+        return 0;
+
+     label1:
+        i0 = i0 + 1;
+
+     label2:
+        r2 = r0.bits;
+        i2 = r2.length;
+        if i0 < i2 goto label0;
+
+        return 1;
+    }
+
+    public void clear()
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        int i0, i1;
+        int[] r1, r2;
+
+        r0 := @this;
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r1 = r0.bits;
+        r1[i0] = 0;
+        i0 = i0 + 1;
+
+     label1:
+        r2 = r0.bits;
+        i1 = r2.length;
+        if i0 < i1 goto label0;
+
+        return;
+    }
+
+    public ca.mcgill.sable.util.List toList(int, int)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28, i29, i30, i31;
+        ca.mcgill.sable.util.ArrayList r1;
+        int[] r2, r5, r8;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r3, r6, r9;
+        java.lang.Object r4, r7, r10;
+
+        r0 := @this;
+        i0 := @parameter0;
+        i1 := @parameter1;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        i6 = i0 / 32;
+        i7 = i0 % 32;
+        i8 = i1 / 32;
+        i9 = i1 % 32;
+        if i0 <= i1 goto label0;
+
+        return r1;
+
+     label0:
+        r2 = r0.bits;
+        i10 = r2[i6];
+        i11 = i6 * 32;
+        if i6 == i8 goto label1;
+
+        i12 = 32;
+        goto label2;
+
+     label1:
+        i12 = i9 + 1;
+
+     label2:
+        i2 = i12;
+        i3 = i7;
+        goto label5;
+
+     label3:
+        i13 = 1 << i3;
+        i14 = i10 & i13;
+        if i14 == 0 goto label4;
+
+        r3 = r0.map;
+        i15 = i11 + i3;
+        r4 = r3.getObjectOf(i15);
+        i16 = r1.add(r4);
+
+     label4:
+        i3 = i3 + 1;
+
+     label5:
+        if i3 < i2 goto label3;
+
+        if i6 == i8 goto label11;
+
+        i17 = i6 + 1;
+        if i17 == i8 goto label11;
+
+        i4 = i6 + 1;
+        goto label10;
+
+     label6:
+        r5 = r0.bits;
+        i18 = r5[i4];
+        i19 = i4 * 32;
+        i5 = 0;
+        goto label9;
+
+     label7:
+        i20 = 1 << i5;
+        i21 = i18 & i20;
+        if i21 == 0 goto label8;
+
+        r6 = r0.map;
+        i22 = i19 + i5;
+        r7 = r6.getObjectOf(i22);
+        i23 = r1.add(r7);
+
+     label8:
+        i5 = i5 + 1;
+
+     label9:
+        if i5 < 32 goto label7;
+
+        i4 = i4 + 1;
+
+     label10:
+        if i4 < i8 goto label6;
+
+     label11:
+        if i6 == i8 goto label15;
+
+        r8 = r0.bits;
+        i24 = r8[i8];
+        i25 = i8 * 32;
+        i26 = i9 + 1;
+        i27 = 0;
+        goto label14;
+
+     label12:
+        i28 = 1 << i27;
+        i29 = i24 & i28;
+        if i29 == 0 goto label13;
+
+        r9 = r0.map;
+        i30 = i25 + i27;
+        r10 = r9.getObjectOf(i30);
+        i31 = r1.add(r10);
+
+     label13:
+        i27 = i27 + 1;
+
+     label14:
+        if i27 < i26 goto label12;
+
+     label15:
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List toList()
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8;
+        int[] r2, r5;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r3;
+        java.lang.Object r4;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        i0 = 0;
+        goto label4;
+
+     label0:
+        r2 = r0.bits;
+        i2 = r2[i0];
+        i3 = i0 * 32;
+        i1 = 0;
+        goto label3;
+
+     label1:
+        i4 = 1 << i1;
+        i5 = i2 & i4;
+        if i5 == 0 goto label2;
+
+        r3 = r0.map;
+        i6 = i3 + i1;
+        r4 = r3.getObjectOf(i6);
+        i7 = r1.add(r4);
+
+     label2:
+        i1 = i1 + 1;
+
+     label3:
+        if i1 < 32 goto label1;
+
+        i0 = i0 + 1;
+
+     label4:
+        r5 = r0.bits;
+        i8 = r5.length;
+        if i0 < i8 goto label0;
+
+        return r1;
+    }
+
+    public void add(java.lang.Object, ca.mcgill.sable.soot.jimple.FlowSet)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r3;
+        java.lang.Object r1;
+        ca.mcgill.sable.soot.jimple.FlowSet r2;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r4;
+        int i0, i1, i2, i3, i4;
+        int[] r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r2;
+        if r0 == r3 goto label0;
+
+        r0.copy(r3);
+
+     label0:
+        r4 = r0.map;
+        i0 = r4.getIndexOf(r1);
+        r5 = r3.bits;
+        i1 = i0 / 32;
+        i2 = r5[i1];
+        i3 = i0 % 32;
+        i4 = 1 << i3;
+        r5[i1] = i2 | i4;
+        return;
+    }
+
+    public void complement(ca.mcgill.sable.soot.jimple.FlowSet)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r2;
+        ca.mcgill.sable.soot.jimple.FlowSet r1;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10;
+        int[] r3, r4, r5, r6, r8, r9;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r1;
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r3 = r2.bits;
+        r4 = r0.bits;
+        i1 = r4[i0];
+        r3[i0] = i1 ^ -1;
+        i0 = i0 + 1;
+
+     label1:
+        r5 = r0.bits;
+        i2 = r5.length;
+        if i0 < i2 goto label0;
+
+        r6 = r0.bits;
+        i3 = r6.length;
+        if i3 < 1 goto label2;
+
+        r7 = r0.map;
+        i4 = r7.getSize();
+        i5 = i4 % 32;
+        if i5 == 0 goto label2;
+
+        r8 = r2.bits;
+        r9 = r0.bits;
+        i6 = r9.length;
+        i7 = i6 - 1;
+        i8 = r8[i7];
+        i9 = -1 << i5;
+        i10 = i9 ^ -1;
+        r8[i7] = i8 & i10;
+
+     label2:
+        return;
+    }
+
+    public void remove(java.lang.Object, ca.mcgill.sable.soot.jimple.FlowSet)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r3;
+        java.lang.Object r1;
+        ca.mcgill.sable.soot.jimple.FlowSet r2;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r4;
+        int i0, i1, i2, i3, i4, i5;
+        int[] r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r2;
+        if r0 == r3 goto label0;
+
+        r0.copy(r3);
+
+     label0:
+        r4 = r0.map;
+        i0 = r4.getIndexOf(r1);
+        r5 = r3.bits;
+        i1 = i0 / 32;
+        i2 = r5[i1];
+        i3 = i0 % 32;
+        i4 = 1 << i3;
+        i5 = i4 ^ -1;
+        r5[i1] = i2 & i5;
+        return;
+    }
+
+    public void union(ca.mcgill.sable.soot.jimple.FlowSet, ca.mcgill.sable.soot.jimple.FlowSet)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r3, r4;
+        ca.mcgill.sable.soot.jimple.FlowSet r1, r2;
+        int i0, i1, i2, i3, i4, i5, i6;
+        int[] r5, r6, r8, r9, r10, r11;
+        java.lang.RuntimeException r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r1;
+        r4 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r2;
+        i1 = r3 instanceof ca.mcgill.sable.soot.jimple.ArrayPackedSet;
+        if i1 == 0 goto label0;
+
+        r5 = r0.bits;
+        i2 = r5.length;
+        r6 = r3.bits;
+        i3 = r6.length;
+        if i2 == i3 goto label1;
+
+     label0:
+        r7 = new java.lang.RuntimeException;
+        specialinvoke r7.<init>("Incompatible other set for union");
+        throw r7;
+
+     label1:
+        i0 = 0;
+        goto label3;
+
+     label2:
+        r8 = r4.bits;
+        r9 = r0.bits;
+        i4 = r9[i0];
+        r10 = r3.bits;
+        i5 = r10[i0];
+        r8[i0] = i4 | i5;
+        i0 = i0 + 1;
+
+     label3:
+        r11 = r0.bits;
+        i6 = r11.length;
+        if i0 < i6 goto label2;
+
+        return;
+    }
+
+    public void difference(ca.mcgill.sable.soot.jimple.FlowSet, ca.mcgill.sable.soot.jimple.FlowSet)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r3, r4;
+        ca.mcgill.sable.soot.jimple.FlowSet r1, r2;
+        int i0, i1, i2, i3, i4, i5, i6, i7;
+        int[] r5, r6, r8, r9, r10, r11;
+        java.lang.RuntimeException r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r1;
+        r4 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r2;
+        i1 = r3 instanceof ca.mcgill.sable.soot.jimple.ArrayPackedSet;
+        if i1 == 0 goto label0;
+
+        r5 = r0.bits;
+        i2 = r5.length;
+        r6 = r3.bits;
+        i3 = r6.length;
+        if i2 == i3 goto label1;
+
+     label0:
+        r7 = new java.lang.RuntimeException;
+        specialinvoke r7.<init>("Incompatible other set for union");
+        throw r7;
+
+     label1:
+        i0 = 0;
+        goto label3;
+
+     label2:
+        r8 = r4.bits;
+        r9 = r0.bits;
+        i4 = r9[i0];
+        r10 = r3.bits;
+        i5 = r10[i0];
+        i6 = i5 ^ -1;
+        r8[i0] = i4 & i6;
+        i0 = i0 + 1;
+
+     label3:
+        r11 = r0.bits;
+        i7 = r11.length;
+        if i0 < i7 goto label2;
+
+        return;
+    }
+
+    public void intersection(ca.mcgill.sable.soot.jimple.FlowSet, ca.mcgill.sable.soot.jimple.FlowSet)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r3, r4;
+        ca.mcgill.sable.soot.jimple.FlowSet r1, r2;
+        int i0, i1, i2, i3, i4, i5, i6;
+        int[] r5, r6, r8, r9, r10, r11;
+        java.lang.RuntimeException r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r1;
+        r4 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r2;
+        i1 = r3 instanceof ca.mcgill.sable.soot.jimple.ArrayPackedSet;
+        if i1 == 0 goto label0;
+
+        r5 = r0.bits;
+        i2 = r5.length;
+        r6 = r3.bits;
+        i3 = r6.length;
+        if i2 == i3 goto label1;
+
+     label0:
+        r7 = new java.lang.RuntimeException;
+        specialinvoke r7.<init>("Incompatible other set for union");
+        throw r7;
+
+     label1:
+        i0 = 0;
+        goto label3;
+
+     label2:
+        r8 = r4.bits;
+        r9 = r0.bits;
+        i4 = r9[i0];
+        r10 = r3.bits;
+        i5 = r10[i0];
+        r8[i0] = i4 & i5;
+        i0 = i0 + 1;
+
+     label3:
+        r11 = r0.bits;
+        i6 = r11.length;
+        if i0 < i6 goto label2;
+
+        return;
+    }
+
+    public boolean contains(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        java.lang.Object r1;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r2;
+        int i0, i1, i2, i3, i4, i5;
+        int[] r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.map;
+        i0 = r2.getIndexOf(r1);
+        r3 = r0.bits;
+        i1 = i0 / 32;
+        i2 = r3[i1];
+        i3 = i0 % 32;
+        i4 = 1 << i3;
+        i5 = i2 & i4;
+        if i5 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r2;
+        java.lang.Object r1;
+        int i0, i1, i2, i3;
+        int[] r3, r4, r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r1;
+        i0 = 0;
+        goto label2;
+
+     label0:
+        r3 = r0.bits;
+        i1 = r3[i0];
+        r4 = r2.bits;
+        i2 = r4[i0];
+        if i1 == i2 goto label1;
+
+        return 0;
+
+     label1:
+        i0 = i0 + 1;
+
+     label2:
+        r5 = r0.bits;
+        i3 = r5.length;
+        if i0 < i3 goto label0;
+
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0;
+        java.lang.StringBuffer r1, r5, r6, r8, r10, r11;
+        ca.mcgill.sable.util.List r2;
+        ca.mcgill.sable.util.Iterator r3;
+        int i0, i1;
+        java.lang.Object r4, r7;
+        java.lang.String r9, r12;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("{");
+        r2 = r0.toList();
+        r3 = r2.iterator();
+        i0 = r3.hasNext();
+        if i0 == 0 goto label2;
+
+        r4 = r3.next();
+        r5 = r1.append(r4);
+        goto label1;
+
+     label0:
+        r6 = new java.lang.StringBuffer;
+        specialinvoke r6.<init>(", ");
+        r7 = r3.next();
+        r8 = r6.append(r7);
+        r9 = r8.toString();
+        r10 = r1.append(r9);
+
+     label1:
+        i1 = r3.hasNext();
+        if i1 != 0 goto label0;
+
+     label2:
+        r11 = r1.append("}");
+        r12 = r1.toString();
+        return r12;
+    }
+
+    public void copy(ca.mcgill.sable.soot.jimple.FlowSet)
+    {
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r0, r2;
+        ca.mcgill.sable.soot.jimple.FlowSet r1;
+        int i0, i1;
+        int[] r3, r4, r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ArrayPackedSet) r1;
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r3 = r2.bits;
+        r4 = r0.bits;
+        r3[i0] = r4[i0];
+        i0 = i0 + 1;
+
+     label1:
+        r5 = r0.bits;
+        i1 = r5.length;
+        if i0 < i1 goto label0;
+
+        return;
+    }
+}

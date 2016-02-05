@@ -1,0 +1,51 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug.misc</A>: JTreeASTPanel');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug.misc</A>: JTreeASTPanel';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug.misc;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>import java.awt.*;
+<a name=4 class="linenum">4	</SPAN>import com.sun.java.swing.*;
+<a name=5 class="linenum">5	</SPAN>import com.sun.java.swing.tree.*;
+<a name=6 class="linenum">6	</SPAN>import com.sun.java.swing.event.*;
+<a name=7 class="linenum">7	</SPAN>
+<a name=8 class="linenum">8	</SPAN>public class <a class="classDef" name=JTreeASTPanel href=JTreeASTPanel_java_ref.html#JTreeASTPanel>JTreeASTPanel</a> extends JPanel {
+<a name=9 class="linenum">9	</SPAN>  JTree <a class="varDef" name=tree href=JTreeASTPanel_java_ref.html#tree>tree</a>;
+<a name=10 class="linenum">10	</SPAN>  
+<a name=11 class="linenum">11	</SPAN>  public <a class="methodDef" name=JTreeASTPanel(TreeModel,TreeSelectionListener) href=JTreeASTPanel_java_ref.html#JTreeASTPanel(TreeModel,TreeSelectionListener)>JTreeASTPanel</a>(TreeModel tm, TreeSelectionListener listener) {
+<a name=12 class="linenum">12	</SPAN>	<span class="comment">// use a layout that will stretch tree to panel size
+<a name=13 class="linenum">13	</SPAN></span>	setLayout(new BorderLayout());
+<a name=14 class="linenum">14	</SPAN>
+<a name=15 class="linenum">15	</SPAN>	<span class="comment">// Create tree
+<a name=16 class="linenum">16	</SPAN></span>	<a class="varRef" href=JTreeASTPanel_java.html#tree>tree</a> = new JTree(tm);
+<a name=17 class="linenum">17	</SPAN>
+<a name=18 class="linenum">18	</SPAN>	<span class="comment">// Change line style
+<a name=19 class="linenum">19	</SPAN></span>	<a class="varRef" href=JTreeASTPanel_java.html#tree>tree</a>.putClientProperty("JTree.lineStyle", "Angled");
+<a name=20 class="linenum">20	</SPAN>
+<a name=21 class="linenum">21	</SPAN>	<span class="comment">// Add TreeSelectionListener
+<a name=22 class="linenum">22	</SPAN></span>	if (listener != null)
+<a name=23 class="linenum">23	</SPAN>	  <a class="varRef" href=JTreeASTPanel_java.html#tree>tree</a>.addTreeSelectionListener (listener);
+<a name=24 class="linenum">24	</SPAN>
+<a name=25 class="linenum">25	</SPAN>	<span class="comment">// Put tree in a scrollable pane's viewport
+<a name=26 class="linenum">26	</SPAN></span>	JScrollPane sp = new JScrollPane();
+<a name=27 class="linenum">27	</SPAN>	sp.getViewport().add(<a class="varRef" href=JTreeASTPanel_java.html#tree>tree</a>);
+<a name=28 class="linenum">28	</SPAN>
+<a name=29 class="linenum">29	</SPAN>	add(sp, BorderLayout.CENTER);
+<a name=30 class="linenum">30	</SPAN>  }        
+<a name=31 class="linenum">31	</SPAN>}
+<a name=32 class="linenum">32	</SPAN></pre>

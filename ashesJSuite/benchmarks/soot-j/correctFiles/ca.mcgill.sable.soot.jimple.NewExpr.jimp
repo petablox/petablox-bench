@@ -1,0 +1,13 @@
+public interface ca.mcgill.sable.soot.jimple.NewExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Expr, ca.mcgill.sable.soot.ToBriefString
+{
+
+    public abstract ca.mcgill.sable.soot.RefType getBaseType();
+
+    public abstract void setBaseType(ca.mcgill.sable.soot.RefType);
+
+    public abstract ca.mcgill.sable.soot.Type getType();
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract void apply(ca.mcgill.sable.util.Switch);
+}

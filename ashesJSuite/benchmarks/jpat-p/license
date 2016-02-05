@@ -1,0 +1,59 @@
+Date: Thu, 3 Jun 1999 14:37:50 -0400 
+From: "Jones, Mike" <mjones@netgenics.com>
+To: 'Patrick LAM' <plam@sable.mcgill.ca>
+Subject: RE: Java Protein Analysis Tools
+Parts/attachments:
+   1 Shown   48 lines  Text (charset: ISO-8859-1)                             
+   2         73 KB     Application                                            
+   3         13 KB     Application                                            
+----------------------------------------
+
+    [The following text is in the "iso-8859-1" character set]
+    [Your display is set for the "US-ASCII" character set]
+    [Some characters may be displayed incorrectly]
+
+Here is a simple aplication for testing the Digest function. 
+It takes about 35 seconds. You can make it longer by making the
+String mSequence longer. Use cut and paste of the sequence already their 
+so you don't have any bad aa codes. I didn't test it but I think most
+of the time is spent running Peptide[] peptides= digest.seqDigest();
+I will also include the API package I send to everyone. 
+
+Mike
+
+
+> -----Original Message-----
+> From: Patrick LAM [mailto:plam@sable.mcgill.ca]
+> Sent: Wednesday, June 02, 1999 10:20 PM
+> To: mjones@pixelgate.net
+> Subject: Java Protein Analysis Tools
+> 
+> 
+> Hi,
+> 
+> I'm involved with the Soot compilers project at McGill.  (You 
+> can visit
+> our site at www.sable.mcgill.ca/soot; our goal is to produce free
+> optimization tools for Java).  Since we want to optimize Java 
+> code, we need
+> as many benchmarks as possible -- especially (L)GPL'd 
+> software -- so that
+> we can compare their execution times before and after we 
+> transform them
+> with Soot.
+> 
+> It seems that the JPAT could make for a good Java benchmark.  
+> Would it be 
+> possible to have a copy of the classfiles and permission to 
+> distribute 
+> them?  Also, I would need some test data and a set of JPAT 
+> calls which 
+> takes a significant amount of time (say 60s on your computer).
+> 
+> The advantage for you is that your JPAT library would be a target for
+> optimization, since we publish papers about optimizing java 
+> programs.  
+> Hopefully they would get sped up and you could use the faster 
+> classfiles.
+>
+> pat

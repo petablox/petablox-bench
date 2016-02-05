@@ -1,0 +1,104 @@
+abstract class ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt extends ca.mcgill.sable.soot.jimple.AbstractStmt implements ca.mcgill.sable.soot.jimple.DefinitionStmt
+{
+    ca.mcgill.sable.soot.jimple.ValueBox leftBox;
+    ca.mcgill.sable.soot.jimple.ValueBox rightBox;
+    ca.mcgill.sable.util.List defBoxes;
+
+    public ca.mcgill.sable.soot.jimple.Value getLeftOp()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.leftBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getRightOp()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.rightBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getLeftOpBox()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.leftBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getRightOpBox()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.rightBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getDefBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = r0.defBoxes;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5, r6;
+        ca.mcgill.sable.soot.jimple.Value r3, r7;
+        ca.mcgill.sable.util.List r4, r8;
+        int i0, i1, i2;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.rightBox;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i0 = r1.addAll(r4);
+        r5 = r0.rightBox;
+        i1 = r1.add(r5);
+        r6 = r0.leftBox;
+        r7 = r6.getValue();
+        r8 = r7.getUseBoxes();
+        i2 = r1.addAll(r8);
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUnitBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractDefinitionStmt r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

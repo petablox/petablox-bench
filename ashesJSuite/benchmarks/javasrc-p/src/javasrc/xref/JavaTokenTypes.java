@@ -1,0 +1,123 @@
+/*
+ * ANTLR-generated file resulting from grammar java.g
+ * 
+ * Terence Parr, MageLang Institute
+ * with John Lilley, Empathy Software
+ * ANTLR Version 2.5.0; 1996-1998
+ */
+
+package javasrc.xref;
+
+public interface JavaTokenTypes {
+	public static final int EOF = 1;
+	public static final int NULL_TREE_LOOKAHEAD = 3;
+	public static final int LITERAL_package = 4;
+	public static final int SEMI = 5;
+	public static final int LITERAL_import = 6;
+	public static final int LBRACK = 7;
+	public static final int RBRACK = 8;
+	public static final int LITERAL_void = 9;
+	public static final int LITERAL_boolean = 10;
+	public static final int LITERAL_byte = 11;
+	public static final int LITERAL_char = 12;
+	public static final int LITERAL_short = 13;
+	public static final int LITERAL_int = 14;
+	public static final int LITERAL_float = 15;
+	public static final int LITERAL_long = 16;
+	public static final int LITERAL_double = 17;
+	public static final int IDENT = 18;
+	public static final int DOT = 19;
+	public static final int STAR = 20;
+	public static final int LITERAL_private = 21;
+	public static final int LITERAL_public = 22;
+	public static final int LITERAL_protected = 23;
+	public static final int LITERAL_static = 24;
+	public static final int LITERAL_transient = 25;
+	public static final int LITERAL_final = 26;
+	public static final int LITERAL_abstract = 27;
+	public static final int LITERAL_native = 28;
+	public static final int LITERAL_threadsafe = 29;
+	public static final int LITERAL_synchronized = 30;
+	public static final int LITERAL_const = 31;
+	public static final int LITERAL_volatile = 32;
+	public static final int LITERAL_class = 33;
+	public static final int LITERAL_extends = 34;
+	public static final int LITERAL_interface = 35;
+	public static final int LCURLY = 36;
+	public static final int RCURLY = 37;
+	public static final int COMMA = 38;
+	public static final int LITERAL_implements = 39;
+	public static final int ASSIGN = 40;
+	public static final int LPAREN = 41;
+	public static final int RPAREN = 42;
+	public static final int LITERAL_throws = 43;
+	public static final int COLON = 44;
+	public static final int LITERAL_if = 45;
+	public static final int LITERAL_else = 46;
+	public static final int LITERAL_for = 47;
+	public static final int LITERAL_while = 48;
+	public static final int LITERAL_do = 49;
+	public static final int LITERAL_break = 50;
+	public static final int LITERAL_continue = 51;
+	public static final int LITERAL_return = 52;
+	public static final int LITERAL_switch = 53;
+	public static final int LITERAL_case = 54;
+	public static final int LITERAL_default = 55;
+	public static final int LITERAL_throw = 56;
+	public static final int LITERAL_try = 57;
+	public static final int LITERAL_finally = 58;
+	public static final int LITERAL_catch = 59;
+	public static final int PLUS_ASSIGN = 60;
+	public static final int MINUS_ASSIGN = 61;
+	public static final int STAR_ASSIGN = 62;
+	public static final int DIV_ASSIGN = 63;
+	public static final int MOD_ASSIGN = 64;
+	public static final int SR_ASSIGN = 65;
+	public static final int BSR_ASSIGN = 66;
+	public static final int SL_ASSIGN = 67;
+	public static final int BAND_ASSIGN = 68;
+	public static final int BXOR_ASSIGN = 69;
+	public static final int BOR_ASSIGN = 70;
+	public static final int QUESTION = 71;
+	public static final int LOR = 72;
+	public static final int LAND = 73;
+	public static final int BOR = 74;
+	public static final int BXOR = 75;
+	public static final int BAND = 76;
+	public static final int NOT_EQUAL = 77;
+	public static final int EQUAL = 78;
+	public static final int LT = 79;
+	public static final int GT = 80;
+	public static final int LE = 81;
+	public static final int GE = 82;
+	public static final int SL = 83;
+	public static final int SR = 84;
+	public static final int BSR = 85;
+	public static final int PLUS = 86;
+	public static final int MINUS = 87;
+	public static final int DIV = 88;
+	public static final int MOD = 89;
+	public static final int INC = 90;
+	public static final int DEC = 91;
+	public static final int BNOT = 92;
+	public static final int LNOT = 93;
+	public static final int LITERAL_instanceof = 94;
+	public static final int LITERAL_this = 95;
+	public static final int LITERAL_super = 96;
+	public static final int LITERAL_true = 97;
+	public static final int LITERAL_false = 98;
+	public static final int LITERAL_null = 99;
+	public static final int LITERAL_new = 100;
+	public static final int NUM_INT = 101;
+	public static final int CHAR_LITERAL = 102;
+	public static final int STRING_LITERAL = 103;
+	public static final int NUM_FLOAT = 104;
+	public static final int WS = 105;
+	public static final int SL_COMMENT = 106;
+	public static final int ML_COMMENT = 107;
+	public static final int ESC = 108;
+	public static final int HEX_DIGIT = 109;
+	public static final int VOCAB = 110;
+	public static final int EXPONENT = 111;
+	public static final int FLOAT_SUFFIX = 112;
+}

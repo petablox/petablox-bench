@@ -1,0 +1,46 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: Event');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: Event';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>import java.util.EventObject;
+<a name=4 class="linenum">4	</SPAN>
+<a name=5 class="linenum">5	</SPAN>public abstract class <a class="classDef" name=Event href=Event_java_ref.html#Event>Event</a> extends EventObject {
+<a name=6 class="linenum">6	</SPAN>	private int <a class="varDef" name=type href=Event_java_ref.html#type>type</a>;
+<a name=7 class="linenum">7	</SPAN>
+<a name=8 class="linenum">8	</SPAN>
+<a name=9 class="linenum">9	</SPAN>	public <a class="methodDef" name=Event(Object) href=Event_java_ref.html#Event(Object)>Event</a>(Object source) {
+<a name=10 class="linenum">10	</SPAN>		super(source);
+<a name=11 class="linenum">11	</SPAN>	}
+<a name=12 class="linenum">12	</SPAN>	public <a class="methodDef" name=Event(Object,int) href=Event_java_ref.html#Event(Object,int)>Event</a>(Object source, int type) {
+<a name=13 class="linenum">13	</SPAN>		super(source);
+<a name=14 class="linenum">14	</SPAN>		<a class="methodRef" href=Event_java.html#setType(int)>setType</a>(type);
+<a name=15 class="linenum">15	</SPAN>	}
+<a name=16 class="linenum">16	</SPAN>	public int <a class="methodDef" name=getType() href=Event_java_ref.html#getType()>getType</a>() {
+<a name=17 class="linenum">17	</SPAN>		return <a class="varRef" href=Event_java.html#type>type</a>;
+<a name=18 class="linenum">18	</SPAN>	}
+<a name=19 class="linenum">19	</SPAN>	void <a class="methodDef" name=setType(int) href=Event_java_ref.html#setType(int)>setType</a>(int type) {
+<a name=20 class="linenum">20	</SPAN>		this.type = type;
+<a name=21 class="linenum">21	</SPAN>	}
+<a name=22 class="linenum">22	</SPAN>	<span class="comment">/** This should NOT be called from anyone other than ParserEventSupport! */</span>
+<a name=23 class="linenum">23	</SPAN>	void <a class="methodDef" name=setValues(int) href=Event_java_ref.html#setValues(int)>setValues</a>(int type) {
+<a name=24 class="linenum">24	</SPAN>		<a class="methodRef" href=Event_java.html#setType(int)>setType</a>(type);
+<a name=25 class="linenum">25	</SPAN>	}
+<a name=26 class="linenum">26	</SPAN>}
+<a name=27 class="linenum">27	</SPAN></pre>

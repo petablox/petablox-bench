@@ -1,0 +1,61 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: TraceEvent');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: TraceEvent';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>public class <a class="classDef" name=TraceEvent href=TraceEvent_java_ref.html#TraceEvent>TraceEvent</a> extends <a class="classRef" href=GuessingEvent_java.html#GuessingEvent>GuessingEvent</a> {
+<a name=4 class="linenum">4	</SPAN>	private int <a class="varDef" name=ruleNum href=TraceEvent_java_ref.html#ruleNum>ruleNum</a>;
+<a name=5 class="linenum">5	</SPAN>	private int <a class="varDef" name=data href=TraceEvent_java_ref.html#data>data</a>;
+<a name=6 class="linenum">6	</SPAN>	public static int <a class="varDef" name=ENTER href=TraceEvent_java_ref.html#ENTER>ENTER</a>=0;
+<a name=7 class="linenum">7	</SPAN>	public static int <a class="varDef" name=EXIT href=TraceEvent_java_ref.html#EXIT>EXIT</a>=1;
+<a name=8 class="linenum">8	</SPAN>	public static int <a class="varDef" name=DONE_PARSING href=TraceEvent_java_ref.html#DONE_PARSING>DONE_PARSING</a>=2;
+<a name=9 class="linenum">9	</SPAN>
+<a name=10 class="linenum">10	</SPAN>
+<a name=11 class="linenum">11	</SPAN>	public <a class="methodDef" name=TraceEvent(Object) href=TraceEvent_java_ref.html#TraceEvent(Object)>TraceEvent</a>(Object source) {
+<a name=12 class="linenum">12	</SPAN>		super(source);
+<a name=13 class="linenum">13	</SPAN>	}
+<a name=14 class="linenum">14	</SPAN>	public <a class="methodDef" name=TraceEvent(Object,int,int,int,int) href=TraceEvent_java_ref.html#TraceEvent(Object,int,int,int,int)>TraceEvent</a>(Object source, int type, int ruleNum, int guessing, int data) {
+<a name=15 class="linenum">15	</SPAN>		super(source);
+<a name=16 class="linenum">16	</SPAN>		<a class="methodRef" href=TraceEvent_java.html#setValues(int,int,int,int)>setValues</a>(type, ruleNum, guessing, data);
+<a name=17 class="linenum">17	</SPAN>	}
+<a name=18 class="linenum">18	</SPAN>	public int <a class="methodDef" name=getData() href=TraceEvent_java_ref.html#getData()>getData</a>() {
+<a name=19 class="linenum">19	</SPAN>		return <a class="varRef" href=TraceEvent_java.html#data>data</a>;
+<a name=20 class="linenum">20	</SPAN>	}
+<a name=21 class="linenum">21	</SPAN>	public int <a class="methodDef" name=getRuleNum() href=TraceEvent_java_ref.html#getRuleNum()>getRuleNum</a>() {
+<a name=22 class="linenum">22	</SPAN>		return <a class="varRef" href=TraceEvent_java.html#ruleNum>ruleNum</a>;
+<a name=23 class="linenum">23	</SPAN>	}
+<a name=24 class="linenum">24	</SPAN>	void <a class="methodDef" name=setData(int) href=TraceEvent_java_ref.html#setData(int)>setData</a>(int data) {
+<a name=25 class="linenum">25	</SPAN>		this.data = data;
+<a name=26 class="linenum">26	</SPAN>	}
+<a name=27 class="linenum">27	</SPAN>	void <a class="methodDef" name=setRuleNum(int) href=TraceEvent_java_ref.html#setRuleNum(int)>setRuleNum</a>(int ruleNum) {
+<a name=28 class="linenum">28	</SPAN>		this.ruleNum = ruleNum;
+<a name=29 class="linenum">29	</SPAN>	}
+<a name=30 class="linenum">30	</SPAN>	<span class="comment">/** This should NOT be called from anyone other than ParserEventSupport! */</span>
+<a name=31 class="linenum">31	</SPAN>	 void <a class="methodDef" name=setValues(int,int,int,int) href=TraceEvent_java_ref.html#setValues(int,int,int,int)>setValues</a>(int type, int ruleNum, int guessing, int data) {
+<a name=32 class="linenum">32	</SPAN>		super.setValues(type, guessing);
+<a name=33 class="linenum">33	</SPAN>		<a class="methodRef" href=TraceEvent_java.html#setRuleNum(int)>setRuleNum</a>(ruleNum);
+<a name=34 class="linenum">34	</SPAN>		<a class="methodRef" href=TraceEvent_java.html#setData(int)>setData</a>(data);
+<a name=35 class="linenum">35	</SPAN>	}
+<a name=36 class="linenum">36	</SPAN>	public String <a class="methodDef" name=toString() href=TraceEvent_java_ref.html#toString()>toString</a>() {
+<a name=37 class="linenum">37	</SPAN>		return "ParserTraceEvent [" + 
+<a name=38 class="linenum">38	</SPAN>		       (<a class="methodRef" href=Event_java.html#getType()>getType</a>()==<a class="varRef" href=TraceEvent_java.html#ENTER>ENTER</a>?"enter,":"exit,") +
+<a name=39 class="linenum">39	</SPAN>		       <a class="methodRef" href=TraceEvent_java.html#getRuleNum()>getRuleNum</a>() + "," + <a class="methodRef" href=GuessingEvent_java.html#getGuessing()>getGuessing</a>() +"]";
+<a name=40 class="linenum">40	</SPAN>	}
+<a name=41 class="linenum">41	</SPAN>}
+<a name=42 class="linenum">42	</SPAN></pre>

@@ -1,0 +1,17 @@
+Benchmark: gj - Generic Java compiler
+Authors: Gilad Bracha, Martin Odersky, David Stoutamire, Philip Wadler
+Homepage: (http://www.plan9.bell-labs.com/~wadler/pizza/gj)
+
+Packaged by: Patrice Pominville (patrice@sable.mcgill.ca)
+Packaged on: Tue Feb  1 02:01:10 EST 2000
+
+Description: 
+The GJ compiler accepts a superset of the Java Language which has support for generic
+types. This basically adds a c++ template like mechanism to the Java
+language. It produces standard JVM bytecodes.
+
+Benchmark desc: The benchmark consists of compiling with gj all the .java files under the executionInput directory.
+		
+Input description: a freeze of the soot framework.
+
+License: see file license.html

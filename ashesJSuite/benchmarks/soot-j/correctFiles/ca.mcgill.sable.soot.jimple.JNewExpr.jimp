@@ -1,0 +1,15 @@
+class ca.mcgill.sable.soot.jimple.JNewExpr extends ca.mcgill.sable.soot.jimple.AbstractNewExpr implements ca.mcgill.sable.soot.jimple.NewExpr
+{
+
+    public void <init>(ca.mcgill.sable.soot.RefType)
+    {
+        ca.mcgill.sable.soot.jimple.JNewExpr r0;
+        ca.mcgill.sable.soot.RefType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.type = r1;
+        return;
+    }
+}

@@ -1,0 +1,35 @@
+class ca.mcgill.sable.soot.jimple.ImmediateBox extends ca.mcgill.sable.soot.jimple.AbstractValueBox
+{
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.ImmediateBox r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.setValue(r1);
+        return;
+    }
+
+    public boolean canContainValue(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.ImmediateBox r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        int i0, i1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i0 != 0 goto label0;
+
+        i1 = r1 instanceof ca.mcgill.sable.soot.jimple.Constant;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+}

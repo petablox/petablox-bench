@@ -1,0 +1,22 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractIntBinopExpr extends ca.mcgill.sable.soot.jimple.AbstractBinopExpr
+{
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractIntBinopExpr r0;
+        ca.mcgill.sable.soot.IntType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.IntType.v();
+        return r1;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractIntBinopExpr r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

@@ -1,0 +1,136 @@
+public abstract class ca.mcgill.sable.soot.jimple.BackwardFlowAnalysis extends ca.mcgill.sable.soot.jimple.FlowAnalysis
+{
+
+    public void <init>(ca.mcgill.sable.soot.jimple.StmtGraph)
+    {
+        ca.mcgill.sable.soot.jimple.BackwardFlowAnalysis r0;
+        ca.mcgill.sable.soot.jimple.StmtGraph r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>(r1);
+        return;
+    }
+
+    protected boolean isForward()
+    {
+        ca.mcgill.sable.soot.jimple.BackwardFlowAnalysis r0;
+
+        r0 := @this;
+        return 0;
+    }
+
+    protected void doAnalysis()
+    {
+        ca.mcgill.sable.soot.jimple.BackwardFlowAnalysis r0;
+        ca.mcgill.sable.util.LinkedList r1;
+        ca.mcgill.sable.util.HashSet r2;
+        ca.mcgill.sable.soot.jimple.StmtGraph r3, r18, r34;
+        ca.mcgill.sable.util.Iterator r4, r25, r36;
+        java.lang.Object r5, r8, r9, r11, r12, r13, r14, r17, r21, r23, r24, r27, r28, r30, r31, r33, r37;
+        ca.mcgill.sable.soot.jimple.Stmt r6, r15, r38;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10;
+        ca.mcgill.sable.util.Map r7, r10, r16, r20, r22, r26, r29, r32;
+        ca.mcgill.sable.util.List r19, r35;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.LinkedList;
+        specialinvoke r1.<init>();
+        r2 = new ca.mcgill.sable.util.HashSet;
+        specialinvoke r2.<init>();
+        r3 = r0.graph;
+        r4 = r3.iterator();
+        goto label1;
+
+     label0:
+        r5 = r4.next();
+        r6 = (ca.mcgill.sable.soot.jimple.Stmt) r5;
+        r1.addLast(r6);
+        i0 = r2.add(r6);
+        r7 = r0.stmtToBeforeFlow;
+        r8 = r0.newInitialFlow();
+        r9 = r7.put(r6, r8);
+        r10 = r0.stmtToAfterFlow;
+        r11 = r0.newInitialFlow();
+        r12 = r10.put(r6, r11);
+
+     label1:
+        i1 = r4.hasNext();
+        if i1 != 0 goto label0;
+
+        r13 = r0.newInitialFlow();
+        goto label9;
+
+     label2:
+        r14 = r1.removeFirst();
+        r15 = (ca.mcgill.sable.soot.jimple.Stmt) r14;
+        i2 = r2.remove(r15);
+        r16 = r0.stmtToBeforeFlow;
+        r17 = r16.get(r15);
+        r0.copy(r17, r13);
+        r18 = r0.graph;
+        r19 = r18.getSuccsOf(r15);
+        r20 = r0.stmtToAfterFlow;
+        r21 = r20.get(r15);
+        i3 = r19.size();
+        if i3 != 1 goto label3;
+
+        r22 = r0.stmtToBeforeFlow;
+        r23 = r19.get(0);
+        r24 = r22.get(r23);
+        r0.copy(r24, r21);
+        goto label6;
+
+     label3:
+        i4 = r19.size();
+        if i4 == 0 goto label6;
+
+        r25 = r19.iterator();
+        r26 = r0.stmtToBeforeFlow;
+        r27 = r25.next();
+        r28 = r26.get(r27);
+        r0.copy(r28, r21);
+        goto label5;
+
+     label4:
+        r29 = r0.stmtToBeforeFlow;
+        r30 = r25.next();
+        r31 = r29.get(r30);
+        r0.merge(r21, r31, r21);
+
+     label5:
+        i5 = r25.hasNext();
+        if i5 != 0 goto label4;
+
+     label6:
+        r32 = r0.stmtToBeforeFlow;
+        r33 = r32.get(r15);
+        r0.flowThrough(r21, r15, r33);
+        i6 = r33.equals(r13);
+        if i6 != 0 goto label9;
+
+        r34 = r0.graph;
+        r35 = r34.getPredsOf(r15);
+        r36 = r35.iterator();
+        goto label8;
+
+     label7:
+        r37 = r36.next();
+        r38 = (ca.mcgill.sable.soot.jimple.Stmt) r37;
+        i7 = r2.contains(r38);
+        if i7 != 0 goto label8;
+
+        i8 = r2.add(r38);
+        r1.addLast(r38);
+
+     label8:
+        i9 = r36.hasNext();
+        if i9 != 0 goto label7;
+
+     label9:
+        i10 = r1.isEmpty();
+        if i10 == 0 goto label2;
+
+        return;
+    }
+}

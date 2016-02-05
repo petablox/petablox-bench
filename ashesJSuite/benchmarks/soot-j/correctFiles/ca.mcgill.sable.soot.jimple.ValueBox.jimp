@@ -1,0 +1,9 @@
+public interface ca.mcgill.sable.soot.jimple.ValueBox extends java.lang.Object
+{
+
+    public abstract void setValue(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getValue();
+
+    public abstract boolean canContainValue(ca.mcgill.sable.soot.jimple.Value);
+}

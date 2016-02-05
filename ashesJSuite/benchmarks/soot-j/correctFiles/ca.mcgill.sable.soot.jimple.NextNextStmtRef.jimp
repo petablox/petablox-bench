@@ -1,0 +1,63 @@
+class ca.mcgill.sable.soot.jimple.NextNextStmtRef extends java.lang.Object implements ca.mcgill.sable.soot.jimple.ConcreteRef, ca.mcgill.sable.soot.ToBriefString
+{
+
+    void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.NextNextStmtRef r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.NextNextStmtRef r0;
+
+        r0 := @this;
+        return "&nextnextstmt";
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.NextNextStmtRef r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.NextNextStmtRef r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.NextNextStmtRef r0;
+        ca.mcgill.sable.soot.StmtAddressType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.StmtAddressType.v();
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.NextNextStmtRef r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.RefSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.RefSwitch) r1;
+        r2.caseNextNextStmtRef(r0);
+        return;
+    }
+}

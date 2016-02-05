@@ -1,0 +1,44 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: GuessingEvent');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: GuessingEvent';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>public abstract class <a class="classDef" name=GuessingEvent href=GuessingEvent_java_ref.html#GuessingEvent>GuessingEvent</a> extends <a class="classRef" href=Event_java.html#Event>Event</a> {
+<a name=4 class="linenum">4	</SPAN>	private int <a class="varDef" name=guessing href=GuessingEvent_java_ref.html#guessing>guessing</a>;
+<a name=5 class="linenum">5	</SPAN>
+<a name=6 class="linenum">6	</SPAN>
+<a name=7 class="linenum">7	</SPAN>	public <a class="methodDef" name=GuessingEvent(Object) href=GuessingEvent_java_ref.html#GuessingEvent(Object)>GuessingEvent</a>(Object source) {
+<a name=8 class="linenum">8	</SPAN>		super(source);
+<a name=9 class="linenum">9	</SPAN>	}
+<a name=10 class="linenum">10	</SPAN>	public <a class="methodDef" name=GuessingEvent(Object,int) href=GuessingEvent_java_ref.html#GuessingEvent(Object,int)>GuessingEvent</a>(Object source, int type) {
+<a name=11 class="linenum">11	</SPAN>		super(source, type);
+<a name=12 class="linenum">12	</SPAN>	}
+<a name=13 class="linenum">13	</SPAN>	public int <a class="methodDef" name=getGuessing() href=GuessingEvent_java_ref.html#getGuessing()>getGuessing</a>() {
+<a name=14 class="linenum">14	</SPAN>		return <a class="varRef" href=GuessingEvent_java.html#guessing>guessing</a>;
+<a name=15 class="linenum">15	</SPAN>	}
+<a name=16 class="linenum">16	</SPAN>	void <a class="methodDef" name=setGuessing(int) href=GuessingEvent_java_ref.html#setGuessing(int)>setGuessing</a>(int guessing) {
+<a name=17 class="linenum">17	</SPAN>		this.guessing = guessing;
+<a name=18 class="linenum">18	</SPAN>	}
+<a name=19 class="linenum">19	</SPAN>	<span class="comment">/** This should NOT be called from anyone other than ParserEventSupport! */</span>
+<a name=20 class="linenum">20	</SPAN>	void <a class="methodDef" name=setValues(int,int) href=GuessingEvent_java_ref.html#setValues(int,int)>setValues</a>(int type, int guessing) {
+<a name=21 class="linenum">21	</SPAN>		super.setValues(type);
+<a name=22 class="linenum">22	</SPAN>		<a class="methodRef" href=GuessingEvent_java.html#setGuessing(int)>setGuessing</a>(guessing);
+<a name=23 class="linenum">23	</SPAN>	}
+<a name=24 class="linenum">24	</SPAN>}
+<a name=25 class="linenum">25	</SPAN></pre>

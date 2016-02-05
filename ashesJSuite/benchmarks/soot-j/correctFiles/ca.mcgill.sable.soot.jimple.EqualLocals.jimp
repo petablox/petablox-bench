@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.EqualLocals extends java.lang.Object
+{
+
+    public abstract boolean isLocalEqualToAt(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Stmt);
+
+    public abstract ca.mcgill.sable.util.List getCopiesAt(ca.mcgill.sable.soot.jimple.Stmt);
+}

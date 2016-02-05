@@ -1,0 +1,776 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.preprocessor</A>: Preprocessor');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.preprocessor</A>: Preprocessor';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN><span class="comment">/*
+<a name=2 class="linenum">2	</SPAN> * ANTLR-generated file resulting from grammar preproc.g
+<a name=3 class="linenum">3	</SPAN> * 
+<a name=4 class="linenum">4	</SPAN> * Terence Parr, MageLang Institute
+<a name=5 class="linenum">5	</SPAN> * with John Lilley, Empathy Software
+<a name=6 class="linenum">6	</SPAN> * ANTLR Version 2.5.0; 1996,1997
+<a name=7 class="linenum">7	</SPAN> */</span>
+<a name=8 class="linenum">8	</SPAN>
+<a name=9 class="linenum">9	</SPAN>package antlr.preprocessor;
+<a name=10 class="linenum">10	</SPAN>
+<a name=11 class="linenum">11	</SPAN>import java.io.IOException;
+<a name=12 class="linenum">12	</SPAN>import antlr.Tokenizer;
+<a name=13 class="linenum">13	</SPAN>import antlr.TokenBuffer;
+<a name=14 class="linenum">14	</SPAN>import antlr.LLkParser;
+<a name=15 class="linenum">15	</SPAN>import antlr.Token;
+<a name=16 class="linenum">16	</SPAN>import antlr.ParserException;
+<a name=17 class="linenum">17	</SPAN>import antlr.NoViableAltException;
+<a name=18 class="linenum">18	</SPAN>import antlr.MismatchedTokenException;
+<a name=19 class="linenum">19	</SPAN>import antlr.SemanticException;
+<a name=20 class="linenum">20	</SPAN>import antlr.collections.impl.BitSet;
+<a name=21 class="linenum">21	</SPAN>
+<a name=22 class="linenum">22	</SPAN>import antlr.collections.impl.IndexedVector;
+<a name=23 class="linenum">23	</SPAN>import java.util.Hashtable;
+<a name=24 class="linenum">24	</SPAN>import antlr.preprocessor.Grammar;
+<a name=25 class="linenum">25	</SPAN>
+<a name=26 class="linenum">26	</SPAN>public class <a class="classDef" name=Preprocessor href=Preprocessor_java_ref.html#Preprocessor>Preprocessor</a> extends <a class="classRef" href=../../antlr/LLkParser_java.html#LLkParser>LLkParser</a>Parser
+<a name=27 class="linenum">27	</SPAN>       implements <a class="classRef" href=PreprocessorTokenTypes_java.html#PreprocessorTokenTypes>PreprocessorTokenTypes</a>
+<a name=28 class="linenum">28	</SPAN> {
+<a name=29 class="linenum">29	</SPAN>
+<a name=30 class="linenum">30	</SPAN>protected <a class="methodDef" name=Preprocessor(TokenBuffer,int) href=Preprocessor_java_ref.html#Preprocessor(TokenBuffer,int)>Preprocessor</a>(TokenBuffer tokenBuf, int k) {
+<a name=31 class="linenum">31	</SPAN>  super(tokenBuf,k);
+<a name=32 class="linenum">32	</SPAN>  <a class="varRef" href=../../antlr/Parser_java.html#tokenNames>tokenNames</a> = <a class="varRef" href=Preprocessor_java.html#_tokenNames>_tokenNames</a>;
+<a name=33 class="linenum">33	</SPAN>}
+<a name=34 class="linenum">34	</SPAN>
+<a name=35 class="linenum">35	</SPAN>public <a class="methodDef" name=Preprocessor(TokenBuffer) href=Preprocessor_java_ref.html#Preprocessor(TokenBuffer)>Preprocessor</a>(TokenBuffer tokenBuf) {
+<a name=36 class="linenum">36	</SPAN>  this(tokenBuf,1);
+<a name=37 class="linenum">37	</SPAN>}
+<a name=38 class="linenum">38	</SPAN>
+<a name=39 class="linenum">39	</SPAN>protected <a class="methodDef" name=Preprocessor(Tokenizer,int) href=Preprocessor_java_ref.html#Preprocessor(Tokenizer,int)>Preprocessor</a>(Tokenizer lexer, int k) {
+<a name=40 class="linenum">40	</SPAN>  super(lexer,k);
+<a name=41 class="linenum">41	</SPAN>  <a class="varRef" href=../../antlr/Parser_java.html#tokenNames>tokenNames</a> = <a class="varRef" href=Preprocessor_java.html#_tokenNames>_tokenNames</a>;
+<a name=42 class="linenum">42	</SPAN>}
+<a name=43 class="linenum">43	</SPAN>
+<a name=44 class="linenum">44	</SPAN>public <a class="methodDef" name=Preprocessor(Tokenizer) href=Preprocessor_java_ref.html#Preprocessor(Tokenizer)>Preprocessor</a>(Tokenizer lexer) {
+<a name=45 class="linenum">45	</SPAN>  this(lexer,1);
+<a name=46 class="linenum">46	</SPAN>}
+<a name=47 class="linenum">47	</SPAN>
+<a name=48 class="linenum">48	</SPAN>	public final void <a class="methodDef" name=grammarFile(Hierarchy,String) href=Preprocessor_java_ref.html#grammarFile(Hierarchy,String)>grammarFile</a>(
+<a name=49 class="linenum">49	</SPAN>		<a class="classRef" href=Hierarchy_java.html#Hierarchy>Hierarchy</a> hier, String file
+<a name=50 class="linenum">50	</SPAN>	) throws ParserException, IOException {
+<a name=51 class="linenum">51	</SPAN>		
+<a name=52 class="linenum">52	</SPAN>		Token  hdr = null;
+<a name=53 class="linenum">53	</SPAN>		
+<a name=54 class="linenum">54	</SPAN>			<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> gr;
+<a name=55 class="linenum">55	</SPAN>			IndexedVector opt=null;
+<a name=56 class="linenum">56	</SPAN>		
+<a name=57 class="linenum">57	</SPAN>		
+<a name=58 class="linenum">58	</SPAN>		try {      <span class="comment">// for error handling
+<a name=59 class="linenum">59	</SPAN></span>			{
+<a name=60 class="linenum">60	</SPAN>			switch ( LA(1)) {
+<a name=61 class="linenum">61	</SPAN>			case HEADER_ACTION:
+<a name=62 class="linenum">62	</SPAN>			{
+<a name=63 class="linenum">63	</SPAN>				hdr = LT(1);
+<a name=64 class="linenum">64	</SPAN>				match(HEADER_ACTION);
+<a name=65 class="linenum">65	</SPAN>				break;
+<a name=66 class="linenum">66	</SPAN>			}
+<a name=67 class="linenum">67	</SPAN>			case EOF:
+<a name=68 class="linenum">68	</SPAN>			case ACTION:
+<a name=69 class="linenum">69	</SPAN>			case LITERAL_class:
+<a name=70 class="linenum">70	</SPAN>			case OPTIONS_START:
+<a name=71 class="linenum">71	</SPAN>			{
+<a name=72 class="linenum">72	</SPAN>				break;
+<a name=73 class="linenum">73	</SPAN>			}
+<a name=74 class="linenum">74	</SPAN>			default:
+<a name=75 class="linenum">75	</SPAN>			{
+<a name=76 class="linenum">76	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(LT(1));
+<a name=77 class="linenum">77	</SPAN>			}
+<a name=78 class="linenum">78	</SPAN>			}
+<a name=79 class="linenum">79	</SPAN>			}
+<a name=80 class="linenum">80	</SPAN>			{
+<a name=81 class="linenum">81	</SPAN>			switch ( LA(1)) {
+<a name=82 class="linenum">82	</SPAN>			case OPTIONS_START:
+<a name=83 class="linenum">83	</SPAN>			{
+<a name=84 class="linenum">84	</SPAN>				opt=optionSpec(null);
+<a name=85 class="linenum">85	</SPAN>				break;
+<a name=86 class="linenum">86	</SPAN>			}
+<a name=87 class="linenum">87	</SPAN>			case EOF:
+<a name=88 class="linenum">88	</SPAN>			case ACTION:
+<a name=89 class="linenum">89	</SPAN>			case LITERAL_class:
+<a name=90 class="linenum">90	</SPAN>			{
+<a name=91 class="linenum">91	</SPAN>				break;
+<a name=92 class="linenum">92	</SPAN>			}
+<a name=93 class="linenum">93	</SPAN>			default:
+<a name=94 class="linenum">94	</SPAN>			{
+<a name=95 class="linenum">95	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(LT(1));
+<a name=96 class="linenum">96	</SPAN>			}
+<a name=97 class="linenum">97	</SPAN>			}
+<a name=98 class="linenum">98	</SPAN>			}
+<a name=99 class="linenum">99	</SPAN>			{
+<a name=100 class="linenum">100	</SPAN>			_loop5:
+<a name=101 class="linenum">101	</SPAN>			do {
+<a name=102 class="linenum">102	</SPAN>				if ((LA(1)==ACTION||LA(1)==LITERAL_class)) {
+<a name=103 class="linenum">103	</SPAN>					gr=class_def(hier);
+<a name=104 class="linenum">104	</SPAN>					
+<a name=105 class="linenum">105	</SPAN>								<span class="comment">// System.out.println(gr);
+<a name=106 class="linenum">106	</SPAN></span>								if ( hdr!=null ) {
+<a name=107 class="linenum">107	</SPAN>									hier.<a class="methodRef" href=Hierarchy_java.html#getFile(String)>getFile</a>(file).<a class="methodRef" href=GrammarFile_java.html#setHeaderAction(String)>setHeaderAction</a>(hdr.getText());
+<a name=108 class="linenum">108	</SPAN>								}
+<a name=109 class="linenum">109	</SPAN>								if ( opt!=null ) {
+<a name=110 class="linenum">110	</SPAN>									hier.<a class="methodRef" href=Hierarchy_java.html#getFile(String)>getFile</a>(file).<a class="methodRef" href=GrammarFile_java.html#setOptions(IndexedVector)>setOptions</a>(opt);
+<a name=111 class="linenum">111	</SPAN>								}
+<a name=112 class="linenum">112	</SPAN>								if ( gr!=null ) {
+<a name=113 class="linenum">113	</SPAN>									gr.<a class="methodRef" href=Grammar_java.html#setFileName(String)>setFileName</a>(file);
+<a name=114 class="linenum">114	</SPAN>									hier.<a class="methodRef" href=Hierarchy_java.html#addGrammar(Grammar)>addGrammar</a>(gr);
+<a name=115 class="linenum">115	</SPAN>								}
+<a name=116 class="linenum">116	</SPAN>								
+<a name=117 class="linenum">117	</SPAN>				}
+<a name=118 class="linenum">118	</SPAN>				else {
+<a name=119 class="linenum">119	</SPAN>					break _loop5;
+<a name=120 class="linenum">120	</SPAN>				}
+<a name=121 class="linenum">121	</SPAN>				
+<a name=122 class="linenum">122	</SPAN>			} while (true);
+<a name=123 class="linenum">123	</SPAN>			}
+<a name=124 class="linenum">124	</SPAN>			match(<a class="classRef" href=../../antlr/Token_java.html#Token>Token</a>.<a class="varRef" href=../../antlr/Token_java.html#EOF_TYPE>EOF_TYPE</a>);
+<a name=125 class="linenum">125	</SPAN>		}
+<a name=126 class="linenum">126	</SPAN>		catch (ParserException ex) {
+<a name=127 class="linenum">127	</SPAN>			reportError(ex);
+<a name=128 class="linenum">128	</SPAN>			consume();
+<a name=129 class="linenum">129	</SPAN>			consumeUntil(_tokenSet_0);
+<a name=130 class="linenum">130	</SPAN>		}
+<a name=131 class="linenum">131	</SPAN>	}
+<a name=132 class="linenum">132	</SPAN>	
+<a name=133 class="linenum">133	</SPAN>	public final IndexedVector  <a class="methodDef" name=optionSpec(Grammar) href=Preprocessor_java_ref.html#optionSpec(Grammar)>optionSpec</a>(
+<a name=134 class="linenum">134	</SPAN>		<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> gr
+<a name=135 class="linenum">135	</SPAN>	) throws ParserException, IOException {
+<a name=136 class="linenum">136	</SPAN>		IndexedVector options;
+<a name=137 class="linenum">137	</SPAN>		
+<a name=138 class="linenum">138	</SPAN>		Token  op = null;
+<a name=139 class="linenum">139	</SPAN>		Token  rhs = null;
+<a name=140 class="linenum">140	</SPAN>		
+<a name=141 class="linenum">141	</SPAN>			options = new <a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector()>IndexedVector</a>();
+<a name=142 class="linenum">142	</SPAN>		
+<a name=143 class="linenum">143	</SPAN>		
+<a name=144 class="linenum">144	</SPAN>		try {      <span class="comment">// for error handling
+<a name=145 class="linenum">145	</SPAN></span>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#OPTIONS_START>OPTIONS_START</a>);
+<a name=146 class="linenum">146	</SPAN>			{
+<a name=147 class="linenum">147	</SPAN>			_loop21:
+<a name=148 class="linenum">148	</SPAN>			do {
+<a name=149 class="linenum">149	</SPAN>				if ((<a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)==<a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>)) {
+<a name=150 class="linenum">150	</SPAN>					op = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=151 class="linenum">151	</SPAN>					<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>);
+<a name=152 class="linenum">152	</SPAN>					rhs = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=153 class="linenum">153	</SPAN>					<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ASSIGN_RHS>ASSIGN_RHS</a>);
+<a name=154 class="linenum">154	</SPAN>					
+<a name=155 class="linenum">155	</SPAN>									<a class="classRef" href=Option_java.html#Option>Option</a> newOp = new <a class="methodRef" href=Option_java.html#Option(String,String,Grammar)>Option</a>(op.getText(),rhs.getText(),gr);
+<a name=156 class="linenum">156	</SPAN>									options.appendElement(newOp.<a class="methodRef" href=Option_java.html#getName()>getName</a>(),newOp);
+<a name=157 class="linenum">157	</SPAN>									if ( rhs.getText().equals("tokdef") ) {
+<a name=158 class="linenum">158	</SPAN>										gr.<a class="varRef" href=Grammar_java.html#specifiedVocabulary>specifiedVocabulary</a> = true;
+<a name=159 class="linenum">159	</SPAN>									}
+<a name=160 class="linenum">160	</SPAN>									
+<a name=161 class="linenum">161	</SPAN>				}
+<a name=162 class="linenum">162	</SPAN>				else {
+<a name=163 class="linenum">163	</SPAN>					break _loop21;
+<a name=164 class="linenum">164	</SPAN>				}
+<a name=165 class="linenum">165	</SPAN>				
+<a name=166 class="linenum">166	</SPAN>			} while (true);
+<a name=167 class="linenum">167	</SPAN>			}
+<a name=168 class="linenum">168	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#RCURLY>RCURLY</a>);
+<a name=169 class="linenum">169	</SPAN>		}
+<a name=170 class="linenum">170	</SPAN>		catch (ParserException ex) {
+<a name=171 class="linenum">171	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=172 class="linenum">172	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=173 class="linenum">173	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_1>_tokenSet_1</a>);
+<a name=174 class="linenum">174	</SPAN>		}
+<a name=175 class="linenum">175	</SPAN>		return options;
+<a name=176 class="linenum">176	</SPAN>	}
+<a name=177 class="linenum">177	</SPAN>	
+<a name=178 class="linenum">178	</SPAN>	public final <a class="classRef" href=Grammar_java.html#Grammar>Grammar</a>  <a class="methodDef" name=class_def(Hierarchy) href=Preprocessor_java_ref.html#class_def(Hierarchy)>class_def</a>(
+<a name=179 class="linenum">179	</SPAN>		<a class="classRef" href=Hierarchy_java.html#Hierarchy>Hierarchy</a> hier
+<a name=180 class="linenum">180	</SPAN>	) throws ParserException, IOException {
+<a name=181 class="linenum">181	</SPAN>		<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> gr;
+<a name=182 class="linenum">182	</SPAN>		
+<a name=183 class="linenum">183	</SPAN>		Token  preamble = null;
+<a name=184 class="linenum">184	</SPAN>		Token  sub = null;
+<a name=185 class="linenum">185	</SPAN>		Token  sup = null;
+<a name=186 class="linenum">186	</SPAN>		Token  memberA = null;
+<a name=187 class="linenum">187	</SPAN>		
+<a name=188 class="linenum">188	</SPAN>			gr=null;
+<a name=189 class="linenum">189	</SPAN>			IndexedVector rules = new <a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector(int)>IndexedVector</a>(100);
+<a name=190 class="linenum">190	</SPAN>			IndexedVector classOptions = null;
+<a name=191 class="linenum">191	</SPAN>		
+<a name=192 class="linenum">192	</SPAN>		
+<a name=193 class="linenum">193	</SPAN>		try {      <span class="comment">// for error handling
+<a name=194 class="linenum">194	</SPAN></span>			{
+<a name=195 class="linenum">195	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=196 class="linenum">196	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=197 class="linenum">197	</SPAN>			{
+<a name=198 class="linenum">198	</SPAN>				preamble = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=199 class="linenum">199	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>);
+<a name=200 class="linenum">200	</SPAN>				break;
+<a name=201 class="linenum">201	</SPAN>			}
+<a name=202 class="linenum">202	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_class>LITERAL_class</a>:
+<a name=203 class="linenum">203	</SPAN>			{
+<a name=204 class="linenum">204	</SPAN>				break;
+<a name=205 class="linenum">205	</SPAN>			}
+<a name=206 class="linenum">206	</SPAN>			default:
+<a name=207 class="linenum">207	</SPAN>			{
+<a name=208 class="linenum">208	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=209 class="linenum">209	</SPAN>			}
+<a name=210 class="linenum">210	</SPAN>			}
+<a name=211 class="linenum">211	</SPAN>			}
+<a name=212 class="linenum">212	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_class>LITERAL_class</a>);
+<a name=213 class="linenum">213	</SPAN>			sub = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=214 class="linenum">214	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>);
+<a name=215 class="linenum">215	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_extends>LITERAL_extends</a>);
+<a name=216 class="linenum">216	</SPAN>			sup = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=217 class="linenum">217	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>);
+<a name=218 class="linenum">218	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#SEMI>SEMI</a>);
+<a name=219 class="linenum">219	</SPAN>			
+<a name=220 class="linenum">220	</SPAN>						gr = (<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a>)hier.<a class="methodRef" href=Hierarchy_java.html#getGrammar(String)>getGrammar</a>(sub.getText());
+<a name=221 class="linenum">221	</SPAN>						if ( gr!=null ) {
+<a name=222 class="linenum">222	</SPAN>							antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#toolError(String)>toolError</a>("redefinition of grammar "+gr.<a class="methodRef" href=Grammar_java.html#getName()>getName</a>()+" ignored");
+<a name=223 class="linenum">223	</SPAN>							gr=null;
+<a name=224 class="linenum">224	</SPAN>						}
+<a name=225 class="linenum">225	</SPAN>						else {
+<a name=226 class="linenum">226	</SPAN>							gr = new <a class="methodRef" href=Grammar_java.html#Grammar(String,String,IndexedVector)>Grammar</a>(sub.getText(), sup.getText(), rules);
+<a name=227 class="linenum">227	</SPAN>							if ( preamble!=null ) {
+<a name=228 class="linenum">228	</SPAN>								gr.<a class="methodRef" href=Grammar_java.html#setPreambleAction(String)>setPreambleAction</a>(preamble.getText());
+<a name=229 class="linenum">229	</SPAN>							}
+<a name=230 class="linenum">230	</SPAN>						}
+<a name=231 class="linenum">231	</SPAN>					
+<a name=232 class="linenum">232	</SPAN>			{
+<a name=233 class="linenum">233	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=234 class="linenum">234	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#OPTIONS_START>OPTIONS_START</a>:
+<a name=235 class="linenum">235	</SPAN>			{
+<a name=236 class="linenum">236	</SPAN>				classOptions=<a class="methodRef" href=Preprocessor_java.html#optionSpec(Grammar)>optionSpec</a>(gr);
+<a name=237 class="linenum">237	</SPAN>				break;
+<a name=238 class="linenum">238	</SPAN>			}
+<a name=239 class="linenum">239	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=240 class="linenum">240	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>:
+<a name=241 class="linenum">241	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#TOKENS_START>TOKENS_START</a>:
+<a name=242 class="linenum">242	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_protected>LITERAL_protected</a>:
+<a name=243 class="linenum">243	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_private>LITERAL_private</a>:
+<a name=244 class="linenum">244	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_public>LITERAL_public</a>:
+<a name=245 class="linenum">245	</SPAN>			{
+<a name=246 class="linenum">246	</SPAN>				break;
+<a name=247 class="linenum">247	</SPAN>			}
+<a name=248 class="linenum">248	</SPAN>			default:
+<a name=249 class="linenum">249	</SPAN>			{
+<a name=250 class="linenum">250	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=251 class="linenum">251	</SPAN>			}
+<a name=252 class="linenum">252	</SPAN>			}
+<a name=253 class="linenum">253	</SPAN>			}
+<a name=254 class="linenum">254	</SPAN>			
+<a name=255 class="linenum">255	</SPAN>					if ( gr!=null ) {
+<a name=256 class="linenum">256	</SPAN>						gr.<a class="methodRef" href=Grammar_java.html#setOptions(IndexedVector)>setOptions</a>(classOptions);
+<a name=257 class="linenum">257	</SPAN>					}
+<a name=258 class="linenum">258	</SPAN>					
+<a name=259 class="linenum">259	</SPAN>			{
+<a name=260 class="linenum">260	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=261 class="linenum">261	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#TOKENS_START>TOKENS_START</a>:
+<a name=262 class="linenum">262	</SPAN>			{
+<a name=263 class="linenum">263	</SPAN>				<a class="methodRef" href=Preprocessor_java.html#tokensSpec()>tokensSpec</a>();
+<a name=264 class="linenum">264	</SPAN>				break;
+<a name=265 class="linenum">265	</SPAN>			}
+<a name=266 class="linenum">266	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=267 class="linenum">267	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>:
+<a name=268 class="linenum">268	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_protected>LITERAL_protected</a>:
+<a name=269 class="linenum">269	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_private>LITERAL_private</a>:
+<a name=270 class="linenum">270	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_public>LITERAL_public</a>:
+<a name=271 class="linenum">271	</SPAN>			{
+<a name=272 class="linenum">272	</SPAN>				break;
+<a name=273 class="linenum">273	</SPAN>			}
+<a name=274 class="linenum">274	</SPAN>			default:
+<a name=275 class="linenum">275	</SPAN>			{
+<a name=276 class="linenum">276	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=277 class="linenum">277	</SPAN>			}
+<a name=278 class="linenum">278	</SPAN>			}
+<a name=279 class="linenum">279	</SPAN>			}
+<a name=280 class="linenum">280	</SPAN>			{
+<a name=281 class="linenum">281	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=282 class="linenum">282	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=283 class="linenum">283	</SPAN>			{
+<a name=284 class="linenum">284	</SPAN>				memberA = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=285 class="linenum">285	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>);
+<a name=286 class="linenum">286	</SPAN>				gr.<a class="methodRef" href=Grammar_java.html#setMemberAction(String)>setMemberAction</a>(memberA.getText());
+<a name=287 class="linenum">287	</SPAN>				break;
+<a name=288 class="linenum">288	</SPAN>			}
+<a name=289 class="linenum">289	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>:
+<a name=290 class="linenum">290	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_protected>LITERAL_protected</a>:
+<a name=291 class="linenum">291	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_private>LITERAL_private</a>:
+<a name=292 class="linenum">292	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_public>LITERAL_public</a>:
+<a name=293 class="linenum">293	</SPAN>			{
+<a name=294 class="linenum">294	</SPAN>				break;
+<a name=295 class="linenum">295	</SPAN>			}
+<a name=296 class="linenum">296	</SPAN>			default:
+<a name=297 class="linenum">297	</SPAN>			{
+<a name=298 class="linenum">298	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=299 class="linenum">299	</SPAN>			}
+<a name=300 class="linenum">300	</SPAN>			}
+<a name=301 class="linenum">301	</SPAN>			}
+<a name=302 class="linenum">302	</SPAN>			{
+<a name=303 class="linenum">303	</SPAN>			int _cnt12=0;
+<a name=304 class="linenum">304	</SPAN>			_loop12:
+<a name=305 class="linenum">305	</SPAN>			do {
+<a name=306 class="linenum">306	</SPAN>				if ((<a class="varRef" href=Preprocessor_java.html#_tokenSet_2>_tokenSet_2</a>.member(<a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)))) {
+<a name=307 class="linenum">307	</SPAN>					<a class="methodRef" href=Preprocessor_java.html#rule(Grammar)>rule</a>(gr);
+<a name=308 class="linenum">308	</SPAN>				}
+<a name=309 class="linenum">309	</SPAN>				else {
+<a name=310 class="linenum">310	</SPAN>					if ( _cnt12>=1 ) { break _loop12; } else {throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));}
+<a name=311 class="linenum">311	</SPAN>				}
+<a name=312 class="linenum">312	</SPAN>				
+<a name=313 class="linenum">313	</SPAN>				_cnt12++;
+<a name=314 class="linenum">314	</SPAN>			} while (true);
+<a name=315 class="linenum">315	</SPAN>			}
+<a name=316 class="linenum">316	</SPAN>		}
+<a name=317 class="linenum">317	</SPAN>		catch (ParserException ex) {
+<a name=318 class="linenum">318	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=319 class="linenum">319	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=320 class="linenum">320	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_3>_tokenSet_3</a>);
+<a name=321 class="linenum">321	</SPAN>		}
+<a name=322 class="linenum">322	</SPAN>		return gr;
+<a name=323 class="linenum">323	</SPAN>	}
+<a name=324 class="linenum">324	</SPAN>	
+<a name=325 class="linenum">325	</SPAN>	public final void <a class="methodDef" name=tokensSpec() href=Preprocessor_java_ref.html#tokensSpec()>tokensSpec</a>() throws ParserException, IOException {
+<a name=326 class="linenum">326	</SPAN>		
+<a name=327 class="linenum">327	</SPAN>		
+<a name=328 class="linenum">328	</SPAN>		try {      <span class="comment">// for error handling
+<a name=329 class="linenum">329	</SPAN></span>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#TOKENS_START>TOKENS_START</a>);
+<a name=330 class="linenum">330	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#TOKEN_REF>TOKEN_REF</a>);
+<a name=331 class="linenum">331	</SPAN>			{
+<a name=332 class="linenum">332	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=333 class="linenum">333	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ASSIGN>ASSIGN</a>:
+<a name=334 class="linenum">334	</SPAN>			{
+<a name=335 class="linenum">335	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ASSIGN>ASSIGN</a>);
+<a name=336 class="linenum">336	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#STRING_LITERAL>STRING_LITERAL</a>);
+<a name=337 class="linenum">337	</SPAN>				break;
+<a name=338 class="linenum">338	</SPAN>			}
+<a name=339 class="linenum">339	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#COMMA>COMMA</a>:
+<a name=340 class="linenum">340	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#RCURLY>RCURLY</a>:
+<a name=341 class="linenum">341	</SPAN>			{
+<a name=342 class="linenum">342	</SPAN>				break;
+<a name=343 class="linenum">343	</SPAN>			}
+<a name=344 class="linenum">344	</SPAN>			default:
+<a name=345 class="linenum">345	</SPAN>			{
+<a name=346 class="linenum">346	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=347 class="linenum">347	</SPAN>			}
+<a name=348 class="linenum">348	</SPAN>			}
+<a name=349 class="linenum">349	</SPAN>			}
+<a name=350 class="linenum">350	</SPAN>			{
+<a name=351 class="linenum">351	</SPAN>			_loop17:
+<a name=352 class="linenum">352	</SPAN>			do {
+<a name=353 class="linenum">353	</SPAN>				if ((<a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)==<a class="varRef" href=PreprocessorTokenTypes_java.html#COMMA>COMMA</a>)) {
+<a name=354 class="linenum">354	</SPAN>					<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#COMMA>COMMA</a>);
+<a name=355 class="linenum">355	</SPAN>					<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#TOKEN_REF>TOKEN_REF</a>);
+<a name=356 class="linenum">356	</SPAN>					{
+<a name=357 class="linenum">357	</SPAN>					switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=358 class="linenum">358	</SPAN>					case <a class="varRef" href=PreprocessorTokenTypes_java.html#ASSIGN>ASSIGN</a>:
+<a name=359 class="linenum">359	</SPAN>					{
+<a name=360 class="linenum">360	</SPAN>						<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ASSIGN>ASSIGN</a>);
+<a name=361 class="linenum">361	</SPAN>						<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#STRING_LITERAL>STRING_LITERAL</a>);
+<a name=362 class="linenum">362	</SPAN>						break;
+<a name=363 class="linenum">363	</SPAN>					}
+<a name=364 class="linenum">364	</SPAN>					case <a class="varRef" href=PreprocessorTokenTypes_java.html#COMMA>COMMA</a>:
+<a name=365 class="linenum">365	</SPAN>					case <a class="varRef" href=PreprocessorTokenTypes_java.html#RCURLY>RCURLY</a>:
+<a name=366 class="linenum">366	</SPAN>					{
+<a name=367 class="linenum">367	</SPAN>						break;
+<a name=368 class="linenum">368	</SPAN>					}
+<a name=369 class="linenum">369	</SPAN>					default:
+<a name=370 class="linenum">370	</SPAN>					{
+<a name=371 class="linenum">371	</SPAN>						throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=372 class="linenum">372	</SPAN>					}
+<a name=373 class="linenum">373	</SPAN>					}
+<a name=374 class="linenum">374	</SPAN>					}
+<a name=375 class="linenum">375	</SPAN>				}
+<a name=376 class="linenum">376	</SPAN>				else {
+<a name=377 class="linenum">377	</SPAN>					break _loop17;
+<a name=378 class="linenum">378	</SPAN>				}
+<a name=379 class="linenum">379	</SPAN>				
+<a name=380 class="linenum">380	</SPAN>			} while (true);
+<a name=381 class="linenum">381	</SPAN>			}
+<a name=382 class="linenum">382	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#RCURLY>RCURLY</a>);
+<a name=383 class="linenum">383	</SPAN>		}
+<a name=384 class="linenum">384	</SPAN>		catch (ParserException ex) {
+<a name=385 class="linenum">385	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=386 class="linenum">386	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=387 class="linenum">387	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_4>_tokenSet_4</a>);
+<a name=388 class="linenum">388	</SPAN>		}
+<a name=389 class="linenum">389	</SPAN>	}
+<a name=390 class="linenum">390	</SPAN>	
+<a name=391 class="linenum">391	</SPAN>	public final void <a class="methodDef" name=rule(Grammar) href=Preprocessor_java_ref.html#rule(Grammar)>rule</a>(
+<a name=392 class="linenum">392	</SPAN>		<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> gr
+<a name=393 class="linenum">393	</SPAN>	) throws <a class="classRef" href=../../antlr/ParserException_java.html#ParserException>ParserException</a>, IOException {
+<a name=394 class="linenum">394	</SPAN>		
+<a name=395 class="linenum">395	</SPAN>		Token  r = null;
+<a name=396 class="linenum">396	</SPAN>		Token  arg = null;
+<a name=397 class="linenum">397	</SPAN>		Token  ret = null;
+<a name=398 class="linenum">398	</SPAN>		Token  init = null;
+<a name=399 class="linenum">399	</SPAN>		Token  blk = null;
+<a name=400 class="linenum">400	</SPAN>		
+<a name=401 class="linenum">401	</SPAN>			IndexedVector o = null;	<span class="comment">// options for rule
+<a name=402 class="linenum">402	</SPAN></span>			String vis = null;
+<a name=403 class="linenum">403	</SPAN>			boolean bang=false;
+<a name=404 class="linenum">404	</SPAN>			String eg=null;
+<a name=405 class="linenum">405	</SPAN>		
+<a name=406 class="linenum">406	</SPAN>		
+<a name=407 class="linenum">407	</SPAN>		try {      <span class="comment">// for error handling
+<a name=408 class="linenum">408	</SPAN></span>			{
+<a name=409 class="linenum">409	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=410 class="linenum">410	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_protected>LITERAL_protected</a>:
+<a name=411 class="linenum">411	</SPAN>			{
+<a name=412 class="linenum">412	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_protected>LITERAL_protected</a>);
+<a name=413 class="linenum">413	</SPAN>				vis="protected";
+<a name=414 class="linenum">414	</SPAN>				break;
+<a name=415 class="linenum">415	</SPAN>			}
+<a name=416 class="linenum">416	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_private>LITERAL_private</a>:
+<a name=417 class="linenum">417	</SPAN>			{
+<a name=418 class="linenum">418	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_private>LITERAL_private</a>);
+<a name=419 class="linenum">419	</SPAN>				vis="private";
+<a name=420 class="linenum">420	</SPAN>				break;
+<a name=421 class="linenum">421	</SPAN>			}
+<a name=422 class="linenum">422	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_public>LITERAL_public</a>:
+<a name=423 class="linenum">423	</SPAN>			{
+<a name=424 class="linenum">424	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_public>LITERAL_public</a>);
+<a name=425 class="linenum">425	</SPAN>				vis="public";
+<a name=426 class="linenum">426	</SPAN>				break;
+<a name=427 class="linenum">427	</SPAN>			}
+<a name=428 class="linenum">428	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>:
+<a name=429 class="linenum">429	</SPAN>			{
+<a name=430 class="linenum">430	</SPAN>				break;
+<a name=431 class="linenum">431	</SPAN>			}
+<a name=432 class="linenum">432	</SPAN>			default:
+<a name=433 class="linenum">433	</SPAN>			{
+<a name=434 class="linenum">434	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=435 class="linenum">435	</SPAN>			}
+<a name=436 class="linenum">436	</SPAN>			}
+<a name=437 class="linenum">437	</SPAN>			}
+<a name=438 class="linenum">438	</SPAN>			r = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=439 class="linenum">439	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>);
+<a name=440 class="linenum">440	</SPAN>			{
+<a name=441 class="linenum">441	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=442 class="linenum">442	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#BANG>BANG</a>:
+<a name=443 class="linenum">443	</SPAN>			{
+<a name=444 class="linenum">444	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#BANG>BANG</a>);
+<a name=445 class="linenum">445	</SPAN>				bang=true;
+<a name=446 class="linenum">446	</SPAN>				break;
+<a name=447 class="linenum">447	</SPAN>			}
+<a name=448 class="linenum">448	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=449 class="linenum">449	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#OPTIONS_START>OPTIONS_START</a>:
+<a name=450 class="linenum">450	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ARG_ACTION>ARG_ACTION</a>:
+<a name=451 class="linenum">451	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_returns>LITERAL_returns</a>:
+<a name=452 class="linenum">452	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#RULE_BLOCK>RULE_BLOCK</a>:
+<a name=453 class="linenum">453	</SPAN>			{
+<a name=454 class="linenum">454	</SPAN>				break;
+<a name=455 class="linenum">455	</SPAN>			}
+<a name=456 class="linenum">456	</SPAN>			default:
+<a name=457 class="linenum">457	</SPAN>			{
+<a name=458 class="linenum">458	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=459 class="linenum">459	</SPAN>			}
+<a name=460 class="linenum">460	</SPAN>			}
+<a name=461 class="linenum">461	</SPAN>			}
+<a name=462 class="linenum">462	</SPAN>			{
+<a name=463 class="linenum">463	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=464 class="linenum">464	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ARG_ACTION>ARG_ACTION</a>:
+<a name=465 class="linenum">465	</SPAN>			{
+<a name=466 class="linenum">466	</SPAN>				arg = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=467 class="linenum">467	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ARG_ACTION>ARG_ACTION</a>);
+<a name=468 class="linenum">468	</SPAN>				break;
+<a name=469 class="linenum">469	</SPAN>			}
+<a name=470 class="linenum">470	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=471 class="linenum">471	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#OPTIONS_START>OPTIONS_START</a>:
+<a name=472 class="linenum">472	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_returns>LITERAL_returns</a>:
+<a name=473 class="linenum">473	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#RULE_BLOCK>RULE_BLOCK</a>:
+<a name=474 class="linenum">474	</SPAN>			{
+<a name=475 class="linenum">475	</SPAN>				break;
+<a name=476 class="linenum">476	</SPAN>			}
+<a name=477 class="linenum">477	</SPAN>			default:
+<a name=478 class="linenum">478	</SPAN>			{
+<a name=479 class="linenum">479	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=480 class="linenum">480	</SPAN>			}
+<a name=481 class="linenum">481	</SPAN>			}
+<a name=482 class="linenum">482	</SPAN>			}
+<a name=483 class="linenum">483	</SPAN>			{
+<a name=484 class="linenum">484	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=485 class="linenum">485	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_returns>LITERAL_returns</a>:
+<a name=486 class="linenum">486	</SPAN>			{
+<a name=487 class="linenum">487	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_returns>LITERAL_returns</a>);
+<a name=488 class="linenum">488	</SPAN>				ret = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=489 class="linenum">489	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ARG_ACTION>ARG_ACTION</a>);
+<a name=490 class="linenum">490	</SPAN>				break;
+<a name=491 class="linenum">491	</SPAN>			}
+<a name=492 class="linenum">492	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=493 class="linenum">493	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#OPTIONS_START>OPTIONS_START</a>:
+<a name=494 class="linenum">494	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#RULE_BLOCK>RULE_BLOCK</a>:
+<a name=495 class="linenum">495	</SPAN>			{
+<a name=496 class="linenum">496	</SPAN>				break;
+<a name=497 class="linenum">497	</SPAN>			}
+<a name=498 class="linenum">498	</SPAN>			default:
+<a name=499 class="linenum">499	</SPAN>			{
+<a name=500 class="linenum">500	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=501 class="linenum">501	</SPAN>			}
+<a name=502 class="linenum">502	</SPAN>			}
+<a name=503 class="linenum">503	</SPAN>			}
+<a name=504 class="linenum">504	</SPAN>			{
+<a name=505 class="linenum">505	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=506 class="linenum">506	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#OPTIONS_START>OPTIONS_START</a>:
+<a name=507 class="linenum">507	</SPAN>			{
+<a name=508 class="linenum">508	</SPAN>				o=<a class="methodRef" href=Preprocessor_java.html#optionSpec(Grammar)>optionSpec</a>(null);
+<a name=509 class="linenum">509	</SPAN>				break;
+<a name=510 class="linenum">510	</SPAN>			}
+<a name=511 class="linenum">511	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=512 class="linenum">512	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#RULE_BLOCK>RULE_BLOCK</a>:
+<a name=513 class="linenum">513	</SPAN>			{
+<a name=514 class="linenum">514	</SPAN>				break;
+<a name=515 class="linenum">515	</SPAN>			}
+<a name=516 class="linenum">516	</SPAN>			default:
+<a name=517 class="linenum">517	</SPAN>			{
+<a name=518 class="linenum">518	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=519 class="linenum">519	</SPAN>			}
+<a name=520 class="linenum">520	</SPAN>			}
+<a name=521 class="linenum">521	</SPAN>			}
+<a name=522 class="linenum">522	</SPAN>			{
+<a name=523 class="linenum">523	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=524 class="linenum">524	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=525 class="linenum">525	</SPAN>			{
+<a name=526 class="linenum">526	</SPAN>				init = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=527 class="linenum">527	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>);
+<a name=528 class="linenum">528	</SPAN>				break;
+<a name=529 class="linenum">529	</SPAN>			}
+<a name=530 class="linenum">530	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#RULE_BLOCK>RULE_BLOCK</a>:
+<a name=531 class="linenum">531	</SPAN>			{
+<a name=532 class="linenum">532	</SPAN>				break;
+<a name=533 class="linenum">533	</SPAN>			}
+<a name=534 class="linenum">534	</SPAN>			default:
+<a name=535 class="linenum">535	</SPAN>			{
+<a name=536 class="linenum">536	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=537 class="linenum">537	</SPAN>			}
+<a name=538 class="linenum">538	</SPAN>			}
+<a name=539 class="linenum">539	</SPAN>			}
+<a name=540 class="linenum">540	</SPAN>			blk = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=541 class="linenum">541	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#RULE_BLOCK>RULE_BLOCK</a>);
+<a name=542 class="linenum">542	</SPAN>			eg=<a class="methodRef" href=Preprocessor_java.html#exceptionGroup()>exceptionGroup</a>();
+<a name=543 class="linenum">543	</SPAN>			
+<a name=544 class="linenum">544	</SPAN>					String rtext = blk.getText()+eg;
+<a name=545 class="linenum">545	</SPAN>					<a class="classRef" href=Rule_java.html#Rule>Rule</a> ppr = new <a class="methodRef" href=Rule_java.html#Rule(String,String,IndexedVector,Grammar)>Rule</a>(r.getText(),rtext,o,gr);
+<a name=546 class="linenum">546	</SPAN>					if ( arg!=null ) {
+<a name=547 class="linenum">547	</SPAN>						ppr.<a class="methodRef" href=Rule_java.html#setArgs(String)>setArgs</a>(arg.getText());
+<a name=548 class="linenum">548	</SPAN>					}
+<a name=549 class="linenum">549	</SPAN>					if ( ret!=null ) {
+<a name=550 class="linenum">550	</SPAN>						ppr.<a class="methodRef" href=Rule_java.html#setReturnValue(String)>setReturnValue</a>(ret.getText());
+<a name=551 class="linenum">551	</SPAN>					}
+<a name=552 class="linenum">552	</SPAN>					if ( init!=null ) {
+<a name=553 class="linenum">553	</SPAN>						ppr.<a class="methodRef" href=Rule_java.html#setInitAction(String)>setInitAction</a>(init.getText());
+<a name=554 class="linenum">554	</SPAN>					}
+<a name=555 class="linenum">555	</SPAN>					if ( bang ) {
+<a name=556 class="linenum">556	</SPAN>						ppr.<a class="methodRef" href=Rule_java.html#setBang()>setBang</a>();
+<a name=557 class="linenum">557	</SPAN>					}
+<a name=558 class="linenum">558	</SPAN>					ppr.<a class="methodRef" href=Rule_java.html#setVisibility(String)>setVisibility</a>(vis);
+<a name=559 class="linenum">559	</SPAN>					if ( gr!=null ) {
+<a name=560 class="linenum">560	</SPAN>						gr.<a class="methodRef" href=Grammar_java.html#addRule(Rule)>addRule</a>(ppr);
+<a name=561 class="linenum">561	</SPAN>					}
+<a name=562 class="linenum">562	</SPAN>					
+<a name=563 class="linenum">563	</SPAN>		}
+<a name=564 class="linenum">564	</SPAN>		catch (ParserException ex) {
+<a name=565 class="linenum">565	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=566 class="linenum">566	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=567 class="linenum">567	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_5>_tokenSet_5</a>);
+<a name=568 class="linenum">568	</SPAN>		}
+<a name=569 class="linenum">569	</SPAN>	}
+<a name=570 class="linenum">570	</SPAN>	
+<a name=571 class="linenum">571	</SPAN>	public final void <a class="methodDef" name=dummy() href=Preprocessor_java_ref.html#dummy()>dummy</a>() throws ParserException, IOException {
+<a name=572 class="linenum">572	</SPAN>		
+<a name=573 class="linenum">573	</SPAN>		
+<a name=574 class="linenum">574	</SPAN>		try {      <span class="comment">// for error handling
+<a name=575 class="linenum">575	</SPAN></span>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_tokens>LITERAL_tokens</a>);
+<a name=576 class="linenum">576	</SPAN>		}
+<a name=577 class="linenum">577	</SPAN>		catch (ParserException ex) {
+<a name=578 class="linenum">578	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=579 class="linenum">579	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=580 class="linenum">580	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_0>_tokenSet_0</a>);
+<a name=581 class="linenum">581	</SPAN>		}
+<a name=582 class="linenum">582	</SPAN>	}
+<a name=583 class="linenum">583	</SPAN>	
+<a name=584 class="linenum">584	</SPAN>	public final String  <a class="methodDef" name=exceptionGroup() href=Preprocessor_java_ref.html#exceptionGroup()>exceptionGroup</a>() throws ParserException, IOException {
+<a name=585 class="linenum">585	</SPAN>		String g;
+<a name=586 class="linenum">586	</SPAN>		
+<a name=587 class="linenum">587	</SPAN>		String e=null; g="";
+<a name=588 class="linenum">588	</SPAN>		
+<a name=589 class="linenum">589	</SPAN>		try {      <span class="comment">// for error handling
+<a name=590 class="linenum">590	</SPAN></span>			{
+<a name=591 class="linenum">591	</SPAN>			_loop31:
+<a name=592 class="linenum">592	</SPAN>			do {
+<a name=593 class="linenum">593	</SPAN>				if ((<a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)==<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_exception>LITERAL_exception</a>)) {
+<a name=594 class="linenum">594	</SPAN>					e=<a class="methodRef" href=Preprocessor_java.html#exceptionSpec()>exceptionSpec</a>();
+<a name=595 class="linenum">595	</SPAN>					g += e;
+<a name=596 class="linenum">596	</SPAN>				}
+<a name=597 class="linenum">597	</SPAN>				else {
+<a name=598 class="linenum">598	</SPAN>					break _loop31;
+<a name=599 class="linenum">599	</SPAN>				}
+<a name=600 class="linenum">600	</SPAN>				
+<a name=601 class="linenum">601	</SPAN>			} while (true);
+<a name=602 class="linenum">602	</SPAN>			}
+<a name=603 class="linenum">603	</SPAN>		}
+<a name=604 class="linenum">604	</SPAN>		catch (ParserException ex) {
+<a name=605 class="linenum">605	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=606 class="linenum">606	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=607 class="linenum">607	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_5>_tokenSet_5</a>);
+<a name=608 class="linenum">608	</SPAN>		}
+<a name=609 class="linenum">609	</SPAN>		return g;
+<a name=610 class="linenum">610	</SPAN>	}
+<a name=611 class="linenum">611	</SPAN>	
+<a name=612 class="linenum">612	</SPAN>	public final String  <a class="methodDef" name=exceptionSpec() href=Preprocessor_java_ref.html#exceptionSpec()>exceptionSpec</a>() throws ParserException, IOException {
+<a name=613 class="linenum">613	</SPAN>		String es;
+<a name=614 class="linenum">614	</SPAN>		
+<a name=615 class="linenum">615	</SPAN>		Token  aa = null;
+<a name=616 class="linenum">616	</SPAN>		String h=null;
+<a name=617 class="linenum">617	</SPAN>		es = System.getProperty("line.separator")+"exception ";
+<a name=618 class="linenum">618	</SPAN>		
+<a name=619 class="linenum">619	</SPAN>		
+<a name=620 class="linenum">620	</SPAN>		try {      <span class="comment">// for error handling
+<a name=621 class="linenum">621	</SPAN></span>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_exception>LITERAL_exception</a>);
+<a name=622 class="linenum">622	</SPAN>			{
+<a name=623 class="linenum">623	</SPAN>			switch ( <a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)) {
+<a name=624 class="linenum">624	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ARG_ACTION>ARG_ACTION</a>:
+<a name=625 class="linenum">625	</SPAN>			{
+<a name=626 class="linenum">626	</SPAN>				aa = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=627 class="linenum">627	</SPAN>				<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ARG_ACTION>ARG_ACTION</a>);
+<a name=628 class="linenum">628	</SPAN>				es += aa.getText();
+<a name=629 class="linenum">629	</SPAN>				break;
+<a name=630 class="linenum">630	</SPAN>			}
+<a name=631 class="linenum">631	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#EOF>EOF</a>:
+<a name=632 class="linenum">632	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>:
+<a name=633 class="linenum">633	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_class>LITERAL_class</a>:
+<a name=634 class="linenum">634	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#ID>ID</a>:
+<a name=635 class="linenum">635	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_protected>LITERAL_protected</a>:
+<a name=636 class="linenum">636	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_private>LITERAL_private</a>:
+<a name=637 class="linenum">637	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_public>LITERAL_public</a>:
+<a name=638 class="linenum">638	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_exception>LITERAL_exception</a>:
+<a name=639 class="linenum">639	</SPAN>			case <a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_catch>LITERAL_catch</a>:
+<a name=640 class="linenum">640	</SPAN>			{
+<a name=641 class="linenum">641	</SPAN>				break;
+<a name=642 class="linenum">642	</SPAN>			}
+<a name=643 class="linenum">643	</SPAN>			default:
+<a name=644 class="linenum">644	</SPAN>			{
+<a name=645 class="linenum">645	</SPAN>				throw new <a class="methodRef" href=../../antlr/NoViableAltException_java.html#NoViableAltException(AST)>NoViableAltException</a>(<a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1));
+<a name=646 class="linenum">646	</SPAN>			}
+<a name=647 class="linenum">647	</SPAN>			}
+<a name=648 class="linenum">648	</SPAN>			}
+<a name=649 class="linenum">649	</SPAN>			{
+<a name=650 class="linenum">650	</SPAN>			_loop35:
+<a name=651 class="linenum">651	</SPAN>			do {
+<a name=652 class="linenum">652	</SPAN>				if ((<a class="methodRef" href=../../antlr/LLkParser_java.html#LA(int)>LA</a>(1)==<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_catch>LITERAL_catch</a>)) {
+<a name=653 class="linenum">653	</SPAN>					h=<a class="methodRef" href=Preprocessor_java.html#exceptionHandler()>exceptionHandler</a>();
+<a name=654 class="linenum">654	</SPAN>					es += h;
+<a name=655 class="linenum">655	</SPAN>				}
+<a name=656 class="linenum">656	</SPAN>				else {
+<a name=657 class="linenum">657	</SPAN>					break _loop35;
+<a name=658 class="linenum">658	</SPAN>				}
+<a name=659 class="linenum">659	</SPAN>				
+<a name=660 class="linenum">660	</SPAN>			} while (true);
+<a name=661 class="linenum">661	</SPAN>			}
+<a name=662 class="linenum">662	</SPAN>		}
+<a name=663 class="linenum">663	</SPAN>		catch (ParserException ex) {
+<a name=664 class="linenum">664	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=665 class="linenum">665	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=666 class="linenum">666	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_6>_tokenSet_6</a>);
+<a name=667 class="linenum">667	</SPAN>		}
+<a name=668 class="linenum">668	</SPAN>		return es;
+<a name=669 class="linenum">669	</SPAN>	}
+<a name=670 class="linenum">670	</SPAN>	
+<a name=671 class="linenum">671	</SPAN>	public final String  <a class="methodDef" name=exceptionHandler() href=Preprocessor_java_ref.html#exceptionHandler()>exceptionHandler</a>() throws ParserException, IOException {
+<a name=672 class="linenum">672	</SPAN>		String h;
+<a name=673 class="linenum">673	</SPAN>		
+<a name=674 class="linenum">674	</SPAN>		Token  a1 = null;
+<a name=675 class="linenum">675	</SPAN>		Token  a2 = null;
+<a name=676 class="linenum">676	</SPAN>		h=null;
+<a name=677 class="linenum">677	</SPAN>		
+<a name=678 class="linenum">678	</SPAN>		try {      <span class="comment">// for error handling
+<a name=679 class="linenum">679	</SPAN></span>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#LITERAL_catch>LITERAL_catch</a>);
+<a name=680 class="linenum">680	</SPAN>			a1 = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=681 class="linenum">681	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ARG_ACTION>ARG_ACTION</a>);
+<a name=682 class="linenum">682	</SPAN>			a2 = <a class="methodRef" href=../../antlr/LLkParser_java.html#LT(int)>LT</a>(1);
+<a name=683 class="linenum">683	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#match(int)>match</a>(<a class="varRef" href=PreprocessorTokenTypes_java.html#ACTION>ACTION</a>);
+<a name=684 class="linenum">684	</SPAN>			h = System.getProperty("line.separator")+
+<a name=685 class="linenum">685	</SPAN>						 "catch "+a1.getText()+" "+a2.getText();
+<a name=686 class="linenum">686	</SPAN>		}
+<a name=687 class="linenum">687	</SPAN>		catch (ParserException ex) {
+<a name=688 class="linenum">688	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#reportError(ParserException)>reportError</a>(ex);
+<a name=689 class="linenum">689	</SPAN>			<a class="methodRef" href=../../antlr/LLkParser_java.html#consume()>consume</a>();
+<a name=690 class="linenum">690	</SPAN>			<a class="methodRef" href=../../antlr/Parser_java.html#consumeUntil(int)>consumeUntil</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_7>_tokenSet_7</a>);
+<a name=691 class="linenum">691	</SPAN>		}
+<a name=692 class="linenum">692	</SPAN>		return h;
+<a name=693 class="linenum">693	</SPAN>	}
+<a name=694 class="linenum">694	</SPAN>	
+<a name=695 class="linenum">695	</SPAN>	
+<a name=696 class="linenum">696	</SPAN>	public static final String[] <a class="varDef" name=_tokenNames href=Preprocessor_java_ref.html#_tokenNames>_tokenNames</a> = {
+<a name=697 class="linenum">697	</SPAN>		"&lt;0>",
+<a name=698 class="linenum">698	</SPAN>		"EOF",
+<a name=699 class="linenum">699	</SPAN>		"&lt;2>",
+<a name=700 class="linenum">700	</SPAN>		"NULL_TREE_LOOKAHEAD",
+<a name=701 class="linenum">701	</SPAN>		"HEADER_ACTION",
+<a name=702 class="linenum">702	</SPAN>		"ACTION",
+<a name=703 class="linenum">703	</SPAN>		"\"class\"",
+<a name=704 class="linenum">704	</SPAN>		"ID",
+<a name=705 class="linenum">705	</SPAN>		"\"extends\"",
+<a name=706 class="linenum">706	</SPAN>		"SEMI",
+<a name=707 class="linenum">707	</SPAN>		"TOKENS_START",
+<a name=708 class="linenum">708	</SPAN>		"TOKEN_REF",
+<a name=709 class="linenum">709	</SPAN>		"ASSIGN",
+<a name=710 class="linenum">710	</SPAN>		"STRING_LITERAL",
+<a name=711 class="linenum">711	</SPAN>		"COMMA",
+<a name=712 class="linenum">712	</SPAN>		"RCURLY",
+<a name=713 class="linenum">713	</SPAN>		"\"tokens\"",
+<a name=714 class="linenum">714	</SPAN>		"OPTIONS_START",
+<a name=715 class="linenum">715	</SPAN>		"ASSIGN_RHS",
+<a name=716 class="linenum">716	</SPAN>		"\"protected\"",
+<a name=717 class="linenum">717	</SPAN>		"\"private\"",
+<a name=718 class="linenum">718	</SPAN>		"\"public\"",
+<a name=719 class="linenum">719	</SPAN>		"BANG",
+<a name=720 class="linenum">720	</SPAN>		"ARG_ACTION",
+<a name=721 class="linenum">721	</SPAN>		"\"returns\"",
+<a name=722 class="linenum">722	</SPAN>		"RULE_BLOCK",
+<a name=723 class="linenum">723	</SPAN>		"\"exception\"",
+<a name=724 class="linenum">724	</SPAN>		"\"catch\"",
+<a name=725 class="linenum">725	</SPAN>		"SUBRULE_BLOCK",
+<a name=726 class="linenum">726	</SPAN>		"ALT",
+<a name=727 class="linenum">727	</SPAN>		"ELEMENT",
+<a name=728 class="linenum">728	</SPAN>		"ID_OR_KEYWORD",
+<a name=729 class="linenum">729	</SPAN>		"WS",
+<a name=730 class="linenum">730	</SPAN>		"COMMENT",
+<a name=731 class="linenum">731	</SPAN>		"SL_COMMENT",
+<a name=732 class="linenum">732	</SPAN>		"ML_COMMENT",
+<a name=733 class="linenum">733	</SPAN>		"CHAR_LITERAL",
+<a name=734 class="linenum">734	</SPAN>		"ESC",
+<a name=735 class="linenum">735	</SPAN>		"DIGIT",
+<a name=736 class="linenum">736	</SPAN>		"XDIGIT"
+<a name=737 class="linenum">737	</SPAN>	};
+<a name=738 class="linenum">738	</SPAN>	
+<a name=739 class="linenum">739	</SPAN>	private static final long <a class="varDef" name=_tokenSet_0_data_ href=Preprocessor_java_ref.html#_tokenSet_0_data_>_tokenSet_0_data_</a>[] = { 2L, 0L };
+<a name=740 class="linenum">740	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_0 href=Preprocessor_java_ref.html#_tokenSet_0>_tokenSet_0</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_0_data_>_tokenSet_0_data_</a>);
+<a name=741 class="linenum">741	</SPAN>	private static final long <a class="varDef" name=_tokenSet_1_data_ href=Preprocessor_java_ref.html#_tokenSet_1_data_>_tokenSet_1_data_</a>[] = { 37225698L, 0L };
+<a name=742 class="linenum">742	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_1 href=Preprocessor_java_ref.html#_tokenSet_1>_tokenSet_1</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_1_data_>_tokenSet_1_data_</a>);
+<a name=743 class="linenum">743	</SPAN>	private static final long <a class="varDef" name=_tokenSet_2_data_ href=Preprocessor_java_ref.html#_tokenSet_2_data_>_tokenSet_2_data_</a>[] = { 3670144L, 0L };
+<a name=744 class="linenum">744	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_2 href=Preprocessor_java_ref.html#_tokenSet_2>_tokenSet_2</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_2_data_>_tokenSet_2_data_</a>);
+<a name=745 class="linenum">745	</SPAN>	private static final long <a class="varDef" name=_tokenSet_3_data_ href=Preprocessor_java_ref.html#_tokenSet_3_data_>_tokenSet_3_data_</a>[] = { 98L, 0L };
+<a name=746 class="linenum">746	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_3 href=Preprocessor_java_ref.html#_tokenSet_3>_tokenSet_3</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_3_data_>_tokenSet_3_data_</a>);
+<a name=747 class="linenum">747	</SPAN>	private static final long <a class="varDef" name=_tokenSet_4_data_ href=Preprocessor_java_ref.html#_tokenSet_4_data_>_tokenSet_4_data_</a>[] = { 3670176L, 0L };
+<a name=748 class="linenum">748	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_4 href=Preprocessor_java_ref.html#_tokenSet_4>_tokenSet_4</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_4_data_>_tokenSet_4_data_</a>);
+<a name=749 class="linenum">749	</SPAN>	private static final long <a class="varDef" name=_tokenSet_5_data_ href=Preprocessor_java_ref.html#_tokenSet_5_data_>_tokenSet_5_data_</a>[] = { 3670242L, 0L };
+<a name=750 class="linenum">750	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_5 href=Preprocessor_java_ref.html#_tokenSet_5>_tokenSet_5</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_5_data_>_tokenSet_5_data_</a>);
+<a name=751 class="linenum">751	</SPAN>	private static final long <a class="varDef" name=_tokenSet_6_data_ href=Preprocessor_java_ref.html#_tokenSet_6_data_>_tokenSet_6_data_</a>[] = { 70779106L, 0L };
+<a name=752 class="linenum">752	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_6 href=Preprocessor_java_ref.html#_tokenSet_6>_tokenSet_6</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_6_data_>_tokenSet_6_data_</a>);
+<a name=753 class="linenum">753	</SPAN>	private static final long <a class="varDef" name=_tokenSet_7_data_ href=Preprocessor_java_ref.html#_tokenSet_7_data_>_tokenSet_7_data_</a>[] = { 204996834L, 0L };
+<a name=754 class="linenum">754	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_7 href=Preprocessor_java_ref.html#_tokenSet_7>_tokenSet_7</a> = new <a class="methodRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=Preprocessor_java.html#_tokenSet_7_data_>_tokenSet_7_data_</a>);
+<a name=755 class="linenum">755	</SPAN>	
+<a name=756 class="linenum">756	</SPAN>	}
+<a name=757 class="linenum">757	</SPAN></pre>

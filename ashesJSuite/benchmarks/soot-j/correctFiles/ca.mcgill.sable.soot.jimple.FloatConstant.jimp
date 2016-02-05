@@ -1,0 +1,106 @@
+public class ca.mcgill.sable.soot.jimple.FloatConstant extends ca.mcgill.sable.soot.jimple.Constant implements ca.mcgill.sable.util.Switchable, ca.mcgill.sable.soot.ToBriefString
+{
+    public final float value;
+
+    private void <init>(float)
+    {
+        ca.mcgill.sable.soot.jimple.FloatConstant r0;
+        float f0;
+
+        r0 := @this;
+        f0 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.value = f0;
+        return;
+    }
+
+    public static ca.mcgill.sable.soot.jimple.FloatConstant v(float)
+    {
+        float f0;
+        ca.mcgill.sable.soot.jimple.FloatConstant r0;
+
+        f0 := @parameter0;
+        r0 = new ca.mcgill.sable.soot.jimple.FloatConstant;
+        specialinvoke r0.<init>(f0);
+        return r0;
+    }
+
+    public boolean equals(ca.mcgill.sable.soot.jimple.Constant)
+    {
+        ca.mcgill.sable.soot.jimple.FloatConstant r0, r2;
+        ca.mcgill.sable.soot.jimple.Constant r1;
+        int i0, i1;
+        float f0, f1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.FloatConstant;
+        if i0 == 0 goto label0;
+
+        r2 = (ca.mcgill.sable.soot.jimple.FloatConstant) r1;
+        f0 = r2.value;
+        f1 = r0.value;
+        i1 = f0 cmpl f1;
+        if i1 == 0 goto label1;
+
+     label0:
+        return 0;
+
+     label1:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.FloatConstant r0;
+        java.lang.StringBuffer r1, r5;
+        java.lang.Float r2;
+        float f0;
+        java.lang.String r3, r4, r6;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        r2 = new java.lang.Float;
+        f0 = r0.value;
+        specialinvoke r2.<init>(f0);
+        r3 = r2.toString();
+        r4 = java.lang.String.valueOf(r3);
+        specialinvoke r1.<init>(r4);
+        r5 = r1.append("F");
+        r6 = r5.toString();
+        return r6;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.FloatConstant r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.FloatConstant r0;
+        ca.mcgill.sable.soot.FloatType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.FloatType.v();
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.FloatConstant r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ConstantSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ConstantSwitch) r1;
+        r2.caseFloatConstant(r0);
+        return;
+    }
+}

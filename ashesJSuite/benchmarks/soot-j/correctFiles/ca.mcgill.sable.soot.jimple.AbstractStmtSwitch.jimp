@@ -1,0 +1,209 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractStmtSwitch extends java.lang.Object implements ca.mcgill.sable.soot.jimple.StmtSwitch
+{
+    java.lang.Object result;
+
+    public void caseBreakpointStmt(ca.mcgill.sable.soot.jimple.BreakpointStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.BreakpointStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseInvokeStmt(ca.mcgill.sable.soot.jimple.InvokeStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.InvokeStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseAssignStmt(ca.mcgill.sable.soot.jimple.AssignStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.AssignStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseIdentityStmt(ca.mcgill.sable.soot.jimple.IdentityStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.IdentityStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseEnterMonitorStmt(ca.mcgill.sable.soot.jimple.EnterMonitorStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.EnterMonitorStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseExitMonitorStmt(ca.mcgill.sable.soot.jimple.ExitMonitorStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.ExitMonitorStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseGotoStmt(ca.mcgill.sable.soot.jimple.GotoStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.GotoStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseIfStmt(ca.mcgill.sable.soot.jimple.IfStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.IfStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseLookupSwitchStmt(ca.mcgill.sable.soot.jimple.LookupSwitchStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.LookupSwitchStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNopStmt(ca.mcgill.sable.soot.jimple.NopStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.NopStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseRetStmt(ca.mcgill.sable.soot.jimple.RetStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.RetStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseReturnStmt(ca.mcgill.sable.soot.jimple.ReturnStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.ReturnStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseReturnVoidStmt(ca.mcgill.sable.soot.jimple.ReturnVoidStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.ReturnVoidStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseTableSwitchStmt(ca.mcgill.sable.soot.jimple.TableSwitchStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.TableSwitchStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseThrowStmt(ca.mcgill.sable.soot.jimple.ThrowStmt)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        ca.mcgill.sable.soot.jimple.ThrowStmt r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void defaultCase(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        return;
+    }
+
+    public void setResult(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r1;
+        return;
+    }
+
+    public java.lang.Object getResult()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 = r0.result;
+        return r1;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmtSwitch r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

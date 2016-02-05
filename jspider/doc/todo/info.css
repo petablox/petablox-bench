@@ -1,0 +1,35 @@
+BODY {
+	font:normal 68% verdana,arial,helvetica;
+	color:black;
+}
+TD {
+	FONT-SIZE: 68%
+}
+P {
+	line-height:1.5em;
+	margin-top:0.5em; margin-bottom:1.0em;
+}
+H1 {
+	MARGIN: 0px 0px 5px; FONT: 165% verdana,arial,helvetica
+}
+H2 {
+	MARGIN-TOP: 1em; MARGIN-BOTTOM: 0.5em; FONT: bold 125% verdana,arial,helvetica
+}
+.Header {
+	font-weight:bold; background:#A6CAF0; color:black;
+}
+.Package {
+	font-weight:bold; background:#EEEEE0; color:black;
+}
+.Class {
+	background:#EEEEE0; color:black;
+}
+.Field {
+	background:#EEEEE0; color:black;
+}
+.Constructor {
+	background:#EEEEE0; color:black;
+}
+.Method {
+	background:#EEEEE0; color:black;
+}

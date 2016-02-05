@@ -1,0 +1,5 @@
+public interface ca.mcgill.sable.soot.jimple.LocalUses extends java.lang.Object
+{
+
+    public abstract ca.mcgill.sable.util.List getUsesOf(ca.mcgill.sable.soot.jimple.DefinitionStmt);
+}

@@ -1,0 +1,492 @@
+public class ca.mcgill.sable.soot.jimple.JTableSwitchStmt extends ca.mcgill.sable.soot.jimple.AbstractStmt implements ca.mcgill.sable.soot.jimple.TableSwitchStmt
+{
+    ca.mcgill.sable.soot.jimple.UnitBox defaultTargetBox;
+    ca.mcgill.sable.soot.jimple.ValueBox keyBox;
+    int lowIndex;
+    int highIndex;
+    ca.mcgill.sable.soot.jimple.UnitBox[] targetBoxes;
+    ca.mcgill.sable.util.List stmtBoxes;
+
+    private static ca.mcgill.sable.soot.jimple.UnitBox[] getTargetBoxesArray(ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.util.List r0;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.Jimple r1;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2;
+        java.lang.Object r3;
+        ca.mcgill.sable.soot.jimple.Stmt r4;
+
+        r0 := @parameter0;
+        i1 = r0.size();
+        r2 = new ca.mcgill.sable.soot.jimple.UnitBox[i1];
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r1 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r3 = r0.get(i0);
+        r4 = (ca.mcgill.sable.soot.jimple.Stmt) r3;
+        r2[i0] = r1.newStmtBox(r4);
+        i0 = i0 + 1;
+
+     label1:
+        i2 = r2.length;
+        if i0 < i2 goto label0;
+
+        return r2;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value, int, int, ca.mcgill.sable.util.List, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        int i0, i1;
+        ca.mcgill.sable.util.List r2;
+        ca.mcgill.sable.soot.jimple.Unit r3;
+        ca.mcgill.sable.soot.jimple.Jimple r4, r5;
+        ca.mcgill.sable.soot.jimple.ValueBox r6;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r7;
+        ca.mcgill.sable.soot.jimple.UnitBox r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        i1 := @parameter2;
+        r2 := @parameter3;
+        r3 := @parameter4;
+        r4 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r6 = r4.newImmediateBox(r1);
+        r7 = ca.mcgill.sable.soot.jimple.JTableSwitchStmt.getTargetBoxesArray(r2);
+        r5 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r8 = r5.newStmtBox(r3);
+        specialinvoke r0.<init>(r6, i0, i1, r7, r8);
+        return;
+    }
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox, int, int, ca.mcgill.sable.soot.jimple.UnitBox[], ca.mcgill.sable.soot.jimple.UnitBox)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        int i0, i1, i2, i3, i4, i5;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2;
+        ca.mcgill.sable.soot.jimple.UnitBox r3, r6;
+        ca.mcgill.sable.util.ArrayList r4;
+        ca.mcgill.sable.util.List r5, r7, r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        i1 := @parameter2;
+        r2 := @parameter3;
+        r3 := @parameter4;
+        specialinvoke r0.<init>();
+        r0.keyBox = r1;
+        r0.defaultTargetBox = r3;
+        r0.lowIndex = i0;
+        r0.highIndex = i1;
+        r0.targetBoxes = r2;
+        r4 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r4.<init>();
+        r0.stmtBoxes = r4;
+        i2 = 0;
+        goto label1;
+
+     label0:
+        r5 = r0.stmtBoxes;
+        r6 = r2[i2];
+        i3 = r5.add(r6);
+        i2 = i2 + 1;
+
+     label1:
+        i4 = r2.length;
+        if i2 < i4 goto label0;
+
+        r7 = r0.stmtBoxes;
+        i5 = r7.add(r3);
+        r8 = r0.stmtBoxes;
+        r0.stmtBoxes = ca.mcgill.sable.util.Collections.unmodifiableList(r8);
+        return;
+    }
+
+    protected java.lang.String toString(boolean, ca.mcgill.sable.util.Map, java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0, i1, i2, i3, i4, i5;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2, r4, r5, r7, r12, r18, r21, r24, r27, r33, r37, r40, r44, r48, r51, r53, r55;
+        java.lang.StringBuffer r3, r6, r8, r15, r16, r17, r19, r20, r22, r23, r25, r26, r28, r29, r30, r34, r35, r36, r38, r39, r41, r45, r46, r47, r49, r50, r52, r54;
+        ca.mcgill.sable.soot.jimple.ValueBox r9, r13;
+        ca.mcgill.sable.soot.jimple.Value r10, r14;
+        ca.mcgill.sable.soot.ToBriefString r11;
+        ca.mcgill.sable.soot.jimple.Unit r31, r42;
+        java.lang.Object r32, r43;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 := @parameter2;
+        r3 = new java.lang.StringBuffer;
+        specialinvoke r3.<init>();
+        i2 = r2.equals("");
+        if i2 == 0 goto label0;
+
+        r5 = " ";
+        goto label1;
+
+     label0:
+        r5 = "
+";
+
+     label1:
+        r4 = r5;
+        r6 = new java.lang.StringBuffer;
+        r7 = java.lang.String.valueOf(r2);
+        specialinvoke r6.<init>(r7);
+        r8 = r6.append("tableswitch(");
+        if i0 == 0 goto label2;
+
+        r9 = r0.keyBox;
+        r10 = r9.getValue();
+        r11 = (ca.mcgill.sable.soot.ToBriefString) r10;
+        r12 = r11.toBriefString();
+        goto label3;
+
+     label2:
+        r13 = r0.keyBox;
+        r14 = r13.getValue();
+        r12 = r14.toString();
+
+     label3:
+        r15 = r8.append(r12);
+        r16 = r15.append(")");
+        r17 = r16.append(r4);
+        r18 = r17.toString();
+        r19 = r3.append(r18);
+        r20 = new java.lang.StringBuffer;
+        r21 = java.lang.String.valueOf(r2);
+        specialinvoke r20.<init>(r21);
+        r22 = r20.append("{");
+        r23 = r22.append(r4);
+        r24 = r23.toString();
+        r25 = r3.append(r24);
+        i1 = r0.lowIndex;
+        goto label5;
+
+     label4:
+        r26 = new java.lang.StringBuffer;
+        r27 = java.lang.String.valueOf(r2);
+        specialinvoke r26.<init>(r27);
+        r28 = r26.append("    case ");
+        r29 = r28.append(i1);
+        r30 = r29.append(": goto ");
+        i3 = r0.lowIndex;
+        i4 = i1 - i3;
+        r31 = r0.getTarget(i4);
+        r32 = r1.get(r31);
+        r33 = (java.lang.String) r32;
+        r34 = r30.append(r33);
+        r35 = r34.append(";");
+        r36 = r35.append(r4);
+        r37 = r36.toString();
+        r38 = r3.append(r37);
+        i1 = i1 + 1;
+
+     label5:
+        i5 = r0.highIndex;
+        if i1 <= i5 goto label4;
+
+        r39 = new java.lang.StringBuffer;
+        r40 = java.lang.String.valueOf(r2);
+        specialinvoke r39.<init>(r40);
+        r41 = r39.append("    default: goto ");
+        r42 = r0.getDefaultTarget();
+        r43 = r1.get(r42);
+        r44 = (java.lang.String) r43;
+        r45 = r41.append(r44);
+        r46 = r45.append(";");
+        r47 = r46.append(r4);
+        r48 = r47.toString();
+        r49 = r3.append(r48);
+        r50 = new java.lang.StringBuffer;
+        r51 = java.lang.String.valueOf(r2);
+        specialinvoke r50.<init>(r51);
+        r52 = r50.append("}");
+        r53 = r52.toString();
+        r54 = r3.append(r53);
+        r55 = r3.toString();
+        return r55;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Unit getDefaultTarget()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.UnitBox r1;
+        ca.mcgill.sable.soot.jimple.Unit r2;
+
+        r0 := @this;
+        r1 = r0.defaultTargetBox;
+        r2 = r1.getUnit();
+        return r2;
+    }
+
+    public void setDefaultTarget(ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.UnitBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.defaultTargetBox;
+        r2.setUnit(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.UnitBox getDefaultTargetBox()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.UnitBox r1;
+
+        r0 := @this;
+        r1 = r0.defaultTargetBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getKey()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.keyBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public void setKey(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.keyBox;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getKeyBox()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.keyBox;
+        return r1;
+    }
+
+    public void setLowIndex(int)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r0.lowIndex = i0;
+        return;
+    }
+
+    public void setHighIndex(int)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r0.highIndex = i0;
+        return;
+    }
+
+    public int getLowIndex()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0;
+
+        r0 := @this;
+        i0 = r0.lowIndex;
+        return i0;
+    }
+
+    public int getHighIndex()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0;
+
+        r0 := @this;
+        i0 = r0.highIndex;
+        return i0;
+    }
+
+    public ca.mcgill.sable.util.List getTargets()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2, r5;
+        ca.mcgill.sable.soot.jimple.UnitBox r3;
+        ca.mcgill.sable.soot.jimple.Unit r4;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r2 = r0.targetBoxes;
+        r3 = r2[i0];
+        r4 = r3.getUnit();
+        i1 = r1.add(r4);
+        i0 = i0 + 1;
+
+     label1:
+        r5 = r0.targetBoxes;
+        i2 = r5.length;
+        if i0 < i2 goto label0;
+
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Unit getTarget(int)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r1;
+        ca.mcgill.sable.soot.jimple.UnitBox r2;
+        ca.mcgill.sable.soot.jimple.Unit r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.targetBoxes;
+        r2 = r1[i0];
+        r3 = r2.getUnit();
+        return r3;
+    }
+
+    public void setTarget(int, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2;
+        ca.mcgill.sable.soot.jimple.UnitBox r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 = r0.targetBoxes;
+        r3 = r2[i0];
+        r3.setUnit(r1);
+        return;
+    }
+
+    public void setTargets(ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.util.List r1;
+        int i0, i1;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2;
+        ca.mcgill.sable.soot.jimple.UnitBox r3;
+        java.lang.Object r4;
+        ca.mcgill.sable.soot.jimple.Stmt r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r2 = r0.targetBoxes;
+        r3 = r2[i0];
+        r4 = r1.get(i0);
+        r5 = (ca.mcgill.sable.soot.jimple.Stmt) r4;
+        r3.setUnit(r5);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r1.size();
+        if i0 < i1 goto label0;
+
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.UnitBox getTargetBox(int)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r1;
+        ca.mcgill.sable.soot.jimple.UnitBox r2;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.targetBoxes;
+        r2 = r1[i0];
+        return r2;
+    }
+
+    public ca.mcgill.sable.util.List getDefBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.util.List r4;
+        int i0, i1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.keyBox;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i0 = r1.addAll(r4);
+        r5 = r0.keyBox;
+        i1 = r1.add(r5);
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUnitBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = r0.stmtBoxes;
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.StmtSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.StmtSwitch) r1;
+        r2.caseTableSwitchStmt(r0);
+        return;
+    }
+}

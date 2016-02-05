@@ -1,0 +1,220 @@
+class ca.mcgill.sable.soot.jimple.SimpleLiveLocalsAnalysis extends ca.mcgill.sable.soot.jimple.BackwardFlowAnalysis
+{
+    ca.mcgill.sable.soot.jimple.FlowSet emptySet;
+    ca.mcgill.sable.util.Map stmtToGenerateSet;
+    ca.mcgill.sable.util.Map stmtToPreserveSet;
+
+    void <init>(ca.mcgill.sable.soot.jimple.StmtGraph)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocalsAnalysis r0;
+        ca.mcgill.sable.soot.jimple.StmtGraph r1;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15;
+        ca.mcgill.sable.soot.Timer r2, r38, r39, r40;
+        ca.mcgill.sable.soot.jimple.StmtBody r3;
+        ca.mcgill.sable.util.List r4, r15, r30;
+        ca.mcgill.sable.soot.jimple.FlowUniverse r5;
+        java.lang.Object[] r6;
+        ca.mcgill.sable.soot.jimple.ArrayPackedSet r7;
+        ca.mcgill.sable.util.HashMap r8, r23;
+        ca.mcgill.sable.util.Iterator r9, r16, r24, r31;
+        java.lang.Object r10, r13, r17, r22, r25, r28, r32, r37;
+        ca.mcgill.sable.soot.jimple.Stmt r11, r26;
+        ca.mcgill.sable.soot.jimple.FlowSet r12, r27, r29;
+        ca.mcgill.sable.soot.jimple.BoundedFlowSet r14;
+        ca.mcgill.sable.soot.jimple.ValueBox r18, r33;
+        ca.mcgill.sable.soot.jimple.Value r19, r20, r34, r35;
+        ca.mcgill.sable.util.Map r21, r36;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>(r1);
+        i0 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i0 == 0 goto label0;
+
+        r2 = ca.mcgill.sable.soot.jimple.Main.liveSetupTimer;
+        r2.start();
+
+     label0:
+        r3 = r1.getBody();
+        r4 = r3.getLocals();
+        r5 = new ca.mcgill.sable.soot.jimple.FlowUniverse;
+        r6 = r4.toArray();
+        specialinvoke r5.<init>(r6);
+        r7 = new ca.mcgill.sable.soot.jimple.ArrayPackedSet;
+        specialinvoke r7.<init>(r5);
+        r0.emptySet = r7;
+        r8 = new ca.mcgill.sable.util.HashMap;
+        i1 = r1.size();
+        i2 = i1 * 2;
+        i3 = i2 + 1;
+        specialinvoke r8.<init>(i3, 0.7F);
+        r0.stmtToPreserveSet = r8;
+        r9 = r1.iterator();
+        goto label4;
+
+     label1:
+        r10 = r9.next();
+        r11 = (ca.mcgill.sable.soot.jimple.Stmt) r10;
+        r12 = r0.emptySet;
+        r13 = r12.clone();
+        r14 = (ca.mcgill.sable.soot.jimple.BoundedFlowSet) r13;
+        r15 = r11.getDefBoxes();
+        r16 = r15.iterator();
+        goto label3;
+
+     label2:
+        r17 = r16.next();
+        r18 = (ca.mcgill.sable.soot.jimple.ValueBox) r17;
+        r19 = r18.getValue();
+        i4 = r19 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i4 == 0 goto label3;
+
+        r20 = r18.getValue();
+        r14.add(r20, r14);
+
+     label3:
+        i5 = r16.hasNext();
+        if i5 != 0 goto label2;
+
+        r14.complement(r14);
+        r21 = r0.stmtToPreserveSet;
+        r22 = r21.put(r11, r14);
+
+     label4:
+        i6 = r9.hasNext();
+        if i6 != 0 goto label1;
+
+        r23 = new ca.mcgill.sable.util.HashMap;
+        i7 = r1.size();
+        i8 = i7 * 2;
+        i9 = i8 + 1;
+        specialinvoke r23.<init>(i9, 0.7F);
+        r0.stmtToGenerateSet = r23;
+        r24 = r1.iterator();
+        goto label8;
+
+     label5:
+        r25 = r24.next();
+        r26 = (ca.mcgill.sable.soot.jimple.Stmt) r25;
+        r27 = r0.emptySet;
+        r28 = r27.clone();
+        r29 = (ca.mcgill.sable.soot.jimple.FlowSet) r28;
+        r30 = r26.getUseBoxes();
+        r31 = r30.iterator();
+        goto label7;
+
+     label6:
+        r32 = r31.next();
+        r33 = (ca.mcgill.sable.soot.jimple.ValueBox) r32;
+        r34 = r33.getValue();
+        i10 = r34 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i10 == 0 goto label7;
+
+        r35 = r33.getValue();
+        r29.add(r35, r29);
+
+     label7:
+        i11 = r31.hasNext();
+        if i11 != 0 goto label6;
+
+        r36 = r0.stmtToGenerateSet;
+        r37 = r36.put(r26, r29);
+
+     label8:
+        i12 = r24.hasNext();
+        if i12 != 0 goto label5;
+
+        i13 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i13 == 0 goto label9;
+
+        r38 = ca.mcgill.sable.soot.jimple.Main.liveSetupTimer;
+        r38.end();
+
+     label9:
+        i14 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i14 == 0 goto label10;
+
+        r39 = ca.mcgill.sable.soot.jimple.Main.liveAnalysisTimer;
+        r39.start();
+
+     label10:
+        r0.doAnalysis();
+        i15 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i15 == 0 goto label11;
+
+        r40 = ca.mcgill.sable.soot.jimple.Main.liveAnalysisTimer;
+        r40.end();
+
+     label11:
+        return;
+    }
+
+    protected java.lang.Object newInitialFlow()
+    {
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocalsAnalysis r0;
+        ca.mcgill.sable.soot.jimple.FlowSet r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+        r1 = r0.emptySet;
+        r2 = r1.clone();
+        return r2;
+    }
+
+    protected void flowThrough(java.lang.Object, ca.mcgill.sable.soot.jimple.Stmt, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocalsAnalysis r0;
+        java.lang.Object r1, r3, r7, r10;
+        ca.mcgill.sable.soot.jimple.Stmt r2;
+        ca.mcgill.sable.soot.jimple.FlowSet r4, r5, r8, r11;
+        ca.mcgill.sable.util.Map r6, r9;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = (ca.mcgill.sable.soot.jimple.FlowSet) r1;
+        r5 = (ca.mcgill.sable.soot.jimple.FlowSet) r3;
+        r6 = r0.stmtToPreserveSet;
+        r7 = r6.get(r2);
+        r8 = (ca.mcgill.sable.soot.jimple.FlowSet) r7;
+        r4.intersection(r8, r5);
+        r9 = r0.stmtToGenerateSet;
+        r10 = r9.get(r2);
+        r11 = (ca.mcgill.sable.soot.jimple.FlowSet) r10;
+        r5.union(r11, r5);
+        return;
+    }
+
+    protected void merge(java.lang.Object, java.lang.Object, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocalsAnalysis r0;
+        java.lang.Object r1, r2, r3;
+        ca.mcgill.sable.soot.jimple.FlowSet r4, r5, r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = (ca.mcgill.sable.soot.jimple.FlowSet) r1;
+        r5 = (ca.mcgill.sable.soot.jimple.FlowSet) r2;
+        r6 = (ca.mcgill.sable.soot.jimple.FlowSet) r3;
+        r4.union(r5, r6);
+        return;
+    }
+
+    protected void copy(java.lang.Object, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocalsAnalysis r0;
+        java.lang.Object r1, r2;
+        ca.mcgill.sable.soot.jimple.FlowSet r3, r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = (ca.mcgill.sable.soot.jimple.FlowSet) r1;
+        r4 = (ca.mcgill.sable.soot.jimple.FlowSet) r2;
+        r3.copy(r4);
+        return;
+    }
+}

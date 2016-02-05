@@ -1,0 +1,58 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: SemanticPredicateEvent');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: SemanticPredicateEvent';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>public class <a class="classDef" name=SemanticPredicateEvent href=SemanticPredicateEvent_java_ref.html#SemanticPredicateEvent>SemanticPredicateEvent</a> extends <a class="classRef" href=GuessingEvent_java.html#GuessingEvent>GuessingEvent</a> {
+<a name=4 class="linenum">4	</SPAN>	public static final int <a class="varDef" name=VALIDATING href=SemanticPredicateEvent_java_ref.html#VALIDATING>VALIDATING</a>=0;
+<a name=5 class="linenum">5	</SPAN>	public static final int <a class="varDef" name=PREDICTING href=SemanticPredicateEvent_java_ref.html#PREDICTING>PREDICTING</a>=1;
+<a name=6 class="linenum">6	</SPAN>	private int <a class="varDef" name=condition href=SemanticPredicateEvent_java_ref.html#condition>condition</a>;
+<a name=7 class="linenum">7	</SPAN>	private boolean <a class="varDef" name=result href=SemanticPredicateEvent_java_ref.html#result>result</a>;
+<a name=8 class="linenum">8	</SPAN>
+<a name=9 class="linenum">9	</SPAN>
+<a name=10 class="linenum">10	</SPAN>	public <a class="methodDef" name=SemanticPredicateEvent(Object) href=SemanticPredicateEvent_java_ref.html#SemanticPredicateEvent(Object)>SemanticPredicateEvent</a>(Object source) {
+<a name=11 class="linenum">11	</SPAN>		super(source);
+<a name=12 class="linenum">12	</SPAN>	}
+<a name=13 class="linenum">13	</SPAN>	public <a class="methodDef" name=SemanticPredicateEvent(Object,int) href=SemanticPredicateEvent_java_ref.html#SemanticPredicateEvent(Object,int)>SemanticPredicateEvent</a>(Object source, int type) {
+<a name=14 class="linenum">14	</SPAN>		super(source, type);
+<a name=15 class="linenum">15	</SPAN>	}
+<a name=16 class="linenum">16	</SPAN>	public int <a class="methodDef" name=getCondition() href=SemanticPredicateEvent_java_ref.html#getCondition()>getCondition</a>() {
+<a name=17 class="linenum">17	</SPAN>		return <a class="varRef" href=SemanticPredicateEvent_java.html#condition>condition</a>;
+<a name=18 class="linenum">18	</SPAN>	}
+<a name=19 class="linenum">19	</SPAN>	public boolean <a class="methodDef" name=getResult() href=SemanticPredicateEvent_java_ref.html#getResult()>getResult</a>() {
+<a name=20 class="linenum">20	</SPAN>		return <a class="varRef" href=SemanticPredicateEvent_java.html#result>result</a>;
+<a name=21 class="linenum">21	</SPAN>	}
+<a name=22 class="linenum">22	</SPAN>	void <a class="methodDef" name=setCondition(int) href=SemanticPredicateEvent_java_ref.html#setCondition(int)>setCondition</a>(int condition) {
+<a name=23 class="linenum">23	</SPAN>		this.condition = condition;
+<a name=24 class="linenum">24	</SPAN>	}
+<a name=25 class="linenum">25	</SPAN>	void <a class="methodDef" name=setResult(boolean) href=SemanticPredicateEvent_java_ref.html#setResult(boolean)>setResult</a>(boolean result) {
+<a name=26 class="linenum">26	</SPAN>		this.result = result;
+<a name=27 class="linenum">27	</SPAN>	}
+<a name=28 class="linenum">28	</SPAN>	<span class="comment">/** This should NOT be called from anyone other than ParserEventSupport! */</span>
+<a name=29 class="linenum">29	</SPAN>	void <a class="methodDef" name=setValues(int,int,boolean,int) href=SemanticPredicateEvent_java_ref.html#setValues(int,int,boolean,int)>setValues</a>(int type, int condition, boolean result, int guessing) {
+<a name=30 class="linenum">30	</SPAN>		super.setValues(type, guessing);
+<a name=31 class="linenum">31	</SPAN>		<a class="methodRef" href=SemanticPredicateEvent_java.html#setCondition(int)>setCondition</a>(condition);
+<a name=32 class="linenum">32	</SPAN>		<a class="methodRef" href=SemanticPredicateEvent_java.html#setResult(boolean)>setResult</a>(result);
+<a name=33 class="linenum">33	</SPAN>	}
+<a name=34 class="linenum">34	</SPAN>	public String <a class="methodDef" name=toString() href=SemanticPredicateEvent_java_ref.html#toString()>toString</a>() {
+<a name=35 class="linenum">35	</SPAN>		return "SemanticPredicateEvent [" + 
+<a name=36 class="linenum">36	</SPAN>		       <a class="methodRef" href=SemanticPredicateEvent_java.html#getCondition()>getCondition</a>() + "," + <a class="methodRef" href=SemanticPredicateEvent_java.html#getResult()>getResult</a>() + "," + <a class="methodRef" href=GuessingEvent_java.html#getGuessing()>getGuessing</a>() + "]";
+<a name=37 class="linenum">37	</SPAN>	}
+<a name=38 class="linenum">38	</SPAN>}
+<a name=39 class="linenum">39	</SPAN></pre>

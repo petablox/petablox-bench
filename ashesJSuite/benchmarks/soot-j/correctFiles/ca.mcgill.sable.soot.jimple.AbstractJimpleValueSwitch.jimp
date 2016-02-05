@@ -1,0 +1,550 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch extends java.lang.Object implements ca.mcgill.sable.soot.jimple.JimpleValueSwitch
+{
+    java.lang.Object result;
+
+    public void caseArrayRef(ca.mcgill.sable.soot.jimple.ArrayRef)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.ArrayRef r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseDoubleConstant(ca.mcgill.sable.soot.jimple.DoubleConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.DoubleConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseFloatConstant(ca.mcgill.sable.soot.jimple.FloatConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.FloatConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseIntConstant(ca.mcgill.sable.soot.jimple.IntConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.IntConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseLongConstant(ca.mcgill.sable.soot.jimple.LongConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.LongConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNullConstant(ca.mcgill.sable.soot.jimple.NullConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NullConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseStringConstant(ca.mcgill.sable.soot.jimple.StringConstant)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.StringConstant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseAddExpr(ca.mcgill.sable.soot.jimple.AddExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.AddExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseAndExpr(ca.mcgill.sable.soot.jimple.AndExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.AndExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseCmpExpr(ca.mcgill.sable.soot.jimple.CmpExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.CmpExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseCmpgExpr(ca.mcgill.sable.soot.jimple.CmpgExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.CmpgExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseCmplExpr(ca.mcgill.sable.soot.jimple.CmplExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.CmplExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseDivExpr(ca.mcgill.sable.soot.jimple.DivExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.DivExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseEqExpr(ca.mcgill.sable.soot.jimple.EqExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.EqExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseGeExpr(ca.mcgill.sable.soot.jimple.GeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.GeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseGtExpr(ca.mcgill.sable.soot.jimple.GtExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.GtExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseLeExpr(ca.mcgill.sable.soot.jimple.LeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.LeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseLtExpr(ca.mcgill.sable.soot.jimple.LtExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.LtExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseMulExpr(ca.mcgill.sable.soot.jimple.MulExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.MulExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNeExpr(ca.mcgill.sable.soot.jimple.NeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseOrExpr(ca.mcgill.sable.soot.jimple.OrExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.OrExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseRemExpr(ca.mcgill.sable.soot.jimple.RemExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.RemExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseShlExpr(ca.mcgill.sable.soot.jimple.ShlExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.ShlExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseShrExpr(ca.mcgill.sable.soot.jimple.ShrExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.ShrExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseSubExpr(ca.mcgill.sable.soot.jimple.SubExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.SubExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseUshrExpr(ca.mcgill.sable.soot.jimple.UshrExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.UshrExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseXorExpr(ca.mcgill.sable.soot.jimple.XorExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.XorExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseInterfaceInvokeExpr(ca.mcgill.sable.soot.jimple.InterfaceInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.InterfaceInvokeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseSpecialInvokeExpr(ca.mcgill.sable.soot.jimple.SpecialInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.SpecialInvokeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseStaticInvokeExpr(ca.mcgill.sable.soot.jimple.StaticInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.StaticInvokeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseVirtualInvokeExpr(ca.mcgill.sable.soot.jimple.VirtualInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.VirtualInvokeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNewInvokeExpr(ca.mcgill.sable.soot.jimple.NewInvokeExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NewInvokeExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseCastExpr(ca.mcgill.sable.soot.jimple.CastExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.CastExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseInstanceOfExpr(ca.mcgill.sable.soot.jimple.InstanceOfExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.InstanceOfExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNewArrayExpr(ca.mcgill.sable.soot.jimple.NewArrayExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NewArrayExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNewMultiArrayExpr(ca.mcgill.sable.soot.jimple.NewMultiArrayExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NewMultiArrayExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNewExpr(ca.mcgill.sable.soot.jimple.NewExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NewExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseLengthExpr(ca.mcgill.sable.soot.jimple.LengthExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.LengthExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNegExpr(ca.mcgill.sable.soot.jimple.NegExpr)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NegExpr r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseInstanceFieldRef(ca.mcgill.sable.soot.jimple.InstanceFieldRef)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.InstanceFieldRef r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseLocal(ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseParameterRef(ca.mcgill.sable.soot.jimple.ParameterRef)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.ParameterRef r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseNextNextStmtRef(ca.mcgill.sable.soot.jimple.NextNextStmtRef)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.NextNextStmtRef r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseCaughtExceptionRef(ca.mcgill.sable.soot.jimple.CaughtExceptionRef)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.CaughtExceptionRef r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseThisRef(ca.mcgill.sable.soot.jimple.ThisRef)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.ThisRef r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void caseStaticFieldRef(ca.mcgill.sable.soot.jimple.StaticFieldRef)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        ca.mcgill.sable.soot.jimple.StaticFieldRef r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.defaultCase(r1);
+        return;
+    }
+
+    public void defaultCase(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        return;
+    }
+
+    public java.lang.Object getResult()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 = r0.result;
+        return r1;
+    }
+
+    public void setResult(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+        java.lang.Object r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r1;
+        return;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

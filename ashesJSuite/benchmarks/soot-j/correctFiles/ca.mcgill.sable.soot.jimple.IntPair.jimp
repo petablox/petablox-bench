@@ -1,0 +1,19 @@
+class ca.mcgill.sable.soot.jimple.IntPair extends java.lang.Object
+{
+    int op1;
+    int op2;
+
+    public void <init>(int, int)
+    {
+        ca.mcgill.sable.soot.jimple.IntPair r0;
+        int i0, i1;
+
+        r0 := @this;
+        i0 := @parameter0;
+        i1 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.op1 = i0;
+        r0.op2 = i1;
+        return;
+    }
+}

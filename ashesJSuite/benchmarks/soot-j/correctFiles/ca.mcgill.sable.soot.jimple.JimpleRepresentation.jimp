@@ -1,0 +1,131 @@
+public interface ca.mcgill.sable.soot.jimple.JimpleRepresentation extends java.lang.Object implements ca.mcgill.sable.soot.BodyRepresentation
+{
+
+    public abstract ca.mcgill.sable.soot.Body newBody(ca.mcgill.sable.soot.SootMethod);
+
+    public abstract ca.mcgill.sable.soot.Body buildBodyOfFrom(ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.soot.Body, int);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newArgBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.XorExpr newXorExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.UshrExpr newUshrExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.SubExpr newSubExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ShrExpr newShrExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ShlExpr newShlExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.RemExpr newRemExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.OrExpr newOrExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.NeExpr newNeExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.MulExpr newMulExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.LeExpr newLeExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.GeExpr newGeExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.EqExpr newEqExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.DivExpr newDivExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.CmplExpr newCmplExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.CmpgExpr newCmpgExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.CmpExpr newCmpExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.GtExpr newGtExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.LtExpr newLtExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.AddExpr newAddExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.AndExpr newAndExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.NegExpr newNegExpr(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.LengthExpr newLengthExpr(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.CastExpr newCastExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.Type);
+
+    public abstract ca.mcgill.sable.soot.jimple.InstanceOfExpr newInstanceOfExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.Type);
+
+    public abstract ca.mcgill.sable.soot.jimple.NewArrayExpr newNewArrayExpr(ca.mcgill.sable.soot.Type, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.NewMultiArrayExpr newNewMultiArrayExpr(ca.mcgill.sable.soot.ArrayType, ca.mcgill.sable.util.List);
+
+    public abstract ca.mcgill.sable.soot.jimple.StaticInvokeExpr newStaticInvokeExpr(ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List);
+
+    public abstract ca.mcgill.sable.soot.jimple.SpecialInvokeExpr newSpecialInvokeExpr(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List);
+
+    public abstract ca.mcgill.sable.soot.jimple.VirtualInvokeExpr newVirtualInvokeExpr(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List);
+
+    public abstract ca.mcgill.sable.soot.jimple.InterfaceInvokeExpr newInterfaceInvokeExpr(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List);
+
+    public abstract ca.mcgill.sable.soot.jimple.ThrowStmt newThrowStmt(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ExitMonitorStmt newExitMonitorStmt(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.EnterMonitorStmt newEnterMonitorStmt(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.BreakpointStmt newBreakpointStmt();
+
+    public abstract ca.mcgill.sable.soot.jimple.GotoStmt newGotoStmt(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.NopStmt newNopStmt();
+
+    public abstract ca.mcgill.sable.soot.jimple.ReturnVoidStmt newReturnVoidStmt();
+
+    public abstract ca.mcgill.sable.soot.jimple.ReturnStmt newReturnStmt(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.RetStmt newRetStmt(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.IfStmt newIfStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.IdentityStmt newIdentityStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.AssignStmt newAssignStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.InvokeStmt newInvokeStmt(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.TableSwitchStmt newTableSwitchStmt(ca.mcgill.sable.soot.jimple.Value, int, int, ca.mcgill.sable.util.List, ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.LookupSwitchStmt newLookupSwitchStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.util.List, ca.mcgill.sable.util.List, ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.Local newLocal(java.lang.String, ca.mcgill.sable.soot.Type);
+
+    public abstract ca.mcgill.sable.soot.jimple.Trap newTrap(ca.mcgill.sable.soot.SootClass, ca.mcgill.sable.soot.jimple.Unit, ca.mcgill.sable.soot.jimple.Unit, ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.StaticFieldRef newStaticFieldRef(ca.mcgill.sable.soot.SootField);
+
+    public abstract ca.mcgill.sable.soot.jimple.ThisRef newThisRef(ca.mcgill.sable.soot.SootClass);
+
+    public abstract ca.mcgill.sable.soot.jimple.ParameterRef newParameterRef(ca.mcgill.sable.soot.SootMethod, int);
+
+    public abstract ca.mcgill.sable.soot.jimple.InstanceFieldRef newInstanceFieldRef(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.SootField);
+
+    public abstract ca.mcgill.sable.soot.jimple.CaughtExceptionRef newCaughtExceptionRef(ca.mcgill.sable.soot.jimple.JimpleBody);
+
+    public abstract ca.mcgill.sable.soot.jimple.ArrayRef newArrayRef(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newVariableBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newLocalBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newRValueBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newImmediateBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newIdentityRefBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newConditionExprBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox newInvokeExprBox(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox newStmtBox(ca.mcgill.sable.soot.jimple.Unit);
+}

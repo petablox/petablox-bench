@@ -1,0 +1,95 @@
+public class ca.mcgill.sable.soot.jimple.FlowUniverse extends java.lang.Object
+{
+    java.lang.Object[] indexToObject;
+    ca.mcgill.sable.util.Map objectToIndex;
+
+    public void <init>(java.lang.Object[])
+    {
+        ca.mcgill.sable.soot.jimple.FlowUniverse r0;
+        java.lang.Object[] r1;
+        ca.mcgill.sable.util.HashMap r2;
+        int i0, i1, i2, i3, i4;
+        java.lang.Object r3, r5, r7;
+        ca.mcgill.sable.util.Map r4;
+        java.lang.Integer r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r2 = new ca.mcgill.sable.util.HashMap;
+        i1 = r1.length;
+        i2 = i1 * 2;
+        i3 = i2 + 1;
+        specialinvoke r2.<init>(i3, 0.7F);
+        r0.objectToIndex = r2;
+        r3 = r1.clone();
+        r0.indexToObject = (java.lang.Object[]) r3;
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r4 = r0.objectToIndex;
+        r5 = r1[i0];
+        r6 = new java.lang.Integer;
+        specialinvoke r6.<init>(i0);
+        r7 = r4.put(r5, r6);
+        i0 = i0 + 1;
+
+     label1:
+        i4 = r1.length;
+        if i0 < i4 goto label0;
+
+        return;
+    }
+
+    public int getSize()
+    {
+        ca.mcgill.sable.soot.jimple.FlowUniverse r0;
+        java.lang.Object[] r1;
+        int i0;
+
+        r0 := @this;
+        r1 = r0.indexToObject;
+        i0 = r1.length;
+        return i0;
+    }
+
+    public java.lang.Object getObjectOf(int)
+    {
+        ca.mcgill.sable.soot.jimple.FlowUniverse r0;
+        int i0;
+        java.lang.Object[] r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.indexToObject;
+        r2 = r1[i0];
+        return r2;
+    }
+
+    public int getIndexOf(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.FlowUniverse r0;
+        java.lang.Object r1, r3;
+        ca.mcgill.sable.util.Map r2;
+        java.lang.Integer r4;
+        java.lang.RuntimeException r5;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.objectToIndex;
+        r3 = r2.get(r1);
+        r4 = (java.lang.Integer) r3;
+        if r4 != null goto label0;
+
+        r5 = new java.lang.RuntimeException;
+        specialinvoke r5.<init>("object not in universe");
+        throw r5;
+
+     label0:
+        i0 = r4.intValue();
+        return i0;
+    }
+}

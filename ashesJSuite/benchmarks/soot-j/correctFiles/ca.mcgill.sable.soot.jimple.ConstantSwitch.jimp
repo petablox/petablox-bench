@@ -1,0 +1,17 @@
+public interface ca.mcgill.sable.soot.jimple.ConstantSwitch extends java.lang.Object implements ca.mcgill.sable.util.Switch
+{
+
+    public abstract void caseDoubleConstant(ca.mcgill.sable.soot.jimple.DoubleConstant);
+
+    public abstract void caseFloatConstant(ca.mcgill.sable.soot.jimple.FloatConstant);
+
+    public abstract void caseIntConstant(ca.mcgill.sable.soot.jimple.IntConstant);
+
+    public abstract void caseLongConstant(ca.mcgill.sable.soot.jimple.LongConstant);
+
+    public abstract void caseNullConstant(ca.mcgill.sable.soot.jimple.NullConstant);
+
+    public abstract void caseStringConstant(ca.mcgill.sable.soot.jimple.StringConstant);
+
+    public abstract void defaultCase(java.lang.Object);
+}

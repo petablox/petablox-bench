@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.UnitBox extends java.lang.Object
+{
+
+    public abstract void setUnit(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.Unit getUnit();
+}

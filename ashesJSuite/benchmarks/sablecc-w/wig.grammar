@@ -1,0 +1,529 @@
+Package wig;
+
+Helpers 
+
+all = [0 .. 127];
+
+id = [[['A' .. 'Z'] + ['a' .. 'z']] + '_'];
+
+id1 = [[[['A' .. 'Z'] + ['a' .. 'z']] + ['0' .. '9']] + '_'];
+
+whole = ['0' .. '9'];
+
+natural = ['1' .. '9'];
+
+n = natural (whole)*;
+
+num = '0' | n;
+
+not_star = [all - '*'];
+
+not_star_slash = [not_star - '/'];
+
+t = 'true';
+
+f = 'false';
+
+tab = 9;
+
+cr = 13;
+
+lf = 10;
+
+not_cr1_lf1 = [all - [[[cr + lf] + tab] + ' ']];
+
+not_cr_lf = [all - [cr + lf]];
+
+eol = cr lf | cr | lf;
+
+b = (' ' | tab | eol)+;
+
+tags = '<p>' | '<i>' | '<b>' | '<h1>' | '<h2>' | '<br>' | '<hr>' |
+       '<img' | 'include' | '<a' | '<ul>' | '<li>' | '<tr>' |
+       '<table>' | '<var' | '<select' | '<input' | '<param' |
+       '<result' | '<applet'; 
+
+
+stringconst = [not_cr_lf - '"']*;
+
+stringconst1 = [not_cr1_lf1 - '"']*;
+
+States
+
+normal,doc1,doc,ses,str_startn,str_starts,special1,special2,special3,special4,normal_doc,normal_ses,str_startn1;
+
+
+
+Tokens
+
+
+
+{normal} service = 'service';
+
+{normal->normal_doc} document = 'document';
+
+{ses->normal_ses,normal->normal_ses} session = 'session';
+
+{normal} global = 'global';
+
+{ses} local = 'local';
+
+{ses} assign_ses = ':=';
+
+{ses} stop = 'stop';
+
+{ses} take = 'take';
+
+{ses} show = 'show';
+
+{ses} in = '<-';
+
+{ses} out = '->';
+
+{ses} random = 'random';
+
+{ses} system = 'system';
+
+{ses,normal} bool = 'bool';
+
+{ses,normal} text = 'text';
+
+{ses,normal} int = 'int';
+
+{ses} if = 'if';
+
+{ses} else = 'else';
+
+{ses} while = 'while';
+
+{ses} equal_ses = '=';
+
+{ses} gt = '>';
+
+{ses} and = 'and';
+
+{ses} not = 'not';
+
+{ses} or = 'or';
+
+{ses} auto_inc = '++';
+
+{ses} interval = '..';
+
+{ses} plus = '+';
+
+{ses} minus = '-';
+
+{ses} multiply = '*';
+
+{ses} divide = '/';
+
+{ses} modulo = '%';
+
+{ses} abs = '|';
+
+{ses,normal} semicolon = ';';
+
+{ses} left_brack = '(';
+
+{ses} right_brack = ')';
+
+{ses} left_paren = '[';
+
+{ses} right_paren = ']';
+
+{ses} ends = 'ends';
+
+{ses} with = 'with';
+
+{normal_doc} left_brack1 = '(';
+
+{normal_doc} right_brack1 = ')';
+
+{str_startn,str_starts,str_startn1} string = stringconst; 
+
+comma = ',';
+
+{normal_doc,normal_ses,normal,ses} identifier = id (id1)*;
+
+number = num;
+
+true = t;
+
+false = f;
+
+{normal,ses} specify = ':';
+
+{normal,doc1} assign_normaldoc = '=';
+
+{doc} bold = '<b>';
+
+{doc} bold_end = '</b>';
+
+{doc} italic = '<i>';
+
+{doc} italic_end = '</i>'; 
+
+{doc} header1 = '<h1>';                  
+
+{doc} header1_end = '</h1>'; 
+
+{doc} header2 = '<h2>';                  
+
+{doc} header2_end = '</h2>'; 
+
+{doc} para = '<p>';
+
+{doc} br = '<br>';                  
+
+{doc} hr = '<hr>'; 
+
+{doc->doc1} img = '<img';
+
+{doc1} src = 'src';
+
+{doc->doc1} include = '<include';
+
+{doc1} file = 'file';
+
+{doc->doc1} a = '<a';
+
+{doc} a_end = '</a>';
+
+{normal_doc->doc,normal_ses->ses,normal,ses} open_br = '{';
+
+{doc1} href = 'href';
+
+{doc} list = '<ul>';
+
+{doc} list_end = '</ul>';
+
+{doc} li = '<li>';
+
+{doc} tr = '<tr>';
+
+{doc} tr_end = '</tr>';
+
+{doc} td = '<td>';
+
+{doc} td_end = '</td>';
+
+{doc} table = '<table>';
+
+{doc} table_end = '</table>';
+
+{doc->special1} var = '<var';
+
+{doc->special1} select = '<select';
+
+{doc->special1} input = '<input';
+
+{doc->special1} param = '<param';
+
+{doc->special1} result = '<result';
+
+{special1->special2} name = 'name';
+
+{special2->special3} assign_sp2 = '=';
+
+{special4} string_sp4 = stringconst;
+
+{doc1} type = 'type';
+
+{doc1} size = 'size';
+
+{doc1} value = 'value';
+
+{doc1} text_const = '"text"';
+
+{doc1} radio = '"radio"';
+
+{doc->doc1} applet = '<applet';
+
+{doc} applet_end = '</applet>';
+
+{doc} select_end = '</select>';
+
+{doc1} codebase = 'codebase';
+
+{doc1} code = 'code';
+
+{doc1} width = 'width';
+
+{doc1} height = 'height';
+
+{doc->normal,ses,normal} close_br = '}';
+
+
+{special3->special4,special4->doc1,normal->str_startn,doc1->special4,
+ str_startn->normal,ses->str_starts,str_starts->ses,normal_doc->str_startn1,
+ str_startn1->normal_doc} quote = '"';  
+
+{doc1->doc} close = '>'; 
+
+{normal,doc1,doc,ses,str_startn,str_starts,special1,special2,special3,special4,normal_doc,normal_ses} blank = b;
+
+comment = '/*' not_star* '*'+ (not_star_slash not_star* '*'+)* '/';
+
+{doc} string1 = stringconst1;
+
+Ignored Tokens 
+
+blank,
+comment;
+
+
+
+Productions
+ 
+servicep = {service1} service open_br globalsp documentsp sessionsp close_br;
+
+globalsp = {empty} | 
+           {globals1} neglobalsp ;
+
+neglobalsp = {neglobals1}globalp semicolon | 
+             {neglobals2}neglobalsp globalp semicolon;
+
+globalp =  {global1}global  nenamesp specify int intinitp |  
+           {global2}global  nenamesp specify bool boolinitp |  
+           {global3}global  nenamesp specify text textinitp ;
+
+nenamesp = {nenames1}namep | 
+           {nenames2}nenamesp comma namep ;
+
+namep = {name1} identifier ;
+
+intinitp = {empty} | 
+           {intinit1}assign_normaldoc number;
+
+boolinitp = {empty} | 
+            {boolinit1}assign_normaldoc true | 
+            {boolinit2}assign_normaldoc false ;
+
+textinit1p = {textinit11} assign_normaldoc quote stringp;
+
+textinitp = {empty} | 
+            {textinit1} textinit1p quote;
+
+
+stringp = {empty}|
+          {stringp1} string |
+          {stringp2} string_sp4;
+
+
+documentsp = {documents1} documentp | 
+             {documents2} documentsp documentp ;
+
+documentp = {document1}document identifier titlep open_br htmlp close_br ;
+
+title1p = {title11} left_brack1 quote stringp;
+
+titlep = {empty} | 
+         {title1} title1p quote right_brack1 ;
+
+htmlp = {html1}entityp | 
+        {html2}htmlp entityp ;
+
+entity9p = {entity91p} img src assign_normaldoc quote;
+
+entity10p = {entity101p} include file assign_normaldoc quote;
+
+entity11p = {entity111p} a href assign_normaldoc quote;
+
+entity14p = {entity141p} var name assign_sp2 quote;
+
+entity15p = {entity151p} select name assign_sp2 quote;
+
+entity161p = {entity1611p} input name assign_sp2 quote;
+
+entity162p = {entity1621p} stringp quote type assign_normaldoc;
+
+entity171p = {entity1711p} quote close;
+
+entity181p = {entity1811p} applet codebase assign_normaldoc quote; 
+
+entity182p = {entity1821p} stringp quote;
+
+entity183p = {entity1831p} code assign_normaldoc quote; 
+
+entity184p = {entity1841p} stringp quote width assign_normaldoc number;
+
+
+entityp = {entity1s} string1 | 
+          {entity1n} number |
+          {entity1t} true |
+          {entity1f} false |
+          {entity2}bold htmlp bold_end |
+          {entity3}italic htmlp italic_end | 
+          {entity4}header1 htmlp header1_end | 
+          {entity5}header2 htmlp header2_end | 
+          {entity6}para | 
+          {entity7}br | 
+          {entity8}hr | 
+          {entity9}entity9p stringp quote close | 
+          {entity10}entity10p stringp quote close | 
+          {entity11}entity11p stringp quote close htmlp a_end | 
+          {entity12}list itemsp list_end | 
+          {entity13}table rowsp table_end | 
+          {entity14}entity14p stringp quote close | 
+          {entity15}entity15p stringp quote close optionsp select_end |
+          {entity16}entity161p entity162p text_const size assign_normaldoc number close | 
+          {entity17}entity161p entity162p radio value assign_normaldoc quote stringp entity171p | 
+          {entity18}entity181p entity182p entity183p entity184p height assign_normaldoc number close argumentsp applet_end;
+
+optionsp = {options1}optionp | 
+           {options2}optionsp optionp ;
+
+option1p = {option11} optionp value assign_normaldoc quote;
+
+optionp = {option1}option1p stringp quote close literalsp ;
+
+literalsp = {literals1}literalp | 
+            {literals2}literalsp literalp ;
+
+literalp = {literal1}quote entity182p | 
+           {literal2}number | 
+           {literal3}true | 
+           {literal4}false ;
+
+itemsp = {items1}itemp | 
+         {items2}itemsp itemp ;
+
+itemp =  {item1}li htmlp ;
+
+rowsp = {rows1}rowp | 
+        {rows2}rowsp rowp ;
+
+rowp = {row1}tr entriesp tr_end ;
+
+entriesp = {entries1}entryp | 
+           {entries2}entriesp entryp ;
+
+entryp = {entry1}td htmlp td_end ;
+
+argumentsp = {empty} | 
+             {arguments1}neargumentsp ;
+
+neargumentsp = {nearguments1}argumentp | 
+               {nearguments2}neargumentsp argumentp ;
+
+argument1p = {argument11} param name assign_sp2 quote;
+
+argument3p = {argument31} result name assign_sp2 quote;
+
+argdump = {argdum1} argument1p stringp;
+
+argumentp = {argument1} argdump quote value assign_normaldoc stringp close | 
+            {argument2} argdump quote close | 
+            {argument3} argument3p stringp quote close ;
+
+sessionsp = {sessions1} sessionp | 
+            {sessions2} sessionsp sessionp ;
+
+sessionp = {session1} session identifier open_br localsp statementseqp close_br terminationp ;
+
+termination1p = {termination11}ends with quote;
+
+terminationp = {empty} | 
+               {termination1}termination1p stringp quote;
+
+localsp = {empty} | 
+          {locals1} nelocalsp ;
+ 
+nelocalsp = {nelocals1} localp semicolon | 
+            {nelocals2} nelocalsp localp semicolon ;
+ 
+localp = {local1} local nenamesp specify int intinitsp | 
+         {local2} local nenamesp specify bool boolinitsp | 
+         {local3} local nenamesp specify text textinitsp;
+
+
+intinitsp = {empty} |
+            {intinits1}equal_ses number;
+
+boolinitsp = {empty} |
+            {boolinits1}equal_ses true |
+            {boolinits2}equal_ses false ;
+
+textinit1sp = {textinits11} equal_ses quote stringp;
+
+textinitsp = {empty} |
+            {textinits1} textinit1sp quote;
+
+
+
+
+
+statement71p = {statement711} if expp open_br statementseqp close_br;
+
+statement72p = {empty} | 
+               {statement721} else open_br statementseqp close_br; 
+
+statementp = {empty} |
+            {statement1} stop | 
+            {statement2} identifier assign_ses expp | 
+            {statement3} take identifier open_br statementseqp close_br | 
+            {statement5} show identifier parametersp | 
+            {statement7} statement71p statement72p | 
+            {statement8} while expp open_br statementseqp close_br ;
+
+statementseqp = {statementseq1} statementp |
+                {statementseq2} statementseqp semicolon statementp;
+
+parametersp = {empty} | 
+             {parameters1} left_paren right_paren | 
+             {parameters2} left_paren neparlistp right_paren;
+
+neparlistp = {neparlist1} parameterp | 
+             {neparlist2} neparlistp comma parameterp ;
+
+parameter2p = {parameter21} identifier out;
+
+parameterp = {parameter1} identifier in expp | 
+             {parameter2} parameter2p identifier; 
+
+expp_int = {expp_int}orexpp interval;
+
+expp = {exp1}orexpp |
+       {exp2}expp left_brack expp_int orexpp right_brack;
+
+orexpp = {orexp1}andexpp |
+         {orexp2}orexpp or andexpp;
+
+andexpp = {andexp1}eqexpp |
+          {andexp2}andexpp and eqexpp;
+
+eqexpp = {eqexp1}relexpp |
+         {eqexp2}eqexpp equal_ses relexpp;
+
+relexpp = {relexp1}addexpp |
+          {relexp2}relexpp gt addexpp;
+
+addexpp = {addexp1}multexpp |
+          {addexp2}addexpp plus multexpp |
+          {addexp3}addexpp minus multexpp |
+          {addexp4}addexpp auto_inc multexpp;
+
+multexpp = {multexp1}unaryexpp |
+           {multexp2}multexpp multiply unaryexpp |
+           {multexp3}multexpp divide unaryexpp |
+           {multexp4}multexpp modulo unaryexpp;
+
+unaryexpp = {unaryexp1}unaryexpnmp |
+            {unaryexp2} minus unaryexpp;
+
+abs_expp = {abs_exp1}abs expp;
+
+unaryexpnmp = {unaryexpnm1}postfixexpp |
+              {unaryexpnm2}not unaryexpp |
+              {unaryexpnm3}abs_expp abs |
+              {unaryexpnm4}random left_brack expp right_brack |
+              {unaryexpnm5}system left_brack expp right_brack ; 
+
+postfixexpp = {postfixexp1}identifier |
+              {postfixexp2}primexpp;
+
+primexpp = {primexp1}literalp |
+           {primexp2}left_brack expp right_brack;
+
+

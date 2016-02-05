@@ -1,0 +1,35 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ActionTransInfo');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ActionTransInfo';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN><span class="comment">/**
+<a name=4 class="linenum">4	</SPAN> * This class contains information about how an action
+<a name=5 class="linenum">5	</SPAN> * was translated (using the AST conversion rules).
+<a name=6 class="linenum">6	</SPAN> */</span>
+<a name=7 class="linenum">7	</SPAN>public class <a class="classDef" name=ActionTransInfo href=ActionTransInfo_java_ref.html#ActionTransInfo>ActionTransInfo</a> {
+<a name=8 class="linenum">8	</SPAN>	public boolean <a class="varDef" name=assignToRoot href=ActionTransInfo_java_ref.html#assignToRoot>assignToRoot</a> = false;	<span class="comment">// somebody did a "#rule = "
+<a name=9 class="linenum">9	</SPAN></span>	public String <a class="varDef" name=refRuleRoot href=ActionTransInfo_java_ref.html#refRuleRoot>refRuleRoot</a> = null;		<span class="comment">// somebody referenced #rule; string is translated var
+<a name=10 class="linenum">10	</SPAN></span>
+<a name=11 class="linenum">11	</SPAN>
+<a name=12 class="linenum">12	</SPAN>	public String <a class="methodDef" name=toString() href=ActionTransInfo_java_ref.html#toString()>toString</a>() {
+<a name=13 class="linenum">13	</SPAN>		return "assignToRoot:"+<a class="varRef" href=ActionTransInfo_java.html#assignToRoot>assignToRoot</a>+", refRuleRoot:"+<a class="varRef" href=ActionTransInfo_java.html#refRuleRoot>refRuleRoot</a>;
+<a name=14 class="linenum">14	</SPAN>	}
+<a name=15 class="linenum">15	</SPAN>}
+<a name=16 class="linenum">16	</SPAN></pre>

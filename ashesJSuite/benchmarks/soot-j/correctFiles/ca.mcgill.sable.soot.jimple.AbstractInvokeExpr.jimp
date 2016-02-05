@@ -1,0 +1,112 @@
+abstract class ca.mcgill.sable.soot.jimple.AbstractInvokeExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.InvokeExpr
+{
+    ca.mcgill.sable.soot.SootMethod method;
+    protected ca.mcgill.sable.soot.jimple.ValueBox[] argBoxes;
+
+    public ca.mcgill.sable.soot.SootMethod getMethod()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+
+        r0 := @this;
+        r1 = r0.method;
+        return r1;
+    }
+
+    public void setMethod(ca.mcgill.sable.soot.SootMethod)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.method = r1;
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getArg(int)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.argBoxes;
+        r2 = r1[i0];
+        r3 = r2.getValue();
+        return r3;
+    }
+
+    public int getArgCount()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r1;
+        int i0;
+
+        r0 := @this;
+        r1 = r0.argBoxes;
+        i0 = r1.length;
+        return i0;
+    }
+
+    public void setArg(int, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r2;
+        ca.mcgill.sable.soot.jimple.ValueBox r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 = r0.argBoxes;
+        r3 = r2[i0];
+        r3.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getArgBox(int)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.argBoxes;
+        r2 = r1[i0];
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        ca.mcgill.sable.soot.Type r2;
+
+        r0 := @this;
+        r1 = r0.method;
+        r2 = r1.getReturnType();
+        return r2;
+    }
+
+    void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInvokeExpr r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract void apply(ca.mcgill.sable.util.Switch);
+
+    public abstract java.lang.String toBriefString();
+}

@@ -1,0 +1,215 @@
+public class ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph extends java.lang.Object
+{
+    private final ca.mcgill.sable.soot.jimple.FastColorer this$0;
+    ca.mcgill.sable.util.Map localToLocals;
+    ca.mcgill.sable.util.List locals;
+
+    private void <init>(ca.mcgill.sable.soot.jimple.FastColorer)
+    {
+        ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph r0;
+        ca.mcgill.sable.soot.jimple.FastColorer r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        r0.this$0 = r1;
+        return;
+    }
+
+    public ca.mcgill.sable.util.List getLocals()
+    {
+        ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = r0.locals;
+        return r1;
+    }
+
+    public void <init>(ca.mcgill.sable.soot.jimple.FastColorer, ca.mcgill.sable.soot.jimple.StmtBody, ca.mcgill.sable.util.Map, ca.mcgill.sable.soot.jimple.LiveLocals)
+    {
+        ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph r0;
+        ca.mcgill.sable.soot.jimple.FastColorer r1;
+        ca.mcgill.sable.soot.jimple.StmtBody r2;
+        ca.mcgill.sable.util.Map r3, r14;
+        ca.mcgill.sable.soot.jimple.LiveLocals r4;
+        ca.mcgill.sable.soot.jimple.StmtList r5;
+        ca.mcgill.sable.util.ArrayList r6;
+        ca.mcgill.sable.util.List r7, r8, r10, r20;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9;
+        ca.mcgill.sable.util.HashMap r9;
+        ca.mcgill.sable.util.Iterator r11, r17, r25;
+        java.lang.Object r12, r16, r18, r26, r28, r29;
+        ca.mcgill.sable.soot.jimple.Local r13, r24, r27;
+        ca.mcgill.sable.util.ArraySet r15;
+        ca.mcgill.sable.soot.jimple.Stmt r19;
+        ca.mcgill.sable.soot.jimple.DefinitionStmt r21;
+        ca.mcgill.sable.soot.jimple.Value r22, r23;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 := @parameter3;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        r0.this$0 = r1;
+        r5 = r2.getStmtList();
+        r6 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r6.<init>();
+        r0.locals = r6;
+        r7 = r0.locals;
+        r8 = r2.getLocals();
+        i0 = r7.addAll(r8);
+        r9 = new ca.mcgill.sable.util.HashMap;
+        i1 = r2.getLocalCount();
+        i2 = i1 * 2;
+        i3 = i2 + 1;
+        specialinvoke r9.<init>(i3, 0.7F);
+        r0.localToLocals = r9;
+        r10 = r2.getLocals();
+        r11 = r10.iterator();
+        goto label1;
+
+     label0:
+        r12 = r11.next();
+        r13 = (ca.mcgill.sable.soot.jimple.Local) r12;
+        r14 = r0.localToLocals;
+        r15 = new ca.mcgill.sable.util.ArraySet;
+        specialinvoke r15.<init>();
+        r16 = r14.put(r13, r15);
+
+     label1:
+        i4 = r11.hasNext();
+        if i4 != 0 goto label0;
+
+        r17 = r5.iterator();
+        goto label5;
+
+     label2:
+        r18 = r17.next();
+        r19 = (ca.mcgill.sable.soot.jimple.Stmt) r18;
+        r20 = r4.getLiveLocalsAfter(r19);
+        i5 = r19 instanceof ca.mcgill.sable.soot.jimple.DefinitionStmt;
+        if i5 == 0 goto label5;
+
+        r21 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r19;
+        r22 = r21.getLeftOp();
+        i6 = r22 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i6 == 0 goto label5;
+
+        r23 = r21.getLeftOp();
+        r24 = (ca.mcgill.sable.soot.jimple.Local) r23;
+        r25 = r20.iterator();
+        goto label4;
+
+     label3:
+        r26 = r25.next();
+        r27 = (ca.mcgill.sable.soot.jimple.Local) r26;
+        r28 = r3.get(r27);
+        r29 = r3.get(r24);
+        i7 = r28.equals(r29);
+        if i7 == 0 goto label4;
+
+        r0.setInterference(r24, r27);
+
+     label4:
+        i8 = r25.hasNext();
+        if i8 != 0 goto label3;
+
+     label5:
+        i9 = r17.hasNext();
+        if i9 != 0 goto label2;
+
+        return;
+    }
+
+    public boolean localsInterfere(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph r0;
+        ca.mcgill.sable.soot.jimple.Local r1, r2;
+        ca.mcgill.sable.util.Map r3;
+        java.lang.Object r4;
+        ca.mcgill.sable.util.Set r5;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = r0.localToLocals;
+        r4 = r3.get(r1);
+        r5 = (ca.mcgill.sable.util.Set) r4;
+        i0 = r5.contains(r2);
+        return i0;
+    }
+
+    public void setInterference(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph r0;
+        ca.mcgill.sable.soot.jimple.Local r1, r2;
+        ca.mcgill.sable.util.Map r3, r6;
+        java.lang.Object r4, r7;
+        ca.mcgill.sable.util.Set r5, r8;
+        int i0, i1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = r0.localToLocals;
+        r4 = r3.get(r1);
+        r5 = (ca.mcgill.sable.util.Set) r4;
+        i0 = r5.add(r2);
+        r6 = r0.localToLocals;
+        r7 = r6.get(r2);
+        r8 = (ca.mcgill.sable.util.Set) r7;
+        i1 = r8.add(r1);
+        return;
+    }
+
+    public boolean isEmpty()
+    {
+        ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph r0;
+        ca.mcgill.sable.util.Map r1;
+        int i0;
+
+        r0 := @this;
+        r1 = r0.localToLocals;
+        i0 = r1.isEmpty();
+        return i0;
+    }
+
+    ca.mcgill.sable.soot.jimple.Local[] getInterferencesOf(ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.FastColorer$InterferenceGraph r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        int i0, i1, i2;
+        ca.mcgill.sable.util.Map r2;
+        java.lang.Object r3, r7;
+        ca.mcgill.sable.util.Set r4;
+        java.lang.Object[] r5;
+        ca.mcgill.sable.soot.jimple.Local[] r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.localToLocals;
+        r3 = r2.get(r1);
+        r4 = (ca.mcgill.sable.util.Set) r3;
+        r5 = r4.toArray();
+        i1 = r5.length;
+        r6 = new ca.mcgill.sable.soot.jimple.Local[i1];
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r7 = r5[i0];
+        r6[i0] = (ca.mcgill.sable.soot.jimple.Local) r7;
+        i0 = i0 + 1;
+
+     label1:
+        i2 = r5.length;
+        if i0 < i2 goto label0;
+
+        return r6;
+    }
+}

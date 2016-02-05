@@ -1,0 +1,121 @@
+#!/bin/bash
+# @author Patrice Pominville 
+#         patrice@cs.mcgill.ca
+# Tue Feb  1 01:32:10 EST 2000
+#
+#
+#  This is a generic script to test and execute the run of a 
+#  benchmark. 
+#
+#  Usage: run2 [-g] [-n]   
+#
+#  options: -n    When this flag is specified the run's execution output
+#                 is not automatically deleted by the script.
+#           -g    Generates the reference execution output for the benchmark run.
+#                 Must be run BEFORE optimizing the benchmark!
+#
+#  To test a benchmark, invoke this script in the benchmark's base directory.  
+#  The benchmark must provide a file 'run.defs' in this directory that defines
+#  the variable BENCHMARK_ARGS. This variable should be set to the benchmarks
+#  execution cmdline arguments.
+#
+#
+
+
+# setup the environment vars
+EXECUTION_OUTPUT_FILE=run.out
+EXECUTION_OUTPUT_DIR=executionOutputDir
+CORRECT_OUTPUT_DIR=correctOutput
+
+# process cmd line switches
+while [ $1 ]; do  
+    case $1 in
+        -g) GENERATE_CORRECT_OUTPUT=1;;
+        -n) EXECUTION_OUTPUT_NODELETE=1;;
+	-d) DEBUG=1;;
+    esac
+    shift;
+done
+
+
+
+# create a directory for the execution output
+rm -rf $EXECUTION_OUTPUT_DIR
+mkdir $EXECUTION_OUTPUT_DIR
+echo "`date`" > $EXECUTION_OUTPUT_DIR/timestamp
+
+# source benchmark variable defs and get the benchmark cmd args
+. run.defs
+BENCHMARK_ARGS=$(eval echo $BENCHMARK_ARGS)
+
+
+
+# set up the JVM to use and it's runtime configuration
+export CLASSPATH=$CLASSPATH:classes
+if [ $ASHES_CLASSPATH_EXT ]
+then
+    CLASSPATH=$CLASSPATH$ASHES_CLASSPATH_EXT
+fi
+
+ASHES_INITIAL_HEAP=64
+ASHES_MAXIMUM_HEAP=64
+
+if [ ! "$ASHES_JVM_CMD" ]
+then
+   ASHES_JVM_CMD='java -ms${ASHES_INITIAL_HEAP}m -mx${ASHES_MAXIMUM_HEAP}m'
+fi
+ACTUAL_JVM_CMD=`eval echo $ASHES_JVM_CMD`
+
+
+
+
+# execute the benchmark
+if [ $DEBUG ]; then
+        echo "Actual jvm cmd: $ACTUAL_JVM_CMD"
+	echo "Args: $BENCHMARK_ARGS"
+	echo "Classpath: $CLASSPATH"
+       /usr/bin/time -o run.timeResults -f "%e:%U:%S:%P" $ACTUAL_JVM_CMD `cat mainClass` $BENCHMARK_ARGS
+else
+    /usr/bin/time -o run.timeResults -f "%e:%U:%S:%P" $ACTUAL_JVM_CMD `cat mainClass` $BENCHMARK_ARGS &> $EXECUTION_OUTPUT_DIR/$EXECUTION_OUTPUT_FILE
+fi
+ 
+
+# get the execution time
+TIME_RESULTS=$(cat run.timeResults | sed "/mmand/d")
+rm run.timeResults
+
+
+ELAPSED_TIME=$(echo $TIME_RESULTS | cut -f1 -d:)
+USER_TIME=$(echo $TIME_RESULTS | cut -f2 -d:)
+SYSTEM_TIME=$(echo $TIME_RESULTS | cut -f3 -d:)
+CPU_TIME=$(echo $TIME_RESULTS | cut -f4 -d:)
+EXECUTION_TIME=$(echo "$USER_TIME + $SYSTEM_TIME" | bc)
+
+
+
+# verify that the benchmark ran ok.
+if [ $GENERATE_CORRECT_OUTPUT ]; then
+    rm -rf $CORRECT_OUTPUT_DIR
+    cp -r $EXECUTION_OUTPUT_DIR $CORRECT_OUTPUT_DIR 
+    echo Correct Output Successfully Generated.
+else
+    if [  "`diff --exclude timestamp -r $CORRECT_OUTPUT_DIR  $EXECUTION_OUTPUT_DIR `" ]; then
+	echo "failure:$EXECUTION_TIME:$ELAPSED_TIME:$CPU_TIME"   
+    else
+	echo "success:$EXECUTION_TIME:$ELAPSED_TIME:$CPU_TIME"   
+    fi
+fi
+
+if [ ! $EXECUTION_OUTPUT_NODELETE ]; then
+    rm -rf $EXECUTION_OUTPUT_DIR
+fi
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+User-agent: JSpiderUnitTest
+Disallow: /testcases/specific/robotstxt/disallowedFolder2
+Disallow: /testcases/specific/robotstxt/disallowedResource2.html
+
+User-agent: JSpider
+Disallow: /testcases/specific/robotstxt/disallowedFolder1
+Disallow: /testcases/specific/robotstxt/disallowedResource1.html
+

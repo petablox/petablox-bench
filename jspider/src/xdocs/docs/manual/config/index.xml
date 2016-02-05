@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<document>
+ <properties>
+  <title>JSpider - User Manual - Configuration</title>
+  <author email="gunther@javacoding.net">Gunther Van Roey</author>
+ </properties>
+
+<body>
+
+<section name="Configuring JSpider">
+  <p>
+  JSpider is higly flexible and adaptable, which requires a lot of configuration.
+  This section is a reference for every piece of configuration that can be done with JSpider.
+  </p>
+  <p>
+    //TODO: This section is still to be expanded.  Only a few configuration issues are explained for the moment,
+    extra information has to be added.
+  </p>
+
+  <subsection name="Environment Configuration">
+    <p>
+    This type of configuration is used to tell JSpider in what type of environment (network,...) it is operating,
+    and how it should handle this.  This type of configuration is done in the 'jspider.properties' file, which can
+    be found under the /conf/{yourconfig} folder
+    </p>
+    <p>
+    <table>
+      <th>Name</th><th>Description</th>
+      <tr>
+        <td><a href="./proxy.html">Proxy/Firewall Configuration</a></td>
+        <td>
+         How to configure JSpider to use a proxy server to reach some destination hosts.
+        </td>
+      </tr>
+      <tr>
+        <td><a href="./threading.html">Threading Configuration</a></td>
+        <td>
+        Determine the allocation of threads on certain types of task and monitoring of the load put on these thread pool
+        </td>
+      </tr>
+    </table>
+    </p>
+  </subsection>
+
+    <subsection name="Per-site Configuration">
+      <p>
+      This type of configuration is done on a per-site basis.  Under the /conf subdirectory, you'll find
+      different properties files for different configurations.
+      </p>
+      <p>
+      The sites.properties file contains the reference towards these configurations.
+      </p>
+      <p>
+      <table>
+        <th>Name</th><th>Description</th>
+        <tr>
+          <td><a href="./sites.html">sites.properties</a></td>
+          <td>
+           Reference for the configuration of sites.properties, the configuration file that
+           assigns a specific per-site configuration to a website.
+          </td>
+        </tr>
+          <tr>
+            <td><a href="./site-props.html">Site configuration</a></td>
+            <td>
+             Explains how to create a specific configuration for a certain site.
+            </td>
+          </tr>
+      </table>
+      </p>
+    </subsection>
+
+    <subsection name="Plugin Configuration">
+        <p>
+            TODO: To be done
+        </p>
+    </subsection>
+
+</section>
+</body>
+</document>
+

@@ -1,0 +1,5 @@
+public interface ca.mcgill.sable.soot.jimple.JimpleValueSwitch extends java.lang.Object implements ca.mcgill.sable.soot.jimple.ConstantSwitch, ca.mcgill.sable.soot.jimple.ExprSwitch, ca.mcgill.sable.soot.jimple.RefSwitch
+{
+
+    public abstract void caseLocal(ca.mcgill.sable.soot.jimple.Local);
+}

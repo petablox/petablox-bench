@@ -1,0 +1,12 @@
+class ca.mcgill.sable.soot.jimple.TypeResolver$TypeException extends java.lang.RuntimeException
+{
+
+    void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeException r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

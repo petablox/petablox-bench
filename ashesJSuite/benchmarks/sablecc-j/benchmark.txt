@@ -1,0 +1,10 @@
+Benchmark: sablecc-j
+
+Author: Etienne Gagnon (www.sable.mcgill.ca/sablecc) 
+
+Packaged by: Raja Vallee-Rai (rvalleerai@sable.mcgill.ca)
+Packaged on: June 1, 1999
+
+Description: This is a frozen version of the Sable Compiler Compiler.  The given
+run produces the sablecc files (parser, lexer, etc.) for an preliminary 
+version of the jimple grammar.

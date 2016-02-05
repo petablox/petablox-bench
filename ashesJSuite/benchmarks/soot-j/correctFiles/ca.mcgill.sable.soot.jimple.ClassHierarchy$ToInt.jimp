@@ -1,0 +1,87 @@
+class ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt extends ca.mcgill.sable.soot.TypeSwitch
+{
+    private final ca.mcgill.sable.soot.jimple.ClassHierarchy this$0;
+    private ca.mcgill.sable.soot.Type result;
+    private ca.mcgill.sable.soot.Type intType;
+
+    void <init>(ca.mcgill.sable.soot.jimple.ClassHierarchy)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r0;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        r0.this$0 = r1;
+        r0.intType = ca.mcgill.sable.soot.IntType.v();
+        return;
+    }
+
+    ca.mcgill.sable.soot.Type toInt(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r0;
+        ca.mcgill.sable.soot.Type r1, r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r1.apply(r0);
+        r2 = r0.result;
+        return r2;
+    }
+
+    public void caseBooleanType(ca.mcgill.sable.soot.BooleanType)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r0;
+        ca.mcgill.sable.soot.BooleanType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r0.intType;
+        return;
+    }
+
+    public void caseByteType(ca.mcgill.sable.soot.ByteType)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r0;
+        ca.mcgill.sable.soot.ByteType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r0.intType;
+        return;
+    }
+
+    public void caseShortType(ca.mcgill.sable.soot.ShortType)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r0;
+        ca.mcgill.sable.soot.ShortType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r0.intType;
+        return;
+    }
+
+    public void caseCharType(ca.mcgill.sable.soot.CharType)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r0;
+        ca.mcgill.sable.soot.CharType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r0.intType;
+        return;
+    }
+
+    public void defaultCase(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$ToInt r0;
+        ca.mcgill.sable.soot.Type r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.result = r1;
+        return;
+    }
+}

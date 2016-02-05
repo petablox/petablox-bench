@@ -1,0 +1,305 @@
+Schroeder 0.2
+File Format Converter How-To
+
+This is not really documentation, but it's a start.
+Questions are expected and welcome. ;-)
+
+PLEASE NOTE that this is an early development release.
+The plug-in framework has been evolving for about a
+month and is approaching some sort of stability; but
+it's still pretty likely to change. Please send me
+your comments.
+
+David Veldhuizen <david@interlog.com>
+
+
+--
+File format conversion plug-ins for Schroeder extend the
+abstract base class schroeder.SoundFileAdapter (see
+source/schroeder/SoundFileAdapter.java). Here's the
+relevant part of the file:
+
+public abstract class SoundFileAdapter {
+	public abstract String getFileExtension();
+	public abstract String getDescription();
+	public abstract SoundModel createSoundFromFile();
+	public abstract boolean createFileFromSound( SoundModel model );
+	
+	public String getInfo() {
+		return( null );
+	}
+
+	...
+}
+
+
+Basically, a subclass overrides the first two methods
+to declare the type of file that it is prepared to
+read and interpret. The file extension and description
+are displayed to the user in the 'Open' and 'Save As'
+dialog boxes as filter options.
+
+Return a non-null String from the getInfo() method if
+you want the About Schroeder... window to include your
+contact information, a credit, description, or whatever.
+
+I'll use the TextFileAdapter plug-in as an example here.
+(See source/adapters/TextFileAdapter.java.) It's not very
+relevant to the conversion of binary sound file formats,
+but has the advantage of isolating the sound model
+manipulation code from the messy parsers. (For the messy
+versions, see source/adapters/AUFileAdapter.java and
+WAVEFileAdapter.java, and source/schroeder/AIFFFileAdapter.java.)
+
+
+public class TextFileAdapter extends SoundFileAdapter {
+	public String getFileExtension() {
+		return( "txt" ); // PENDING "csv"
+	}
+	
+	public String getDescription() {
+		return( "Text files" );
+	}
+
+	...
+}
+
+
+SoundFileAdapters retain an association with a particular
+File object. When a user attempts to open a file, the system
+attempts to obtain an instance of a SoundFileAdapter whose
+declared extension matches the file's. If one is found, that
+adapter is bound to the File:
+
+public abstract class SoundFileAdapter {
+	...
+	
+	public File getFile() {
+		return( f_ );
+	}
+
+	public void setFile( File f ) {
+		f_ = f;
+	}
+	
+	...
+	
+	// FILE
+	protected File f_ = null;
+}
+
+
+The adapter is then asked to interpret the file and return
+a valid SoundModel, via the public createSoundFromFile()
+method. When saving, the createFileFromSound( SoundModel )
+method is called. In both cases, the file in question is f_.
+
+
+The SoundModel class (source/schroeder/SoundModel.java) is
+a wrapper for a byte array that contains valid AIFF data.
+The array's format is actually a convenient subset of the
+range of valid AIFF structures. It's worth checking out the
+source file, but here's a quick walkthrough of how TextFileAdapter
+converts a delimited text file to a playable sound. I've
+interrupted the source with commentary.
+
+
+	public SoundModel createSoundFromFile() {
+ 		SoundModel model = null;
+ 		
+		// ask about interpretation; sample rate,
+		// number of channels (bit depth is auto)
+		boolean canceled = false;
+		JDialog dialog = new JDialog(
+			MainFrame.instance(),
+			"Convert Text File",
+			true
+		);
+		DataInterpretationPanel pane = new DataInterpretationPanel( dialog );
+		dialog.getContentPane().add( pane );
+		dialog.pack();
+		dialog.setLocationRelativeTo( MainFrame.instance() );			
+		dialog.show();
+		
+		canceled = pane.isCanceled();
+		if( canceled ) {
+			return( null );
+		}
+		
+		int numChannels = pane.getNumChannels();
+		int sampleRate = pane.getSampleRate();
+
+Since the text file is to be interpreted as raw sample data,
+we need to place it in a context; sample rate, sample size,
+and number of interleaved channels. The sample size will be
+determined by the range of samples in the file; we ask the
+user about the other two.
+
+File formats that are designed to contain sound data generally
+provide this information in a header of some sort, and the
+above will not be necessary.
+
+		
+		InputStream in = null;
+		
+		try {
+			// read file into memory
+		  	in = new FileInputStream( f_ );
+		  	long length = f_.length();
+		  	if( length > Integer.MAX_VALUE ) {
+		  		throw new Exception( "File length is greater than Integer.MAX_VALUE" );
+		  	}
+		  	
+		  	byte[] buffer = new byte[ (int) length ];
+		  	in.read( buffer );
+		  	in.close();
+		  	
+		  	String data = new String( buffer );
+
+
+Now that we have the entire contents of the delimited text file
+in a String in memory, we can iterate over the delimited tokens,
+parse them as integers, and interpret the numbers as samples. I
+noted above that the sample size will be determined by the range
+of the samples; we need to know the size before creating the
+SoundModel we'll populate and return. So we make a preliminary
+pass over the data to find the peak value and compute the appropriate
+sample size and count the number of sample frames:
+		  	
+		  	// parse
+			int numSampleFrames = 0;
+			int sampleSize = 8;
+			
+			// find peak
+		  	StringTokenizer st = new StringTokenizer( data );
+			int max = 0;
+			int min = 0;
+			while( st.hasMoreElements() ) {
+				int sample = 0;
+				try {
+					sample = Integer.parseInt( (String) st.nextElement() );
+				}
+				catch( Exception e ) {
+					;
+				}
+				
+				if( max < sample )
+					max = sample;
+				if( min > sample )
+					min = sample;
+				
+				numSampleFrames++;
+			}
+			if( min < 0 ) min = 1 + min;
+			if( max < min ) max = min; 
+			
+			if( max > 8388607 )
+				sampleSize = 32;
+			else if( max > 32767 )
+				sampleSize = 24;
+			else if( max > 127 )
+				sampleSize = 16;
+			
+			numSampleFrames /= numChannels;
+
+
+The basic constructor for SoundModel takes arguments for the
+number of channels, the number of sample frames, the sample
+size, and sample rate. Most of the above code was written to
+establish those values; now we can create the model.
+
+			
+			model = new SoundModel(
+				numChannels,
+				numSampleFrames,
+				sampleSize,
+				sampleRate
+			);
+			model.setFileAdapter( this );
+
+Note the last line. It's important to bind the model to this
+adapter, otherwise the Save operation won't work.
+
+A SoundModel created with this constructor contains the
+specified number of samples, all zero. Here, we iterate over
+the samples again, but this time we can populate the model
+with the sample values using the
+setSample( int ch, int offset, int sample ) method.
+
+			
+		  	st = new StringTokenizer( data );
+			for( int idx = 0; idx<numSampleFrames; idx++ ) {
+				for( int ch=0; ch<numChannels; ch++ ) {
+					int sample = 0;
+					
+					try {
+						String token = (String) st.nextElement();
+						sample = Integer.parseInt( token );
+					}
+					catch( Exception e ) {
+						;
+					}
+					
+					model.setSample( ch, idx, sample );
+				}
+			}
+		}
+		catch( Exception e ) {
+			if( schroeder.Constants.DEBUG ) {
+				e.printStackTrace();
+			}
+			
+			// return null if opening failed
+			model = null;
+		}
+		finally {
+			try {
+				in.close();
+			}
+			catch( Exception e ) {
+				;
+			}
+		}
+		
+		return( model );
+	}
+
+
+Writing the model out to a file is simpler, for this file format
+at least. Here's the code:
+
+	public boolean createFileFromSound( SoundModel model ) {
+		boolean success = true;
+		PrintStream out = null;
+		
+		try {
+			// output
+			out = new PrintStream( new FileOutputStream( f_ ) );
+
+			for( int idx = 0; idx<model.getNumSampleFrames(); idx++ ) {
+				for( int ch=0; ch<model.getNumChannels(); ch++ ) {
+					out.print( "" + model.getSample( ch, idx ) + "\t" );
+				}
+				out.println( "" );
+			}
+
+			out.flush();
+		}
+		catch( Exception e ) {
+			success = false;
+			if( schroeder.Constants.DEBUG ) {
+				e.printStackTrace();
+			}
+		}
+		finally {
+			try {
+				if( out != null )
+					out.close();
+			}
+			catch( Exception e ) {
+				;
+			}
+		}		
+		
+		return( success );
+	}

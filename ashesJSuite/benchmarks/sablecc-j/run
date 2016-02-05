@@ -1,0 +1,42 @@
+#!/bin/bash
+export CLASSPATH=classes
+
+if [ $ASHES_CLASSPATH_EXT ]
+then
+    CLASSPATH=$CLASSPATH$ASHES_CLASSPATH_EXT
+fi
+
+ASHES_INITIAL_HEAP=64
+ASHES_MAXIMUM_HEAP=64
+
+if [ ! "$ASHES_JVM_CMD" ]
+then
+   ASHES_JVM_CMD='java -ms${ASHES_INITIAL_HEAP}m -mx${ASHES_MAXIMUM_HEAP}m'
+fi
+
+ACTUAL_JVM_CMD=`eval echo $ASHES_JVM_CMD`
+ 
+/usr/bin/time -o run.timeResults -f "%e:%U:%S:%P" $ACTUAL_JVM_CMD SableCC jimple.scc >&/dev/null
+mv run.timeResults run.tmp ; cat run.tmp | sed "/mmand/d" >run.timeResults ; rm -f run.tmp
+
+cat run.timeResults | cut -f1 -d: >run.elapsedTime
+cat run.timeResults | cut -f2 -d: >run.userTime
+cat run.timeResults | cut -f3 -d: >run.systemTime
+cat run.timeResults | cut -f4 -d: >run.cpuTime
+
+echo "`cat run.userTime` + `cat run.systemTime`" | bc >run.executionTime
+
+RESULT=failure
+
+if [ -d ca ]
+then
+    if [ ! "`diff -r ca correctCa`" ]
+    then
+        RESULT=success
+    fi 
+fi
+
+echo "${RESULT}:`cat run.executionTime`:`cat run.elapsedTime`:`cat run.cpuTime`"
+
+rm -f run.executionTime run.cpuTime run.elapsedTime run.userTime run.systemTime run.output run.timeResults
+rm -rf ca >&/dev/null

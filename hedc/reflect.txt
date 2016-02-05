@@ -1,0 +1,13 @@
+# resolvedClsForNameSites
+2!<clinit>:()V@java.net.ProxySelector->sun.net.spi.DefaultProxySelector
+43!loadImpl:(Ljava/lang/String;)Ljava/lang/Object;@java.net.InetAddress->java.net.Inet6AddressImpl
+175!getURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@java.net.URL->sun.net.www.protocol.http.Handler
+# resolvedObjNewInstSites
+21!<clinit>:()V@java.net.ProxySelector->sun.net.spi.DefaultProxySelector
+42!newBundle:(Ljava/lang/String;Ljava/util/Locale;Ljava/lang/String;Ljava/lang/ClassLoader;Z)Ljava/util/ResourceBundle;@java.util.ResourceBundle$Control->sun.util.resources.TimeZoneNames,sun.util.resources.TimeZoneNames_en
+46!loadImpl:(Ljava/lang/String;)Ljava/lang/Object;@java.net.InetAddress->java.net.Inet6AddressImpl
+211!getURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@java.net.URL->sun.net.www.protocol.http.Handler
+# resolvedConNewInstSites
+118!newInstance0:()Ljava/lang/Object;@java.lang.Class->sun.util.resources.TimeZoneNames,sun.util.resources.TimeZoneNames_en,sun.net.www.protocol.http.Handler,sun.net.spi.DefaultProxySelector,java.net.Inet6AddressImpl
+# resolvedAryNewInstSites
+22!copyOf:([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;@java.util.Arrays->java.lang.String[],java.lang.Thread[]

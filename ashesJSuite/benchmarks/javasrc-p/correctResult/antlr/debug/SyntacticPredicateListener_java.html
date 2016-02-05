@@ -1,0 +1,29 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: null');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: null';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>public interface <a class="classDef" name=SyntacticPredicateListener href=SyntacticPredicateListener_java_ref.html#SyntacticPredicateListener>SyntacticPredicateListener</a> extends <a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a> {
+<a name=4 class="linenum">4	</SPAN>
+<a name=5 class="linenum">5	</SPAN>
+<a name=6 class="linenum">6	</SPAN>	public void <a class="methodDef" name=syntacticPredicateFailed(SyntacticPredicateEvent) href=SyntacticPredicateListener_java_ref.html#syntacticPredicateFailed(SyntacticPredicateEvent)>syntacticPredicateFailed</a>(<a class="classRef" href=SyntacticPredicateEvent_java.html#SyntacticPredicateEvent>SyntacticPredicateEvent</a> e);
+<a name=7 class="linenum">7	</SPAN>	public void <a class="methodDef" name=syntacticPredicateStarted(SyntacticPredicateEvent) href=SyntacticPredicateListener_java_ref.html#syntacticPredicateStarted(SyntacticPredicateEvent)>syntacticPredicateStarted</a>(<a class="classRef" href=SyntacticPredicateEvent_java.html#SyntacticPredicateEvent>SyntacticPredicateEvent</a> e);
+<a name=8 class="linenum">8	</SPAN>	public void <a class="methodDef" name=syntacticPredicateSucceeded(SyntacticPredicateEvent) href=SyntacticPredicateListener_java_ref.html#syntacticPredicateSucceeded(SyntacticPredicateEvent)>syntacticPredicateSucceeded</a>(<a class="classRef" href=SyntacticPredicateEvent_java.html#SyntacticPredicateEvent>SyntacticPredicateEvent</a> e);
+<a name=9 class="linenum">9	</SPAN>}
+<a name=10 class="linenum">10	</SPAN></pre>

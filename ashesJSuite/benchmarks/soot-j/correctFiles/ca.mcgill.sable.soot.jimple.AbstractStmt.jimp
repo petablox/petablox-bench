@@ -1,0 +1,190 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractStmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Stmt
+{
+    ca.mcgill.sable.util.Map allMapToUnnamed;
+    static ca.mcgill.sable.util.List emptyList;
+    ca.mcgill.sable.util.List boxesPointingToThis;
+    ca.mcgill.sable.util.List valueBoxes;
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract ca.mcgill.sable.util.List getDefBoxes();
+
+    public abstract ca.mcgill.sable.util.List getUnitBoxes();
+
+    public ca.mcgill.sable.util.List getBoxesPointingToThis()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = r0.boxesPointingToThis;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseAndDefBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.util.List r2, r3, r4, r5, r6, r7, r8;
+        int i0, i1;
+
+        r0 := @this;
+        r2 = r0.valueBoxes;
+        if r2 != null goto label0;
+
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r0.valueBoxes = r1;
+        r3 = r0.valueBoxes;
+        r4 = r0.getUseBoxes();
+        i0 = r3.addAll(r4);
+        r5 = r0.valueBoxes;
+        r6 = r0.getDefBoxes();
+        i1 = r5.addAll(r6);
+        r7 = r0.valueBoxes;
+        r0.valueBoxes = ca.mcgill.sable.util.Collections.unmodifiableList(r7);
+
+     label0:
+        r8 = r0.valueBoxes;
+        return r8;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.Switch r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        return;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2;
+
+        r0 := @this;
+        r1 = r0.allMapToUnnamed;
+        r2 = r0.toString(1, r1, "");
+        return r2;
+    }
+
+    public java.lang.String toBriefString(ca.mcgill.sable.util.Map)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.toString(1, r1, "");
+        return r2;
+    }
+
+    public java.lang.String toBriefString(java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        java.lang.String r1, r3;
+        ca.mcgill.sable.util.Map r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.allMapToUnnamed;
+        r3 = r0.toString(1, r2, r1);
+        return r3;
+    }
+
+    public java.lang.String toBriefString(ca.mcgill.sable.util.Map, java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2, r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = r0.toString(1, r1, r2);
+        return r3;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2;
+
+        r0 := @this;
+        r1 = r0.allMapToUnnamed;
+        r2 = r0.toString(0, r1, "");
+        return r2;
+    }
+
+    public java.lang.String toString(ca.mcgill.sable.util.Map)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.toString(0, r1, "");
+        return r2;
+    }
+
+    public java.lang.String toString(java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        java.lang.String r1, r3;
+        ca.mcgill.sable.util.Map r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.allMapToUnnamed;
+        r3 = r0.toString(0, r2, r1);
+        return r3;
+    }
+
+    public java.lang.String toString(ca.mcgill.sable.util.Map, java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2, r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = r0.toString(0, r1, r2);
+        return r3;
+    }
+
+    protected abstract java.lang.String toString(boolean, ca.mcgill.sable.util.Map, java.lang.String);
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt r0;
+        ca.mcgill.sable.soot.jimple.AbstractStmt$AllMapTo r1;
+        ca.mcgill.sable.util.ArrayList r2;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        r1 = new ca.mcgill.sable.soot.jimple.AbstractStmt$AllMapTo;
+        specialinvoke r1.<init>(r0, "<unnamed>");
+        r0.allMapToUnnamed = r1;
+        r2 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r2.<init>();
+        r0.boxesPointingToThis = r2;
+        return;
+    }
+
+    static void <clinit>()
+    {
+        ca.mcgill.sable.util.ArrayList r0;
+
+        r0 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r0.<init>();
+        ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList = ca.mcgill.sable.util.Collections.unmodifiableList(r0);
+        return;
+    }
+}

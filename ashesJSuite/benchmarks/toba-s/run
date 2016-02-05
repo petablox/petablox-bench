@@ -1,0 +1,51 @@
+#!/bin/bash
+
+export CLASSPATH=classes:toTobafy
+
+if [ $ASHES_CLASSPATH_EXT ]
+then
+    CLASSPATH=$CLASSPATH$ASHES_CLASSPATH_EXT
+fi
+
+ASHES_INITIAL_HEAP=64
+ASHES_MAXIMUM_HEAP=64
+
+if [ ! "$ASHES_JVM_CMD" ]
+then
+   ASHES_JVM_CMD='java -ms${ASHES_INITIAL_HEAP}m -mx${ASHES_MAXIMUM_HEAP}m'
+fi
+
+ACTUAL_JVM_CMD=`eval echo $ASHES_JVM_CMD`
+
+if [ ! $ASHES_JDK_CLASSES ] 
+then
+   echo "Please set the ASHES_JDK_CLASSES environment variable to the "
+   echo "path of the JDK classes."
+   exit
+fi
+
+CLASSPATH=$CLASSPATH:$ASHES_JDK_CLASSES
+
+/usr/bin/time -o run.timeResults -f "%e:%U:%S:%P" $ACTUAL_JVM_CMD toba.translator.Trans `cat listToTobafy` &>/dev/null
+mv run.timeResults run.tmp ; cat run.tmp | sed "/mmand/d" >run.timeResults ; rm -f run.tmp
+
+mkdir outputFiles
+mv *.c outputFiles
+mv *.h outputFiles
+
+cat run.timeResults | cut -f1 -d: >run.elapsedTime
+cat run.timeResults | cut -f2 -d: >run.userTime
+cat run.timeResults | cut -f3 -d: >run.systemTime
+cat run.timeResults | cut -f4 -d: >run.cpuTime
+
+echo "`cat run.userTime` + `cat run.systemTime`" | bc >run.executionTime
+
+if [ ! "`diff -r outputFiles correctFiles`" ]
+then
+    echo "success:`cat run.executionTime`:`cat run.elapsedTime`:`cat run.cpuTime`"
+else 
+    echo "failure:`cat run.executionTime`:`cat run.elapsedTime`:`cat run.cpuTime`"
+fi
+
+rm -f run.executionTime run.cpuTime run.elapsedTime run.userTime run.systemTime run.output run.timeResults
+rm -rf outputFiles

@@ -1,0 +1,75 @@
+public class ca.mcgill.sable.soot.jimple.JNopStmt extends ca.mcgill.sable.soot.jimple.AbstractStmt implements ca.mcgill.sable.soot.jimple.NopStmt
+{
+
+    void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.JNopStmt r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    protected java.lang.String toString(boolean, ca.mcgill.sable.util.Map, java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.JNopStmt r0;
+        int i0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2, r4, r6;
+        java.lang.StringBuffer r3, r5;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 := @parameter2;
+        r3 = new java.lang.StringBuffer;
+        r4 = java.lang.String.valueOf(r2);
+        specialinvoke r3.<init>(r4);
+        r5 = r3.append("nop");
+        r6 = r5.toString();
+        return r6;
+    }
+
+    public ca.mcgill.sable.util.List getDefBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JNopStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JNopStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUnitBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JNopStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.JNopStmt r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.StmtSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.StmtSwitch) r1;
+        r2.caseNopStmt(r0);
+        return;
+    }
+}

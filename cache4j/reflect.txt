@@ -1,0 +1,7 @@
+# resolvedClsForNameSites
+47!newInstances:(Ljava/util/List;)Ljava/util/List;@net.sf.cache4j.test.Tester->net.sf.cache4j.test.SynchronizedCacheTest
+# resolvedObjNewInstSites
+50!newInstances:(Ljava/util/List;)Ljava/util/List;@net.sf.cache4j.test.Tester->net.sf.cache4j.test.SynchronizedCacheTest
+# resolvedConNewInstSites
+118!newInstance0:()Ljava/lang/Object;@java.lang.Class->net.sf.cache4j.test.SynchronizedCacheTest
+# resolvedAryNewInstSites

@@ -1,0 +1,123 @@
+public class ca.mcgill.sable.soot.jimple.AbstractNegExpr extends ca.mcgill.sable.soot.jimple.AbstractUnopExpr implements ca.mcgill.sable.soot.jimple.NegExpr
+{
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNegExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>(r1);
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNegExpr r0;
+        java.lang.StringBuffer r1, r5;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        java.lang.String r4, r6;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("-");
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = r3.toString();
+        r5 = r1.append(r4);
+        r6 = r5.toString();
+        return r6;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNegExpr r0;
+        java.lang.StringBuffer r1, r6;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.soot.ToBriefString r4;
+        java.lang.String r5, r7;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("-");
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = (ca.mcgill.sable.soot.ToBriefString) r3;
+        r5 = r4.toBriefString();
+        r6 = r1.append(r5);
+        r7 = r6.toString();
+        return r7;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNegExpr r0;
+        ca.mcgill.sable.soot.IntType r1, r5;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.soot.Type r4, r6, r9, r12;
+        int i0, i1, i2, i3;
+        ca.mcgill.sable.soot.LongType r7, r8;
+        ca.mcgill.sable.soot.DoubleType r10, r11;
+        ca.mcgill.sable.soot.FloatType r13, r14;
+        ca.mcgill.sable.soot.UnknownType r15;
+
+        r0 := @this;
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = r3.getType();
+        r1 = ca.mcgill.sable.soot.IntType.v();
+        i0 = r4.equals(r1);
+        if i0 == 0 goto label0;
+
+        r5 = ca.mcgill.sable.soot.IntType.v();
+        return r5;
+
+     label0:
+        r6 = r3.getType();
+        r7 = ca.mcgill.sable.soot.LongType.v();
+        i1 = r6.equals(r7);
+        if i1 == 0 goto label1;
+
+        r8 = ca.mcgill.sable.soot.LongType.v();
+        return r8;
+
+     label1:
+        r9 = r3.getType();
+        r10 = ca.mcgill.sable.soot.DoubleType.v();
+        i2 = r9.equals(r10);
+        if i2 == 0 goto label2;
+
+        r11 = ca.mcgill.sable.soot.DoubleType.v();
+        return r11;
+
+     label2:
+        r12 = r3.getType();
+        r13 = ca.mcgill.sable.soot.FloatType.v();
+        i3 = r12.equals(r13);
+        if i3 == 0 goto label3;
+
+        r14 = ca.mcgill.sable.soot.FloatType.v();
+        return r14;
+
+     label3:
+        r15 = ca.mcgill.sable.soot.UnknownType.v();
+        return r15;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNegExpr r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ExprSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ExprSwitch) r1;
+        r2.caseNegExpr(r0);
+        return;
+    }
+}

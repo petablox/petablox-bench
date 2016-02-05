@@ -1,0 +1,170 @@
+public class ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.InstanceOfExpr
+{
+    ca.mcgill.sable.soot.jimple.ValueBox opBox;
+    ca.mcgill.sable.soot.Type checkType;
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox, ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.Type r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.opBox = r1;
+        r0.checkType = r2;
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        java.lang.StringBuffer r1, r6, r9;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        java.lang.String r4, r5, r8, r10;
+        ca.mcgill.sable.soot.Type r7;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = r3.toString();
+        r5 = java.lang.String.valueOf(r4);
+        specialinvoke r1.<init>(r5);
+        r6 = r1.append(" instanceof ");
+        r7 = r0.checkType;
+        r8 = r7.toString();
+        r9 = r6.append(r8);
+        r10 = r9.toString();
+        return r10;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        java.lang.StringBuffer r1, r7, r10;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.soot.ToBriefString r4;
+        java.lang.String r5, r6, r9, r11;
+        ca.mcgill.sable.soot.Type r8;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = (ca.mcgill.sable.soot.ToBriefString) r3;
+        r5 = r4.toBriefString();
+        r6 = java.lang.String.valueOf(r5);
+        specialinvoke r1.<init>(r6);
+        r7 = r1.append(" instanceof ");
+        r8 = r0.checkType;
+        r9 = r8.toString();
+        r10 = r7.append(r9);
+        r11 = r10.toString();
+        return r11;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getOp()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.opBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public void setOp(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.opBox;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getOpBox()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.opBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.util.List r4;
+        int i0, i1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i0 = r1.addAll(r4);
+        r5 = r0.opBox;
+        i1 = r1.add(r5);
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.soot.IntType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.IntType.v();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getCheckType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.soot.Type r1;
+
+        r0 := @this;
+        r1 = r0.checkType;
+        return r1;
+    }
+
+    public void setCheckType(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.soot.Type r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.checkType = r1;
+        return;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ExprSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ExprSwitch) r1;
+        r2.caseInstanceOfExpr(r0);
+        return;
+    }
+}

@@ -1,0 +1,172 @@
+final class ca.mcgill.sable.soot.jimple.JasminClass$29 extends ca.mcgill.sable.soot.TypeSwitch
+{
+    private final ca.mcgill.sable.soot.jimple.JasminClass this$0;
+
+    public void caseDoubleType(ca.mcgill.sable.soot.DoubleType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.DoubleType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r3, r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("dcmpg", -3);
+        r3 = r0.this$0;
+        r3.emit("iconst_0", 1);
+        r4 = r0.this$0;
+        r4.emitBooleanBranch("if_icmpeq");
+        return;
+    }
+
+    public void caseFloatType(ca.mcgill.sable.soot.FloatType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.FloatType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r3, r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("fcmpg", -3);
+        r3 = r0.this$0;
+        r3.emit("iconst_0", 1);
+        r4 = r0.this$0;
+        r4.emitBooleanBranch("if_icmpeq");
+        return;
+    }
+
+    private void handleIntCase()
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.jimple.JasminClass r1;
+
+        r0 := @this;
+        r1 = r0.this$0;
+        r1.emit("if_icmpeq", -2);
+        return;
+    }
+
+    public void caseIntType(ca.mcgill.sable.soot.IntType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.IntType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.handleIntCase();
+        return;
+    }
+
+    public void caseBooleanType(ca.mcgill.sable.soot.BooleanType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.BooleanType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.handleIntCase();
+        return;
+    }
+
+    public void caseShortType(ca.mcgill.sable.soot.ShortType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.ShortType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.handleIntCase();
+        return;
+    }
+
+    public void caseCharType(ca.mcgill.sable.soot.CharType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.CharType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.handleIntCase();
+        return;
+    }
+
+    public void caseByteType(ca.mcgill.sable.soot.ByteType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.ByteType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.handleIntCase();
+        return;
+    }
+
+    public void caseLongType(ca.mcgill.sable.soot.LongType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.LongType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r3, r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("lcmp", -3);
+        r3 = r0.this$0;
+        r3.emit("iconst_0", 1);
+        r4 = r0.this$0;
+        r4.emitBooleanBranch("if_icmpeq");
+        return;
+    }
+
+    public void caseArrayType(ca.mcgill.sable.soot.ArrayType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.ArrayType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emitBooleanBranch("if_acmpeq");
+        return;
+    }
+
+    public void casbeRefType(ca.mcgill.sable.soot.RefType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.RefType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emitBooleanBranch("if_acmpeq");
+        return;
+    }
+
+    public void defaultCase(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.Type r1;
+        java.lang.RuntimeException r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new java.lang.RuntimeException;
+        specialinvoke r2.<init>("invalid type");
+        throw r2;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.JasminClass)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$29 r0;
+        ca.mcgill.sable.soot.jimple.JasminClass r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        return;
+    }
+}

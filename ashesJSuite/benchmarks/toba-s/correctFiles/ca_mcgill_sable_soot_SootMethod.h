@@ -1,0 +1,170 @@
+/*  ca_mcgill_sable_soot_SootMethod.h -- from Java class ca.mcgill.sable.soot.SootMethod  */
+/*  created by Toba  */
+
+#ifndef h_ca_mcgill_sable_soot_SootMethod
+#define h_ca_mcgill_sable_soot_SootMethod
+
+#define init_ca_mcgill_sable_soot_SootMethod() (void)0
+
+Void	init_SLT_OyjsS(Object,Object,Object,Object);
+Void	init_SLTi_1VuWQ(Object,Object,Object,Object,Int);
+Void	setSource_Cm_wMqLc(Object,Object,Object);
+Object	getName__iW73P(Object);
+Object	getDeclaringClass__ywcIy(Object);
+Boolean	isDeclared__7aapj(Object);
+Void	setName_S_iTaNM(Object,Object);
+Int	getModifiers__KRAh8(Object);
+Void	setModifiers_i_24FIg(Object,Int);
+Object	getReturnType__sYISd(Object);
+Void	setReturnType_T_qy6Ic(Object,Object);
+Int	getParameterCount__2n0Xi(Object);
+Object	getParameterType_i_cz4Pq(Object,Int);
+Object	getParameterTypes__F9alY(Object);
+Boolean	isBodyStored_B_c7SpM(Object,Object);
+Object	getBody_B_2pFZ5(Object,Object);
+Void	storeBody_BB_1xfem(Object,Object,Object);
+Void	addException_S_tQIEX(Object,Object);
+Void	removeException_S_UD3Kc(Object,Object);
+Boolean	throwsException_S_3imYU(Object,Object);
+Object	getExceptions__tTHxv(Object);
+Void	setParameterTypes_L_1QivW(Object,Object);
+Boolean	isStatic__RVPb4(Object);
+Object	getSignature__fIDMx(Object);
+Object	toString__bgOEG(Object);
+Object	getDeclaration__9dYAZ(Object);
+
+struct mt_ca_mcgill_sable_soot_SootMethod {
+    struct {TobaMethodInvokeType itype;Void(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} init__AAyKx;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} clone__dslwm;
+    struct {TobaMethodInvokeType itype;Boolean(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} equals_O_Ba6e0;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} finalize__UKxhs;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getClass__zh19H;
+    struct {TobaMethodInvokeType itype;Int(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} hashCode__8wJNW;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} notify__ne4bk;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} notifyAll__iTnlk;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} toString__bgOEG;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} wait__Zlr2b;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Long);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} wait_l_1Iito;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Long,Int);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} wait_li_07Ea2;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object,Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} init_SLT_OyjsS;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object,Object,Object,Int);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} init_SLTi_1VuWQ;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} setSource_Cm_wMqLc;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getName__iW73P;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getDeclaringClass__ywcIy;
+    struct {TobaMethodInvokeType itype;Boolean(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} isDeclared__7aapj;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} setName_S_iTaNM;
+    struct {TobaMethodInvokeType itype;Int(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getModifiers__KRAh8;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Int);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} setModifiers_i_24FIg;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getReturnType__sYISd;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} setReturnType_T_qy6Ic;
+    struct {TobaMethodInvokeType itype;Int(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getParameterCount__2n0Xi;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object,Int);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getParameterType_i_cz4Pq;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getParameterTypes__F9alY;
+    struct {TobaMethodInvokeType itype;Boolean(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} isBodyStored_B_c7SpM;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getBody_B_2pFZ5;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} storeBody_BB_1xfem;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} addException_S_tQIEX;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} removeException_S_UD3Kc;
+    struct {TobaMethodInvokeType itype;Boolean(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} throwsException_S_3imYU;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getExceptions__tTHxv;
+    struct {TobaMethodInvokeType itype;Void(*f)(Object,Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} setParameterTypes_L_1QivW;
+    struct {TobaMethodInvokeType itype;Boolean(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} isStatic__RVPb4;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getSignature__fIDMx;
+    struct {TobaMethodInvokeType itype;Object(*f)(Object);
+	const Char *name_chars;int name_len;const Char *sig_chars;int sig_len;
+	int localp;int access;int classfilePos;Class *xlist;} getDeclaration__9dYAZ;
+};
+
+extern struct cl_ca_mcgill_sable_soot_SootMethod {
+    struct class C;
+    struct mt_ca_mcgill_sable_soot_SootMethod M;
+} cl_ca_mcgill_sable_soot_SootMethod;
+
+struct in_ca_mcgill_sable_soot_SootMethod {
+    struct cl_ca_mcgill_sable_soot_SootMethod *class;
+    struct monitor *monitor;
+    Object name;
+    Object parameterTypes;
+    Object returnType;
+    Boolean isDeclared;
+    Object declaringClass;
+    Int modifiers;
+    Object exceptions;
+    Object repToBody;
+    Object coffiClass;
+    Object coffiMethod;
+};
+
+#endif /* h_ca_mcgill_sable_soot_SootMethod */

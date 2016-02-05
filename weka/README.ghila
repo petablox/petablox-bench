@@ -1,0 +1,4 @@
+For compilation, need to execute:
+
+ant compile
+ant compile_tests

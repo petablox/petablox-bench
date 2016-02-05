@@ -1,0 +1,23 @@
+public interface ca.mcgill.sable.soot.jimple.BinopExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Expr
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getOp1();
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getOp2();
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getOp1Box();
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getOp2Box();
+
+    public abstract void setOp1(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract void setOp2(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract java.lang.String getSymbol();
+
+    public abstract java.lang.String toString();
+
+    public abstract java.lang.String toBriefString();
+}

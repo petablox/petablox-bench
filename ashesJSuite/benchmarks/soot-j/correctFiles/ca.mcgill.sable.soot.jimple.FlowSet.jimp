@@ -1,0 +1,27 @@
+public interface ca.mcgill.sable.soot.jimple.FlowSet extends java.lang.Object
+{
+
+    public abstract int size();
+
+    public abstract java.lang.Object clone();
+
+    public abstract void copy(ca.mcgill.sable.soot.jimple.FlowSet);
+
+    public abstract boolean isEmpty();
+
+    public abstract void clear();
+
+    public abstract ca.mcgill.sable.util.List toList();
+
+    public abstract void add(java.lang.Object, ca.mcgill.sable.soot.jimple.FlowSet);
+
+    public abstract void remove(java.lang.Object, ca.mcgill.sable.soot.jimple.FlowSet);
+
+    public abstract void union(ca.mcgill.sable.soot.jimple.FlowSet, ca.mcgill.sable.soot.jimple.FlowSet);
+
+    public abstract void intersection(ca.mcgill.sable.soot.jimple.FlowSet, ca.mcgill.sable.soot.jimple.FlowSet);
+
+    public abstract void difference(ca.mcgill.sable.soot.jimple.FlowSet, ca.mcgill.sable.soot.jimple.FlowSet);
+
+    public abstract boolean contains(java.lang.Object);
+}

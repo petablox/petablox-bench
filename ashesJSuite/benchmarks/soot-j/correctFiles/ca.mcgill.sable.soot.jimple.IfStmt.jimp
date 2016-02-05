@@ -1,0 +1,15 @@
+public interface ca.mcgill.sable.soot.jimple.IfStmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Stmt
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getCondition();
+
+    public abstract void setCondition(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getConditionBox();
+
+    public abstract ca.mcgill.sable.soot.jimple.Stmt getTarget();
+
+    public abstract void setTarget(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox getTargetBox();
+}

@@ -1,0 +1,89 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractNonStaticInvokeExpr extends ca.mcgill.sable.soot.jimple.AbstractInvokeExpr implements ca.mcgill.sable.soot.jimple.NonStaticInvokeExpr
+{
+    ca.mcgill.sable.soot.jimple.ValueBox baseBox;
+
+    public ca.mcgill.sable.soot.jimple.Value getBase()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNonStaticInvokeExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.baseBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getBaseBox()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNonStaticInvokeExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.baseBox;
+        return r1;
+    }
+
+    public void setBase(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNonStaticInvokeExpr r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.baseBox;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNonStaticInvokeExpr r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        int i0, i1, i2, i3, i4, i5;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5, r7, r11;
+        ca.mcgill.sable.soot.jimple.Value r3, r8;
+        ca.mcgill.sable.util.List r4, r9;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r6, r10, r12;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.baseBox;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i1 = r1.addAll(r4);
+        r5 = r0.baseBox;
+        i2 = r1.add(r5);
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r6 = r0.argBoxes;
+        r7 = r6[i0];
+        r8 = r7.getValue();
+        r9 = r8.getUseBoxes();
+        i3 = r1.addAll(r9);
+        r10 = r0.argBoxes;
+        r11 = r10[i0];
+        i4 = r1.add(r11);
+        i0 = i0 + 1;
+
+     label1:
+        r12 = r0.argBoxes;
+        i5 = r12.length;
+        if i0 < i5 goto label0;
+
+        return r1;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNonStaticInvokeExpr r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

@@ -1,0 +1,10 @@
+Benchmark: schroeder-m
+
+Author: David Veldhuizen (david@interlog.com)
+
+Packaged by: Patrick Lam (plam@sable.mcgill.ca)
+Packaged on: June 4, 1999
+
+Description: This is a copy of Schroeder version 0.2, a sampled audio editing
+application for the Java platform.  It has been equipped with a benchmark
+harness provided by the author.  This run edits a medium-length sound file.

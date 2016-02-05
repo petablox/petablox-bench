@@ -1,0 +1,280 @@
+public class ca.mcgill.sable.soot.jimple.ConstantAndCopyPropagator extends java.lang.Object
+{
+
+    public static void propagateConstantsAndCopies(ca.mcgill.sable.soot.jimple.StmtBody)
+    {
+        ca.mcgill.sable.soot.jimple.StmtBody r0;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25;
+        java.lang.StringBuffer r1, r6, r7, r55, r56, r57, r67, r70, r71, r72, r73, r74, r75, r76, r77;
+        ca.mcgill.sable.soot.jimple.LiveLocals r2;
+        java.io.PrintStream r3, r66;
+        ca.mcgill.sable.soot.SootMethod r4, r68;
+        java.lang.String r5, r8, r58, r69, r78;
+        ca.mcgill.sable.soot.Timer r9, r79;
+        ca.mcgill.sable.soot.jimple.StmtList r10;
+        ca.mcgill.sable.util.HashMap r11;
+        ca.mcgill.sable.util.Iterator r12, r33, r37, r60;
+        java.lang.Object r13, r21, r23, r25, r34, r38, r44, r52, r61, r62;
+        ca.mcgill.sable.soot.jimple.Stmt r14, r35, r63;
+        ca.mcgill.sable.soot.jimple.DefinitionStmt r15, r17, r45, r64;
+        ca.mcgill.sable.soot.jimple.Value r16, r18, r40, r41, r46, r47, r48, r49, r50, r65;
+        ca.mcgill.sable.soot.jimple.Local r19, r42, r51;
+        java.lang.Integer r20, r22, r24, r53;
+        ca.mcgill.sable.soot.jimple.CompleteStmtGraph r26;
+        ca.mcgill.sable.soot.jimple.SimpleLocalDefs r27;
+        ca.mcgill.sable.soot.jimple.LocalDefs r28;
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocals r29;
+        ca.mcgill.sable.soot.jimple.SparseLiveLocals r30;
+        ca.mcgill.sable.soot.jimple.SparseLocalDefs r31;
+        ca.mcgill.sable.soot.jimple.SimpleLocalUses r32;
+        ca.mcgill.sable.util.List r36, r43, r59;
+        ca.mcgill.sable.soot.jimple.ValueBox r39;
+        java.lang.RuntimeException r54;
+
+        r0 := @parameter0;
+        i0 = 0;
+        i1 = 0;
+        i2 = 0;
+        i4 = ca.mcgill.sable.soot.jimple.Main.isVerbose;
+        if i4 == 0 goto label0;
+
+        r3 = java.lang.System.out;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("[");
+        r4 = r0.getMethod();
+        r5 = r4.getName();
+        r6 = r1.append(r5);
+        r7 = r6.append("] Propagating constants and copies...");
+        r8 = r7.toString();
+        r3.println(r8);
+
+     label0:
+        i5 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i5 == 0 goto label1;
+
+        r9 = ca.mcgill.sable.soot.jimple.Main.propagatorTimer;
+        r9.start();
+
+     label1:
+        r10 = r0.getStmtList();
+        r11 = new ca.mcgill.sable.util.HashMap;
+        specialinvoke r11.<init>();
+        r12 = r10.iterator();
+        goto label4;
+
+     label2:
+        r13 = r12.next();
+        r14 = (ca.mcgill.sable.soot.jimple.Stmt) r13;
+        i6 = r14 instanceof ca.mcgill.sable.soot.jimple.DefinitionStmt;
+        if i6 == 0 goto label4;
+
+        r15 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r14;
+        r16 = r15.getLeftOp();
+        i7 = r16 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i7 == 0 goto label4;
+
+        r17 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r14;
+        r18 = r17.getLeftOp();
+        r19 = (ca.mcgill.sable.soot.jimple.Local) r18;
+        i8 = r11.containsKey(r19);
+        if i8 != 0 goto label3;
+
+        r20 = new java.lang.Integer;
+        specialinvoke r20.<init>(1);
+        r21 = r11.put(r19, r20);
+        goto label4;
+
+     label3:
+        r22 = new java.lang.Integer;
+        r23 = r11.get(r19);
+        r24 = (java.lang.Integer) r23;
+        i9 = r24.intValue();
+        i10 = i9 + 1;
+        specialinvoke r22.<init>(i10);
+        r25 = r11.put(r19, r22);
+
+     label4:
+        i11 = r12.hasNext();
+        if i11 != 0 goto label2;
+
+        r26 = new ca.mcgill.sable.soot.jimple.CompleteStmtGraph;
+        specialinvoke r26.<init>(r10);
+        i12 = ca.mcgill.sable.soot.jimple.Main.usePackedDefs;
+        if i12 == 0 goto label5;
+
+        r27 = new ca.mcgill.sable.soot.jimple.SimpleLocalDefs;
+        specialinvoke r27.<init>(r26);
+        r28 = r27;
+        goto label8;
+
+     label5:
+        i13 = ca.mcgill.sable.soot.jimple.Main.usePackedLive;
+        if i13 == 0 goto label6;
+
+        r29 = new ca.mcgill.sable.soot.jimple.SimpleLiveLocals;
+        specialinvoke r29.<init>(r26);
+        r2 = r29;
+        goto label7;
+
+     label6:
+        r30 = new ca.mcgill.sable.soot.jimple.SparseLiveLocals;
+        specialinvoke r30.<init>(r26);
+        r2 = r30;
+
+     label7:
+        r31 = new ca.mcgill.sable.soot.jimple.SparseLocalDefs;
+        specialinvoke r31.<init>(r26, r2);
+        r28 = r31;
+
+     label8:
+        r32 = new ca.mcgill.sable.soot.jimple.SimpleLocalUses;
+        specialinvoke r32.<init>(r26, r28);
+        r33 = r26.pseudoTopologicalOrderIterator();
+        goto label18;
+
+     label9:
+        r34 = r33.next();
+        r35 = (ca.mcgill.sable.soot.jimple.Stmt) r34;
+        r36 = r35.getUseBoxes();
+        r37 = r36.iterator();
+        goto label17;
+
+     label10:
+        r38 = r37.next();
+        r39 = (ca.mcgill.sable.soot.jimple.ValueBox) r38;
+        r40 = r39.getValue();
+        i14 = r40 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i14 == 0 goto label17;
+
+        r41 = r39.getValue();
+        r42 = (ca.mcgill.sable.soot.jimple.Local) r41;
+        r43 = r28.getDefsOfAt(r42, r35);
+        i15 = r43.size();
+        if i15 != 1 goto label17;
+
+        r44 = r43.get(0);
+        r45 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r44;
+        r46 = r45.getRightOp();
+        i16 = r46 instanceof ca.mcgill.sable.soot.jimple.Constant;
+        if i16 == 0 goto label11;
+
+        r47 = r45.getRightOp();
+        i17 = r39.canContainValue(r47);
+        if i17 == 0 goto label17;
+
+        r48 = r45.getRightOp();
+        r39.setValue(r48);
+        i2 = i2 + 1;
+        goto label17;
+
+     label11:
+        r49 = r45.getRightOp();
+        i18 = r49 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i18 == 0 goto label17;
+
+        r50 = r45.getRightOp();
+        r51 = (ca.mcgill.sable.soot.jimple.Local) r50;
+        if r42 == r51 goto label17;
+
+        r52 = r11.get(r51);
+        r53 = (java.lang.Integer) r52;
+        i19 = r53.intValue();
+        if i19 != 0 goto label12;
+
+        r54 = new java.lang.RuntimeException;
+        r55 = new java.lang.StringBuffer;
+        specialinvoke r55.<init>("Variable ");
+        r56 = r55.append(r51);
+        r57 = r56.append(" used without definition!");
+        r58 = r57.toString();
+        specialinvoke r54.<init>(r58);
+        throw r54;
+
+     label12:
+        if i19 != 1 goto label13;
+
+        r39.setValue(r51);
+        i0 = i0 + 1;
+        goto label17;
+
+     label13:
+        r59 = r26.getExtendedBasicBlockPathBetween(r45, r35);
+        if r59 == null goto label17;
+
+        r60 = r59.iterator();
+        r61 = r60.next();
+        i3 = 0;
+        goto label15;
+
+     label14:
+        r62 = r60.next();
+        r63 = (ca.mcgill.sable.soot.jimple.Stmt) r62;
+        if r35 == r63 goto label16;
+
+        i20 = r63 instanceof ca.mcgill.sable.soot.jimple.DefinitionStmt;
+        if i20 == 0 goto label15;
+
+        r64 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r63;
+        r65 = r64.getLeftOp();
+        if r65 != r51 goto label15;
+
+        i3 = 1;
+        goto label16;
+
+     label15:
+        i21 = r60.hasNext();
+        if i21 != 0 goto label14;
+
+     label16:
+        if i3 != 0 goto label17;
+
+        r39.setValue(r51);
+        i1 = i1 + 1;
+
+     label17:
+        i22 = r37.hasNext();
+        if i22 != 0 goto label10;
+
+     label18:
+        i23 = r33.hasNext();
+        if i23 != 0 goto label9;
+
+        i24 = ca.mcgill.sable.soot.jimple.Main.isVerbose;
+        if i24 == 0 goto label19;
+
+        r66 = java.lang.System.out;
+        r67 = new java.lang.StringBuffer;
+        specialinvoke r67.<init>("[");
+        r68 = r0.getMethod();
+        r69 = r68.getName();
+        r70 = r67.append(r69);
+        r71 = r70.append("] Propagated: ");
+        r72 = r71.append(i2);
+        r73 = r72.append(" constants  ");
+        r74 = r73.append(i0);
+        r75 = r74.append(" fast copies  ");
+        r76 = r75.append(i1);
+        r77 = r76.append(" slow copies");
+        r78 = r77.toString();
+        r66.println(r78);
+
+     label19:
+        i25 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i25 == 0 goto label20;
+
+        r79 = ca.mcgill.sable.soot.jimple.Main.propagatorTimer;
+        r79.end();
+
+     label20:
+        return;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.ConstantAndCopyPropagator r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

@@ -1,0 +1,24 @@
+Benchmark: kawa-c
+
+Kawa - scheme to bytecode compiler
+Author: Per Bothner <bothner@cygnus.com> 
+Homepage: (http://www.gnu.org/software/kawa) 
+
+Packaged by: Patrice Pominville (patrice@sable.mcgill.ca)
+Packaged on: June 2, 1999
+
+Description: The kawa compiler can be used to compile scheme code into
+bytecode. The benchmark here consists of compiling the all the .scm files
+found  directory testdir. The generated class files are then outputed into
+the directory testdir/resultdir. Once all files are compiled, the
+content of resultdir and all it's files is verified against the
+reference class files found in directory testdir/refdir.
+
+
+Note:
+The scheme files found in testdir are taken from:
+
+under dir testdir/gimp-files:  the gimp version 1.0.0 (www.gimp.org) (GPL).
+under dir testdir/slib:  The Scheme Library, maintained by Aubrey Jaffer (from the Scheme repository) (GPL)
+
+ 

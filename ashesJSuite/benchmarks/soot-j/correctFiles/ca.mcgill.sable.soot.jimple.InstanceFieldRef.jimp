@@ -1,0 +1,9 @@
+public interface ca.mcgill.sable.soot.jimple.InstanceFieldRef extends java.lang.Object implements ca.mcgill.sable.soot.jimple.FieldRef
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getBase();
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getBaseBox();
+
+    public abstract void setBase(ca.mcgill.sable.soot.jimple.Value);
+}

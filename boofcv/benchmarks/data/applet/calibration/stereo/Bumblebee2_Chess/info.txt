@@ -1,0 +1,2 @@
+# (type) (zero skew) (invert y) (num columns) (num rows) (square width in mm )
+chess true false 5 7 30

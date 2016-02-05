@@ -1,0 +1,16 @@
+Benchmark: toba-s
+
+Author: University of Arizona (http://www.cs.arizona.edu/sumatra/toba/)
+
+Packaged by: Raja Vallee-Rai (rvalleerai@sable.mcgill.ca)
+Packaged on: June 8, 1999
+
+Description: This is Toba, a Java bytecode to C compiler.  It "tobafies" every
+classfile in the soot-j benchmark.  The soot-j classfiles are covered
+by the LGPL license (see the soot-j benchmark.)  This benchmark was set up
+to run properly under JDK1.2 under Linux.  Because of the way that Toba
+builds signatures based on class properties, running it under another
+system probably will fail.
+
+
+

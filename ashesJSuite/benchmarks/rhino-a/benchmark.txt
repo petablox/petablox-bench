@@ -1,0 +1,19 @@
+Benchmark: rhino-a
+
+Author: Mozilla organisation (www.mozilla.org/js/rhino) 
+
+Packaged by: Patrice Pominville (patrice@cs.mcgill.ca)
+Packaged on: Thu May 27 16:43:45 EDT 1999
+
+Description: This is JavaScript interpreter written in Java. The
+benchmark consists of running a script (in javascript:
+testdir/checkParam.js) on a bunch of java source code files found in
+testdir/javafiles. Output is to stdout. 
+
+note:
+The checkParam.js script is a useful tool  
+to check that @param tags in Java documentation comments match the
+parameters in the corresponding Java method. 
+
+License: NPL (Netscape Public License)
+

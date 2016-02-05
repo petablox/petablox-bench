@@ -1,0 +1,292 @@
+class ca.mcgill.sable.soot.jimple.ChaitinAllocator extends java.lang.Object
+{
+
+    private static void packLocals(ca.mcgill.sable.soot.jimple.JimpleBody)
+    {
+        ca.mcgill.sable.soot.jimple.JimpleBody r0;
+        ca.mcgill.sable.soot.jimple.ChaitinAllocator r1;
+
+        r0 := @parameter0;
+        r1 = new ca.mcgill.sable.soot.jimple.ChaitinAllocator;
+        specialinvoke r1.<init>(r0);
+        return;
+    }
+
+    public void <init>(ca.mcgill.sable.soot.jimple.JimpleBody)
+    {
+        ca.mcgill.sable.soot.jimple.ChaitinAllocator r0;
+        ca.mcgill.sable.soot.jimple.JimpleBody r1;
+        java.lang.StringBuffer r2, r8, r9;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28, i29, i30, i31;
+        ca.mcgill.sable.soot.jimple.Local r3, r17, r33, r35, r38, r40, r45, r46, r48, r56, r60, r62, r67, r77, r80;
+        ca.mcgill.sable.soot.jimple.StmtList r4;
+        java.io.PrintStream r5;
+        ca.mcgill.sable.soot.SootMethod r6;
+        java.lang.String r7, r10, r63, r64;
+        ca.mcgill.sable.soot.jimple.CompleteStmtGraph r11;
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocals r12;
+        ca.mcgill.sable.util.List r13, r53, r71;
+        ca.mcgill.sable.util.Iterator r14, r19, r26, r42, r49, r54, r58, r65, r68, r72;
+        ca.mcgill.sable.util.ArraySet r15;
+        java.lang.Object r16, r20, r27, r36, r39, r43, r47, r50, r51, r55, r59, r61, r66, r69, r73, r79;
+        ca.mcgill.sable.soot.Type r18, r21, r34, r57, r78;
+        ca.mcgill.sable.util.HashMap r22;
+        ca.mcgill.sable.util.HashSet r23, r41, r52;
+        ca.mcgill.sable.soot.jimple.ChaitinAllocator$InterferenceGraph r24, r25;
+        ca.mcgill.sable.soot.jimple.Stmt r28, r70;
+        ca.mcgill.sable.soot.jimple.IdentityStmt r29, r31;
+        ca.mcgill.sable.soot.jimple.Value r30, r32, r75, r76;
+        ca.mcgill.sable.util.LinkedList r37;
+        ca.mcgill.sable.soot.jimple.Local[] r44;
+        ca.mcgill.sable.soot.jimple.ValueBox r74;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r4 = r1.getStmtList();
+        i1 = ca.mcgill.sable.soot.jimple.Main.isVerbose;
+        if i1 == 0 goto label0;
+
+        r5 = java.lang.System.out;
+        r2 = new java.lang.StringBuffer;
+        specialinvoke r2.<init>("[");
+        r6 = r1.getMethod();
+        r7 = r6.getName();
+        r8 = r2.append(r7);
+        r9 = r8.append("] Packing locals...");
+        r10 = r9.toString();
+        r5.println(r10);
+
+     label0:
+        r11 = new ca.mcgill.sable.soot.jimple.CompleteStmtGraph;
+        specialinvoke r11.<init>(r4);
+        r12 = new ca.mcgill.sable.soot.jimple.SimpleLiveLocals;
+        specialinvoke r12.<init>(r11);
+        r13 = r1.getLocals();
+        r14 = r13.iterator();
+        r15 = new ca.mcgill.sable.util.ArraySet;
+        specialinvoke r15.<init>();
+        goto label2;
+
+     label1:
+        r16 = r14.next();
+        r17 = (ca.mcgill.sable.soot.jimple.Local) r16;
+        r18 = r17.getType();
+        i2 = r15.add(r18);
+
+     label2:
+        i3 = r14.hasNext();
+        if i3 != 0 goto label1;
+
+        r19 = r15.iterator();
+        goto label27;
+
+     label3:
+        r20 = r19.next();
+        r21 = (ca.mcgill.sable.soot.Type) r20;
+        r22 = new ca.mcgill.sable.util.HashMap;
+        i4 = r1.getLocalCount();
+        i5 = i4 * 2;
+        i6 = i5 + 1;
+        specialinvoke r22.<init>(i6, 0.7F);
+        r23 = new ca.mcgill.sable.util.HashSet;
+        specialinvoke r23.<init>();
+        r24 = new ca.mcgill.sable.soot.jimple.ChaitinAllocator$InterferenceGraph;
+        specialinvoke r24.<init>(r0, r1, r21, r12);
+        r25 = new ca.mcgill.sable.soot.jimple.ChaitinAllocator$InterferenceGraph;
+        specialinvoke r25.<init>(r0, r1, r21, r12);
+        r26 = r4.iterator();
+        goto label5;
+
+     label4:
+        r27 = r26.next();
+        r28 = (ca.mcgill.sable.soot.jimple.Stmt) r27;
+        i7 = r28 instanceof ca.mcgill.sable.soot.jimple.IdentityStmt;
+        if i7 == 0 goto label5;
+
+        r29 = (ca.mcgill.sable.soot.jimple.IdentityStmt) r28;
+        r30 = r29.getLeftOp();
+        i8 = r30 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i8 == 0 goto label5;
+
+        r31 = (ca.mcgill.sable.soot.jimple.IdentityStmt) r28;
+        r32 = r31.getLeftOp();
+        r33 = (ca.mcgill.sable.soot.jimple.Local) r32;
+        r34 = r33.getType();
+        i9 = r34.equals(r21);
+        if i9 == 0 goto label5;
+
+        r35 = new ca.mcgill.sable.soot.jimple.Local;
+        specialinvoke r35.<init>("", r21);
+        r36 = r22.put(r33, r35);
+        i10 = r23.add(r35);
+        r25.removeLocal(r33);
+
+     label5:
+        i11 = r26.hasNext();
+        if i11 != 0 goto label4;
+
+        r37 = new ca.mcgill.sable.util.LinkedList;
+        specialinvoke r37.<init>();
+        goto label7;
+
+     label6:
+        r38 = r25.removeMostInterferingLocal();
+        r37.addFirst(r38);
+
+     label7:
+        i12 = r25.isEmpty();
+        if i12 == 0 goto label6;
+
+        goto label16;
+
+     label8:
+        r39 = r37.removeFirst();
+        r40 = (ca.mcgill.sable.soot.jimple.Local) r39;
+        r41 = new ca.mcgill.sable.util.HashSet;
+        specialinvoke r41.<init>();
+        r42 = r23.iterator();
+        goto label10;
+
+     label9:
+        r43 = r42.next();
+        i13 = r41.add(r43);
+
+     label10:
+        i14 = r42.hasNext();
+        if i14 != 0 goto label9;
+
+        r44 = r24.getInterferencesOf(r40);
+        i0 = 0;
+        goto label13;
+
+     label11:
+        r45 = r44[i0];
+        i15 = r22.containsKey(r45);
+        if i15 == 0 goto label12;
+
+        r46 = r44[i0];
+        r47 = r22.get(r46);
+        i16 = r41.remove(r47);
+
+     label12:
+        i0 = i0 + 1;
+
+     label13:
+        i17 = r44.length;
+        if i0 < i17 goto label11;
+
+        i18 = r41.isEmpty();
+        if i18 == 0 goto label14;
+
+        r48 = new ca.mcgill.sable.soot.jimple.Local;
+        specialinvoke r48.<init>("", r21);
+        r3 = r48;
+        i19 = r23.add(r48);
+        goto label15;
+
+     label14:
+        r49 = r41.iterator();
+        r50 = r49.next();
+        r3 = (ca.mcgill.sable.soot.jimple.Local) r50;
+
+     label15:
+        r51 = r22.put(r40, r3);
+
+     label16:
+        i20 = r37.isEmpty();
+        if i20 == 0 goto label8;
+
+        r52 = new ca.mcgill.sable.util.HashSet;
+        specialinvoke r52.<init>();
+        r53 = r1.getLocals();
+        r54 = r53.iterator();
+        goto label18;
+
+     label17:
+        r55 = r54.next();
+        r56 = (ca.mcgill.sable.soot.jimple.Local) r55;
+        r57 = r56.getType();
+        i21 = r57.equals(r21);
+        if i21 == 0 goto label18;
+
+        r1.removeLocal(r56);
+        i22 = r52.add(r56);
+
+     label18:
+        i23 = r54.hasNext();
+        if i23 != 0 goto label17;
+
+        r58 = r52.iterator();
+        goto label20;
+
+     label19:
+        r59 = r58.next();
+        r60 = (ca.mcgill.sable.soot.jimple.Local) r59;
+        r61 = r22.get(r60);
+        r62 = (ca.mcgill.sable.soot.jimple.Local) r61;
+        r63 = r62.getName();
+        i24 = r63.equals("");
+        if i24 == 0 goto label20;
+
+        r64 = r60.getName();
+        r62.setName(r64);
+
+     label20:
+        i25 = r58.hasNext();
+        if i25 != 0 goto label19;
+
+        r65 = r23.iterator();
+        goto label22;
+
+     label21:
+        r66 = r65.next();
+        r67 = (ca.mcgill.sable.soot.jimple.Local) r66;
+        r1.addLocal(r67);
+
+     label22:
+        i26 = r65.hasNext();
+        if i26 != 0 goto label21;
+
+        r68 = r4.iterator();
+        goto label26;
+
+     label23:
+        r69 = r68.next();
+        r70 = (ca.mcgill.sable.soot.jimple.Stmt) r69;
+        r71 = r70.getUseAndDefBoxes();
+        r72 = r71.iterator();
+        goto label25;
+
+     label24:
+        r73 = r72.next();
+        r74 = (ca.mcgill.sable.soot.jimple.ValueBox) r73;
+        r75 = r74.getValue();
+        i27 = r75 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i27 == 0 goto label25;
+
+        r76 = r74.getValue();
+        r77 = (ca.mcgill.sable.soot.jimple.Local) r76;
+        r78 = r77.getType();
+        i28 = r78.equals(r21);
+        if i28 == 0 goto label25;
+
+        r79 = r22.get(r77);
+        r80 = (ca.mcgill.sable.soot.jimple.Local) r79;
+        r74.setValue(r80);
+
+     label25:
+        i29 = r72.hasNext();
+        if i29 != 0 goto label24;
+
+     label26:
+        i30 = r68.hasNext();
+        if i30 != 0 goto label23;
+
+     label27:
+        i31 = r19.hasNext();
+        if i31 != 0 goto label3;
+
+        return;
+    }
+}

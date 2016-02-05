@@ -1,0 +1,31 @@
+public interface ca.mcgill.sable.soot.jimple.Stmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Unit
+{
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract ca.mcgill.sable.util.List getDefBoxes();
+
+    public abstract ca.mcgill.sable.util.List getUnitBoxes();
+
+    public abstract ca.mcgill.sable.util.List getBoxesPointingToThis();
+
+    public abstract ca.mcgill.sable.util.List getUseAndDefBoxes();
+
+    public abstract void apply(ca.mcgill.sable.util.Switch);
+
+    public abstract java.lang.String toBriefString();
+
+    public abstract java.lang.String toBriefString(ca.mcgill.sable.util.Map);
+
+    public abstract java.lang.String toBriefString(java.lang.String);
+
+    public abstract java.lang.String toBriefString(ca.mcgill.sable.util.Map, java.lang.String);
+
+    public abstract java.lang.String toString();
+
+    public abstract java.lang.String toString(ca.mcgill.sable.util.Map);
+
+    public abstract java.lang.String toString(java.lang.String);
+
+    public abstract java.lang.String toString(ca.mcgill.sable.util.Map, java.lang.String);
+}

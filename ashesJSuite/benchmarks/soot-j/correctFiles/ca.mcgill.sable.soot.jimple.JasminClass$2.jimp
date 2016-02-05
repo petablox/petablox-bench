@@ -1,0 +1,192 @@
+final class ca.mcgill.sable.soot.jimple.JasminClass$2 extends ca.mcgill.sable.soot.jimple.AbstractJimpleValueSwitch
+{
+    private final ca.mcgill.sable.soot.jimple.Value val$rvalue;
+    private final ca.mcgill.sable.soot.jimple.JasminClass this$0;
+
+    public void caseArrayRef(ca.mcgill.sable.soot.jimple.ArrayRef)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$2 r0;
+        ca.mcgill.sable.soot.jimple.ArrayRef r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r6, r10;
+        ca.mcgill.sable.soot.jimple.Value r3, r5, r7;
+        ca.mcgill.sable.soot.Type r8;
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r9;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getBase();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r1.getIndex();
+        r4.emitValue(r5);
+        r6 = r0.this$0;
+        r7 = r0.val$rvalue;
+        r6.emitValue(r7);
+        r8 = r1.getType();
+        r9 = new ca.mcgill.sable.soot.jimple.JasminClass$3;
+        r10 = r0.this$0;
+        specialinvoke r9.<init>(r10);
+        r8.apply(r9);
+        return;
+    }
+
+    public void defaultCase(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$2 r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        java.lang.RuntimeException r2;
+        java.lang.StringBuffer r3, r4;
+        java.lang.String r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new java.lang.RuntimeException;
+        r3 = new java.lang.StringBuffer;
+        specialinvoke r3.<init>("Can't store in value ");
+        r4 = r3.append(r1);
+        r5 = r4.toString();
+        specialinvoke r2.<init>(r5);
+        throw r2;
+    }
+
+    public void caseInstanceFieldRef(ca.mcgill.sable.soot.jimple.InstanceFieldRef)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$2 r0;
+        ca.mcgill.sable.soot.jimple.InstanceFieldRef r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r6, r8, r19, r25;
+        ca.mcgill.sable.soot.jimple.Value r3, r5;
+        java.lang.StringBuffer r7, r13, r14, r17, r18, r23;
+        ca.mcgill.sable.soot.SootField r9, r15, r20, r26;
+        ca.mcgill.sable.soot.SootClass r10;
+        java.lang.String r11, r12, r16, r22, r24;
+        ca.mcgill.sable.soot.Type r21, r27;
+        int i0, i1, i2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r1.getBase();
+        r2.emitValue(r3);
+        r4 = r0.this$0;
+        r5 = r0.val$rvalue;
+        r4.emitValue(r5);
+        r6 = r0.this$0;
+        r7 = new java.lang.StringBuffer;
+        specialinvoke r7.<init>("putfield ");
+        r8 = r0.this$0;
+        r9 = r1.getField();
+        r10 = r9.getDeclaringClass();
+        r11 = r10.getName();
+        r12 = r8.slashify(r11);
+        r13 = r7.append(r12);
+        r14 = r13.append("/");
+        r15 = r1.getField();
+        r16 = r15.getName();
+        r17 = r14.append(r16);
+        r18 = r17.append(" ");
+        r19 = r0.this$0;
+        r20 = r1.getField();
+        r21 = r20.getType();
+        r22 = r19.jasminDescriptorOf(r21);
+        r23 = r18.append(r22);
+        r24 = r23.toString();
+        r25 = r0.this$0;
+        r26 = r1.getField();
+        r27 = r26.getType();
+        i0 = r25.sizeOfType(r27);
+        i1 = -i0;
+        i2 = -1 + i1;
+        r6.emit(r24, i2);
+        return;
+    }
+
+    public void caseLocal(ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$2 r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r9;
+        ca.mcgill.sable.util.Map r3;
+        java.lang.Object r4;
+        java.lang.Integer r5;
+        int i0;
+        ca.mcgill.sable.soot.Type r6;
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r7;
+        ca.mcgill.sable.soot.jimple.Value r8;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r2.localToSlot;
+        r4 = r3.get(r1);
+        r5 = (java.lang.Integer) r4;
+        i0 = r5.intValue();
+        r6 = r1.getType();
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass$4;
+        r8 = r0.val$rvalue;
+        r9 = r0.this$0;
+        specialinvoke r7.<init>(r8, i0, r9);
+        r6.apply(r7);
+        return;
+    }
+
+    public void caseStaticFieldRef(ca.mcgill.sable.soot.jimple.StaticFieldRef)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$2 r0;
+        ca.mcgill.sable.soot.jimple.StaticFieldRef r1;
+        ca.mcgill.sable.soot.SootField r2, r22;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r5, r7, r16, r21;
+        ca.mcgill.sable.soot.jimple.Value r4;
+        java.lang.StringBuffer r6, r11, r12, r14, r15, r19;
+        ca.mcgill.sable.soot.SootClass r8;
+        java.lang.String r9, r10, r13, r18, r20;
+        ca.mcgill.sable.soot.Type r17, r23;
+        int i0, i1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r1.getField();
+        r3 = r0.this$0;
+        r4 = r0.val$rvalue;
+        r3.emitValue(r4);
+        r5 = r0.this$0;
+        r6 = new java.lang.StringBuffer;
+        specialinvoke r6.<init>("putstatic ");
+        r7 = r0.this$0;
+        r8 = r2.getDeclaringClass();
+        r9 = r8.getName();
+        r10 = r7.slashify(r9);
+        r11 = r6.append(r10);
+        r12 = r11.append("/");
+        r13 = r2.getName();
+        r14 = r12.append(r13);
+        r15 = r14.append(" ");
+        r16 = r0.this$0;
+        r17 = r2.getType();
+        r18 = r16.jasminDescriptorOf(r17);
+        r19 = r15.append(r18);
+        r20 = r19.toString();
+        r21 = r0.this$0;
+        r22 = r1.getField();
+        r23 = r22.getType();
+        i0 = r21.sizeOfType(r23);
+        i1 = -i0;
+        r5.emit(r20, i1);
+        return;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.JasminClass)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$2 r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.val$rvalue = r1;
+        r0.this$0 = r2;
+        return;
+    }
+}

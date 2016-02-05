@@ -1,0 +1,102 @@
+public class ca.mcgill.sable.soot.jimple.BuildJimpleBodyOption extends java.lang.Object
+{
+    public static final int NO_TYPING;
+    public static final int NO_RENAMING;
+    public static final int NO_SPLITTING;
+    public static final int NO_CLEANUP;
+    public static final int NO_PACKING;
+    public static final int NO_AGGREGATING;
+
+    public static boolean noTyping(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 1;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public static boolean noRenaming(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 2;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public static boolean noSplitting(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 4;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public static boolean noCleanup(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 8;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public static boolean noPacking(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 16;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public static boolean noAggregating(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 32;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.BuildJimpleBodyOption r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

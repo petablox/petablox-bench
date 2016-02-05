@@ -1,0 +1,11 @@
+public interface ca.mcgill.sable.soot.jimple.CaughtExceptionRef extends java.lang.Object implements ca.mcgill.sable.soot.jimple.IdentityRef, ca.mcgill.sable.soot.ToBriefString
+{
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract ca.mcgill.sable.util.List getExceptionTypes();
+
+    public abstract ca.mcgill.sable.soot.Type getType();
+
+    public abstract void apply(ca.mcgill.sable.util.Switch);
+}

@@ -1,0 +1,945 @@
+public class ca.mcgill.sable.soot.jimple.Jimple extends java.lang.Object implements ca.mcgill.sable.soot.BodyRepresentation
+{
+    private static ca.mcgill.sable.soot.jimple.Jimple jimpleRepresentation;
+
+    protected void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public static ca.mcgill.sable.soot.jimple.Jimple v()
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+
+        r0 = ca.mcgill.sable.soot.jimple.Jimple.jimpleRepresentation;
+        return r0;
+    }
+
+    public ca.mcgill.sable.soot.Body newBody(ca.mcgill.sable.soot.SootMethod)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        ca.mcgill.sable.soot.jimple.JimpleBody r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JimpleBody;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.Body buildBodyOfFrom(ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.soot.Body, int)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        ca.mcgill.sable.soot.Body r2;
+        int i0;
+        ca.mcgill.sable.soot.jimple.JimpleBody r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        i0 := @parameter2;
+        r3 = new ca.mcgill.sable.soot.jimple.JimpleBody;
+        specialinvoke r3.<init>(r1, r2, i0);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.XorExpr newXorExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JXorExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JXorExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.UshrExpr newUshrExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JUshrExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JUshrExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.SubExpr newSubExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JSubExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JSubExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ShrExpr newShrExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JShrExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JShrExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ShlExpr newShlExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JShlExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JShlExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.RemExpr newRemExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JRemExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JRemExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.OrExpr newOrExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JOrExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JOrExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.NeExpr newNeExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JNeExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JNeExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.MulExpr newMulExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JMulExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JMulExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.LeExpr newLeExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JLeExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JLeExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.GeExpr newGeExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JGeExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JGeExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.EqExpr newEqExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JEqExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JEqExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.DivExpr newDivExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JDivExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JDivExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.CmplExpr newCmplExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JCmplExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JCmplExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.CmpgExpr newCmpgExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JCmpgExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JCmpgExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.CmpExpr newCmpExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JCmpExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JCmpExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.GtExpr newGtExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JGtExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JGtExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.LtExpr newLtExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JLtExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JLtExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.AddExpr newAddExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JAddExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JAddExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.AndExpr newAndExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JAndExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JAndExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.NegExpr newNegExpr(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JNegExpr r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JNegExpr;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.LengthExpr newLengthExpr(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JLengthExpr r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JLengthExpr;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.CastExpr newCastExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.Type r2;
+        ca.mcgill.sable.soot.jimple.JCastExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JCastExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.InstanceOfExpr newInstanceOfExpr(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.Type r2;
+        ca.mcgill.sable.soot.jimple.JInstanceOfExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JInstanceOfExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.NewExpr newNewExpr(ca.mcgill.sable.soot.RefType)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.RefType r1;
+        ca.mcgill.sable.soot.jimple.JNewExpr r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JNewExpr;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.NewArrayExpr newNewArrayExpr(ca.mcgill.sable.soot.Type, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.Type r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+        ca.mcgill.sable.soot.jimple.JNewArrayExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JNewArrayExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.NewMultiArrayExpr newNewMultiArrayExpr(ca.mcgill.sable.soot.ArrayType, ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.ArrayType r1;
+        ca.mcgill.sable.util.List r2;
+        ca.mcgill.sable.soot.jimple.JNewMultiArrayExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JNewMultiArrayExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.StaticInvokeExpr newStaticInvokeExpr(ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        ca.mcgill.sable.util.List r2;
+        ca.mcgill.sable.soot.jimple.JStaticInvokeExpr r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JStaticInvokeExpr;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.SpecialInvokeExpr newSpecialInvokeExpr(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.util.List r3;
+        ca.mcgill.sable.soot.jimple.JSpecialInvokeExpr r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = new ca.mcgill.sable.soot.jimple.JSpecialInvokeExpr;
+        specialinvoke r4.<init>(r1, r2, r3);
+        return r4;
+    }
+
+    public ca.mcgill.sable.soot.jimple.VirtualInvokeExpr newVirtualInvokeExpr(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.util.List r3;
+        ca.mcgill.sable.soot.jimple.JVirtualInvokeExpr r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = new ca.mcgill.sable.soot.jimple.JVirtualInvokeExpr;
+        specialinvoke r4.<init>(r1, r2, r3);
+        return r4;
+    }
+
+    public ca.mcgill.sable.soot.jimple.InterfaceInvokeExpr newInterfaceInvokeExpr(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.util.List r3;
+        ca.mcgill.sable.soot.jimple.JInterfaceInvokeExpr r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = new ca.mcgill.sable.soot.jimple.JInterfaceInvokeExpr;
+        specialinvoke r4.<init>(r1, r2, r3);
+        return r4;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ThrowStmt newThrowStmt(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JThrowStmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JThrowStmt;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ExitMonitorStmt newExitMonitorStmt(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JExitMonitorStmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JExitMonitorStmt;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.EnterMonitorStmt newEnterMonitorStmt(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JEnterMonitorStmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JEnterMonitorStmt;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.BreakpointStmt newBreakpointStmt()
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.JBreakpointStmt r1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.soot.jimple.JBreakpointStmt;
+        specialinvoke r1.<init>();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.GotoStmt newGotoStmt(ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.JGotoStmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JGotoStmt;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.NopStmt newNopStmt()
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.JNopStmt r1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.soot.jimple.JNopStmt;
+        specialinvoke r1.<init>();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ReturnVoidStmt newReturnVoidStmt()
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.JReturnVoidStmt r1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.soot.jimple.JReturnVoidStmt;
+        specialinvoke r1.<init>();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ReturnStmt newReturnStmt(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JReturnStmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JReturnStmt;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.RetStmt newRetStmt(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JRetStmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JRetStmt;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.IfStmt newIfStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.Unit r2;
+        ca.mcgill.sable.soot.jimple.JIfStmt r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JIfStmt;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.IdentityStmt newIdentityStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JIdentityStmt r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JIdentityStmt;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.AssignStmt newAssignStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JAssignStmt r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JAssignStmt;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.InvokeStmt newInvokeStmt(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JInvokeStmt;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.TableSwitchStmt newTableSwitchStmt(ca.mcgill.sable.soot.jimple.Value, int, int, ca.mcgill.sable.util.List, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        int i0, i1;
+        ca.mcgill.sable.util.List r2;
+        ca.mcgill.sable.soot.jimple.Unit r3;
+        ca.mcgill.sable.soot.jimple.JTableSwitchStmt r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        i1 := @parameter2;
+        r2 := @parameter3;
+        r3 := @parameter4;
+        r4 = new ca.mcgill.sable.soot.jimple.JTableSwitchStmt;
+        specialinvoke r4.<init>(r1, i0, i1, r2, r3);
+        return r4;
+    }
+
+    public ca.mcgill.sable.soot.jimple.LookupSwitchStmt newLookupSwitchStmt(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.util.List, ca.mcgill.sable.util.List, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.util.List r2, r3;
+        ca.mcgill.sable.soot.jimple.Unit r4;
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 := @parameter3;
+        r5 = new ca.mcgill.sable.soot.jimple.JLookupSwitchStmt;
+        specialinvoke r5.<init>(r1, r2, r3, r4);
+        return r5;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Local newLocal(java.lang.String, ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        java.lang.String r1;
+        ca.mcgill.sable.soot.Type r2;
+        ca.mcgill.sable.soot.jimple.Local r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.Local;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Trap newTrap(ca.mcgill.sable.soot.SootClass, ca.mcgill.sable.soot.jimple.Unit, ca.mcgill.sable.soot.jimple.Unit, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.SootClass r1;
+        ca.mcgill.sable.soot.jimple.Unit r2, r3, r4;
+        ca.mcgill.sable.soot.jimple.JTrap r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 := @parameter3;
+        r5 = new ca.mcgill.sable.soot.jimple.JTrap;
+        specialinvoke r5.<init>(r1, r2, r3, r4);
+        return r5;
+    }
+
+    public ca.mcgill.sable.soot.jimple.StaticFieldRef newStaticFieldRef(ca.mcgill.sable.soot.SootField)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.SootField r1;
+        ca.mcgill.sable.soot.jimple.StaticFieldRef r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.StaticFieldRef;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ThisRef newThisRef(ca.mcgill.sable.soot.SootClass)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.SootClass r1;
+        ca.mcgill.sable.soot.jimple.ThisRef r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.ThisRef;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ParameterRef newParameterRef(ca.mcgill.sable.soot.SootMethod, int)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        int i0;
+        ca.mcgill.sable.soot.jimple.ParameterRef r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        r2 = new ca.mcgill.sable.soot.jimple.ParameterRef;
+        specialinvoke r2.<init>(r1, i0);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.InstanceFieldRef newInstanceFieldRef(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.SootField)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.SootField r2;
+        ca.mcgill.sable.soot.jimple.JInstanceFieldRef r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JInstanceFieldRef;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.CaughtExceptionRef newCaughtExceptionRef(ca.mcgill.sable.soot.jimple.JimpleBody)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.JimpleBody r1;
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.JCaughtExceptionRef;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ArrayRef newArrayRef(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.JArrayRef r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.JArrayRef;
+        specialinvoke r3.<init>(r1, r2);
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newVariableBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.VariableBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.VariableBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newLocalBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.LocalBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.LocalBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newRValueBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.RValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.RValueBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newImmediateBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ImmediateBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.ImmediateBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newArgBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ImmediateBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.ImmediateBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newIdentityRefBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.IdentityRefBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.IdentityRefBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newConditionExprBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ConditionExprBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.ConditionExprBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox newInvokeExprBox(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.InvokeExprBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.InvokeExprBox;
+        specialinvoke r2.<init>(r1);
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.UnitBox newStmtBox(ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.StmtBox r2;
+        ca.mcgill.sable.soot.jimple.Stmt r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.soot.jimple.StmtBox;
+        r3 = (ca.mcgill.sable.soot.jimple.Stmt) r1;
+        specialinvoke r2.<init>(r3);
+        return r2;
+    }
+
+    static void <clinit>()
+    {
+        ca.mcgill.sable.soot.jimple.Jimple r0;
+
+        r0 = new ca.mcgill.sable.soot.jimple.Jimple;
+        specialinvoke r0.<init>();
+        ca.mcgill.sable.soot.jimple.Jimple.jimpleRepresentation = r0;
+        return;
+    }
+}

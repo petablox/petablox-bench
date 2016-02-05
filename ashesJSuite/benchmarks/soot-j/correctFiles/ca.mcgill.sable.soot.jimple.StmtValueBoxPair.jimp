@@ -1,0 +1,50 @@
+public class ca.mcgill.sable.soot.jimple.StmtValueBoxPair extends java.lang.Object
+{
+    public ca.mcgill.sable.soot.jimple.Stmt stmt;
+    public ca.mcgill.sable.soot.jimple.ValueBox valueBox;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.Stmt, ca.mcgill.sable.soot.jimple.ValueBox)
+    {
+        ca.mcgill.sable.soot.jimple.StmtValueBoxPair r0;
+        ca.mcgill.sable.soot.jimple.Stmt r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.stmt = r1;
+        r0.valueBox = r2;
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.StmtValueBoxPair r0, r2;
+        java.lang.Object r1;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.Stmt r3, r4;
+        ca.mcgill.sable.soot.jimple.ValueBox r5, r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.StmtValueBoxPair;
+        if i0 == 0 goto label0;
+
+        r2 = (ca.mcgill.sable.soot.jimple.StmtValueBoxPair) r1;
+        r3 = r0.stmt;
+        r4 = r2.stmt;
+        i1 = r3.equals(r4);
+        if i1 == 0 goto label0;
+
+        r5 = r0.valueBox;
+        r6 = r2.valueBox;
+        i2 = r5.equals(r6);
+        if i2 == 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 0;
+    }
+}

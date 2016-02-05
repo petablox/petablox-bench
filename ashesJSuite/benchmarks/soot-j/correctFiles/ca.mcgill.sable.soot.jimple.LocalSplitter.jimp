@@ -1,0 +1,298 @@
+public class ca.mcgill.sable.soot.jimple.LocalSplitter extends java.lang.Object
+{
+
+    public static void splitLocals(ca.mcgill.sable.soot.jimple.JimpleBody)
+    {
+        ca.mcgill.sable.soot.jimple.JimpleBody r0;
+        ca.mcgill.sable.soot.jimple.LocalDefs r1;
+        ca.mcgill.sable.soot.jimple.LiveLocals r2;
+        ca.mcgill.sable.soot.jimple.StmtList r3;
+        ca.mcgill.sable.util.ArrayList r4, r32;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28, i29, i30, i31, i32, i33, i34, i35, i36, i37, i38;
+        java.io.PrintStream r5;
+        java.lang.StringBuffer r6, r9, r10, r74, r77, r78;
+        ca.mcgill.sable.soot.SootMethod r7;
+        java.lang.String r8, r11, r75, r76, r79;
+        ca.mcgill.sable.util.HashMap r12, r23, r59;
+        ca.mcgill.sable.soot.Timer r13, r20, r21, r84;
+        ca.mcgill.sable.soot.jimple.CompleteStmtGraph r14;
+        ca.mcgill.sable.soot.jimple.SimpleLocalDefs r15;
+        ca.mcgill.sable.soot.jimple.SimpleLiveLocals r16;
+        ca.mcgill.sable.soot.jimple.SparseLiveLocals r17;
+        ca.mcgill.sable.soot.jimple.SparseLocalDefs r18;
+        ca.mcgill.sable.soot.jimple.SimpleLocalUses r19;
+        ca.mcgill.sable.util.HashSet r22;
+        ca.mcgill.sable.util.Iterator r24, r38, r54, r60, r81;
+        java.lang.Object r25, r34, r39, r46, r47, r51, r55, r61, r63, r68, r69, r72, r82;
+        ca.mcgill.sable.soot.jimple.Stmt r26, r45, r52;
+        ca.mcgill.sable.soot.jimple.DefinitionStmt r27, r35, r56;
+        ca.mcgill.sable.soot.jimple.Value r28, r49, r65;
+        ca.mcgill.sable.soot.jimple.ValueBox r29, r33, r36, r41, r42, r43, r44, r48, r57, r58, r64, r83;
+        ca.mcgill.sable.util.LinkedList r30, r31;
+        ca.mcgill.sable.util.List r37, r53, r62;
+        ca.mcgill.sable.soot.jimple.StmtValueBoxPair r40;
+        ca.mcgill.sable.soot.jimple.Local r50, r66, r73;
+        java.lang.Integer r67, r70, r71;
+        ca.mcgill.sable.soot.Type r80;
+
+        r0 := @parameter0;
+        r3 = r0.getStmtList();
+        r4 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r4.<init>();
+        i0 = ca.mcgill.sable.soot.jimple.Main.isVerbose;
+        if i0 == 0 goto label0;
+
+        r5 = java.lang.System.out;
+        r6 = new java.lang.StringBuffer;
+        specialinvoke r6.<init>("[");
+        r7 = r0.getMethod();
+        r8 = r7.getName();
+        r9 = r6.append(r8);
+        r10 = r9.append("] Splitting locals...");
+        r11 = r10.toString();
+        r5.println(r11);
+
+     label0:
+        r12 = new ca.mcgill.sable.util.HashMap;
+        i1 = r3.size();
+        i2 = i1 * 2;
+        i3 = i2 + 1;
+        specialinvoke r12.<init>(i3, 0.7F);
+        i4 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i4 == 0 goto label1;
+
+        r13 = ca.mcgill.sable.soot.jimple.Main.splitPhase1Timer;
+        r13.start();
+
+     label1:
+        r14 = new ca.mcgill.sable.soot.jimple.CompleteStmtGraph;
+        specialinvoke r14.<init>(r3);
+        i5 = ca.mcgill.sable.soot.jimple.Main.usePackedDefs;
+        if i5 == 0 goto label2;
+
+        r15 = new ca.mcgill.sable.soot.jimple.SimpleLocalDefs;
+        specialinvoke r15.<init>(r14);
+        r1 = r15;
+        goto label5;
+
+     label2:
+        i6 = ca.mcgill.sable.soot.jimple.Main.usePackedLive;
+        if i6 == 0 goto label3;
+
+        r16 = new ca.mcgill.sable.soot.jimple.SimpleLiveLocals;
+        specialinvoke r16.<init>(r14);
+        r2 = r16;
+        goto label4;
+
+     label3:
+        r17 = new ca.mcgill.sable.soot.jimple.SparseLiveLocals;
+        specialinvoke r17.<init>(r14);
+        r2 = r17;
+
+     label4:
+        r18 = new ca.mcgill.sable.soot.jimple.SparseLocalDefs;
+        specialinvoke r18.<init>(r14, r2);
+        r1 = r18;
+
+     label5:
+        r19 = new ca.mcgill.sable.soot.jimple.SimpleLocalUses;
+        specialinvoke r19.<init>(r14, r1);
+        i7 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i7 == 0 goto label6;
+
+        r20 = ca.mcgill.sable.soot.jimple.Main.splitPhase1Timer;
+        r20.end();
+
+     label6:
+        i8 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i8 == 0 goto label7;
+
+        r21 = ca.mcgill.sable.soot.jimple.Main.splitPhase2Timer;
+        r21.start();
+
+     label7:
+        r22 = new ca.mcgill.sable.util.HashSet;
+        specialinvoke r22.<init>();
+        r23 = new ca.mcgill.sable.util.HashMap;
+        i9 = r3.size();
+        i10 = i9 * 2;
+        i11 = i10 + 1;
+        specialinvoke r23.<init>(i11, 0.7F);
+        r24 = r3.iterator();
+        goto label16;
+
+     label8:
+        r25 = r24.next();
+        r26 = (ca.mcgill.sable.soot.jimple.Stmt) r25;
+        i12 = r26 instanceof ca.mcgill.sable.soot.jimple.DefinitionStmt;
+        if i12 == 0 goto label16;
+
+        r27 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r26;
+        r28 = r27.getLeftOp();
+        i13 = r28 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i13 == 0 goto label16;
+
+        r29 = r27.getLeftOpBox();
+        i14 = r22.contains(r29);
+        if i14 != 0 goto label16;
+
+        r30 = new ca.mcgill.sable.util.LinkedList;
+        specialinvoke r30.<init>();
+        r31 = new ca.mcgill.sable.util.LinkedList;
+        specialinvoke r31.<init>();
+        r32 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r32.<init>();
+        i15 = r4.add(r32);
+        i16 = r30.add(r27);
+        r33 = r27.getLeftOpBox();
+        i17 = r22.add(r33);
+        goto label15;
+
+     label9:
+        i18 = r30.isEmpty();
+        if i18 != 0 goto label12;
+
+        r34 = r30.removeFirst();
+        r35 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r34;
+        r36 = r35.getLeftOpBox();
+        i19 = r32.add(r36);
+        r37 = r19.getUsesOf(r35);
+        r38 = r37.iterator();
+        goto label11;
+
+     label10:
+        r39 = r38.next();
+        r40 = (ca.mcgill.sable.soot.jimple.StmtValueBoxPair) r39;
+        r41 = r40.valueBox;
+        i20 = r22.contains(r41);
+        if i20 != 0 goto label11;
+
+        r42 = r40.valueBox;
+        i21 = r22.add(r42);
+        r43 = r40.valueBox;
+        r31.addLast(r43);
+        r44 = r40.valueBox;
+        r45 = r40.stmt;
+        r46 = r23.put(r44, r45);
+
+     label11:
+        i22 = r38.hasNext();
+        if i22 != 0 goto label10;
+
+        goto label15;
+
+     label12:
+        r47 = r31.removeFirst();
+        r48 = (ca.mcgill.sable.soot.jimple.ValueBox) r47;
+        i23 = r32.add(r48);
+        r49 = r48.getValue();
+        r50 = (ca.mcgill.sable.soot.jimple.Local) r49;
+        r51 = r23.get(r48);
+        r52 = (ca.mcgill.sable.soot.jimple.Stmt) r51;
+        r53 = r1.getDefsOfAt(r50, r52);
+        r54 = r53.iterator();
+        goto label14;
+
+     label13:
+        r55 = r54.next();
+        r56 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r55;
+        r57 = r56.getLeftOpBox();
+        i24 = r22.contains(r57);
+        if i24 != 0 goto label14;
+
+        r58 = r56.getLeftOpBox();
+        i25 = r22.add(r58);
+        r30.addLast(r56);
+
+     label14:
+        i26 = r54.hasNext();
+        if i26 != 0 goto label13;
+
+     label15:
+        i27 = r31.isEmpty();
+        if i27 == 0 goto label9;
+
+        i28 = r30.isEmpty();
+        if i28 == 0 goto label9;
+
+     label16:
+        i29 = r24.hasNext();
+        if i29 != 0 goto label8;
+
+        r59 = new ca.mcgill.sable.util.HashMap;
+        i30 = r0.getLocalCount();
+        i31 = i30 * 2;
+        i32 = i31 + 1;
+        specialinvoke r59.<init>(i32, 0.7F);
+        r60 = r4.iterator();
+        goto label21;
+
+     label17:
+        r61 = r60.next();
+        r62 = (ca.mcgill.sable.util.List) r61;
+        r63 = r62.get(0);
+        r64 = (ca.mcgill.sable.soot.jimple.ValueBox) r63;
+        r65 = r64.getValue();
+        r66 = (ca.mcgill.sable.soot.jimple.Local) r65;
+        i33 = r59.containsKey(r66);
+        if i33 != 0 goto label18;
+
+        r67 = new java.lang.Integer;
+        specialinvoke r67.<init>(1);
+        r68 = r59.put(r66, r67);
+        goto label21;
+
+     label18:
+        r69 = r59.get(r66);
+        r70 = (java.lang.Integer) r69;
+        i34 = r70.intValue();
+        i35 = i34 + 1;
+        r71 = new java.lang.Integer;
+        specialinvoke r71.<init>(i35);
+        r72 = r59.put(r66, r71);
+        r73 = new ca.mcgill.sable.soot.jimple.Local;
+        r74 = new java.lang.StringBuffer;
+        r75 = r66.getName();
+        r76 = java.lang.String.valueOf(r75);
+        specialinvoke r74.<init>(r76);
+        r77 = r74.append("$");
+        r78 = r77.append(i35);
+        r79 = r78.toString();
+        r80 = r66.getType();
+        specialinvoke r73.<init>(r79, r80);
+        r0.addLocal(r73);
+        r81 = r62.iterator();
+        goto label20;
+
+     label19:
+        r82 = r81.next();
+        r83 = (ca.mcgill.sable.soot.jimple.ValueBox) r82;
+        r83.setValue(r73);
+
+     label20:
+        i36 = r81.hasNext();
+        if i36 != 0 goto label19;
+
+     label21:
+        i37 = r60.hasNext();
+        if i37 != 0 goto label17;
+
+        i38 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i38 == 0 goto label22;
+
+        r84 = ca.mcgill.sable.soot.jimple.Main.splitPhase2Timer;
+        r84.end();
+
+     label22:
+        return;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.LocalSplitter r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

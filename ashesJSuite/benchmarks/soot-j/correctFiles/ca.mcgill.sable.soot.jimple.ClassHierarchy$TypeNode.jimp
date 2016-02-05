@@ -1,0 +1,446 @@
+class ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode extends java.lang.Object
+{
+    private final ca.mcgill.sable.soot.jimple.ClassHierarchy this$0;
+    private int id;
+    private ca.mcgill.sable.soot.Type type;
+    private java.util.BitSet parents;
+    private java.util.BitSet ancestors;
+    private java.util.BitSet descendants;
+
+    void <init>(ca.mcgill.sable.soot.jimple.ClassHierarchy, ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r1;
+        ca.mcgill.sable.soot.Type r2;
+        java.util.BitSet r3, r4, r5;
+        java.util.Vector r6, r7;
+        java.util.Hashtable r8;
+        java.lang.Object r9;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        r0.this$0 = r1;
+        r3 = new java.util.BitSet;
+        specialinvoke r3.<init>();
+        r0.parents = r3;
+        r4 = new java.util.BitSet;
+        specialinvoke r4.<init>();
+        r0.ancestors = r4;
+        r5 = new java.util.BitSet;
+        specialinvoke r5.<init>();
+        r0.descendants = r5;
+        r0.type = r2;
+        r6 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r0.id = r6.size();
+        r7 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r7.addElement(r0);
+        r8 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$1(r1);
+        r9 = r8.put(r2, r0);
+        return;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.ClassHierarchy, ca.mcgill.sable.soot.RefType)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0, r10, r18, r23, r29, r35;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r1;
+        ca.mcgill.sable.soot.RefType r2, r9, r17;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11;
+        ca.mcgill.sable.soot.SootClassManager r3;
+        java.lang.String r4, r8, r16;
+        ca.mcgill.sable.soot.SootClass r5, r7, r15;
+        java.util.BitSet r6, r13, r19, r20, r24, r25, r26, r27, r30, r31, r32;
+        ca.mcgill.sable.util.List r11;
+        ca.mcgill.sable.util.Iterator r12;
+        java.lang.Object r14, r22, r34;
+        java.util.Vector r21, r33;
+        ca.mcgill.sable.soot.NullType r28;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>(r1, r2);
+        r3 = r1.classManager;
+        r4 = r2.className;
+        r5 = r3.getClass(r4);
+        i2 = r5.hasSuperClass();
+        if i2 == 0 goto label0;
+
+        r6 = r0.parents;
+        r7 = r5.getSuperClass();
+        r8 = r7.getName();
+        r9 = ca.mcgill.sable.soot.RefType.v(r8);
+        r10 = r1.getTypeNode(r9);
+        i3 = r10.id;
+        r6.set(i3);
+
+     label0:
+        r11 = r5.getInterfaces();
+        r12 = r11.iterator();
+        goto label2;
+
+     label1:
+        r13 = r0.parents;
+        r14 = r12.next();
+        r15 = (ca.mcgill.sable.soot.SootClass) r14;
+        r16 = r15.getName();
+        r17 = ca.mcgill.sable.soot.RefType.v(r16);
+        r18 = r1.getTypeNode(r17);
+        i4 = r18.id;
+        r13.set(i4);
+
+     label2:
+        i5 = r12.hasNext();
+        if i5 != 0 goto label1;
+
+        r19 = r0.parents;
+        i6 = r19.size();
+        i0 = 0;
+        goto label5;
+
+     label3:
+        r20 = r0.parents;
+        i7 = r20.get(i0);
+        if i7 == 0 goto label4;
+
+        r21 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r22 = r21.elementAt(i0);
+        r23 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r22;
+        r24 = r0.ancestors;
+        r25 = r23.ancestors;
+        r24.or(r25);
+
+     label4:
+        i0 = i0 + 1;
+
+     label5:
+        if i0 < i6 goto label3;
+
+        r26 = r0.ancestors;
+        r27 = r0.parents;
+        r26.or(r27);
+        r28 = ca.mcgill.sable.soot.NullType.v();
+        r29 = r1.getTypeNode(r28);
+        r30 = r0.descendants;
+        i8 = r29.id;
+        r30.set(i8);
+        r31 = r29.ancestors;
+        i9 = r0.id;
+        r31.set(i9);
+        i1 = 0;
+        goto label8;
+
+     label6:
+        r32 = r0.parents;
+        i10 = r32.get(i1);
+        if i10 == 0 goto label7;
+
+        r33 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r34 = r33.elementAt(i1);
+        r35 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r34;
+        i11 = r0.id;
+        specialinvoke r35.fixDescendants(i11);
+
+     label7:
+        i1 = i1 + 1;
+
+     label8:
+        if i1 < i6 goto label6;
+
+        return;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.ClassHierarchy, ca.mcgill.sable.soot.ArrayType)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0, r14, r23, r26, r29, r34, r40, r46, r49, r52, r57, r63, r69;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r1;
+        ca.mcgill.sable.soot.ArrayType r2, r13, r22;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26;
+        ca.mcgill.sable.soot.BaseType r3, r4;
+        ca.mcgill.sable.soot.RefType r5, r12, r21, r25, r28, r48, r51;
+        ca.mcgill.sable.soot.SootClassManager r6;
+        java.lang.String r7, r11, r20;
+        ca.mcgill.sable.soot.SootClass r8, r10, r19;
+        java.util.BitSet r9, r17, r24, r27, r30, r31, r35, r36, r37, r38, r41, r42, r43, r47, r50, r53, r54, r58, r59, r60, r61, r64, r65, r66;
+        ca.mcgill.sable.util.List r15;
+        ca.mcgill.sable.util.Iterator r16;
+        java.lang.Object r18, r33, r45, r56, r68;
+        java.util.Vector r32, r44, r55, r67;
+        ca.mcgill.sable.soot.NullType r39, r62;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>(r1, r2);
+        r3 = r2.baseType;
+        i2 = r3 instanceof ca.mcgill.sable.soot.RefType;
+        if i2 == 0 goto label9;
+
+        r4 = r2.baseType;
+        r5 = (ca.mcgill.sable.soot.RefType) r4;
+        r6 = r1.classManager;
+        r7 = r5.className;
+        r8 = r6.getClass(r7);
+        i3 = r8.hasSuperClass();
+        if i3 == 0 goto label0;
+
+        r9 = r0.parents;
+        r10 = r8.getSuperClass();
+        r11 = r10.getName();
+        r12 = ca.mcgill.sable.soot.RefType.v(r11);
+        i4 = r2.numDimensions;
+        r13 = ca.mcgill.sable.soot.ArrayType.v(r12, i4);
+        r14 = r1.getTypeNode(r13);
+        i5 = r14.id;
+        r9.set(i5);
+
+     label0:
+        r15 = r8.getInterfaces();
+        r16 = r15.iterator();
+        goto label2;
+
+     label1:
+        r17 = r0.parents;
+        r18 = r16.next();
+        r19 = (ca.mcgill.sable.soot.SootClass) r18;
+        r20 = r19.getName();
+        r21 = ca.mcgill.sable.soot.RefType.v(r20);
+        i6 = r2.numDimensions;
+        r22 = ca.mcgill.sable.soot.ArrayType.v(r21, i6);
+        r23 = r1.getTypeNode(r22);
+        i7 = r23.id;
+        r17.set(i7);
+
+     label2:
+        i8 = r16.hasNext();
+        if i8 != 0 goto label1;
+
+        r24 = r0.parents;
+        r25 = ca.mcgill.sable.soot.RefType.v("java.lang.Object");
+        r26 = r1.getTypeNode(r25);
+        i9 = r26.id;
+        r24.set(i9);
+        r27 = r0.parents;
+        r28 = ca.mcgill.sable.soot.RefType.v("java.lang.Cloneable");
+        r29 = r1.getTypeNode(r28);
+        i10 = r29.id;
+        r27.set(i10);
+        r30 = r0.parents;
+        i11 = r30.size();
+        i0 = 0;
+        goto label5;
+
+     label3:
+        r31 = r0.parents;
+        i12 = r31.get(i0);
+        if i12 == 0 goto label4;
+
+        r32 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r33 = r32.elementAt(i0);
+        r34 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r33;
+        r35 = r0.ancestors;
+        r36 = r34.ancestors;
+        r35.or(r36);
+
+     label4:
+        i0 = i0 + 1;
+
+     label5:
+        if i0 < i11 goto label3;
+
+        r37 = r0.ancestors;
+        r38 = r0.parents;
+        r37.or(r38);
+        r39 = ca.mcgill.sable.soot.NullType.v();
+        r40 = r1.getTypeNode(r39);
+        r41 = r0.descendants;
+        i13 = r40.id;
+        r41.set(i13);
+        r42 = r40.ancestors;
+        i14 = r0.id;
+        r42.set(i14);
+        i1 = 0;
+        goto label8;
+
+     label6:
+        r43 = r0.parents;
+        i15 = r43.get(i1);
+        if i15 == 0 goto label7;
+
+        r44 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r45 = r44.elementAt(i1);
+        r46 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r45;
+        i16 = r0.id;
+        specialinvoke r46.fixDescendants(i16);
+
+     label7:
+        i1 = i1 + 1;
+
+     label8:
+        if i1 < i11 goto label6;
+
+        return;
+
+     label9:
+        r47 = r0.parents;
+        r48 = ca.mcgill.sable.soot.RefType.v("java.lang.Object");
+        r49 = r1.getTypeNode(r48);
+        i17 = r49.id;
+        r47.set(i17);
+        r50 = r0.parents;
+        r51 = ca.mcgill.sable.soot.RefType.v("java.lang.Cloneable");
+        r52 = r1.getTypeNode(r51);
+        i18 = r52.id;
+        r50.set(i18);
+        r53 = r0.parents;
+        i19 = r53.size();
+        i20 = 0;
+        goto label12;
+
+     label10:
+        r54 = r0.parents;
+        i21 = r54.get(i20);
+        if i21 == 0 goto label11;
+
+        r55 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r56 = r55.elementAt(i20);
+        r57 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r56;
+        r58 = r0.ancestors;
+        r59 = r57.ancestors;
+        r58.or(r59);
+
+     label11:
+        i20 = i20 + 1;
+
+     label12:
+        if i20 < i19 goto label10;
+
+        r60 = r0.ancestors;
+        r61 = r0.parents;
+        r60.or(r61);
+        r62 = ca.mcgill.sable.soot.NullType.v();
+        r63 = r1.getTypeNode(r62);
+        r64 = r0.descendants;
+        i22 = r63.id;
+        r64.set(i22);
+        r65 = r63.ancestors;
+        i23 = r0.id;
+        r65.set(i23);
+        i24 = 0;
+        goto label15;
+
+     label13:
+        r66 = r0.parents;
+        i25 = r66.get(i24);
+        if i25 == 0 goto label14;
+
+        r67 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r1);
+        r68 = r67.elementAt(i24);
+        r69 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r68;
+        i26 = r0.id;
+        specialinvoke r69.fixDescendants(i26);
+
+     label14:
+        i24 = i24 + 1;
+
+     label15:
+        if i24 < i19 goto label13;
+
+        return;
+    }
+
+    private void fixDescendants(int)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0, r7;
+        int i0, i1, i2, i3, i4;
+        java.util.BitSet r1, r2, r3, r8;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r4;
+        java.util.Vector r5;
+        java.lang.Object r6;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.descendants;
+        i2 = r1.get(i0);
+        if i2 == 0 goto label0;
+
+        return;
+
+     label0:
+        r2 = r0.parents;
+        i3 = r2.size();
+        i1 = 0;
+        goto label3;
+
+     label1:
+        r3 = r0.parents;
+        i4 = r3.get(i1);
+        if i4 == 0 goto label2;
+
+        r4 = r0.this$0;
+        r5 = ca.mcgill.sable.soot.jimple.ClassHierarchy.access$0(r4);
+        r6 = r5.elementAt(i1);
+        r7 = (ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode) r6;
+        specialinvoke r7.fixDescendants(i0);
+
+     label2:
+        i1 = i1 + 1;
+
+     label3:
+        if i1 < i3 goto label1;
+
+        r8 = r0.descendants;
+        r8.set(i0);
+        return;
+    }
+
+    public int getId()
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0;
+        int i0;
+
+        r0 := @this;
+        i0 = r0.id;
+        return i0;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0;
+        ca.mcgill.sable.soot.Type r1;
+
+        r0 := @this;
+        r1 = r0.type;
+        return r1;
+    }
+
+    public boolean hasAncestor(ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0, r1;
+        java.util.BitSet r2;
+        int i0, i1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.ancestors;
+        i0 = r1.id;
+        i1 = r2.get(i0);
+        return i1;
+    }
+
+    public boolean hasDescendant(ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode)
+    {
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r0, r1;
+        java.util.BitSet r2;
+        int i0, i1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.descendants;
+        i0 = r1.id;
+        i1 = r2.get(i0);
+        return i1;
+    }
+}

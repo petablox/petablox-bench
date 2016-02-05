@@ -1,0 +1,85 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.preprocessor</A>: GrammarFile');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.preprocessor</A>: GrammarFile';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.preprocessor;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN><span class="comment">/** Stores header action, grammar preamble, file options, and
+<a name=4 class="linenum">4	</SPAN> *  list of grammars in the file
+<a name=5 class="linenum">5	</SPAN> */</span>
+<a name=6 class="linenum">6	</SPAN>
+<a name=7 class="linenum">7	</SPAN>import antlr.collections.impl.IndexedVector;
+<a name=8 class="linenum">8	</SPAN>import java.util.Enumeration;
+<a name=9 class="linenum">9	</SPAN>import java.io.*;
+<a name=10 class="linenum">10	</SPAN>
+<a name=11 class="linenum">11	</SPAN>public class <a class="classDef" name=GrammarFile href=GrammarFile_java_ref.html#GrammarFile>GrammarFile</a> {
+<a name=12 class="linenum">12	</SPAN>	protected String <a class="varDef" name=fileName href=GrammarFile_java_ref.html#fileName>fileName</a>;
+<a name=13 class="linenum">13	</SPAN>	protected String <a class="varDef" name=headerAction href=GrammarFile_java_ref.html#headerAction>headerAction</a>;
+<a name=14 class="linenum">14	</SPAN>	protected <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> <a class="varDef" name=options href=GrammarFile_java_ref.html#options>options</a>;
+<a name=15 class="linenum">15	</SPAN>	protected <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> <a class="varDef" name=grammars href=GrammarFile_java_ref.html#grammars>grammars</a>;
+<a name=16 class="linenum">16	</SPAN>	protected boolean <a class="varDef" name=expanded href=GrammarFile_java_ref.html#expanded>expanded</a> = false;	<span class="comment">// any grammars expanded within?
+<a name=17 class="linenum">17	</SPAN></span>
+<a name=18 class="linenum">18	</SPAN>	public <a class="methodDef" name=GrammarFile(String) href=GrammarFile_java_ref.html#GrammarFile(String)>GrammarFile</a>(String f) {
+<a name=19 class="linenum">19	</SPAN>		<a class="varRef" href=GrammarFile_java.html#fileName>fileName</a> = f;
+<a name=20 class="linenum">20	</SPAN>		<a class="varRef" href=GrammarFile_java.html#grammars>grammars</a> = new <a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector()>IndexedVector</a>();
+<a name=21 class="linenum">21	</SPAN>	}
+<a name=22 class="linenum">22	</SPAN>	public void <a class="methodDef" name=addGrammar(Grammar) href=GrammarFile_java_ref.html#addGrammar(Grammar)>addGrammar</a>(<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> g) {
+<a name=23 class="linenum">23	</SPAN>		<a class="varRef" href=GrammarFile_java.html#grammars>grammars</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#appendElement(Object,Object)>appendElement</a>(g.<a class="methodRef" href=Grammar_java.html#getName()>getName</a>(), g);
+<a name=24 class="linenum">24	</SPAN>	}
+<a name=25 class="linenum">25	</SPAN>	public void <a class="methodDef" name=generateExpandedFile() href=GrammarFile_java_ref.html#generateExpandedFile()>generateExpandedFile</a>() throws IOException {
+<a name=26 class="linenum">26	</SPAN>		if ( !expanded ) {
+<a name=27 class="linenum">27	</SPAN>			return;	<span class="comment">// don't generate if nothing got expanded
+<a name=28 class="linenum">28	</SPAN></span>		}	
+<a name=29 class="linenum">29	</SPAN>		String expandedFileName = nameForExpandedGrammarFile(this.getName());
+<a name=30 class="linenum">30	</SPAN>		
+<a name=31 class="linenum">31	</SPAN>		<span class="comment">// create the new grammar file with expanded grammars
+<a name=32 class="linenum">32	</SPAN></span>		PrintWriter expF = antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#openOutputFile(String)>openOutputFile</a>(expandedFileName);
+<a name=33 class="linenum">33	</SPAN>		expF.println(toString());
+<a name=34 class="linenum">34	</SPAN>		expF.close();
+<a name=35 class="linenum">35	</SPAN>	}
+<a name=36 class="linenum">36	</SPAN>	public <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> <a class="methodDef" name=getGrammars() href=GrammarFile_java_ref.html#getGrammars()>getGrammars</a>() {
+<a name=37 class="linenum">37	</SPAN>		return <a class="varRef" href=GrammarFile_java.html#grammars>grammars</a>;
+<a name=38 class="linenum">38	</SPAN>	}
+<a name=39 class="linenum">39	</SPAN>	public String <a class="methodDef" name=getName() href=GrammarFile_java_ref.html#getName()>getName</a>() {return <a class="varRef" href=GrammarFile_java.html#fileName>fileName</a>;}
+<a name=40 class="linenum">40	</SPAN>	public String <a class="methodDef" name=nameForExpandedGrammarFile(String) href=GrammarFile_java_ref.html#nameForExpandedGrammarFile(String)>nameForExpandedGrammarFile</a>(String f) {
+<a name=41 class="linenum">41	</SPAN>		if ( expanded ) {
+<a name=42 class="linenum">42	</SPAN>			<span class="comment">// strip path to original input, make expanded file in current dir
+<a name=43 class="linenum">43	</SPAN></span>			return "expanded"+antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#fileMinusPath(String)>fileMinusPath</a>(f);	
+<a name=44 class="linenum">44	</SPAN>		}
+<a name=45 class="linenum">45	</SPAN>		else {
+<a name=46 class="linenum">46	</SPAN>			return f;
+<a name=47 class="linenum">47	</SPAN>		}		
+<a name=48 class="linenum">48	</SPAN>	}
+<a name=49 class="linenum">49	</SPAN>	public void <a class="methodDef" name=setExpanded(boolean) href=GrammarFile_java_ref.html#setExpanded(boolean)>setExpanded</a>(boolean exp) {
+<a name=50 class="linenum">50	</SPAN>		<a class="varRef" href=GrammarFile_java.html#expanded>expanded</a> = exp;
+<a name=51 class="linenum">51	</SPAN>	}
+<a name=52 class="linenum">52	</SPAN>	public void <a class="methodDef" name=setHeaderAction(String) href=GrammarFile_java_ref.html#setHeaderAction(String)>setHeaderAction</a>(String a) {<a class="varRef" href=GrammarFile_java.html#headerAction>headerAction</a>=a;}
+<a name=53 class="linenum">53	</SPAN>	public void <a class="methodDef" name=setOptions(IndexedVector) href=GrammarFile_java_ref.html#setOptions(IndexedVector)>setOptions</a>(<a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> o) {<a class="varRef" href=GrammarFile_java.html#options>options</a>=o;}
+<a name=54 class="linenum">54	</SPAN>	public String <a class="methodDef" name=toString() href=GrammarFile_java_ref.html#toString()>toString</a>() {
+<a name=55 class="linenum">55	</SPAN>		String h = <a class="varRef" href=GrammarFile_java.html#headerAction>headerAction</a>==null ? "" : <a class="varRef" href=GrammarFile_java.html#headerAction>headerAction</a>;
+<a name=56 class="linenum">56	</SPAN>		String o = <a class="varRef" href=GrammarFile_java.html#options>options</a>==null ? "" : <a class="classRef" href=Hierarchy_java.html#Hierarchy>Hierarchy</a>.<a class="methodRef" href=Hierarchy_java.html#optionsToString(IndexedVector)>optionsToString</a>(<a class="varRef" href=GrammarFile_java.html#options>options</a>);
+<a name=57 class="linenum">57	</SPAN>		
+<a name=58 class="linenum">58	</SPAN>		String s=h+o;
+<a name=59 class="linenum">59	</SPAN>		for (Enumeration e=<a class="varRef" href=GrammarFile_java.html#grammars>grammars</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#elements()>elements</a>(); e.hasMoreElements(); ) {
+<a name=60 class="linenum">60	</SPAN>			<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> g = (<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a>)e.nextElement();
+<a name=61 class="linenum">61	</SPAN>			s += g;
+<a name=62 class="linenum">62	</SPAN>		}	
+<a name=63 class="linenum">63	</SPAN>		return s;
+<a name=64 class="linenum">64	</SPAN>	}
+<a name=65 class="linenum">65	</SPAN>}
+<a name=66 class="linenum">66	</SPAN></pre>

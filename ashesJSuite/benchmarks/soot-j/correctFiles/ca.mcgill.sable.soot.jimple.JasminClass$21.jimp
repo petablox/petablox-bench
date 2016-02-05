@@ -1,0 +1,419 @@
+final class ca.mcgill.sable.soot.jimple.JasminClass$21 extends ca.mcgill.sable.soot.TypeSwitch
+{
+    private final ca.mcgill.sable.soot.jimple.CastExpr val$v;
+    private final ca.mcgill.sable.soot.jimple.JasminClass this$0;
+    private final ca.mcgill.sable.soot.Type val$toType;
+    private final ca.mcgill.sable.soot.Type val$fromType;
+
+    public void defaultCase(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.Type r1, r4;
+        java.lang.RuntimeException r2;
+        java.lang.StringBuffer r3, r5;
+        java.lang.String r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new java.lang.RuntimeException;
+        r3 = new java.lang.StringBuffer;
+        specialinvoke r3.<init>("invalid fromType ");
+        r4 = r0.val$fromType;
+        r5 = r3.append(r4);
+        r6 = r5.toString();
+        specialinvoke r2.<init>(r6);
+        throw r2;
+    }
+
+    public void caseDoubleType(ca.mcgill.sable.soot.DoubleType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.DoubleType r1;
+        ca.mcgill.sable.soot.IntType r2;
+        ca.mcgill.sable.soot.Type r3, r5, r8, r13;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.JasminClass r4, r7, r10;
+        ca.mcgill.sable.soot.LongType r6;
+        ca.mcgill.sable.soot.FloatType r9;
+        java.lang.RuntimeException r11;
+        java.lang.StringBuffer r12, r14;
+        java.lang.String r15;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.val$toType;
+        r2 = ca.mcgill.sable.soot.IntType.v();
+        i0 = r3.equals(r2);
+        if i0 == 0 goto label0;
+
+        r4 = r0.this$0;
+        r4.emit("d2i", -1);
+        return;
+
+     label0:
+        r5 = r0.val$toType;
+        r6 = ca.mcgill.sable.soot.LongType.v();
+        i1 = r5.equals(r6);
+        if i1 == 0 goto label1;
+
+        r7 = r0.this$0;
+        r7.emit("d2l", 0);
+        return;
+
+     label1:
+        r8 = r0.val$toType;
+        r9 = ca.mcgill.sable.soot.FloatType.v();
+        i2 = r8.equals(r9);
+        if i2 == 0 goto label2;
+
+        r10 = r0.this$0;
+        r10.emit("d2f", -1);
+        return;
+
+     label2:
+        r11 = new java.lang.RuntimeException;
+        r12 = new java.lang.StringBuffer;
+        specialinvoke r12.<init>("invalid toType from double: ");
+        r13 = r0.val$toType;
+        r14 = r12.append(r13);
+        r15 = r14.toString();
+        specialinvoke r11.<init>(r15);
+        throw r11;
+    }
+
+    public void caseFloatType(ca.mcgill.sable.soot.FloatType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.FloatType r1;
+        ca.mcgill.sable.soot.IntType r2;
+        ca.mcgill.sable.soot.Type r3, r5, r8, r13;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.JasminClass r4, r7, r10;
+        ca.mcgill.sable.soot.LongType r6;
+        ca.mcgill.sable.soot.DoubleType r9;
+        java.lang.RuntimeException r11;
+        java.lang.StringBuffer r12, r14;
+        java.lang.String r15;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.val$toType;
+        r2 = ca.mcgill.sable.soot.IntType.v();
+        i0 = r3.equals(r2);
+        if i0 == 0 goto label0;
+
+        r4 = r0.this$0;
+        r4.emit("f2i", 0);
+        return;
+
+     label0:
+        r5 = r0.val$toType;
+        r6 = ca.mcgill.sable.soot.LongType.v();
+        i1 = r5.equals(r6);
+        if i1 == 0 goto label1;
+
+        r7 = r0.this$0;
+        r7.emit("f2l", 1);
+        return;
+
+     label1:
+        r8 = r0.val$toType;
+        r9 = ca.mcgill.sable.soot.DoubleType.v();
+        i2 = r8.equals(r9);
+        if i2 == 0 goto label2;
+
+        r10 = r0.this$0;
+        r10.emit("f2d", 1);
+        return;
+
+     label2:
+        r11 = new java.lang.RuntimeException;
+        r12 = new java.lang.StringBuffer;
+        specialinvoke r12.<init>("invalid toType from float: ");
+        r13 = r0.val$toType;
+        r14 = r12.append(r13);
+        r15 = r14.toString();
+        specialinvoke r11.<init>(r15);
+        throw r11;
+    }
+
+    public void caseIntType(ca.mcgill.sable.soot.IntType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.IntType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+    }
+
+    public void caseBooleanType(ca.mcgill.sable.soot.BooleanType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.BooleanType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+    }
+
+    public void caseByteType(ca.mcgill.sable.soot.ByteType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.ByteType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+    }
+
+    public void caseCharType(ca.mcgill.sable.soot.CharType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.CharType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+    }
+
+    public void caseShortType(ca.mcgill.sable.soot.ShortType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.ShortType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+    }
+
+    private void emitIntToTypeCast()
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.ByteType r1;
+        ca.mcgill.sable.soot.Type r2, r4, r7, r10, r13, r16, r19, r23;
+        int i0, i1, i2, i3, i4, i5, i6;
+        ca.mcgill.sable.soot.jimple.JasminClass r3, r6, r9, r12, r15, r18;
+        ca.mcgill.sable.soot.CharType r5;
+        ca.mcgill.sable.soot.ShortType r8;
+        ca.mcgill.sable.soot.FloatType r11;
+        ca.mcgill.sable.soot.LongType r14;
+        ca.mcgill.sable.soot.DoubleType r17;
+        ca.mcgill.sable.soot.IntType r20;
+        java.lang.RuntimeException r21;
+        java.lang.StringBuffer r22, r24, r25, r28;
+        ca.mcgill.sable.soot.jimple.CastExpr r26;
+        java.lang.String r27, r29;
+
+        r0 := @this;
+        r2 = r0.val$toType;
+        r1 = ca.mcgill.sable.soot.ByteType.v();
+        i0 = r2.equals(r1);
+        if i0 == 0 goto label0;
+
+        r3 = r0.this$0;
+        r3.emit("i2b", 0);
+        return;
+
+     label0:
+        r4 = r0.val$toType;
+        r5 = ca.mcgill.sable.soot.CharType.v();
+        i1 = r4.equals(r5);
+        if i1 == 0 goto label1;
+
+        r6 = r0.this$0;
+        r6.emit("i2c", 0);
+        return;
+
+     label1:
+        r7 = r0.val$toType;
+        r8 = ca.mcgill.sable.soot.ShortType.v();
+        i2 = r7.equals(r8);
+        if i2 == 0 goto label2;
+
+        r9 = r0.this$0;
+        r9.emit("i2s", 0);
+        return;
+
+     label2:
+        r10 = r0.val$toType;
+        r11 = ca.mcgill.sable.soot.FloatType.v();
+        i3 = r10.equals(r11);
+        if i3 == 0 goto label3;
+
+        r12 = r0.this$0;
+        r12.emit("i2f", 0);
+        return;
+
+     label3:
+        r13 = r0.val$toType;
+        r14 = ca.mcgill.sable.soot.LongType.v();
+        i4 = r13.equals(r14);
+        if i4 == 0 goto label4;
+
+        r15 = r0.this$0;
+        r15.emit("i2l", 1);
+        return;
+
+     label4:
+        r16 = r0.val$toType;
+        r17 = ca.mcgill.sable.soot.DoubleType.v();
+        i5 = r16.equals(r17);
+        if i5 == 0 goto label5;
+
+        r18 = r0.this$0;
+        r18.emit("i2d", 1);
+        return;
+
+     label5:
+        r19 = r0.val$toType;
+        r20 = ca.mcgill.sable.soot.IntType.v();
+        i6 = r19.equals(r20);
+        if i6 != 0 goto label6;
+
+        r21 = new java.lang.RuntimeException;
+        r22 = new java.lang.StringBuffer;
+        specialinvoke r22.<init>("invalid toType from int: ");
+        r23 = r0.val$toType;
+        r24 = r22.append(r23);
+        r25 = r24.append(" ");
+        r26 = r0.val$v;
+        r27 = r26.toString();
+        r28 = r25.append(r27);
+        r29 = r28.toString();
+        specialinvoke r21.<init>(r29);
+        throw r21;
+
+     label6:
+        return;
+    }
+
+    public void caseLongType(ca.mcgill.sable.soot.LongType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.LongType r1;
+        ca.mcgill.sable.soot.IntType r2;
+        ca.mcgill.sable.soot.Type r3, r5, r8, r11, r14, r17, r20, r25;
+        int i0, i1, i2, i3, i4, i5, i6;
+        ca.mcgill.sable.soot.jimple.JasminClass r4, r7, r10, r13, r16, r19, r22;
+        ca.mcgill.sable.soot.FloatType r6;
+        ca.mcgill.sable.soot.DoubleType r9;
+        ca.mcgill.sable.soot.ByteType r12;
+        ca.mcgill.sable.soot.ShortType r15;
+        ca.mcgill.sable.soot.CharType r18;
+        ca.mcgill.sable.soot.BooleanType r21;
+        java.lang.RuntimeException r23;
+        java.lang.StringBuffer r24, r26;
+        java.lang.String r27;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.val$toType;
+        r2 = ca.mcgill.sable.soot.IntType.v();
+        i0 = r3.equals(r2);
+        if i0 == 0 goto label0;
+
+        r4 = r0.this$0;
+        r4.emit("l2i", -1);
+        return;
+
+     label0:
+        r5 = r0.val$toType;
+        r6 = ca.mcgill.sable.soot.FloatType.v();
+        i1 = r5.equals(r6);
+        if i1 == 0 goto label1;
+
+        r7 = r0.this$0;
+        r7.emit("l2f", -1);
+        return;
+
+     label1:
+        r8 = r0.val$toType;
+        r9 = ca.mcgill.sable.soot.DoubleType.v();
+        i2 = r8.equals(r9);
+        if i2 == 0 goto label2;
+
+        r10 = r0.this$0;
+        r10.emit("l2d", 0);
+        return;
+
+     label2:
+        r11 = r0.val$toType;
+        r12 = ca.mcgill.sable.soot.ByteType.v();
+        i3 = r11.equals(r12);
+        if i3 == 0 goto label3;
+
+        r13 = r0.this$0;
+        r13.emit("l2i", -1);
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+
+     label3:
+        r14 = r0.val$toType;
+        r15 = ca.mcgill.sable.soot.ShortType.v();
+        i4 = r14.equals(r15);
+        if i4 == 0 goto label4;
+
+        r16 = r0.this$0;
+        r16.emit("l2i", -1);
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+
+     label4:
+        r17 = r0.val$toType;
+        r18 = ca.mcgill.sable.soot.CharType.v();
+        i5 = r17.equals(r18);
+        if i5 == 0 goto label5;
+
+        r19 = r0.this$0;
+        r19.emit("l2i", -1);
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+
+     label5:
+        r20 = r0.val$toType;
+        r21 = ca.mcgill.sable.soot.BooleanType.v();
+        i6 = r20.equals(r21);
+        if i6 == 0 goto label6;
+
+        r22 = r0.this$0;
+        r22.emit("l2i", -1);
+        specialinvoke r0.emitIntToTypeCast();
+        return;
+
+     label6:
+        r23 = new java.lang.RuntimeException;
+        r24 = new java.lang.StringBuffer;
+        specialinvoke r24.<init>("invalid toType from long: ");
+        r25 = r0.val$toType;
+        r26 = r24.append(r25);
+        r27 = r26.toString();
+        specialinvoke r23.<init>(r27);
+        throw r23;
+    }
+
+    void <init>(ca.mcgill.sable.soot.Type, ca.mcgill.sable.soot.jimple.JasminClass, ca.mcgill.sable.soot.Type, ca.mcgill.sable.soot.jimple.CastExpr)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$21 r0;
+        ca.mcgill.sable.soot.Type r1, r3;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+        ca.mcgill.sable.soot.jimple.CastExpr r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 := @parameter3;
+        specialinvoke r0.<init>();
+        r0.val$fromType = r1;
+        r0.this$0 = r2;
+        r0.val$toType = r3;
+        r0.val$v = r4;
+        return;
+    }
+}

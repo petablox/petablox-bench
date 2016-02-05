@@ -1,0 +1,225 @@
+public class ca.mcgill.sable.soot.jimple.Local extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.ToBriefString
+{
+    java.lang.String name;
+    ca.mcgill.sable.soot.Type type;
+    int fixedHashCode;
+    boolean isHashCodeChosen;
+
+    void <init>(java.lang.String, ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        java.lang.String r1;
+        ca.mcgill.sable.soot.Type r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.name = r1;
+        r0.type = r2;
+        return;
+    }
+
+    public java.lang.Object clone()
+    {
+        ca.mcgill.sable.soot.jimple.Local r0, r1;
+        java.lang.String r2;
+        ca.mcgill.sable.soot.Type r3;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.soot.jimple.Local;
+        r2 = r0.name;
+        r3 = r0.type;
+        specialinvoke r1.<init>(r2, r3);
+        return r1;
+    }
+
+    public java.lang.String getName()
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.name;
+        return r1;
+    }
+
+    public void setName(java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.name = r1;
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.Local r0, r2, r5;
+        java.lang.Object r1;
+        int i0, i1, i2;
+        java.lang.String r3, r4;
+        ca.mcgill.sable.soot.Type r6, r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i0 == 0 goto label2;
+
+        r2 = (ca.mcgill.sable.soot.jimple.Local) r1;
+        r3 = r2.name;
+        r4 = r0.name;
+        i1 = r3.equals(r4);
+        if i1 == 0 goto label0;
+
+        r5 = (ca.mcgill.sable.soot.jimple.Local) r1;
+        r6 = r5.type;
+        r7 = r0.type;
+        i2 = r6.equals(r7);
+        if i2 != 0 goto label1;
+
+     label0:
+        return 0;
+
+     label1:
+        return 1;
+
+     label2:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        int i0, i1, i2, i3, i4, i5, i6, i7;
+        java.lang.String r1, r3, r5, r6;
+        ca.mcgill.sable.soot.Type r2, r4, r7, r8;
+
+        r0 := @this;
+        i0 = r0.isHashCodeChosen;
+        if i0 != 0 goto label8;
+
+        r1 = r0.name;
+        if r1 != null goto label0;
+
+        i1 = 0;
+        goto label1;
+
+     label0:
+        i1 = 1;
+
+     label1:
+        r2 = r0.type;
+        if r2 != null goto label2;
+
+        i2 = 0;
+        goto label3;
+
+     label2:
+        i2 = 1;
+
+     label3:
+        i3 = i1 & i2;
+        if i3 == 0 goto label4;
+
+        r3 = r0.name;
+        i4 = r3.hashCode();
+        r4 = r0.type;
+        i5 = r4.hashCode();
+        i6 = 19 * i5;
+        r0.fixedHashCode = i4 + i6;
+        goto label7;
+
+     label4:
+        r5 = r0.name;
+        if r5 == null goto label5;
+
+        r6 = r0.name;
+        r0.fixedHashCode = r6.hashCode();
+        goto label7;
+
+     label5:
+        r7 = r0.type;
+        if r7 == null goto label6;
+
+        r8 = r0.type;
+        r0.fixedHashCode = r8.hashCode();
+        goto label7;
+
+     label6:
+        r0.fixedHashCode = 1;
+
+     label7:
+        r0.isHashCodeChosen = 1;
+
+     label8:
+        i7 = r0.fixedHashCode;
+        return i7;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        ca.mcgill.sable.soot.Type r1;
+
+        r0 := @this;
+        r1 = r0.type;
+        return r1;
+    }
+
+    public void setType(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        ca.mcgill.sable.soot.Type r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.type = r1;
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.getName();
+        return r1;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.Local r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.JimpleValueSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.JimpleValueSwitch) r1;
+        r2.caseLocal(r0);
+        return;
+    }
+}

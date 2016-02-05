@@ -1,0 +1,9 @@
+public interface ca.mcgill.sable.soot.jimple.InvokeStmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Stmt
+{
+
+    public abstract void setInvokeExpr(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getInvokeExpr();
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getInvokeExprBox();
+}

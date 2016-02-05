@@ -1,0 +1,11 @@
+public interface ca.mcgill.sable.soot.jimple.UnopExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Expr, ca.mcgill.sable.soot.ToBriefString
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getOp();
+
+    public abstract void setOp(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getOpBox();
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+}

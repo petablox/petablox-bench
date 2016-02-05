@@ -1,0 +1,98 @@
+public class ca.mcgill.sable.soot.jimple.IntConstant extends ca.mcgill.sable.soot.jimple.Constant implements ca.mcgill.sable.util.Switchable, ca.mcgill.sable.soot.ToBriefString
+{
+    public final int value;
+
+    private void <init>(int)
+    {
+        ca.mcgill.sable.soot.jimple.IntConstant r0;
+        int i0;
+
+        r0 := @this;
+        i0 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.value = i0;
+        return;
+    }
+
+    public static ca.mcgill.sable.soot.jimple.IntConstant v(int)
+    {
+        int i0;
+        ca.mcgill.sable.soot.jimple.IntConstant r0;
+
+        i0 := @parameter0;
+        r0 = new ca.mcgill.sable.soot.jimple.IntConstant;
+        specialinvoke r0.<init>(i0);
+        return r0;
+    }
+
+    public boolean equals(ca.mcgill.sable.soot.jimple.Constant)
+    {
+        ca.mcgill.sable.soot.jimple.IntConstant r0, r2;
+        ca.mcgill.sable.soot.jimple.Constant r1;
+        int i0, i1, i2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.IntConstant;
+        if i0 == 0 goto label0;
+
+        r2 = (ca.mcgill.sable.soot.jimple.IntConstant) r1;
+        i1 = r2.value;
+        i2 = r0.value;
+        if i1 == i2 goto label1;
+
+     label0:
+        return 0;
+
+     label1:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.IntConstant r0;
+        java.lang.Integer r1;
+        int i0;
+        java.lang.String r2;
+
+        r0 := @this;
+        r1 = new java.lang.Integer;
+        i0 = r0.value;
+        specialinvoke r1.<init>(i0);
+        r2 = r1.toString();
+        return r2;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.IntConstant r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.IntConstant r0;
+        ca.mcgill.sable.soot.IntType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.IntType.v();
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.IntConstant r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ConstantSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ConstantSwitch) r1;
+        r2.caseIntConstant(r0);
+        return;
+    }
+}

@@ -1,0 +1,380 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * SableCC, an object-oriented compiler framework.                   *
+ * Copyright (C) 1997, 1998 Etienne Gagnon (gagnon@sable.mcgill.ca). *
+ * All rights reserved.                                              *
+ *                                                                   *
+ * This work was done as a project of the Sable Research Group,      *
+ * School of Computer Science, McGill University, Canada             *
+ * (http://www.sable.mcgill.ca/).  It is understood that any         *
+ * modification not identified as such is not covered by the         *
+ * preceding statement.                                              *
+ *                                                                   *
+ * This work is free software; you can redistribute it and/or        *
+ * modify it under the terms of the GNU Library General Public       *
+ * License as published by the Free Software Foundation; either      *
+ * version 2 of the License, or (at your option) any later version.  *
+ *                                                                   *
+ * This work is distributed in the hope that it will be useful,      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of    *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU *
+ * Library General Public License for more details.                  *
+ *                                                                   *
+ * You should have received a copy of the GNU Library General Public *
+ * License along with this library; if not, write to the             *
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,      *
+ * Boston, MA  02111-1307, USA.                                      *
+ *                                                                   *
+ * To submit a bug report, send a comment, or get the latest news on *
+ * this project and other Sable Research Group projects, please      *
+ * visit the web site: http://www.sable.mcgill.ca/                   *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*
+ Reference Version
+ -----------------
+ This is the latest official version on which this file is based.
+ The reference version is: $SableCCVersion: 2.8 $
+
+ Change History
+ --------------
+ A) Notes:
+
+ Please use the following template.  Most recent changes should
+ appear at the top of the list.
+
+ - Modified on [date (March 1, 1900)] by [name]. [(*) if appropriate]
+   [description of modification].
+
+ Any Modification flagged with "(*)" was done as a project of the
+ Sable Research Group, School of Computer Science,
+ McGill University, Canada (http://www.sable.mcgill.ca/).
+
+ You should add your copyright, using the following template, at
+ the top of this file, along with other copyrights.
+
+ *                                                                   *
+ * Modifications by [name] are                                       *
+ * Copyright (C) [year(s)] [your name (or company)].  All rights     *
+ * reserved.                                                         *
+ *                                                                   *
+
+ B) Changes:
+
+ - Modified on June 7, 1998 by Etienne Gagnon (gagnon@sable.mcgill.ca). (*)
+   Changed the license.
+*/
+
+Macro:Start
+package $0$;
+
+import ca.mcgill.sable.util.*;
+import $1$.*;
+
+public final class Start extends Node
+{
+    private $2$ _$3$_;
+    private EOF _eof_;
+
+    public Start()
+    {
+    }
+
+    public Start(
+        $2$ _$3$_,
+        EOF _eof_)
+    {
+        set$2$(_$3$_);
+        setEOF(_eof_);
+    }
+
+    public Object clone()
+    {
+        return new Start(
+            ($2$) cloneNode(_$3$_),
+            (EOF) cloneNode(_eof_));
+    }
+
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseStart(this);
+    }
+
+    public $2$ get$2$()
+    {
+        return _$3$_;
+    }
+
+    public void set$2$($2$ node)
+    {
+        if(_$3$_ != null)
+        {
+            _$3$_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        _$3$_ = node;
+    }
+
+    public EOF getEOF()
+    {
+        return _eof_;
+    }
+
+    public void setEOF(EOF node)
+    {
+        if(_eof_ != null)
+        {
+            _eof_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        _eof_ = node;
+    }
+
+    void removeChild(Node child)
+    {
+        if(_$3$_ == child)
+        {
+            _$3$_ = null;
+            return;
+        }
+
+        if(_eof_ == child)
+        {
+            _eof_ = null;
+            return;
+        }
+    }
+
+    void replaceChild(Node oldChild, Node newChild)
+    {
+        if(_$3$_ == oldChild)
+        {
+            set$2$(($2$) newChild);
+            return;
+        }
+
+        if(_eof_ == oldChild)
+        {
+            setEOF((EOF) newChild);
+            return;
+        }
+    }
+
+    public String toString()
+    {
+        return "" +
+            toString(_$3$_) +
+            toString(_eof_);
+    }
+}
+
+$
+
+Macro:EOF
+package $0$;
+
+import ca.mcgill.sable.util.*;
+import $1$.*;
+
+public final class EOF extends Token
+{
+    public EOF()
+    {
+        setText("");
+    }
+
+    public EOF(int line, int pos)
+    {
+        setText("");
+        setLine(line);
+        setPos(pos);
+    }
+
+    public Object clone()
+    {
+        return new EOF(getLine(), getPos());
+    }
+
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).caseEOF(this);
+    }
+}
+
+$
+
+Macro:Token
+package $0$;
+
+public abstract class Token extends Node
+{
+    private String text;
+    private int line;
+    private int pos;
+
+    public String getText()
+    {
+        return text;
+    }
+
+    public void setText(String text)
+    {
+        this.text = text;
+    }
+
+    public int getLine()
+    {
+        return line;
+    }
+
+    public void setLine(int line)
+    {
+        this.line = line;
+    }
+
+    public int getPos()
+    {
+        return pos;
+    }
+
+    public void setPos(int pos)
+    {
+        this.pos = pos;
+    }
+
+    public String toString()
+    {
+        return text + " ";
+    }
+
+    void removeChild(Node child)
+    {
+    }
+
+    void replaceChild(Node oldChild, Node newChild)
+    {
+    }
+}
+
+$
+
+Macro:Node
+package $0$;
+
+import ca.mcgill.sable.util.*;
+import $1$.*;
+
+public abstract class Node implements Switchable, Cloneable
+{
+    private Node parent;
+
+    public abstract Object clone();
+
+    public Node parent()
+    {
+        return parent;
+    }
+
+    void parent(Node parent)
+    {
+        this.parent = parent;
+    }
+
+    abstract void removeChild(Node child);
+    abstract void replaceChild(Node oldChild, Node newChild);
+
+    public void replaceBy(Node node)
+    {
+        if(parent != null)
+        {
+            parent.replaceChild(this, node);
+        }
+    }
+
+    protected String toString(Node node)
+    {
+        if(node != null)
+        {
+            return node.toString();
+        }
+
+        return "";
+    }
+
+    protected String toString(List list)
+    {
+        StringBuffer s = new StringBuffer();
+
+        for(Iterator i = list.iterator(); i.hasNext();)
+        {
+            s.append(i.next());
+        }
+
+        return s.toString();
+    }
+
+    protected Node cloneNode(Node node)
+    {
+        if(node != null)
+        {
+            return (Node) node.clone();
+        }
+
+        return null;
+    }
+
+    protected List cloneList(List list)
+    {
+        List clone = new LinkedList();
+
+        for(Iterator i = list.iterator(); i.hasNext();)
+        {
+            clone.add(((Node) i.next()).clone());
+        }
+
+        return clone;
+    }
+}
+
+$
+
+Macro:NodeCast
+package $0$;
+
+import ca.mcgill.sable.util.*;
+
+public class NodeCast implements Cast
+{
+    public final static NodeCast instance = new NodeCast();
+
+    private NodeCast()
+    {
+    }
+
+    public Object cast(Object o)
+    {
+        return (Node) o;
+    }
+}
+
+$
+

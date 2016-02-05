@@ -1,0 +1,135 @@
+public class ca.mcgill.sable.soot.jimple.JGotoStmt extends ca.mcgill.sable.soot.jimple.AbstractStmt implements ca.mcgill.sable.soot.jimple.GotoStmt
+{
+    ca.mcgill.sable.soot.jimple.UnitBox targetBox;
+    ca.mcgill.sable.util.List targetBoxes;
+
+    void <init>(ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.Jimple r2;
+        ca.mcgill.sable.util.ArrayList r3;
+        ca.mcgill.sable.util.List r4, r6;
+        ca.mcgill.sable.soot.jimple.UnitBox r5;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r2 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r0.targetBox = r2.newStmtBox(r1);
+        r3 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r3.<init>();
+        r0.targetBoxes = r3;
+        r4 = r0.targetBoxes;
+        r5 = r0.targetBox;
+        i0 = r4.add(r5);
+        r6 = r0.targetBoxes;
+        r0.targetBoxes = ca.mcgill.sable.util.Collections.unmodifiableList(r6);
+        return;
+    }
+
+    protected java.lang.String toString(boolean, ca.mcgill.sable.util.Map, java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        int i0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2, r4, r8, r10;
+        java.lang.StringBuffer r3, r5, r9;
+        ca.mcgill.sable.soot.jimple.Unit r6;
+        java.lang.Object r7;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 := @parameter2;
+        r3 = new java.lang.StringBuffer;
+        r4 = java.lang.String.valueOf(r2);
+        specialinvoke r3.<init>(r4);
+        r5 = r3.append("goto ");
+        r6 = r0.getTarget();
+        r7 = r1.get(r6);
+        r8 = (java.lang.String) r7;
+        r9 = r5.append(r8);
+        r10 = r9.toString();
+        return r10;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Unit getTarget()
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.soot.jimple.UnitBox r1;
+        ca.mcgill.sable.soot.jimple.Unit r2;
+
+        r0 := @this;
+        r1 = r0.targetBox;
+        r2 = r1.getUnit();
+        return r2;
+    }
+
+    public void setTarget(ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.UnitBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.targetBox;
+        r2.setUnit(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.UnitBox getTargetBox()
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.soot.jimple.UnitBox r1;
+
+        r0 := @this;
+        r1 = r0.targetBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getDefBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUnitBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = r0.targetBoxes;
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.JGotoStmt r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.StmtSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.StmtSwitch) r1;
+        r2.caseGotoStmt(r0);
+        return;
+    }
+}

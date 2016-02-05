@@ -1,0 +1,78 @@
+public class ca.mcgill.sable.soot.jimple.AbstractLengthExpr extends ca.mcgill.sable.soot.jimple.AbstractUnopExpr implements ca.mcgill.sable.soot.jimple.LengthExpr
+{
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractLengthExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>(r1);
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractLengthExpr r0;
+        java.lang.StringBuffer r1, r5;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        java.lang.String r4, r6;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("lengthof ");
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = r3.toString();
+        r5 = r1.append(r4);
+        r6 = r5.toString();
+        return r6;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractLengthExpr r0;
+        java.lang.StringBuffer r1, r7;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.soot.ToBriefString r4;
+        java.lang.String r5, r6, r8;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        r2 = r0.opBox;
+        r3 = r2.getValue();
+        r4 = (ca.mcgill.sable.soot.ToBriefString) r3;
+        r5 = r4.toBriefString();
+        r6 = java.lang.String.valueOf(r5);
+        specialinvoke r1.<init>(r6);
+        r7 = r1.append(".length");
+        r8 = r7.toString();
+        return r8;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractLengthExpr r0;
+        ca.mcgill.sable.soot.IntType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.IntType.v();
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractLengthExpr r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ExprSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ExprSwitch) r1;
+        r2.caseLengthExpr(r0);
+        return;
+    }
+}

@@ -1,0 +1,85 @@
+class ca.mcgill.sable.soot.jimple.TypeResolver$1$RecursiveFunction extends java.lang.Object
+{
+    private final ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] val$ecrInstances;
+    private final ca.mcgill.sable.soot.jimple.TypeResolver this$0;
+    private final int[] val$elements;
+    int index;
+
+    public boolean resolve()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$1$RecursiveFunction r0;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8;
+        int[] r1, r4;
+        ca.mcgill.sable.soot.jimple.TypeResolver r2;
+        java.util.Vector r3;
+        java.lang.Object r5;
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r6, r8;
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] r7, r10;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r9;
+
+        r0 := @this;
+        i1 = r0.index;
+        r1 = r0.val$elements;
+        i2 = r1.length;
+        if i1 != i2 goto label0;
+
+        return 1;
+
+     label0:
+        r2 = r0.this$0;
+        r3 = r2.typeVariableInstances;
+        r4 = r0.val$elements;
+        i3 = r0.index;
+        r0.index = i3 + 1;
+        i4 = r4[i3];
+        r5 = r3.elementAt(i4);
+        r6 = (ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable) r5;
+        i0 = 0;
+        goto label4;
+
+     label1:
+        r7 = r0.val$ecrInstances;
+        r8 = r7[i0];
+        r9 = r8.getEcrTypeNode();
+        i5 = r6.setEcrTypeNode(r9);
+        if i5 == 0 goto label3;
+
+        i6 = r0.resolve();
+        if i6 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        r6.unsetEcrTypeNode();
+
+     label3:
+        i0 = i0 + 1;
+
+     label4:
+        r10 = r0.val$ecrInstances;
+        i7 = r10.length;
+        if i0 < i7 goto label1;
+
+        i8 = r0.index;
+        r0.index = i8 - 1;
+        return 0;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[], int[], ca.mcgill.sable.soot.jimple.TypeResolver)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$1$RecursiveFunction r0;
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] r1;
+        int[] r2;
+        ca.mcgill.sable.soot.jimple.TypeResolver r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        specialinvoke r0.<init>();
+        r0.val$ecrInstances = r1;
+        r0.val$elements = r2;
+        r0.this$0 = r3;
+        return;
+    }
+}

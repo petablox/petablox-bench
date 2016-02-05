@@ -1,0 +1,68 @@
+class ca.mcgill.sable.soot.jimple.SimpleEqualLocals extends java.lang.Object implements ca.mcgill.sable.soot.jimple.EqualLocals
+{
+    ca.mcgill.sable.util.Map localStmtPairToDefs;
+    ca.mcgill.sable.soot.jimple.LiveLocals liveLocals;
+    ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis analysis;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.CompleteStmtGraph)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocals r0;
+        ca.mcgill.sable.soot.jimple.CompleteStmtGraph r1;
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r2 = new ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis;
+        specialinvoke r2.<init>(r1);
+        r0.analysis = r2;
+        return;
+    }
+
+    public boolean isLocalEqualToAt(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Stmt)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocals r0;
+        ca.mcgill.sable.soot.jimple.Local r1, r2;
+        ca.mcgill.sable.soot.jimple.Stmt r3;
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r4;
+        java.lang.Object r5;
+        ca.mcgill.sable.soot.jimple.FlowSet r6;
+        ca.mcgill.sable.soot.jimple.LocalCopy r7;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        if r1 != r2 goto label0;
+
+        return 1;
+
+     label0:
+        r4 = r0.analysis;
+        r5 = r4.getFlowBeforeStmt(r3);
+        r6 = (ca.mcgill.sable.soot.jimple.FlowSet) r5;
+        r7 = new ca.mcgill.sable.soot.jimple.LocalCopy;
+        specialinvoke r7.<init>(r1, r2);
+        i0 = r6.contains(r7);
+        return i0;
+    }
+
+    public ca.mcgill.sable.util.List getCopiesAt(ca.mcgill.sable.soot.jimple.Stmt)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocals r0;
+        ca.mcgill.sable.soot.jimple.Stmt r1;
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r2;
+        java.lang.Object r3;
+        ca.mcgill.sable.soot.jimple.FlowSet r4;
+        ca.mcgill.sable.util.List r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.analysis;
+        r3 = r2.getFlowBeforeStmt(r1);
+        r4 = (ca.mcgill.sable.soot.jimple.FlowSet) r3;
+        r5 = r4.toList();
+        return r5;
+    }
+}

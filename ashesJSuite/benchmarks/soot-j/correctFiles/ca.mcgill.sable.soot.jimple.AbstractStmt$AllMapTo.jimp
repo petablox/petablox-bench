@@ -1,0 +1,43 @@
+class ca.mcgill.sable.soot.jimple.AbstractStmt$AllMapTo extends ca.mcgill.sable.util.AbstractMap
+{
+    private final ca.mcgill.sable.soot.jimple.AbstractStmt this$0;
+    java.lang.Object dest;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.AbstractStmt, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt$AllMapTo r0;
+        ca.mcgill.sable.soot.jimple.AbstractStmt r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        r0.this$0 = r1;
+        r0.dest = r2;
+        return;
+    }
+
+    public java.lang.Object get(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt$AllMapTo r0;
+        java.lang.Object r1, r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.dest;
+        return r2;
+    }
+
+    public ca.mcgill.sable.util.Collection entries()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractStmt$AllMapTo r0;
+        ca.mcgill.sable.util.UnsupportedOperationException r1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.UnsupportedOperationException;
+        specialinvoke r1.<init>();
+        throw r1;
+    }
+}

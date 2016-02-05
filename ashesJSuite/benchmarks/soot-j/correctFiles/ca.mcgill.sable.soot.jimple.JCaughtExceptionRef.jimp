@@ -1,0 +1,115 @@
+public class ca.mcgill.sable.soot.jimple.JCaughtExceptionRef extends java.lang.Object implements ca.mcgill.sable.soot.jimple.CaughtExceptionRef
+{
+    ca.mcgill.sable.soot.jimple.JimpleBody body;
+
+    void <init>(ca.mcgill.sable.soot.jimple.JimpleBody)
+    {
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r0;
+        ca.mcgill.sable.soot.jimple.JimpleBody r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.body = r1;
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r0;
+
+        r0 := @this;
+        return "@caughtexception";
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getExceptionTypes()
+    {
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.JimpleBody r2;
+        ca.mcgill.sable.util.List r3;
+        ca.mcgill.sable.util.Iterator r4;
+        java.lang.Object r5;
+        ca.mcgill.sable.soot.jimple.Trap r6;
+        ca.mcgill.sable.soot.jimple.Unit r7;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.IdentityStmt r8;
+        ca.mcgill.sable.soot.jimple.Value r9;
+        ca.mcgill.sable.soot.SootClass r10;
+        java.lang.String r11;
+        ca.mcgill.sable.soot.RefType r12;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.body;
+        r3 = r2.getTraps();
+        r4 = r3.iterator();
+        goto label1;
+
+     label0:
+        r5 = r4.next();
+        r6 = (ca.mcgill.sable.soot.jimple.Trap) r5;
+        r7 = r6.getHandlerUnit();
+        i0 = r7 instanceof ca.mcgill.sable.soot.jimple.IdentityStmt;
+        if i0 == 0 goto label1;
+
+        r8 = (ca.mcgill.sable.soot.jimple.IdentityStmt) r7;
+        r9 = r8.getRightOp();
+        if r9 != r0 goto label1;
+
+        r10 = r6.getException();
+        r11 = r10.getName();
+        r12 = ca.mcgill.sable.soot.RefType.v(r11);
+        i1 = r1.add(r12);
+
+     label1:
+        i2 = r4.hasNext();
+        if i2 != 0 goto label0;
+
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r0;
+        ca.mcgill.sable.soot.RefType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.RefType.v("java.lang.Throwable");
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.JCaughtExceptionRef r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.RefSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.RefSwitch) r1;
+        r2.caseCaughtExceptionRef(r0);
+        return;
+    }
+}

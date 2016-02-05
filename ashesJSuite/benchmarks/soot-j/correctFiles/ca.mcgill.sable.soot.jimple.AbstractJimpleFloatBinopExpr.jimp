@@ -1,0 +1,35 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractJimpleFloatBinopExpr extends ca.mcgill.sable.soot.jimple.AbstractFloatBinopExpr
+{
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleFloatBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.Value r1, r2;
+        ca.mcgill.sable.soot.jimple.Jimple r3, r5;
+        ca.mcgill.sable.soot.jimple.ValueBox r4, r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r4 = r3.newArgBox(r1);
+        r5 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r6 = r5.newArgBox(r2);
+        specialinvoke r0.<init>(r4, r6);
+        return;
+    }
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox, ca.mcgill.sable.soot.jimple.ValueBox)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractJimpleFloatBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1, r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.op1Box = r1;
+        r0.op2Box = r2;
+        return;
+    }
+}

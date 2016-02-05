@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" name="net.javacoding.jspider.core.threading.WorkerThreadPoolTest" tests="8" time="3.164">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."></property>
+    <property name="dependency.commons-logging.files" value="*.jar"></property>
+    <property name="os.name" value="Windows 2000"></property>
+    <property name="sun.boot.class.path" value="c:\jdk1.4.1\jre\lib\rt.jar;c:\jdk1.4.1\jre\lib\i18n.jar;c:\jdk1.4.1\jre\lib\sunrsasign.jar;c:\jdk1.4.1\jre\lib\jsse.jar;c:\jdk1.4.1\jre\lib\jce.jar;c:\jdk1.4.1\jre\lib\charsets.jar;c:\jdk1.4.1\jre\classes"></property>
+    <property name="dependency.log4j.version" value="log4j-1.2.8"></property>
+    <property name="TODAY" value="April 6 2003"></property>
+    <property name="build.timestamp.standard" value="2003/04/06 13:33"></property>
+    <property name="folder.src.main" value="src"></property>
+    <property name="sun.java2d.fontpath" value=""></property>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="ant.home" value="c:\opt\ant"></property>
+    <property name="java.runtime.version" value="1.4.1_01-b01"></property>
+    <property name="folder.stage.doc.junit.report" value="stage/doc/junit"></property>
+    <property name="project.jspider.version.number" value="0.4.0-dev"></property>
+    <property name="user.name" value="Administrator"></property>
+    <property name="dependency.junit.version" value="junit-3.8.1"></property>
+    <property name="folder.stage.src.test" value="stage/src/test"></property>
+    <property name="user.language" value="en"></property>
+    <property name="sun.boot.library.path" value="c:\jdk1.4.1\jre\bin"></property>
+    <property name="folder.stage.compiled" value="stage/compiled"></property>
+    <property name="ant.project.name" value="JSpider (http://www.javacoding.net/jspider)"></property>
+    <property name="DSTAMP" value="20030406"></property>
+    <property name="java.version" value="1.4.1_01"></property>
+    <property name="user.timezone" value="Europe/Paris"></property>
+    <property name="sun.arch.data.model" value="32"></property>
+    <property name="folder.stage" value="stage"></property>
+    <property name="java.endorsed.dirs" value="c:\jdk1.4.1\jre\lib\endorsed"></property>
+    <property name="sun.cpu.isalist" value="pentium i486 i386"></property>
+    <property name="file.encoding.pkg" value="sun.io"></property>
+    <property name="jspider.version.string" value="JSpider v0.4.0 DEV (http://j-spider.sourceforge.net)"></property>
+    <property name="dependency.xdoclet.files" value="*.jar"></property>
+    <property name="folder.dist" value="dist"></property>
+    <property name="file.separator" value="\"></property>
+    <property name="java.specification.name" value="Java Platform API Specification"></property>
+    <property name="java.class.version" value="48.0"></property>
+    <property name="user.country" value="US"></property>
+    <property name="java.home" value="c:\jdk1.4.1\jre"></property>
+    <property name="java.vm.info" value="mixed mode"></property>
+    <property name="folder.stage.compiled.main" value="stage/compiled/main"></property>
+    <property name="ant.file" value="C:\work\jspider-main\build.xml"></property>
+    <property name="os.version" value="5.0"></property>
+    <property name="folder.res" value="res"></property>
+    <property name="folder.res.lib" value="res/lib"></property>
+    <property name="path.separator" value=";"></property>
+    <property name="java.vm.version" value="1.4.1_01-b01"></property>
+    <property name="java.util.prefs.PreferencesFactory" value="java.util.prefs.WindowsPreferencesFactory"></property>
+    <property name="user.variant" value=""></property>
+    <property name="build.DSTAMP" value="20030406"></property>
+    <property name="folder.res.output" value="res/output"></property>
+    <property name="folder.build" value="build"></property>
+    <property name="folder.src.test" value="test"></property>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"></property>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"></property>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"></property>
+    <property name="user.home" value="C:\Documents and Settings\Administrator"></property>
+    <property name="build.timestamp.version" value="20030406"></property>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="java.library.path" value="c:\jdk1.4.1\bin;.;C:\WINNT\System32;C:\WINNT;c:\home;c:\opt\maven\bin;c:\program files\cvsnt;c:\opt\ant\bin;c:\cygwin;c:\cygwin\bin;C:\WINNT\system32;C:\WINNT;C:\WINNT\System32\Wbem;C:\Program Files\SQLLIB\BIN;C:\Program Files\SQLLIB\HELP;C:\PROGRA~1\ULTRAE~1"></property>
+    <property name="java.vendor.url" value="http://java.sun.com/"></property>
+    <property name="dependency.junit.files" value="junit.jar"></property>
+    <property name="build.TODAY" value="April 6 2003"></property>
+    <property name="project.jspider.version.string" value="JSpider v0.4.0 DEV (http://j-spider.sourceforge.net)"></property>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."></property>
+    <property name="dependency.velocity.version" value="velocity-1.3.1"></property>
+    <property name="java.runtime.name" value="Java(TM) 2 Runtime Environment, Standard Edition"></property>
+    <property name="java.class.path" value="c:\jdk1.4.1\lib\tools.jar;c:\opt\ant\lib\xml-apis.jar;c:\opt\ant\lib\xercesImpl.jar;c:\opt\ant\lib\optional.jar;c:\opt\ant\lib\mail.jar;c:\opt\ant\lib\junit.jar;c:\opt\ant\lib\clover.jar;c:\opt\ant\lib\ant.jar;c:\opt\ant\lib\activation.jar;.;C:\Program Files\SQLLIB\java\db2java.zip;C:\Program Files\SQLLIB\java\runtime.zip;C:\Program Files\SQLLIB\bin;C:\Program Files\Altova\xmlspy\XMLSpyInterface.jar"></property>
+    <property name="ant.version" value="Apache Ant version 1.5.2 compiled on February 28 2003"></property>
+    <property name="folder.stage.doc.junit.xml" value="stage/doc/junit-xml"></property>
+    <property name="TSTAMP" value="1333"></property>
+    <property name="folder.stage.doc.api" value="stage/doc/api"></property>
+    <property name="folder.res.bin" value="res/bin"></property>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property>
+    <property name="java.vm.specification.version" value="1.0"></property>
+    <property name="sun.os.patch.level" value="Service Pack 3"></property>
+    <property name="sun.cpu.endian" value="little"></property>
+    <property name="java.io.tmpdir" value="C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\"></property>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property>
+    <property name="folder.res.common" value="res/common"></property>
+    <property name="dependency.clover.files" value="*.jar"></property>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"></property>
+    <property name="os.arch" value="x86"></property>
+    <property name="folder.stage.doc" value="stage/doc"></property>
+    <property name="folder.stage.compiled.test" value="stage/compiled/test"></property>
+    <property name="java.ext.dirs" value="c:\jdk1.4.1\jre\lib\ext"></property>
+    <property name="user.dir" value="C:\work\jspider-main"></property>
+    <property name="folder.stage.src.main" value="stage/src/main"></property>
+    <property name="folder.stage.src" value="stage/src"></property>
+    <property name="line.separator" value="
+"></property>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"></property>
+    <property name="jspider.version.number" value="0.4.0-dev"></property>
+    <property name="basedir" value="C:\work\jspider-main"></property>
+    <property name="dependency.clover.version" value="clover-1.0"></property>
+    <property name="ant.java.version" value="1.4"></property>
+    <property name="file.encoding" value="Cp1252"></property>
+    <property name="dependency.xdoclet.version" value="xdoclet-1.2b2"></property>
+    <property name="dependency.commons-logging.version" value="commons-logging-1.0.2"></property>
+    <property name="folder.dist.prepared" value="dist/prepared"></property>
+    <property name="folder.dist.packaged" value="dist/packaged"></property>
+    <property name="folder.res.conf" value="res/conf"></property>
+    <property name="java.specification.version" value="1.4"></property>
+    <property name="dependency.log4j.files" value="*.jar"></property>
+    <property name="dependency.velocity.files" value="*.jar"></property>
+    <property name="folder.stage.doc.todo" value="stage/doc/todo"></property>
+    <property name="build.TSTAMP" value="1333"></property>
+    <property name="config.tests.fail.build" value="false"></property>
+  </properties>
+  <testcase name="testWorkerThreadPoolInstantiation" time="0.03"></testcase>
+  <testcase name="testWorkerThreadPoolSize" time="0.0"></testcase>
+  <testcase name="testWorkerThreadOccupation" time="0.01"></testcase>
+  <testcase name="testDispatcherThread" time="0.22"></testcase>
+  <testcase name="testThreadedCountingNonDispatchedSmall" time="0.0"></testcase>
+  <testcase name="testThreadedCountingNonDispatchedLarge" time="1.532"></testcase>
+  <testcase name="testThreadedCountingDispatchedSmall" time="0.02"></testcase>
+  <testcase name="testThreadedCountingDispatchedLarge" time="1.322"></testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

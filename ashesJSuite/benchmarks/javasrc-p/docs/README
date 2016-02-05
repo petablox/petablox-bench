@@ -1,0 +1,66 @@
+Javasrc: v1.4.2
+http://keith.johnston.net/javasrc.htm
+
+Instructions
+============
+
+java -cp javasrc.jar -Dtitle=<title -Doutdir=<doc dir> javasrc.app.JavaSrc <sourcedir,sourcedir,...>
+
+javasrc will recursively descend the source dir, looking for java
+files to parse.
+
+If you run out of memory, try adding the flag "-Xmx180m" (for 180 megs).
+Keep increasing the memory size until it works.
+
+The output will be the same top-level files as you would find with the
+output of javadoc.  The main file "index.html" is the first file you should
+view.
+
+The source files are renamed as *_java.html.  For each of these, a 
+references file is generated *_java_ref.html.  The source files and
+reference files are placed in the package directory for that
+file, relative to the docdir specified on the command line.
+
+Clicking on a definition (class or method) takes you to the 
+reference page where all the references to that definition.  Clicking
+on a reference takes you to the definition.
+
+Modifying the Colors
+====================
+Cascading Style Sheets are used to define the colors for the comments
+and line numbers.  You can change these by modifying the styles.css
+file in the main directory.
+
+Modifying the Code
+==================
+If you want to change the parser, modify java.g in javasrc/xref,
+and then run "java -cp javasrc.jar antlr.Tool java.g".  This will 
+generate the JavaLexer, JavaTokenTypes, and JavaXref classes.
+
+References
+==========
+Antlr was used to generate the parser files:
+antlr can be found at www.antlr.org
+
+The majority of the code for JavaSrc came from an article on
+the Java Developer's Connection: 
+"Parsers, Part IV: A Java Cross-Reference Tool"
+
+http://developer.java.sun.com/developer/technicalArticles/parser/xref/
+
+See the CREDITS for a complete list of contriubutors.
+
+Known Bugs
+==========
+Callers of methods that are are part of an interface 
+are not referenced
+
+Disclaimer
+==========
+Javasrc is an educational tool, not intended for production use.  The
+contributors do not offer any warranty or accept any liabilities
+with respect to the program.
+
+Comments/Questions/Bugs
+=======================
+Please Email comments/questions/bugs to kjohnston@iname.com

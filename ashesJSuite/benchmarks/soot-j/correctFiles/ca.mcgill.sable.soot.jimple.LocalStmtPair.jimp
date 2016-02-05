@@ -1,0 +1,67 @@
+public class ca.mcgill.sable.soot.jimple.LocalStmtPair extends java.lang.Object
+{
+    ca.mcgill.sable.soot.jimple.Local local;
+    ca.mcgill.sable.soot.jimple.Stmt stmt;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Stmt)
+    {
+        ca.mcgill.sable.soot.jimple.LocalStmtPair r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.jimple.Stmt r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.local = r1;
+        r0.stmt = r2;
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.LocalStmtPair r0, r2, r5;
+        java.lang.Object r1;
+        int i0;
+        ca.mcgill.sable.soot.jimple.Local r3, r4;
+        ca.mcgill.sable.soot.jimple.Stmt r6, r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.LocalStmtPair;
+        if i0 == 0 goto label0;
+
+        r2 = (ca.mcgill.sable.soot.jimple.LocalStmtPair) r1;
+        r3 = r2.local;
+        r4 = r0.local;
+        if r3 != r4 goto label0;
+
+        r5 = (ca.mcgill.sable.soot.jimple.LocalStmtPair) r1;
+        r6 = r5.stmt;
+        r7 = r0.stmt;
+        if r6 != r7 goto label0;
+
+        return 1;
+
+     label0:
+        return 0;
+    }
+
+    public int hashCode()
+    {
+        ca.mcgill.sable.soot.jimple.LocalStmtPair r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        int i0, i1, i2, i3, i4;
+        ca.mcgill.sable.soot.jimple.Stmt r2;
+
+        r0 := @this;
+        r1 = r0.local;
+        i0 = r1.hashCode();
+        i1 = i0 * 101;
+        r2 = r0.stmt;
+        i2 = r2.hashCode();
+        i3 = i1 + i2;
+        i4 = i3 + 17;
+        return i4;
+    }
+}

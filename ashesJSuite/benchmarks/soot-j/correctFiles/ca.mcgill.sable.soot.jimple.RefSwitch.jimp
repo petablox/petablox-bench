@@ -1,0 +1,19 @@
+public interface ca.mcgill.sable.soot.jimple.RefSwitch extends java.lang.Object implements ca.mcgill.sable.util.Switch
+{
+
+    public abstract void caseArrayRef(ca.mcgill.sable.soot.jimple.ArrayRef);
+
+    public abstract void caseStaticFieldRef(ca.mcgill.sable.soot.jimple.StaticFieldRef);
+
+    public abstract void caseInstanceFieldRef(ca.mcgill.sable.soot.jimple.InstanceFieldRef);
+
+    public abstract void caseParameterRef(ca.mcgill.sable.soot.jimple.ParameterRef);
+
+    public abstract void caseNextNextStmtRef(ca.mcgill.sable.soot.jimple.NextNextStmtRef);
+
+    public abstract void caseCaughtExceptionRef(ca.mcgill.sable.soot.jimple.CaughtExceptionRef);
+
+    public abstract void caseThisRef(ca.mcgill.sable.soot.jimple.ThisRef);
+
+    public abstract void defaultCase(java.lang.Object);
+}

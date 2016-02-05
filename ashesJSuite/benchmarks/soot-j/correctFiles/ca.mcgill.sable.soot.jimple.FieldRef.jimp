@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.FieldRef extends java.lang.Object implements ca.mcgill.sable.soot.jimple.ConcreteRef, ca.mcgill.sable.soot.ToBriefString
+{
+
+    public abstract ca.mcgill.sable.soot.SootField getField();
+
+    public abstract void setField(ca.mcgill.sable.soot.SootField);
+}

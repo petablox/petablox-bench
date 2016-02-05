@@ -1,0 +1,38 @@
+class ca.mcgill.sable.soot.jimple.JStaticInvokeExpr extends ca.mcgill.sable.soot.jimple.AbstractStaticInvokeExpr implements ca.mcgill.sable.soot.jimple.StaticInvokeExpr
+{
+
+    void <init>(ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.JStaticInvokeExpr r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        ca.mcgill.sable.util.List r2;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r3, r4;
+        ca.mcgill.sable.soot.jimple.Jimple r5;
+        java.lang.Object r6;
+        ca.mcgill.sable.soot.jimple.Value r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        i1 = r2.size();
+        r3 = new ca.mcgill.sable.soot.jimple.ValueBox[i1];
+        specialinvoke r0.<init>(r1, r3);
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r4 = r0.argBoxes;
+        r5 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r6 = r2.get(i0);
+        r7 = (ca.mcgill.sable.soot.jimple.Value) r6;
+        r4[i0] = r5.newImmediateBox(r7);
+        i0 = i0 + 1;
+
+     label1:
+        i2 = r2.size();
+        if i0 < i2 goto label0;
+
+        return;
+    }
+}

@@ -1,0 +1,392 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: ParserEventSupport');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: ParserEventSupport';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>import java.util.Vector;
+<a name=4 class="linenum">4	</SPAN>import java.util.Hashtable;
+<a name=5 class="linenum">5	</SPAN>import java.util.Enumeration;
+<a name=6 class="linenum">6	</SPAN>import antlr.collections.impl.BitSet;
+<a name=7 class="linenum">7	</SPAN>import antlr.ParserException;
+<a name=8 class="linenum">8	</SPAN>
+<a name=9 class="linenum">9	</SPAN>
+<a name=10 class="linenum">10	</SPAN><span class="comment">/** A class to assist in firing parser events
+<a name=11 class="linenum">11	</SPAN> *  NOTE: I intentionally _did_not_ synchronize the event firing and
+<a name=12 class="linenum">12	</SPAN> *        add/remove listener methods.  This is because the add/remove should
+<a name=13 class="linenum">13	</SPAN> *        _only_ be called by the parser at its start/end, and the _same_thread_
+<a name=14 class="linenum">14	</SPAN> *        should be performing the parsing.  This should help performance a tad...
+<a name=15 class="linenum">15	</SPAN> */</span>
+<a name=16 class="linenum">16	</SPAN>public class <a class="classDef" name=ParserEventSupport href=ParserEventSupport_java_ref.html#ParserEventSupport>ParserEventSupport</a> {
+<a name=17 class="linenum">17	</SPAN>	private Object <a class="varDef" name=source href=ParserEventSupport_java_ref.html#source>source</a>;
+<a name=18 class="linenum">18	</SPAN>	private Hashtable <a class="varDef" name=doneListeners href=ParserEventSupport_java_ref.html#doneListeners>doneListeners</a>;
+<a name=19 class="linenum">19	</SPAN>	private Vector <a class="varDef" name=matchListeners href=ParserEventSupport_java_ref.html#matchListeners>matchListeners</a>;
+<a name=20 class="linenum">20	</SPAN>	private Vector <a class="varDef" name=messageListeners href=ParserEventSupport_java_ref.html#messageListeners>messageListeners</a>;
+<a name=21 class="linenum">21	</SPAN>	private Vector <a class="varDef" name=tokenListeners href=ParserEventSupport_java_ref.html#tokenListeners>tokenListeners</a>;
+<a name=22 class="linenum">22	</SPAN>	private Vector <a class="varDef" name=traceListeners href=ParserEventSupport_java_ref.html#traceListeners>traceListeners</a>;
+<a name=23 class="linenum">23	</SPAN>	private Vector <a class="varDef" name=semPredListeners href=ParserEventSupport_java_ref.html#semPredListeners>semPredListeners</a>;
+<a name=24 class="linenum">24	</SPAN>	private Vector <a class="varDef" name=synPredListeners href=ParserEventSupport_java_ref.html#synPredListeners>synPredListeners</a>;
+<a name=25 class="linenum">25	</SPAN>	private Vector <a class="varDef" name=newLineListeners href=ParserEventSupport_java_ref.html#newLineListeners>newLineListeners</a>;
+<a name=26 class="linenum">26	</SPAN>	private <a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>        <a class="varDef" name=matchEvent href=ParserEventSupport_java_ref.html#matchEvent>matchEvent</a>;
+<a name=27 class="linenum">27	</SPAN>	private <a class="classRef" href=MessageEvent_java.html#MessageEvent>MessageEvent</a>            <a class="varDef" name=messageEvent href=ParserEventSupport_java_ref.html#messageEvent>messageEvent</a>;
+<a name=28 class="linenum">28	</SPAN>	private <a class="classRef" href=ParserTokenEvent_java.html#ParserTokenEvent>ParserTokenEvent</a>        <a class="varDef" name=tokenEvent href=ParserEventSupport_java_ref.html#tokenEvent>tokenEvent</a>;
+<a name=29 class="linenum">29	</SPAN>	private <a class="classRef" href=SemanticPredicateEvent_java.html#SemanticPredicateEvent>SemanticPredicateEvent</a>  <a class="varDef" name=semPredEvent href=ParserEventSupport_java_ref.html#semPredEvent>semPredEvent</a>;
+<a name=30 class="linenum">30	</SPAN>	private <a class="classRef" href=SyntacticPredicateEvent_java.html#SyntacticPredicateEvent>SyntacticPredicateEvent</a> <a class="varDef" name=synPredEvent href=ParserEventSupport_java_ref.html#synPredEvent>synPredEvent</a>;
+<a name=31 class="linenum">31	</SPAN>	private <a class="classRef" href=TraceEvent_java.html#TraceEvent>TraceEvent</a>              <a class="varDef" name=traceEvent href=ParserEventSupport_java_ref.html#traceEvent>traceEvent</a>;
+<a name=32 class="linenum">32	</SPAN>	private <a class="classRef" href=NewLineEvent_java.html#NewLineEvent>NewLineEvent</a>            <a class="varDef" name=newLineEvent href=ParserEventSupport_java_ref.html#newLineEvent>newLineEvent</a>;
+<a name=33 class="linenum">33	</SPAN>	private <a class="classRef" href=ParserController_java.html#ParserController>ParserController</a>        <a class="varDef" name=controller href=ParserEventSupport_java_ref.html#controller>controller</a>;
+<a name=34 class="linenum">34	</SPAN>	protected static final int <a class="varDef" name=CONSUME href=ParserEventSupport_java_ref.html#CONSUME>CONSUME</a>=0;
+<a name=35 class="linenum">35	</SPAN>	protected static final int <a class="varDef" name=ENTER_RULE href=ParserEventSupport_java_ref.html#ENTER_RULE>ENTER_RULE</a>=1;
+<a name=36 class="linenum">36	</SPAN>	protected static final int <a class="varDef" name=EXIT_RULE href=ParserEventSupport_java_ref.html#EXIT_RULE>EXIT_RULE</a>=2;
+<a name=37 class="linenum">37	</SPAN>	protected static final int <a class="varDef" name=LA href=ParserEventSupport_java_ref.html#LA>LA</a>=3;
+<a name=38 class="linenum">38	</SPAN>	protected static final int <a class="varDef" name=MATCH href=ParserEventSupport_java_ref.html#MATCH>MATCH</a>=4;
+<a name=39 class="linenum">39	</SPAN>	protected static final int <a class="varDef" name=MATCH_NOT href=ParserEventSupport_java_ref.html#MATCH_NOT>MATCH_NOT</a>=5;
+<a name=40 class="linenum">40	</SPAN>	protected static final int <a class="varDef" name=MISMATCH href=ParserEventSupport_java_ref.html#MISMATCH>MISMATCH</a>=6;
+<a name=41 class="linenum">41	</SPAN>	protected static final int <a class="varDef" name=MISMATCH_NOT href=ParserEventSupport_java_ref.html#MISMATCH_NOT>MISMATCH_NOT</a>=7;
+<a name=42 class="linenum">42	</SPAN>	protected static final int <a class="varDef" name=REPORT_ERROR href=ParserEventSupport_java_ref.html#REPORT_ERROR>REPORT_ERROR</a>=8;
+<a name=43 class="linenum">43	</SPAN>	protected static final int <a class="varDef" name=REPORT_WARNING href=ParserEventSupport_java_ref.html#REPORT_WARNING>REPORT_WARNING</a>=9;
+<a name=44 class="linenum">44	</SPAN>	protected static final int <a class="varDef" name=SEMPRED href=ParserEventSupport_java_ref.html#SEMPRED>SEMPRED</a>=10;
+<a name=45 class="linenum">45	</SPAN>	protected static final int <a class="varDef" name=SYNPRED_FAILED href=ParserEventSupport_java_ref.html#SYNPRED_FAILED>SYNPRED_FAILED</a>=11;
+<a name=46 class="linenum">46	</SPAN>	protected static final int <a class="varDef" name=SYNPRED_STARTED href=ParserEventSupport_java_ref.html#SYNPRED_STARTED>SYNPRED_STARTED</a>=12;
+<a name=47 class="linenum">47	</SPAN>	protected static final int <a class="varDef" name=SYNPRED_SUCCEEDED href=ParserEventSupport_java_ref.html#SYNPRED_SUCCEEDED>SYNPRED_SUCCEEDED</a>=13;
+<a name=48 class="linenum">48	</SPAN>	protected static final int <a class="varDef" name=NEW_LINE href=ParserEventSupport_java_ref.html#NEW_LINE>NEW_LINE</a>=14;
+<a name=49 class="linenum">49	</SPAN>	protected static final int <a class="varDef" name=DONE_PARSING href=ParserEventSupport_java_ref.html#DONE_PARSING>DONE_PARSING</a>=15;
+<a name=50 class="linenum">50	</SPAN>	private int <a class="varDef" name=ruleDepth href=ParserEventSupport_java_ref.html#ruleDepth>ruleDepth</a> = 0;
+<a name=51 class="linenum">51	</SPAN>
+<a name=52 class="linenum">52	</SPAN>
+<a name=53 class="linenum">53	</SPAN>	public <a class="methodDef" name=ParserEventSupport(Object) href=ParserEventSupport_java_ref.html#ParserEventSupport(Object)>ParserEventSupport</a>(Object source) {
+<a name=54 class="linenum">54	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>   = new <a class="methodRef" href=ParserMatchEvent_java.html#ParserMatchEvent(Object)>ParserMatchEvent</a>(source);
+<a name=55 class="linenum">55	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#messageEvent>messageEvent</a> = new <a class="methodRef" href=MessageEvent_java.html#MessageEvent(Object)>MessageEvent</a>(source);
+<a name=56 class="linenum">56	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#tokenEvent>tokenEvent</a>   = new <a class="methodRef" href=ParserTokenEvent_java.html#ParserTokenEvent(Object)>ParserTokenEvent</a>(source);
+<a name=57 class="linenum">57	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#traceEvent>traceEvent</a>   = new <a class="methodRef" href=TraceEvent_java.html#TraceEvent(Object)>TraceEvent</a>(source);
+<a name=58 class="linenum">58	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#semPredEvent>semPredEvent</a> = new <a class="methodRef" href=SemanticPredicateEvent_java.html#SemanticPredicateEvent(Object)>SemanticPredicateEvent</a>(source);
+<a name=59 class="linenum">59	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#synPredEvent>synPredEvent</a> = new <a class="methodRef" href=SyntacticPredicateEvent_java.html#SyntacticPredicateEvent(Object)>SyntacticPredicateEvent</a>(source);
+<a name=60 class="linenum">60	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#newLineEvent>newLineEvent</a> = new <a class="methodRef" href=NewLineEvent_java.html#NewLineEvent(Object)>NewLineEvent</a>(source);
+<a name=61 class="linenum">61	</SPAN>		this.source = source;
+<a name=62 class="linenum">62	</SPAN>	}
+<a name=63 class="linenum">63	</SPAN>	public void <a class="methodDef" name=addDoneListener(ListenerBase) href=ParserEventSupport_java_ref.html#addDoneListener(ListenerBase)>addDoneListener</a>(<a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a> l) {
+<a name=64 class="linenum">64	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a> = new Hashtable();
+<a name=65 class="linenum">65	</SPAN>		Integer i = (Integer)<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a>.get(l);
+<a name=66 class="linenum">66	</SPAN>		int val;
+<a name=67 class="linenum">67	</SPAN>		if (i != null)
+<a name=68 class="linenum">68	</SPAN>			val = i.intValue() + 1;
+<a name=69 class="linenum">69	</SPAN>		else
+<a name=70 class="linenum">70	</SPAN>			val = 1;
+<a name=71 class="linenum">71	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a>.put(l, new Integer(val));
+<a name=72 class="linenum">72	</SPAN>	}
+<a name=73 class="linenum">73	</SPAN>	public void <a class="methodDef" name=addMessageListener(MessageListener) href=ParserEventSupport_java_ref.html#addMessageListener(MessageListener)>addMessageListener</a>(<a class="classRef" href=MessageListener_java.html#MessageListener>MessageListener</a> l) {
+<a name=74 class="linenum">74	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a> = new Vector();
+<a name=75 class="linenum">75	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a>.addElement(l);
+<a name=76 class="linenum">76	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addDoneListener(ListenerBase)>addDoneListener</a>(l);
+<a name=77 class="linenum">77	</SPAN>	}
+<a name=78 class="linenum">78	</SPAN>	public void <a class="methodDef" name=addNewLineListener(NewLineListener) href=ParserEventSupport_java_ref.html#addNewLineListener(NewLineListener)>addNewLineListener</a>(<a class="classRef" href=NewLineListener_java.html#NewLineListener>NewLineListener</a> l) {
+<a name=79 class="linenum">79	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#newLineListeners>newLineListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#newLineListeners>newLineListeners</a> = new Vector();
+<a name=80 class="linenum">80	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#newLineListeners>newLineListeners</a>.addElement(l);
+<a name=81 class="linenum">81	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addDoneListener(ListenerBase)>addDoneListener</a>(l);
+<a name=82 class="linenum">82	</SPAN>	}
+<a name=83 class="linenum">83	</SPAN>	public void <a class="methodDef" name=addParserListener(ParserListener) href=ParserEventSupport_java_ref.html#addParserListener(ParserListener)>addParserListener</a>(<a class="classRef" href=ParserListener_java.html#ParserListener>ParserListener</a> l) {
+<a name=84 class="linenum">84	</SPAN>		if (l instanceof <a class="classRef" href=ParserController_java.html#ParserController>ParserController</a>) {
+<a name=85 class="linenum">85	</SPAN>			((<a class="classRef" href=ParserController_java.html#ParserController>ParserController</a>)l).setParserEventSupport(this);
+<a name=86 class="linenum">86	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#controller>controller</a> = (<a class="classRef" href=ParserController_java.html#ParserController>ParserController</a>)l;
+<a name=87 class="linenum">87	</SPAN>		}	
+<a name=88 class="linenum">88	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addParserMatchListener(ParserMatchListener)>addParserMatchListener</a>(l);
+<a name=89 class="linenum">89	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addParserTokenListener(ParserTokenListener)>addParserTokenListener</a>(l);
+<a name=90 class="linenum">90	</SPAN>
+<a name=91 class="linenum">91	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addMessageListener(MessageListener)>addMessageListener</a>(l);
+<a name=92 class="linenum">92	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addTraceListener(TraceListener)>addTraceListener</a>(l);
+<a name=93 class="linenum">93	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addSemanticPredicateListener(SemanticPredicateListener)>addSemanticPredicateListener</a>(l);
+<a name=94 class="linenum">94	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addSyntacticPredicateListener(SyntacticPredicateListener)>addSyntacticPredicateListener</a>(l);
+<a name=95 class="linenum">95	</SPAN>	}
+<a name=96 class="linenum">96	</SPAN>	public void <a class="methodDef" name=addParserMatchListener(ParserMatchListener) href=ParserEventSupport_java_ref.html#addParserMatchListener(ParserMatchListener)>addParserMatchListener</a>(<a class="classRef" href=ParserMatchListener_java.html#ParserMatchListener>ParserMatchListener</a> l) {
+<a name=97 class="linenum">97	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a> = new Vector();
+<a name=98 class="linenum">98	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>.addElement(l);
+<a name=99 class="linenum">99	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addDoneListener(ListenerBase)>addDoneListener</a>(l);
+<a name=100 class="linenum">100	</SPAN>	}
+<a name=101 class="linenum">101	</SPAN>	public void <a class="methodDef" name=addParserTokenListener(ParserTokenListener) href=ParserEventSupport_java_ref.html#addParserTokenListener(ParserTokenListener)>addParserTokenListener</a>(<a class="classRef" href=ParserTokenListener_java.html#ParserTokenListener>ParserTokenListener</a> l) {
+<a name=102 class="linenum">102	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a> = new Vector();
+<a name=103 class="linenum">103	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a>.addElement(l);
+<a name=104 class="linenum">104	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addDoneListener(ListenerBase)>addDoneListener</a>(l);
+<a name=105 class="linenum">105	</SPAN>	}
+<a name=106 class="linenum">106	</SPAN>	public void <a class="methodDef" name=addSemanticPredicateListener(SemanticPredicateListener) href=ParserEventSupport_java_ref.html#addSemanticPredicateListener(SemanticPredicateListener)>addSemanticPredicateListener</a>(<a class="classRef" href=SemanticPredicateListener_java.html#SemanticPredicateListener>SemanticPredicateListener</a> l) {
+<a name=107 class="linenum">107	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#semPredListeners>semPredListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#semPredListeners>semPredListeners</a> = new Vector();
+<a name=108 class="linenum">108	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#semPredListeners>semPredListeners</a>.addElement(l);
+<a name=109 class="linenum">109	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addDoneListener(ListenerBase)>addDoneListener</a>(l);
+<a name=110 class="linenum">110	</SPAN>	}
+<a name=111 class="linenum">111	</SPAN>	public void <a class="methodDef" name=addSyntacticPredicateListener(SyntacticPredicateListener) href=ParserEventSupport_java_ref.html#addSyntacticPredicateListener(SyntacticPredicateListener)>addSyntacticPredicateListener</a>(<a class="classRef" href=SyntacticPredicateListener_java.html#SyntacticPredicateListener>SyntacticPredicateListener</a> l) {
+<a name=112 class="linenum">112	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a> = new Vector();
+<a name=113 class="linenum">113	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a>.addElement(l);
+<a name=114 class="linenum">114	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addDoneListener(ListenerBase)>addDoneListener</a>(l);
+<a name=115 class="linenum">115	</SPAN>	}
+<a name=116 class="linenum">116	</SPAN>	public void <a class="methodDef" name=addTraceListener(TraceListener) href=ParserEventSupport_java_ref.html#addTraceListener(TraceListener)>addTraceListener</a>(<a class="classRef" href=TraceListener_java.html#TraceListener>TraceListener</a> l) {
+<a name=117 class="linenum">117	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a> == null) <a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a> = new Vector();
+<a name=118 class="linenum">118	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a>.addElement(l);
+<a name=119 class="linenum">119	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#addDoneListener(ListenerBase)>addDoneListener</a>(l);
+<a name=120 class="linenum">120	</SPAN>	}
+<a name=121 class="linenum">121	</SPAN>	public void <a class="methodDef" name=fireConsume(int) href=ParserEventSupport_java_ref.html#fireConsume(int)>fireConsume</a>(int value) {
+<a name=122 class="linenum">122	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#tokenEvent>tokenEvent</a>.<a class="methodRef" href=ParserTokenEvent_java.html#setValues(int,int,int)>setValues</a>(<a class="classRef" href=ParserTokenEvent_java.html#ParserTokenEvent>ParserTokenEvent</a>.<a class="varRef" href=ParserTokenEvent_java.html#CONSUME>CONSUME</a>, 1, value);
+<a name=123 class="linenum">123	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#CONSUME>CONSUME</a>, <a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a>);		
+<a name=124 class="linenum">124	</SPAN>	}
+<a name=125 class="linenum">125	</SPAN>	public void <a class="methodDef" name=fireDoneParsing() href=ParserEventSupport_java_ref.html#fireDoneParsing()>fireDoneParsing</a>() {
+<a name=126 class="linenum">126	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#traceEvent>traceEvent</a>.<a class="methodRef" href=TraceEvent_java.html#setValues(int,int,int,int)>setValues</a>(<a class="classRef" href=TraceEvent_java.html#TraceEvent>TraceEvent</a>.<a class="varRef" href=TraceEvent_java.html#DONE_PARSING>DONE_PARSING</a>, 0,0,0);
+<a name=127 class="linenum">127	</SPAN>
+<a name=128 class="linenum">128	</SPAN>		Hashtable targets=null;
+<a name=129 class="linenum">129	</SPAN><span class="comment">//		Hashtable targets=doneListeners;
+<a name=130 class="linenum">130	</SPAN></span>		<a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a> l=null;
+<a name=131 class="linenum">131	</SPAN>		
+<a name=132 class="linenum">132	</SPAN>		synchronized (this) {
+<a name=133 class="linenum">133	</SPAN>			if (<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a> == null) return;
+<a name=134 class="linenum">134	</SPAN>			targets = (Hashtable)<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a>.clone();
+<a name=135 class="linenum">135	</SPAN>		}
+<a name=136 class="linenum">136	</SPAN>		
+<a name=137 class="linenum">137	</SPAN>		if (targets != null) {
+<a name=138 class="linenum">138	</SPAN>			Enumeration e = targets.keys();
+<a name=139 class="linenum">139	</SPAN>			while(e.hasMoreElements()) {
+<a name=140 class="linenum">140	</SPAN>				l = (<a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a>)e.nextElement();
+<a name=141 class="linenum">141	</SPAN>				<a class="methodRef" href=ParserEventSupport_java.html#fireEvent(int,ListenerBase)>fireEvent</a>(<a class="varRef" href=ParserEventSupport_java.html#DONE_PARSING>DONE_PARSING</a>, l);
+<a name=142 class="linenum">142	</SPAN>			}
+<a name=143 class="linenum">143	</SPAN>		}	
+<a name=144 class="linenum">144	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#controller>controller</a> != null)
+<a name=145 class="linenum">145	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#controller>controller</a>.<a class="methodRef" href=ParserController_java.html#checkBreak()>checkBreak</a>();
+<a name=146 class="linenum">146	</SPAN>	}
+<a name=147 class="linenum">147	</SPAN>	public void <a class="methodDef" name=fireEnterRule(int,int,int) href=ParserEventSupport_java_ref.html#fireEnterRule(int,int,int)>fireEnterRule</a>(int ruleNum, int guessing, int data) {
+<a name=148 class="linenum">148	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#ruleDepth>ruleDepth</a>++;
+<a name=149 class="linenum">149	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#traceEvent>traceEvent</a>.<a class="methodRef" href=TraceEvent_java.html#setValues(int,int,int,int)>setValues</a>(<a class="classRef" href=TraceEvent_java.html#TraceEvent>TraceEvent</a>.<a class="varRef" href=TraceEvent_java.html#ENTER>ENTER</a>, ruleNum, guessing, data);
+<a name=150 class="linenum">150	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#ENTER_RULE>ENTER_RULE</a>, <a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a>);
+<a name=151 class="linenum">151	</SPAN>	}
+<a name=152 class="linenum">152	</SPAN>	public void <a class="methodDef" name=fireEvent(int,ListenerBase) href=ParserEventSupport_java_ref.html#fireEvent(int,ListenerBase)>fireEvent</a>(int type, <a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a> l) {
+<a name=153 class="linenum">153	</SPAN>		switch(type) {
+<a name=154 class="linenum">154	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#CONSUME>CONSUME</a>:    ((<a class="classRef" href=ParserTokenListener_java.html#ParserTokenListener>ParserTokenListener</a>)l).parserConsume(<a class="varRef" href=ParserEventSupport_java.html#tokenEvent>tokenEvent</a>); break;
+<a name=155 class="linenum">155	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#LA>LA</a>:         ((<a class="classRef" href=ParserTokenListener_java.html#ParserTokenListener>ParserTokenListener</a>)l).parserLA(<a class="varRef" href=ParserEventSupport_java.html#tokenEvent>tokenEvent</a>);      break;
+<a name=156 class="linenum">156	</SPAN>
+<a name=157 class="linenum">157	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#ENTER_RULE>ENTER_RULE</a>: ((<a class="classRef" href=TraceListener_java.html#TraceListener>TraceListener</a>)l).enterRule(<a class="varRef" href=ParserEventSupport_java.html#traceEvent>traceEvent</a>);           break;
+<a name=158 class="linenum">158	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#EXIT_RULE>EXIT_RULE</a>:  ((<a class="classRef" href=TraceListener_java.html#TraceListener>TraceListener</a>)l).exitRule(<a class="varRef" href=ParserEventSupport_java.html#traceEvent>traceEvent</a>);            break;
+<a name=159 class="linenum">159	</SPAN>
+<a name=160 class="linenum">160	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#MATCH>MATCH</a>:        ((<a class="classRef" href=ParserMatchListener_java.html#ParserMatchListener>ParserMatchListener</a>)l).parserMatch(<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>);       break;
+<a name=161 class="linenum">161	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#MATCH_NOT>MATCH_NOT</a>:    ((<a class="classRef" href=ParserMatchListener_java.html#ParserMatchListener>ParserMatchListener</a>)l).parserMatchNot(<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>);    break;
+<a name=162 class="linenum">162	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#MISMATCH>MISMATCH</a>:     ((<a class="classRef" href=ParserMatchListener_java.html#ParserMatchListener>ParserMatchListener</a>)l).parserMismatch(<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>);    break;
+<a name=163 class="linenum">163	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#MISMATCH_NOT>MISMATCH_NOT</a>: ((<a class="classRef" href=ParserMatchListener_java.html#ParserMatchListener>ParserMatchListener</a>)l).parserMismatchNot(<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>); break;
+<a name=164 class="linenum">164	</SPAN>
+<a name=165 class="linenum">165	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#SEMPRED>SEMPRED</a>:      ((<a class="classRef" href=SemanticPredicateListener_java.html#SemanticPredicateListener>SemanticPredicateListener</a>)l).semanticPredicateEvaluated(<a class="varRef" href=ParserEventSupport_java.html#semPredEvent>semPredEvent</a>); break;
+<a name=166 class="linenum">166	</SPAN>
+<a name=167 class="linenum">167	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#SYNPRED_STARTED>SYNPRED_STARTED</a>:   ((<a class="classRef" href=SyntacticPredicateListener_java.html#SyntacticPredicateListener>SyntacticPredicateListener</a>)l).syntacticPredicateStarted(<a class="varRef" href=ParserEventSupport_java.html#synPredEvent>synPredEvent</a>);   break;
+<a name=168 class="linenum">168	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#SYNPRED_FAILED>SYNPRED_FAILED</a>:    ((<a class="classRef" href=SyntacticPredicateListener_java.html#SyntacticPredicateListener>SyntacticPredicateListener</a>)l).syntacticPredicateFailed(<a class="varRef" href=ParserEventSupport_java.html#synPredEvent>synPredEvent</a>);    break;
+<a name=169 class="linenum">169	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#SYNPRED_SUCCEEDED>SYNPRED_SUCCEEDED</a>: ((<a class="classRef" href=SyntacticPredicateListener_java.html#SyntacticPredicateListener>SyntacticPredicateListener</a>)l).syntacticPredicateSucceeded(<a class="varRef" href=ParserEventSupport_java.html#synPredEvent>synPredEvent</a>); break;
+<a name=170 class="linenum">170	</SPAN>
+<a name=171 class="linenum">171	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#REPORT_ERROR>REPORT_ERROR</a>:   ((<a class="classRef" href=MessageListener_java.html#MessageListener>MessageListener</a>)l).reportError(<a class="varRef" href=ParserEventSupport_java.html#messageEvent>messageEvent</a>);   break;
+<a name=172 class="linenum">172	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#REPORT_WARNING>REPORT_WARNING</a>: ((<a class="classRef" href=MessageListener_java.html#MessageListener>MessageListener</a>)l).reportWarning(<a class="varRef" href=ParserEventSupport_java.html#messageEvent>messageEvent</a>); break;
+<a name=173 class="linenum">173	</SPAN>
+<a name=174 class="linenum">174	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#DONE_PARSING>DONE_PARSING</a>: l.<a class="methodRef" href=ListenerBase_java.html#doneParsing(TraceEvent)>doneParsing</a>(<a class="varRef" href=ParserEventSupport_java.html#traceEvent>traceEvent</a>); break;
+<a name=175 class="linenum">175	</SPAN>			case <a class="varRef" href=ParserEventSupport_java.html#NEW_LINE>NEW_LINE</a>:     ((<a class="classRef" href=NewLineListener_java.html#NewLineListener>NewLineListener</a>)l).hitNewLine(<a class="varRef" href=ParserEventSupport_java.html#newLineEvent>newLineEvent</a>); break;
+<a name=176 class="linenum">176	</SPAN>			
+<a name=177 class="linenum">177	</SPAN>			default:
+<a name=178 class="linenum">178	</SPAN>				throw new IllegalArgumentException("bad type "+type+" for fireEvent()");
+<a name=179 class="linenum">179	</SPAN>		}	
+<a name=180 class="linenum">180	</SPAN>	}
+<a name=181 class="linenum">181	</SPAN>	public void <a class="methodDef" name=fireEvents(int,Vector) href=ParserEventSupport_java_ref.html#fireEvents(int,Vector)>fireEvents</a>(int type, Vector listeners) {
+<a name=182 class="linenum">182	</SPAN>		<a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a> l=null;
+<a name=183 class="linenum">183	</SPAN>		
+<a name=184 class="linenum">184	</SPAN>		if (listeners != null)
+<a name=185 class="linenum">185	</SPAN>			for (int i = 0; i &lt; listeners.size(); i++) {
+<a name=186 class="linenum">186	</SPAN>				l = (<a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a>)listeners.elementAt(i);
+<a name=187 class="linenum">187	</SPAN>				<a class="methodRef" href=ParserEventSupport_java.html#fireEvent(int,ListenerBase)>fireEvent</a>(type, l);
+<a name=188 class="linenum">188	</SPAN>			}
+<a name=189 class="linenum">189	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#controller>controller</a> != null)
+<a name=190 class="linenum">190	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#controller>controller</a>.<a class="methodRef" href=ParserController_java.html#checkBreak()>checkBreak</a>();
+<a name=191 class="linenum">191	</SPAN>	}
+<a name=192 class="linenum">192	</SPAN>	public void <a class="methodDef" name=fireExitRule(int,int,int) href=ParserEventSupport_java_ref.html#fireExitRule(int,int,int)>fireExitRule</a>(int ruleNum, int guessing, int data) {
+<a name=193 class="linenum">193	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#traceEvent>traceEvent</a>.<a class="methodRef" href=TraceEvent_java.html#setValues(int,int,int,int)>setValues</a>(<a class="classRef" href=TraceEvent_java.html#TraceEvent>TraceEvent</a>.<a class="varRef" href=TraceEvent_java.html#EXIT>EXIT</a>, ruleNum, guessing, data);
+<a name=194 class="linenum">194	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#EXIT_RULE>EXIT_RULE</a>, <a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a>);
+<a name=195 class="linenum">195	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#ruleDepth>ruleDepth</a>--;
+<a name=196 class="linenum">196	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#ruleDepth>ruleDepth</a> == 0)
+<a name=197 class="linenum">197	</SPAN>			<a class="methodRef" href=ParserEventSupport_java.html#fireDoneParsing()>fireDoneParsing</a>();
+<a name=198 class="linenum">198	</SPAN>	}
+<a name=199 class="linenum">199	</SPAN>	public void <a class="methodDef" name=fireLA(int,int) href=ParserEventSupport_java_ref.html#fireLA(int,int)>fireLA</a>(int k, int la) {
+<a name=200 class="linenum">200	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#tokenEvent>tokenEvent</a>.<a class="methodRef" href=ParserTokenEvent_java.html#setValues(int,int,int)>setValues</a>(<a class="classRef" href=ParserTokenEvent_java.html#ParserTokenEvent>ParserTokenEvent</a>.<a class="varRef" href=ParserTokenEvent_java.html#LA>LA</a>, k, la);
+<a name=201 class="linenum">201	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#LA>LA</a>, <a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a>);
+<a name=202 class="linenum">202	</SPAN>	}
+<a name=203 class="linenum">203	</SPAN>	public void <a class="methodDef" name=fireMatch(char,int) href=ParserEventSupport_java_ref.html#fireMatch(char,int)>fireMatch</a>(char c, int guessing) {
+<a name=204 class="linenum">204	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR>CHAR</a>, c, new Character(c), null, guessing, false, true);
+<a name=205 class="linenum">205	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH>MATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=206 class="linenum">206	</SPAN>	}
+<a name=207 class="linenum">207	</SPAN>	public void <a class="methodDef" name=fireMatch(char,BitSet,int) href=ParserEventSupport_java_ref.html#fireMatch(char,BitSet,int)>fireMatch</a>(char value, <a class="classRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet>BitSet</a> b, int guessing) {
+<a name=208 class="linenum">208	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR_BITSET>CHAR_BITSET</a>, value, b, null, guessing, false, true);
+<a name=209 class="linenum">209	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH>MATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=210 class="linenum">210	</SPAN>	}
+<a name=211 class="linenum">211	</SPAN>	public void <a class="methodDef" name=fireMatch(char,String,int) href=ParserEventSupport_java_ref.html#fireMatch(char,String,int)>fireMatch</a>(char value, String target, int guessing) {
+<a name=212 class="linenum">212	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR_RANGE>CHAR_RANGE</a>, value, target, null, guessing, false, true);
+<a name=213 class="linenum">213	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH>MATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=214 class="linenum">214	</SPAN>	}
+<a name=215 class="linenum">215	</SPAN>	public void <a class="methodDef" name=fireMatch(int,BitSet,String,int) href=ParserEventSupport_java_ref.html#fireMatch(int,BitSet,String,int)>fireMatch</a>(int value, <a class="classRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet>BitSet</a> b, String text, int guessing) {
+<a name=216 class="linenum">216	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#BITSET>BITSET</a>, value, b, text, guessing, false, true);
+<a name=217 class="linenum">217	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH>MATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=218 class="linenum">218	</SPAN>	}
+<a name=219 class="linenum">219	</SPAN>	public void <a class="methodDef" name=fireMatch(int,String,int) href=ParserEventSupport_java_ref.html#fireMatch(int,String,int)>fireMatch</a>(int n, String text, int guessing) {
+<a name=220 class="linenum">220	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#TOKEN>TOKEN</a>, n, new Integer(n), text, guessing, false, true);
+<a name=221 class="linenum">221	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH>MATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=222 class="linenum">222	</SPAN>	}
+<a name=223 class="linenum">223	</SPAN>	public void <a class="methodDef" name=fireMatch(String,int) href=ParserEventSupport_java_ref.html#fireMatch(String,int)>fireMatch</a>(String s, int guessing) {
+<a name=224 class="linenum">224	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#STRING>STRING</a>, 0, s, null, guessing, false, true);
+<a name=225 class="linenum">225	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH>MATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=226 class="linenum">226	</SPAN>	}
+<a name=227 class="linenum">227	</SPAN>	public void <a class="methodDef" name=fireMatchNot(char,char,int) href=ParserEventSupport_java_ref.html#fireMatchNot(char,char,int)>fireMatchNot</a>(char value, char n, int guessing) {
+<a name=228 class="linenum">228	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR>CHAR</a>, value, new Character(n), null, guessing, true, true);
+<a name=229 class="linenum">229	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH_NOT>MATCH_NOT</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=230 class="linenum">230	</SPAN>	}
+<a name=231 class="linenum">231	</SPAN>	public void <a class="methodDef" name=fireMatchNot(int,int,String,int) href=ParserEventSupport_java_ref.html#fireMatchNot(int,int,String,int)>fireMatchNot</a>(int value, int n, String text, int guessing) {
+<a name=232 class="linenum">232	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#TOKEN>TOKEN</a>, value, new Integer(n), text, guessing, true, true);
+<a name=233 class="linenum">233	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MATCH_NOT>MATCH_NOT</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=234 class="linenum">234	</SPAN>	}
+<a name=235 class="linenum">235	</SPAN>	public void <a class="methodDef" name=fireMismatch(char,char,int) href=ParserEventSupport_java_ref.html#fireMismatch(char,char,int)>fireMismatch</a>(char value, char n, int guessing) {
+<a name=236 class="linenum">236	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR>CHAR</a>, value, new Character(n), null, guessing, false, false);
+<a name=237 class="linenum">237	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH>MISMATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=238 class="linenum">238	</SPAN>	}
+<a name=239 class="linenum">239	</SPAN>	public void <a class="methodDef" name=fireMismatch(char,BitSet,int) href=ParserEventSupport_java_ref.html#fireMismatch(char,BitSet,int)>fireMismatch</a>(char value, <a class="classRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet>BitSet</a> b, int guessing) {
+<a name=240 class="linenum">240	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR_BITSET>CHAR_BITSET</a>, value, b, null, guessing, false, true);
+<a name=241 class="linenum">241	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH>MISMATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=242 class="linenum">242	</SPAN>	}
+<a name=243 class="linenum">243	</SPAN>	public void <a class="methodDef" name=fireMismatch(char,String,int) href=ParserEventSupport_java_ref.html#fireMismatch(char,String,int)>fireMismatch</a>(char value, String target, int guessing) {
+<a name=244 class="linenum">244	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR_RANGE>CHAR_RANGE</a>, value, target, null, guessing, false, true);
+<a name=245 class="linenum">245	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH>MISMATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=246 class="linenum">246	</SPAN>	}
+<a name=247 class="linenum">247	</SPAN>	public void <a class="methodDef" name=fireMismatch(int,int,String,int) href=ParserEventSupport_java_ref.html#fireMismatch(int,int,String,int)>fireMismatch</a>(int value, int n, String text, int guessing) {
+<a name=248 class="linenum">248	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#TOKEN>TOKEN</a>, value, new Integer(n), text, guessing, false, false);
+<a name=249 class="linenum">249	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH>MISMATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=250 class="linenum">250	</SPAN>	}
+<a name=251 class="linenum">251	</SPAN>	public void <a class="methodDef" name=fireMismatch(int,BitSet,String,int) href=ParserEventSupport_java_ref.html#fireMismatch(int,BitSet,String,int)>fireMismatch</a>(int value, <a class="classRef" href=../../antlr/collections/impl/BitSet_java.html#BitSet>BitSet</a> b, String text, int guessing) {
+<a name=252 class="linenum">252	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#BITSET>BITSET</a>, value, b, text, guessing, false, true);
+<a name=253 class="linenum">253	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH>MISMATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=254 class="linenum">254	</SPAN>	}
+<a name=255 class="linenum">255	</SPAN>	public void <a class="methodDef" name=fireMismatch(String,String,int) href=ParserEventSupport_java_ref.html#fireMismatch(String,String,int)>fireMismatch</a>(String value, String text, int guessing) {
+<a name=256 class="linenum">256	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#STRING>STRING</a>, 0, text, value, guessing, false, true);
+<a name=257 class="linenum">257	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH>MISMATCH</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=258 class="linenum">258	</SPAN>	}
+<a name=259 class="linenum">259	</SPAN>	public void <a class="methodDef" name=fireMismatchNot(char,char,int) href=ParserEventSupport_java_ref.html#fireMismatchNot(char,char,int)>fireMismatchNot</a>(char value, char c, int guessing) {
+<a name=260 class="linenum">260	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#CHAR>CHAR</a>, value, new Character(c), null, guessing, true, true);
+<a name=261 class="linenum">261	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH_NOT>MISMATCH_NOT</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=262 class="linenum">262	</SPAN>	}
+<a name=263 class="linenum">263	</SPAN>	public void <a class="methodDef" name=fireMismatchNot(int,int,String,int) href=ParserEventSupport_java_ref.html#fireMismatchNot(int,int,String,int)>fireMismatchNot</a>(int value, int n, String text, int guessing) {
+<a name=264 class="linenum">264	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#matchEvent>matchEvent</a>.<a class="methodRef" href=ParserMatchEvent_java.html#setValues(int,int,Object,String,int,boolean,boolean)>setValues</a>(<a class="classRef" href=ParserMatchEvent_java.html#ParserMatchEvent>ParserMatchEvent</a>.<a class="varRef" href=ParserMatchEvent_java.html#TOKEN>TOKEN</a>, value, new Integer(n), text, guessing, true, true);
+<a name=265 class="linenum">265	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#MISMATCH_NOT>MISMATCH_NOT</a>, <a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=266 class="linenum">266	</SPAN>	}
+<a name=267 class="linenum">267	</SPAN>	public void <a class="methodDef" name=fireNewLine(int) href=ParserEventSupport_java_ref.html#fireNewLine(int)>fireNewLine</a>(int line) {
+<a name=268 class="linenum">268	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#newLineEvent>newLineEvent</a>.<a class="methodRef" href=NewLineEvent_java.html#setValues(int)>setValues</a>(line);
+<a name=269 class="linenum">269	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#NEW_LINE>NEW_LINE</a>, <a class="varRef" href=ParserEventSupport_java.html#newLineListeners>newLineListeners</a>);
+<a name=270 class="linenum">270	</SPAN>	}
+<a name=271 class="linenum">271	</SPAN>	public void <a class="methodDef" name=fireReportError(Exception) href=ParserEventSupport_java_ref.html#fireReportError(Exception)>fireReportError</a>(Exception e) {
+<a name=272 class="linenum">272	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#messageEvent>messageEvent</a>.<a class="methodRef" href=MessageEvent_java.html#setValues(int,String)>setValues</a>(<a class="classRef" href=MessageEvent_java.html#MessageEvent>MessageEvent</a>.<a class="varRef" href=MessageEvent_java.html#ERROR>ERROR</a>, e.toString());
+<a name=273 class="linenum">273	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#REPORT_ERROR>REPORT_ERROR</a>, <a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a>);
+<a name=274 class="linenum">274	</SPAN>	}
+<a name=275 class="linenum">275	</SPAN>	public void <a class="methodDef" name=fireReportError(String) href=ParserEventSupport_java_ref.html#fireReportError(String)>fireReportError</a>(String s) {
+<a name=276 class="linenum">276	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#messageEvent>messageEvent</a>.<a class="methodRef" href=MessageEvent_java.html#setValues(int,String)>setValues</a>(<a class="classRef" href=MessageEvent_java.html#MessageEvent>MessageEvent</a>.<a class="varRef" href=MessageEvent_java.html#ERROR>ERROR</a>, s);
+<a name=277 class="linenum">277	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#REPORT_ERROR>REPORT_ERROR</a>, <a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a>);
+<a name=278 class="linenum">278	</SPAN>	}
+<a name=279 class="linenum">279	</SPAN>	public void <a class="methodDef" name=fireReportWarning(String) href=ParserEventSupport_java_ref.html#fireReportWarning(String)>fireReportWarning</a>(String s) {
+<a name=280 class="linenum">280	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#messageEvent>messageEvent</a>.<a class="methodRef" href=MessageEvent_java.html#setValues(int,String)>setValues</a>(<a class="classRef" href=MessageEvent_java.html#MessageEvent>MessageEvent</a>.<a class="varRef" href=MessageEvent_java.html#WARNING>WARNING</a>, s);
+<a name=281 class="linenum">281	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#REPORT_WARNING>REPORT_WARNING</a>, <a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a>);
+<a name=282 class="linenum">282	</SPAN>	}
+<a name=283 class="linenum">283	</SPAN>	public boolean <a class="methodDef" name=fireSemanticPredicateEvaluated(int,int,boolean,int) href=ParserEventSupport_java_ref.html#fireSemanticPredicateEvaluated(int,int,boolean,int)>fireSemanticPredicateEvaluated</a>(int type, int condition, boolean result, int guessing) {
+<a name=284 class="linenum">284	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#semPredEvent>semPredEvent</a>.<a class="methodRef" href=SemanticPredicateEvent_java.html#setValues(int,int,boolean,int)>setValues</a>(type, condition, result, guessing);
+<a name=285 class="linenum">285	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#SEMPRED>SEMPRED</a>, <a class="varRef" href=ParserEventSupport_java.html#semPredListeners>semPredListeners</a>);
+<a name=286 class="linenum">286	</SPAN>		return result;
+<a name=287 class="linenum">287	</SPAN>	}
+<a name=288 class="linenum">288	</SPAN>	public void <a class="methodDef" name=fireSyntacticPredicateFailed(int) href=ParserEventSupport_java_ref.html#fireSyntacticPredicateFailed(int)>fireSyntacticPredicateFailed</a>(int guessing) {
+<a name=289 class="linenum">289	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#synPredEvent>synPredEvent</a>.<a class="methodRef" href=SyntacticPredicateEvent_java.html#setValues(int,int)>setValues</a>(0, guessing);
+<a name=290 class="linenum">290	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#SYNPRED_FAILED>SYNPRED_FAILED</a>, <a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a>);
+<a name=291 class="linenum">291	</SPAN>	}
+<a name=292 class="linenum">292	</SPAN>	public void <a class="methodDef" name=fireSyntacticPredicateStarted(int) href=ParserEventSupport_java_ref.html#fireSyntacticPredicateStarted(int)>fireSyntacticPredicateStarted</a>(int guessing) {
+<a name=293 class="linenum">293	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#synPredEvent>synPredEvent</a>.<a class="methodRef" href=SyntacticPredicateEvent_java.html#setValues(int,int)>setValues</a>(0, guessing);
+<a name=294 class="linenum">294	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#SYNPRED_STARTED>SYNPRED_STARTED</a>, <a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a>);
+<a name=295 class="linenum">295	</SPAN>	}
+<a name=296 class="linenum">296	</SPAN>	public void <a class="methodDef" name=fireSyntacticPredicateSucceeded(int) href=ParserEventSupport_java_ref.html#fireSyntacticPredicateSucceeded(int)>fireSyntacticPredicateSucceeded</a>(int guessing) {
+<a name=297 class="linenum">297	</SPAN>		<a class="varRef" href=ParserEventSupport_java.html#synPredEvent>synPredEvent</a>.<a class="methodRef" href=SyntacticPredicateEvent_java.html#setValues(int,int)>setValues</a>(0, guessing);
+<a name=298 class="linenum">298	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#fireEvents(int,Vector)>fireEvents</a>(<a class="varRef" href=ParserEventSupport_java.html#SYNPRED_SUCCEEDED>SYNPRED_SUCCEEDED</a>, <a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a>);
+<a name=299 class="linenum">299	</SPAN>	}
+<a name=300 class="linenum">300	</SPAN>	protected void <a class="methodDef" name=refresh(Vector) href=ParserEventSupport_java_ref.html#refresh(Vector)>refresh</a>(Vector listeners) {
+<a name=301 class="linenum">301	</SPAN>		Vector v;
+<a name=302 class="linenum">302	</SPAN>		synchronized (listeners) {
+<a name=303 class="linenum">303	</SPAN>			v = (Vector)listeners.clone();
+<a name=304 class="linenum">304	</SPAN>		}
+<a name=305 class="linenum">305	</SPAN>		if (v != null)
+<a name=306 class="linenum">306	</SPAN>			for (int i = 0; i &lt; v.size(); i++)
+<a name=307 class="linenum">307	</SPAN>				((<a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a>)v.elementAt(i)).refresh();
+<a name=308 class="linenum">308	</SPAN>	}
+<a name=309 class="linenum">309	</SPAN>	public void <a class="methodDef" name=refreshListeners() href=ParserEventSupport_java_ref.html#refreshListeners()>refreshListeners</a>() {
+<a name=310 class="linenum">310	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#refresh(Vector)>refresh</a>(<a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>);
+<a name=311 class="linenum">311	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#refresh(Vector)>refresh</a>(<a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a>);
+<a name=312 class="linenum">312	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#refresh(Vector)>refresh</a>(<a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a>);
+<a name=313 class="linenum">313	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#refresh(Vector)>refresh</a>(<a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a>);
+<a name=314 class="linenum">314	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#refresh(Vector)>refresh</a>(<a class="varRef" href=ParserEventSupport_java.html#semPredListeners>semPredListeners</a>);
+<a name=315 class="linenum">315	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#refresh(Vector)>refresh</a>(<a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a>);
+<a name=316 class="linenum">316	</SPAN>	}
+<a name=317 class="linenum">317	</SPAN>	public void <a class="methodDef" name=removeDoneListener(ListenerBase) href=ParserEventSupport_java_ref.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(<a class="classRef" href=ListenerBase_java.html#ListenerBase>ListenerBase</a> l) {
+<a name=318 class="linenum">318	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a> == null) return;
+<a name=319 class="linenum">319	</SPAN>		Integer i = (Integer)<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a>.get(l);
+<a name=320 class="linenum">320	</SPAN>		int val=0;
+<a name=321 class="linenum">321	</SPAN>		if (i != null)
+<a name=322 class="linenum">322	</SPAN>			val = i.intValue() - 1;
+<a name=323 class="linenum">323	</SPAN>
+<a name=324 class="linenum">324	</SPAN>		if (val == 0) 
+<a name=325 class="linenum">325	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a>.remove(l);
+<a name=326 class="linenum">326	</SPAN>		else
+<a name=327 class="linenum">327	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#doneListeners>doneListeners</a>.put(l, new Integer(val));
+<a name=328 class="linenum">328	</SPAN>	}
+<a name=329 class="linenum">329	</SPAN>	public void <a class="methodDef" name=removeMessageListener(MessageListener) href=ParserEventSupport_java_ref.html#removeMessageListener(MessageListener)>removeMessageListener</a>(<a class="classRef" href=MessageListener_java.html#MessageListener>MessageListener</a> l) {
+<a name=330 class="linenum">330	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a> != null)
+<a name=331 class="linenum">331	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#messageListeners>messageListeners</a>.removeElement(l);
+<a name=332 class="linenum">332	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(l);
+<a name=333 class="linenum">333	</SPAN>	}
+<a name=334 class="linenum">334	</SPAN>	public void <a class="methodDef" name=removeNewLineListener(NewLineListener) href=ParserEventSupport_java_ref.html#removeNewLineListener(NewLineListener)>removeNewLineListener</a>(<a class="classRef" href=NewLineListener_java.html#NewLineListener>NewLineListener</a> l) {
+<a name=335 class="linenum">335	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#newLineListeners>newLineListeners</a> != null)
+<a name=336 class="linenum">336	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#newLineListeners>newLineListeners</a>.removeElement(l);
+<a name=337 class="linenum">337	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(l);
+<a name=338 class="linenum">338	</SPAN>	}
+<a name=339 class="linenum">339	</SPAN>	public void <a class="methodDef" name=removeParserListener(ParserListener) href=ParserEventSupport_java_ref.html#removeParserListener(ParserListener)>removeParserListener</a>(<a class="classRef" href=ParserListener_java.html#ParserListener>ParserListener</a> l) {
+<a name=340 class="linenum">340	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeParserMatchListener(ParserMatchListener)>removeParserMatchListener</a>(l);
+<a name=341 class="linenum">341	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeMessageListener(MessageListener)>removeMessageListener</a>(l);
+<a name=342 class="linenum">342	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeParserTokenListener(ParserTokenListener)>removeParserTokenListener</a>(l);
+<a name=343 class="linenum">343	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeTraceListener(TraceListener)>removeTraceListener</a>(l);
+<a name=344 class="linenum">344	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeSemanticPredicateListener(SemanticPredicateListener)>removeSemanticPredicateListener</a>(l);
+<a name=345 class="linenum">345	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeSyntacticPredicateListener(SyntacticPredicateListener)>removeSyntacticPredicateListener</a>(l);
+<a name=346 class="linenum">346	</SPAN>	}
+<a name=347 class="linenum">347	</SPAN>	public void <a class="methodDef" name=removeParserMatchListener(ParserMatchListener) href=ParserEventSupport_java_ref.html#removeParserMatchListener(ParserMatchListener)>removeParserMatchListener</a>(<a class="classRef" href=ParserMatchListener_java.html#ParserMatchListener>ParserMatchListener</a> l) {
+<a name=348 class="linenum">348	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a> != null)
+<a name=349 class="linenum">349	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#matchListeners>matchListeners</a>.removeElement(l);
+<a name=350 class="linenum">350	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(l);
+<a name=351 class="linenum">351	</SPAN>	}
+<a name=352 class="linenum">352	</SPAN>	public void <a class="methodDef" name=removeParserTokenListener(ParserTokenListener) href=ParserEventSupport_java_ref.html#removeParserTokenListener(ParserTokenListener)>removeParserTokenListener</a>(<a class="classRef" href=ParserTokenListener_java.html#ParserTokenListener>ParserTokenListener</a> l) {
+<a name=353 class="linenum">353	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a> != null)
+<a name=354 class="linenum">354	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#tokenListeners>tokenListeners</a>.removeElement(l);
+<a name=355 class="linenum">355	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(l);
+<a name=356 class="linenum">356	</SPAN>	}
+<a name=357 class="linenum">357	</SPAN>	public void <a class="methodDef" name=removeSemanticPredicateListener(SemanticPredicateListener) href=ParserEventSupport_java_ref.html#removeSemanticPredicateListener(SemanticPredicateListener)>removeSemanticPredicateListener</a>(<a class="classRef" href=SemanticPredicateListener_java.html#SemanticPredicateListener>SemanticPredicateListener</a> l) {
+<a name=358 class="linenum">358	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#semPredListeners>semPredListeners</a> != null)
+<a name=359 class="linenum">359	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#semPredListeners>semPredListeners</a>.removeElement(l);
+<a name=360 class="linenum">360	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(l);
+<a name=361 class="linenum">361	</SPAN>	}
+<a name=362 class="linenum">362	</SPAN>	public void <a class="methodDef" name=removeSyntacticPredicateListener(SyntacticPredicateListener) href=ParserEventSupport_java_ref.html#removeSyntacticPredicateListener(SyntacticPredicateListener)>removeSyntacticPredicateListener</a>(<a class="classRef" href=SyntacticPredicateListener_java.html#SyntacticPredicateListener>SyntacticPredicateListener</a> l) {
+<a name=363 class="linenum">363	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a> != null)
+<a name=364 class="linenum">364	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#synPredListeners>synPredListeners</a>.removeElement(l);
+<a name=365 class="linenum">365	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(l);
+<a name=366 class="linenum">366	</SPAN>	}
+<a name=367 class="linenum">367	</SPAN>	public void <a class="methodDef" name=removeTraceListener(TraceListener) href=ParserEventSupport_java_ref.html#removeTraceListener(TraceListener)>removeTraceListener</a>(<a class="classRef" href=TraceListener_java.html#TraceListener>TraceListener</a> l) {
+<a name=368 class="linenum">368	</SPAN>		if (<a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a> != null)
+<a name=369 class="linenum">369	</SPAN>			<a class="varRef" href=ParserEventSupport_java.html#traceListeners>traceListeners</a>.removeElement(l);
+<a name=370 class="linenum">370	</SPAN>		<a class="methodRef" href=ParserEventSupport_java.html#removeDoneListener(ListenerBase)>removeDoneListener</a>(l);
+<a name=371 class="linenum">371	</SPAN>	}
+<a name=372 class="linenum">372	</SPAN>}
+<a name=373 class="linenum">373	</SPAN></pre>

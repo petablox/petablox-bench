@@ -1,0 +1,103 @@
+public class ca.mcgill.sable.soot.jimple.ParameterRef extends java.lang.Object implements ca.mcgill.sable.soot.jimple.IdentityRef, ca.mcgill.sable.util.Switchable, ca.mcgill.sable.soot.ToBriefString
+{
+    int n;
+    ca.mcgill.sable.soot.SootMethod method;
+
+    void <init>(ca.mcgill.sable.soot.SootMethod, int)
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.n = i0;
+        r0.method = r1;
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        java.lang.StringBuffer r1, r2;
+        int i0;
+        java.lang.String r3;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("@parameter");
+        i0 = r0.n;
+        r2 = r1.append(i0);
+        r3 = r2.toString();
+        return r3;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public int getIndex()
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        int i0;
+
+        r0 := @this;
+        i0 = r0.n;
+        return i0;
+    }
+
+    public ca.mcgill.sable.soot.SootMethod getMethod()
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+
+        r0 := @this;
+        r1 = r0.method;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        ca.mcgill.sable.soot.SootMethod r1;
+        int i0;
+        ca.mcgill.sable.soot.Type r2;
+
+        r0 := @this;
+        r1 = r0.method;
+        i0 = r0.n;
+        r2 = r1.getParameterType(i0);
+        return r2;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.ParameterRef r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.RefSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.RefSwitch) r1;
+        r2.caseParameterRef(r0);
+        return;
+    }
+}

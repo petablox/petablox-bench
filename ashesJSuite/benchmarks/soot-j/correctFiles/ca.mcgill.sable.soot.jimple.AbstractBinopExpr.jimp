@@ -1,0 +1,170 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractBinopExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Expr, ca.mcgill.sable.soot.ToBriefString
+{
+    protected ca.mcgill.sable.soot.jimple.ValueBox op1Box;
+    protected ca.mcgill.sable.soot.jimple.ValueBox op2Box;
+
+    public ca.mcgill.sable.soot.jimple.Value getOp1()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.op1Box;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getOp2()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.op2Box;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getOp1Box()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.op1Box;
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getOp2Box()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.op2Box;
+        return r1;
+    }
+
+    public void setOp1(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.op1Box;
+        r2.setValue(r1);
+        return;
+    }
+
+    public void setOp2(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.op2Box;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5, r6, r9;
+        ca.mcgill.sable.soot.jimple.Value r3, r7;
+        ca.mcgill.sable.util.List r4, r8;
+        int i0, i1, i2, i3;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.op1Box;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i0 = r1.addAll(r4);
+        r5 = r0.op1Box;
+        i1 = r1.add(r5);
+        r6 = r0.op2Box;
+        r7 = r6.getValue();
+        r8 = r7.getUseBoxes();
+        i2 = r1.addAll(r8);
+        r9 = r0.op2Box;
+        i3 = r1.add(r9);
+        return r1;
+    }
+
+    protected abstract java.lang.String getSymbol();
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1, r3;
+        ca.mcgill.sable.soot.jimple.Value r2, r4;
+        java.lang.String r5, r6, r8, r9, r12;
+        java.lang.StringBuffer r7, r10, r11;
+
+        r0 := @this;
+        r1 = r0.op1Box;
+        r2 = r1.getValue();
+        r3 = r0.op2Box;
+        r4 = r3.getValue();
+        r5 = r2.toString();
+        r6 = r4.toString();
+        r7 = new java.lang.StringBuffer;
+        r8 = java.lang.String.valueOf(r5);
+        specialinvoke r7.<init>(r8);
+        r9 = r0.getSymbol();
+        r10 = r7.append(r9);
+        r11 = r10.append(r6);
+        r12 = r11.toString();
+        return r12;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1, r3;
+        ca.mcgill.sable.soot.jimple.Value r2, r4;
+        ca.mcgill.sable.soot.ToBriefString r5, r7;
+        java.lang.String r6, r8, r10, r11, r14;
+        java.lang.StringBuffer r9, r12, r13;
+
+        r0 := @this;
+        r1 = r0.op1Box;
+        r2 = r1.getValue();
+        r3 = r0.op2Box;
+        r4 = r3.getValue();
+        r5 = (ca.mcgill.sable.soot.ToBriefString) r2;
+        r6 = r5.toBriefString();
+        r7 = (ca.mcgill.sable.soot.ToBriefString) r4;
+        r8 = r7.toBriefString();
+        r9 = new java.lang.StringBuffer;
+        r10 = java.lang.String.valueOf(r6);
+        specialinvoke r9.<init>(r10);
+        r11 = r0.getSymbol();
+        r12 = r9.append(r11);
+        r13 = r12.append(r8);
+        r14 = r13.toString();
+        return r14;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractBinopExpr r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public abstract ca.mcgill.sable.soot.Type getType();
+
+    public abstract void apply(ca.mcgill.sable.util.Switch);
+}

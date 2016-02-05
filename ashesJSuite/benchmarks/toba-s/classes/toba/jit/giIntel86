@@ -1,0 +1,362 @@
+#!/usr/local/bin/perl
+# $Id: giIntel86,v 1.3 1998/04/18 23:30:30 pab Exp $
+#
+# This perl script is used to generate the instruction assemblers for the
+# Intel86-architecture toba/joust/sumatra JIT compiler.  The rationale for
+# it is that many instructions have similar layouts, differing only in
+# 3-bit opcode modifiers, and it's best to write their respective
+# translations no more than once, so they're consistent.
+
+# &genImmGrp1 (name, opc)
+# Assemble instructions from Immediate Group 1
+sub
+genImmGrp1 {
+    local ($name,               # Name of function
+           $code                # 3-bit opcode modifier
+           ) = @_;
+
+    my ($imopcode) = sprintf ("0x%.2x", ($code << 3) | 0x04);
+    my ($rmopcode) = sprintf ("0x%.2x", ($code << 3));
+    
+    print <<"EOString"
+    public byte []
+    $name (Object src,
+         Object dst)
+    {
+        int sot = checkOperand (src);
+        int dot = checkOperand (dst);
+        if (OT_imm == sot) {
+            Immediate imOp = (Immediate) src;
+            
+            if (OT_reg == dot) {
+                Register rOp = (Register) dst;
+                
+                if (rOp.isAReg ()) {
+                    boolean byteOp;
+
+                    byteOp = rOp.is8BitReg ();
+                    return encode (
+                        makeByteArray ($imopcode | (byteOp ? 0x00 : WFlag)),
+                        null,
+                        makeByteArray (imOp.setImmSize (byteOp ? 1 : 4)));
+                }
+            }
+            int wFlag;
+            wFlag = valWFlag (dst);
+            return encode (
+                makeByteArray (0x80
+                               | valSFlag (imOp)
+                               | wFlag),
+                makeModRM ($code, dst),
+                makeByteArray (imOp));
+        }
+        return encode (makeByteArray ($rmopcode
+                                      | valDFlag (src, dst)
+                                      | valWFlag (src, dst)),
+                       makeModRM (src, dst),
+                       null);
+    }
+
+EOString
+    ;    
+    return;
+}
+
+# &genDecInc (name, opc)
+# Assemble INC and DEC instructions
+sub
+genDecInc {
+    local ($name,               # Name of instruction
+           $code                # 3-bit opcode modifier
+           ) = @_;
+
+    my ($altopc) = sprintf ("0x%.2x", 0x40 | ($code << 3));
+    my ($rmopcode) = sprintf ("0x%.2x", ($code << 3) + 0x04);
+    
+    print <<"EOString"
+    public byte []
+    $name (Object dst)
+    {
+        int dot = checkOperand (dst);
+        if (OT_reg == dot) {
+            Register rOp = (Register) dst;
+            if (! rOp.is8BitReg ()) {
+                return encode ($altopc | rOp.getRegBitName ());
+            }
+        }
+        return encode (makeByteArray (0xfe | valWFlag (dst)),
+                       makeModRM ($code, dst),
+                       null);
+    }
+EOString
+    ;    
+    return;
+}
+
+# &genAXOp (name, opc)
+# Assemble instructions like IDIV and IMUL which have a single explicit
+# operand and implicitly operate on %edx:%eax.
+sub
+genAXOp {
+    local ($name,               # Name of instruction
+           $opc                 # 3-bit opcode modifier
+           ) = @_;
+
+    $opc = sprintf ("0x%.2x", $opc);
+    
+    print <<"EOString"
+    public byte []
+    $name (Object src) {
+        int sot = checkOperand (src);
+        if ((OT_mem != sot) && (OT_reg != sot)) {
+            throw new InternalError ("Intel86: Invalid $name source operand: " + src);
+        }
+        return encode (makeByteArray (0xf6 | valWFlag (src)),
+                       makeModRM ($opc, src),
+                       null);
+    }
+
+EOString
+    ;    
+    return;
+}
+
+# &genFPUunop (name, esc, opc)
+# Assemble floating-point unary operations; usually, these have an implicit
+# second operand of ST(0).
+sub
+genFPUunop {
+    local ($name,               # Name of instruction
+           $esc,                # Escape prefix byte
+           $opc                 # 3-bit opcode modifier
+           ) = @_;
+
+    $esc = sprintf ("0x%.2x", $esc);
+    $opc = sprintf ("0x%.2x", $opc);
+    
+    print <<"EOString"
+    public byte []
+    $name (Object src) {
+        int sot = checkOperand (src);
+        if (OT_fpstack != sot) {
+            throw new InternalError ("Intel86: Invalid type " + sot + " for $name source: " + src);
+        }
+        return encode ($esc, $opc | ((Register)src).getRegBitName ());
+    }
+
+EOString
+    ;    
+    return;
+}
+
+# Pseudo-enumeration to distinguish the different types of instruction which
+# transfer between the FPU and memory.
+sub FPUi_IntLS { return 1; }    # Integer loads and stores
+sub FPUi_FloatLS { return 2; }  # Floating point loads and stores
+sub FPUi_CtlLS { return 3; }    # Control/status word loads and stores
+
+# &genFPUmemxfer (name, type, ...)
+# Assemble instructions which move data between memory and the FPU.
+sub
+genFPUmemxfer {
+    local ($name,               # Name of instruction
+           $itype,              # Transfer classification
+           @rem                 # Classification-specific operands
+           ) = @_;
+
+    $smopc = sprintf ("0x%.2x", $smopc);
+    $bgopc = sprintf ("0x%.2x", $bgopc);
+    
+    print <<"EOString"
+    public byte []
+    $name (Object op) {
+        MemoryRef mop;
+        
+        try {
+            mop = (MemoryRef) op;
+        } catch (ClassCastException e) {
+            throw new InternalError ("Intel86: $name must take MemoryRef operand: " + op);
+        }
+EOString
+    ;
+    if (&FPUi_IntLS == $itype) {
+        # Loads and stores of integer values
+        my ($smopc, $bgopc) = @rem;
+        print <<"EOString"
+        switch (((MemoryRef)op).getRefSize ()) {
+            case 2:
+                return encode (makeByteArray (0xdf),
+                               makeModRM ($smopc, op),
+                               null);
+            case 4:
+                return encode (makeByteArray (0xdb),
+                               makeModRM ($smopc, op),
+                               null);
+            case 8:
+                return encode (makeByteArray (0xdf),
+                               makeModRM ($bgopc, op),
+                               null);
+            default:
+                throw new InternalError ("Intel86: Unsupported $name size: " + op);
+        }
+EOString
+    ;
+    } elsif (&FPUi_FloatLS) {
+        # Loads and stores of floating point values
+        my ($opc) = @rem;
+        print <<"EOString"
+        return encode (makeByteArray (0xd9 | valFFlag (op)),
+                       makeModRM ($opc, op),
+                       null);
+EOString
+    ;
+    } elsif (&FPUi_CtlLS) {
+        # Loads and stores of control and status words
+        my ($opc) = @rem;
+        print <<"EOString"
+        return encode (makeByteArray (0xd9),
+                       makeModRM ($opc, op),
+                       null);
+EOString
+    ;
+    } else {
+        die ("$0: Invalid parameters to FPUmemxfer");
+    }
+    print ("    }\n\n");
+    return;
+}
+
+# &genOneByte (name, opc)
+# Assemble instructions which have one-byte encodings.
+sub
+genOneByte {
+    local ($name,               # Name of instruction
+           $b0                  # Value of encoding
+           ) = @_;
+
+    $b0 = sprintf ("0x%.2x", $b0);
+    
+    print <<"EOString"
+    public byte []
+    $name ()
+    {
+        return encode ($b0);
+    }
+
+EOString
+    ;    
+    return;
+}
+
+# &genTwoByte (name, b0, b1)
+# Assemble instructions which have two-byte encodings.
+sub
+genTwoByte {
+    local ($name, $b0, $b1) = @_;
+
+    $b0 = sprintf ("0x%.2x", $b0);
+    $b1 = sprintf ("0x%.2x", $b1);
+    
+    print <<"EOString"
+    public byte []
+    $name ()
+    {
+        return encode ($b0, $b1);
+    }
+
+EOString
+    ;    
+    return;
+}
+
+# &genShift (name, opc)
+# Assemble instructions from Shift Group 2
+sub
+genShift {
+    local ($name,               # Name of instruction
+           $opc                 # 3-bit opcode modifier
+           ) = @_;
+
+    $opc = sprintf ("0x%.2x", $opc);
+    
+    print <<"EOString"
+    public byte []
+    $name (Object src,
+         Object dst)
+    {
+        int sot = checkOperand (src);
+        int dot = checkOperand (dst);
+
+        if (OT_reg == sot) {
+            if (Register.R_cl == src) {
+                return encode (makeByteArray (0xd2 | valWFlag (dst)),
+                               makeModRM ($opc, dst),
+                               null);
+            } else {
+                throw new InternalError ("Intel86: Shift by register only allows %cl");
+            }
+        }
+        if (OT_imm == sot) {
+            Immediate iOp = (Immediate) src;
+            if (1 == iOp.getValue()) {
+                return encode (makeByteArray (0xd0 | valWFlag (dst)),
+                               makeModRM ($opc, dst),
+                               null);
+            } else {
+                return encode (makeByteArray (0xc0 | valWFlag (dst)),
+                               makeModRM ($opc, dst),
+                               makeByteArray (iOp.setImmSize (1)));
+            }
+        }
+        throw new InternalError ("Intel86: Shift source illegal");
+    }
+
+EOString
+    ;
+    return;
+}
+
+&genAXOp ("IDIV", 0x07);
+&genAXOp ("IMUL", 0x05);
+
+&genOneByte ("CBW", 0x98);
+&genOneByte ("PrefixOPSIZE", 0x66);
+&genOneByte ("CWD", 0x99);
+&genOneByte ("LEAVE", 0xc9);
+&genOneByte ("RET", 0xc3);
+
+&genTwoByte ("FCHS", 0xd9, 0xe0);
+&genTwoByte ("FTST", 0xd9, 0xe4);
+&genTwoByte ("FRNDINT", 0xd9, 0xfc);
+&genTwoByte ("FNSTSW", 0xdf, 0xe0);
+&genTwoByte ("FUCOMPP", 0xda, 0xe9);
+
+&genFPUmemxfer ("FSTP", &FPUi_FloatLS, 0x03);
+&genFPUmemxfer ("FLD", &FPUi_FloatLS, 0x00);
+&genFPUmemxfer ("FLDCW", &FPUi_CtlLS, 0x05);
+&genFPUmemxfer ("FNSTCW", &FPUi_CtlLS, 0x07);
+&genFPUmemxfer ("FILD", &FPUi_IntLS, 0x00, 0x05);
+&genFPUmemxfer ("FISTP", &FPUi_IntLS, 0x03, 0x07);
+
+&genFPUunop ("FADDP",  0xde, 0xc0);
+&genFPUunop ("FDIVRP", 0xde, 0xf0);
+&genFPUunop ("FMULP",  0xde, 0xc8);
+&genFPUunop ("FSUBRP", 0xde, 0xe0);
+
+&genDecInc ("INC", 0);
+&genDecInc ("DEC", 1);
+
+&genImmGrp1 ("ADD", 0);
+&genImmGrp1 ("OR",  1);
+&genImmGrp1 ("ADC", 2);
+&genImmGrp1 ("SBB", 3);
+&genImmGrp1 ("AND", 4);
+&genImmGrp1 ("SUB", 5);
+&genImmGrp1 ("XOR", 6);
+&genImmGrp1 ("CMP", 7);
+
+&genShift ("SAR", 0x07);
+&genShift ("SHL", 0x04);
+&genShift ("SHR", 0x05);
+
+exit 0;

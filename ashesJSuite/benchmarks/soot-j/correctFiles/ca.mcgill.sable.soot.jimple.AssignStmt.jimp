@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.AssignStmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.DefinitionStmt
+{
+
+    public abstract void setLeftOp(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract void setRightOp(ca.mcgill.sable.soot.jimple.Value);
+}

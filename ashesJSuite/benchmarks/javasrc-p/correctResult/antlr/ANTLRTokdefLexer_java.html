@@ -1,0 +1,728 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ANTLRTokdefLexer');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ANTLRTokdefLexer';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN><span class="comment">/*
+<a name=2 class="linenum">2	</SPAN> * ANTLR-generated file resulting from grammar tokdef.g
+<a name=3 class="linenum">3	</SPAN> * 
+<a name=4 class="linenum">4	</SPAN> * Terence Parr, MageLang Institute
+<a name=5 class="linenum">5	</SPAN> * with John Lilley, Empathy Software
+<a name=6 class="linenum">6	</SPAN> * ANTLR Version 2.5.0; 1996,1997
+<a name=7 class="linenum">7	</SPAN> */</span>
+<a name=8 class="linenum">8	</SPAN> package antlr; 
+<a name=9 class="linenum">9	</SPAN>import java.io.InputStream;
+<a name=10 class="linenum">10	</SPAN>import java.io.Reader;
+<a name=11 class="linenum">11	</SPAN>import java.io.IOException;
+<a name=12 class="linenum">12	</SPAN>import java.util.Hashtable;
+<a name=13 class="linenum">13	</SPAN>import antlr.CharScanner;
+<a name=14 class="linenum">14	</SPAN>import antlr.InputBuffer;
+<a name=15 class="linenum">15	</SPAN>import antlr.ByteBuffer;
+<a name=16 class="linenum">16	</SPAN>import antlr.CharBuffer;
+<a name=17 class="linenum">17	</SPAN>import antlr.Token;
+<a name=18 class="linenum">18	</SPAN>import antlr.CommonToken;
+<a name=19 class="linenum">19	</SPAN>import antlr.ScannerException;
+<a name=20 class="linenum">20	</SPAN>import antlr.Tokenizer;
+<a name=21 class="linenum">21	</SPAN>import antlr.ANTLRHashString;
+<a name=22 class="linenum">22	</SPAN>import antlr.collections.impl.BitSet;
+<a name=23 class="linenum">23	</SPAN>public class <a class="classDef" name=ANTLRTokdefLexer href=ANTLRTokdefLexer_java_ref.html#ANTLRTokdefLexer>ANTLRTokdefLexer</a> extends <a class="classRef" href=CharScanner_java.html#CharScanner>CharScanner</a>canner implements <a class="classRef" href=ANTLRTokdefParserTokenTypes_java.html#ANTLRTokdefParserTokenTypes>ANTLRTokdefParserTokenTypes</a>, Tokenizer
+<a name=24 class="linenum">24	</SPAN> {
+<a name=25 class="linenum">25	</SPAN>public <a class="methodDef" name=ANTLRTokdefLexer(InputStream) href=ANTLRTokdefLexer_java_ref.html#ANTLRTokdefLexer(InputStream)>ANTLRTokdefLexer</a>(InputStream in) {
+<a name=26 class="linenum">26	</SPAN>	this(new <a class="methodRef" href=ByteBuffer_java.html#ByteBuffer(InputStream)>ByteBuffer</a>(in));
+<a name=27 class="linenum">27	</SPAN>}
+<a name=28 class="linenum">28	</SPAN>public <a class="methodDef" name=ANTLRTokdefLexer(Reader) href=ANTLRTokdefLexer_java_ref.html#ANTLRTokdefLexer(Reader)>ANTLRTokdefLexer</a>(Reader in) {
+<a name=29 class="linenum">29	</SPAN>	this(new <a class="methodRef" href=CharBuffer_java.html#CharBuffer(Reader)>CharBuffer</a>(in));
+<a name=30 class="linenum">30	</SPAN>}
+<a name=31 class="linenum">31	</SPAN>public <a class="methodDef" name=ANTLRTokdefLexer(InputBuffer) href=ANTLRTokdefLexer_java_ref.html#ANTLRTokdefLexer(InputBuffer)>ANTLRTokdefLexer</a>(<a class="classRef" href=InputBuffer_java.html#InputBuffer>InputBuffer</a> ib) {
+<a name=32 class="linenum">32	</SPAN>	super(ib);
+<a name=33 class="linenum">33	</SPAN>	<a class="varRef" href=CharScanner_java.html#literals>literals</a> = new Hashtable();
+<a name=34 class="linenum">34	</SPAN><a class="varRef" href=CharScanner_java.html#caseSensitiveLiterals>caseSensitiveLiterals</a> = true;
+<a name=35 class="linenum">35	</SPAN><a class="methodRef" href=CharScanner_java.html#setCaseSensitive(boolean)>setCaseSensitive</a>(true);
+<a name=36 class="linenum">36	</SPAN>}
+<a name=37 class="linenum">37	</SPAN>
+<a name=38 class="linenum">38	</SPAN>public <a class="classRef" href=Token_java.html#Token>Token</a> <a class="methodDef" name=nextToken() href=ANTLRTokdefLexer_java_ref.html#nextToken()>nextToken</a>() throws IOException {
+<a name=39 class="linenum">39	</SPAN>	<a class="classRef" href=Token_java.html#Token>Token</a> _rettoken=null;
+<a name=40 class="linenum">40	</SPAN>tryAgain:
+<a name=41 class="linenum">41	</SPAN>	for (;;) {
+<a name=42 class="linenum">42	</SPAN>		<a class="classRef" href=Token_java.html#Token>Token</a> _token = null;
+<a name=43 class="linenum">43	</SPAN>		int _ttype = <a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#INVALID_TYPE>INVALID_TYPE</a>;
+<a name=44 class="linenum">44	</SPAN>		<a class="methodRef" href=CharScanner_java.html#resetText()>resetText</a>();
+<a name=45 class="linenum">45	</SPAN>		try {   <span class="comment">// for error handling
+<a name=46 class="linenum">46	</SPAN></span>			switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=47 class="linenum">47	</SPAN>			case '\t':  case '\n':  case '\r':  case ' ':
+<a name=48 class="linenum">48	</SPAN>			{
+<a name=49 class="linenum">49	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mWS(boolean)>mWS</a>(true);
+<a name=50 class="linenum">50	</SPAN>				_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=51 class="linenum">51	</SPAN>				break;
+<a name=52 class="linenum">52	</SPAN>			}
+<a name=53 class="linenum">53	</SPAN>			case '(':
+<a name=54 class="linenum">54	</SPAN>			{
+<a name=55 class="linenum">55	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mLPAREN(boolean)>mLPAREN</a>(true);
+<a name=56 class="linenum">56	</SPAN>				_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=57 class="linenum">57	</SPAN>				break;
+<a name=58 class="linenum">58	</SPAN>			}
+<a name=59 class="linenum">59	</SPAN>			case ')':
+<a name=60 class="linenum">60	</SPAN>			{
+<a name=61 class="linenum">61	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mRPAREN(boolean)>mRPAREN</a>(true);
+<a name=62 class="linenum">62	</SPAN>				_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=63 class="linenum">63	</SPAN>				break;
+<a name=64 class="linenum">64	</SPAN>			}
+<a name=65 class="linenum">65	</SPAN>			case '=':
+<a name=66 class="linenum">66	</SPAN>			{
+<a name=67 class="linenum">67	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mASSIGN(boolean)>mASSIGN</a>(true);
+<a name=68 class="linenum">68	</SPAN>				_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=69 class="linenum">69	</SPAN>				break;
+<a name=70 class="linenum">70	</SPAN>			}
+<a name=71 class="linenum">71	</SPAN>			case '"':
+<a name=72 class="linenum">72	</SPAN>			{
+<a name=73 class="linenum">73	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mSTRING(boolean)>mSTRING</a>(true);
+<a name=74 class="linenum">74	</SPAN>				_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=75 class="linenum">75	</SPAN>				break;
+<a name=76 class="linenum">76	</SPAN>			}
+<a name=77 class="linenum">77	</SPAN>			case 'A':  case 'B':  case 'C':  case 'D':
+<a name=78 class="linenum">78	</SPAN>			case 'E':  case 'F':  case 'G':  case 'H':
+<a name=79 class="linenum">79	</SPAN>			case 'I':  case 'J':  case 'K':  case 'L':
+<a name=80 class="linenum">80	</SPAN>			case 'M':  case 'N':  case 'O':  case 'P':
+<a name=81 class="linenum">81	</SPAN>			case 'Q':  case 'R':  case 'S':  case 'T':
+<a name=82 class="linenum">82	</SPAN>			case 'U':  case 'V':  case 'W':  case 'X':
+<a name=83 class="linenum">83	</SPAN>			case 'Y':  case 'Z':  case 'a':  case 'b':
+<a name=84 class="linenum">84	</SPAN>			case 'c':  case 'd':  case 'e':  case 'f':
+<a name=85 class="linenum">85	</SPAN>			case 'g':  case 'h':  case 'i':  case 'j':
+<a name=86 class="linenum">86	</SPAN>			case 'k':  case 'l':  case 'm':  case 'n':
+<a name=87 class="linenum">87	</SPAN>			case 'o':  case 'p':  case 'q':  case 'r':
+<a name=88 class="linenum">88	</SPAN>			case 's':  case 't':  case 'u':  case 'v':
+<a name=89 class="linenum">89	</SPAN>			case 'w':  case 'x':  case 'y':  case 'z':
+<a name=90 class="linenum">90	</SPAN>			{
+<a name=91 class="linenum">91	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mID(boolean)>mID</a>(true);
+<a name=92 class="linenum">92	</SPAN>				_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=93 class="linenum">93	</SPAN>				break;
+<a name=94 class="linenum">94	</SPAN>			}
+<a name=95 class="linenum">95	</SPAN>			case '0':  case '1':  case '2':  case '3':
+<a name=96 class="linenum">96	</SPAN>			case '4':  case '5':  case '6':  case '7':
+<a name=97 class="linenum">97	</SPAN>			case '8':  case '9':
+<a name=98 class="linenum">98	</SPAN>			{
+<a name=99 class="linenum">99	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mINT(boolean)>mINT</a>(true);
+<a name=100 class="linenum">100	</SPAN>				_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=101 class="linenum">101	</SPAN>				break;
+<a name=102 class="linenum">102	</SPAN>			}
+<a name=103 class="linenum">103	</SPAN>			default:
+<a name=104 class="linenum">104	</SPAN>				if ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)=='/') && (<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2)=='/')) {
+<a name=105 class="linenum">105	</SPAN>					<a class="methodRef" href=ANTLRTokdefLexer_java.html#mSL_COMMENT(boolean)>mSL_COMMENT</a>(true);
+<a name=106 class="linenum">106	</SPAN>					_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=107 class="linenum">107	</SPAN>				}
+<a name=108 class="linenum">108	</SPAN>				else if ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)=='/') && (<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2)=='*')) {
+<a name=109 class="linenum">109	</SPAN>					<a class="methodRef" href=ANTLRTokdefLexer_java.html#mML_COMMENT(boolean)>mML_COMMENT</a>(true);
+<a name=110 class="linenum">110	</SPAN>					_rettoken=<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=111 class="linenum">111	</SPAN>				}
+<a name=112 class="linenum">112	</SPAN>			else {
+<a name=113 class="linenum">113	</SPAN>				if (<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)==<a class="varRef" href=CharScanner_java.html#EOF_CHAR>EOF_CHAR</a>) {<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#EOF_TYPE>EOF_TYPE</a>);}
+<a name=114 class="linenum">114	</SPAN>				else {throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());}
+<a name=115 class="linenum">115	</SPAN>			}
+<a name=116 class="linenum">116	</SPAN>			}
+<a name=117 class="linenum">117	</SPAN>			if ( <a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>==null ) continue tryAgain; <span class="comment">// found SKIP token
+<a name=118 class="linenum">118	</SPAN></span>			_ttype = <a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>.<a class="methodRef" href=Token_java.html#getType()>getType</a>();
+<a name=119 class="linenum">119	</SPAN>			<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>.<a class="methodRef" href=Token_java.html#setType(int)>setType</a>(_ttype);
+<a name=120 class="linenum">120	</SPAN>			return <a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a>;
+<a name=121 class="linenum">121	</SPAN>		}
+<a name=122 class="linenum">122	</SPAN>		catch (<a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a> e) {
+<a name=123 class="linenum">123	</SPAN>			<a class="methodRef" href=CharScanner_java.html#reportError(ScannerException)>reportError</a>(e);
+<a name=124 class="linenum">124	</SPAN>			<a class="methodRef" href=CharScanner_java.html#consume()>consume</a>();
+<a name=125 class="linenum">125	</SPAN>		}
+<a name=126 class="linenum">126	</SPAN>	}
+<a name=127 class="linenum">127	</SPAN>}
+<a name=128 class="linenum">128	</SPAN>
+<a name=129 class="linenum">129	</SPAN>	public final void <a class="methodDef" name=mWS(boolean) href=ANTLRTokdefLexer_java_ref.html#mWS(boolean)>mWS</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=130 class="linenum">130	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=131 class="linenum">131	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#WS>WS</a>;
+<a name=132 class="linenum">132	</SPAN>		int _saveIndex;
+<a name=133 class="linenum">133	</SPAN>		
+<a name=134 class="linenum">134	</SPAN>		{
+<a name=135 class="linenum">135	</SPAN>		switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=136 class="linenum">136	</SPAN>		case ' ':
+<a name=137 class="linenum">137	</SPAN>		{
+<a name=138 class="linenum">138	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>(' ');
+<a name=139 class="linenum">139	</SPAN>			break;
+<a name=140 class="linenum">140	</SPAN>		}
+<a name=141 class="linenum">141	</SPAN>		case '\t':
+<a name=142 class="linenum">142	</SPAN>		{
+<a name=143 class="linenum">143	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\t');
+<a name=144 class="linenum">144	</SPAN>			break;
+<a name=145 class="linenum">145	</SPAN>		}
+<a name=146 class="linenum">146	</SPAN>		case '\r':
+<a name=147 class="linenum">147	</SPAN>		{
+<a name=148 class="linenum">148	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\r');
+<a name=149 class="linenum">149	</SPAN>			{
+<a name=150 class="linenum">150	</SPAN>			if ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)=='\n')) {
+<a name=151 class="linenum">151	</SPAN>				<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\n');
+<a name=152 class="linenum">152	</SPAN>			}
+<a name=153 class="linenum">153	</SPAN>			else {
+<a name=154 class="linenum">154	</SPAN>			}
+<a name=155 class="linenum">155	</SPAN>			
+<a name=156 class="linenum">156	</SPAN>			}
+<a name=157 class="linenum">157	</SPAN>			<a class="methodRef" href=CharScanner_java.html#newline()>newline</a>();
+<a name=158 class="linenum">158	</SPAN>			break;
+<a name=159 class="linenum">159	</SPAN>		}
+<a name=160 class="linenum">160	</SPAN>		case '\n':
+<a name=161 class="linenum">161	</SPAN>		{
+<a name=162 class="linenum">162	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\n');
+<a name=163 class="linenum">163	</SPAN>			<a class="methodRef" href=CharScanner_java.html#newline()>newline</a>();
+<a name=164 class="linenum">164	</SPAN>			break;
+<a name=165 class="linenum">165	</SPAN>		}
+<a name=166 class="linenum">166	</SPAN>		default:
+<a name=167 class="linenum">167	</SPAN>		{
+<a name=168 class="linenum">168	</SPAN>			throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=169 class="linenum">169	</SPAN>		}
+<a name=170 class="linenum">170	</SPAN>		}
+<a name=171 class="linenum">171	</SPAN>		}
+<a name=172 class="linenum">172	</SPAN>		_ttype = <a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a>;
+<a name=173 class="linenum">173	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=174 class="linenum">174	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=175 class="linenum">175	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=176 class="linenum">176	</SPAN>		}
+<a name=177 class="linenum">177	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=178 class="linenum">178	</SPAN>	}
+<a name=179 class="linenum">179	</SPAN>	
+<a name=180 class="linenum">180	</SPAN>	public final void <a class="methodDef" name=mSL_COMMENT(boolean) href=ANTLRTokdefLexer_java_ref.html#mSL_COMMENT(boolean)>mSL_COMMENT</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=181 class="linenum">181	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=182 class="linenum">182	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#SL_COMMENT>SL_COMMENT</a>;
+<a name=183 class="linenum">183	</SPAN>		int _saveIndex;
+<a name=184 class="linenum">184	</SPAN>		
+<a name=185 class="linenum">185	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>("//");
+<a name=186 class="linenum">186	</SPAN>		{
+<a name=187 class="linenum">187	</SPAN>		_loop12:
+<a name=188 class="linenum">188	</SPAN>		do {
+<a name=189 class="linenum">189	</SPAN>			if ((<a class="varRef" href=ANTLRTokdefLexer_java.html#_tokenSet_0>_tokenSet_0</a>.member(<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)))) {
+<a name=190 class="linenum">190	</SPAN>				{
+<a name=191 class="linenum">191	</SPAN>				<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>(<a class="varRef" href=ANTLRTokdefLexer_java.html#_tokenSet_0>_tokenSet_0</a>);
+<a name=192 class="linenum">192	</SPAN>				}
+<a name=193 class="linenum">193	</SPAN>			}
+<a name=194 class="linenum">194	</SPAN>			else {
+<a name=195 class="linenum">195	</SPAN>				break _loop12;
+<a name=196 class="linenum">196	</SPAN>			}
+<a name=197 class="linenum">197	</SPAN>			
+<a name=198 class="linenum">198	</SPAN>		} while (true);
+<a name=199 class="linenum">199	</SPAN>		}
+<a name=200 class="linenum">200	</SPAN>		{
+<a name=201 class="linenum">201	</SPAN>		switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=202 class="linenum">202	</SPAN>		case '\n':
+<a name=203 class="linenum">203	</SPAN>		{
+<a name=204 class="linenum">204	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\n');
+<a name=205 class="linenum">205	</SPAN>			break;
+<a name=206 class="linenum">206	</SPAN>		}
+<a name=207 class="linenum">207	</SPAN>		case '\r':
+<a name=208 class="linenum">208	</SPAN>		{
+<a name=209 class="linenum">209	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\r');
+<a name=210 class="linenum">210	</SPAN>			{
+<a name=211 class="linenum">211	</SPAN>			if ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)=='\n')) {
+<a name=212 class="linenum">212	</SPAN>				<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\n');
+<a name=213 class="linenum">213	</SPAN>			}
+<a name=214 class="linenum">214	</SPAN>			else {
+<a name=215 class="linenum">215	</SPAN>			}
+<a name=216 class="linenum">216	</SPAN>			
+<a name=217 class="linenum">217	</SPAN>			}
+<a name=218 class="linenum">218	</SPAN>			break;
+<a name=219 class="linenum">219	</SPAN>		}
+<a name=220 class="linenum">220	</SPAN>		default:
+<a name=221 class="linenum">221	</SPAN>		{
+<a name=222 class="linenum">222	</SPAN>			throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=223 class="linenum">223	</SPAN>		}
+<a name=224 class="linenum">224	</SPAN>		}
+<a name=225 class="linenum">225	</SPAN>		}
+<a name=226 class="linenum">226	</SPAN>		_ttype = <a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a>; <a class="methodRef" href=CharScanner_java.html#newline()>newline</a>();
+<a name=227 class="linenum">227	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=228 class="linenum">228	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=229 class="linenum">229	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=230 class="linenum">230	</SPAN>		}
+<a name=231 class="linenum">231	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=232 class="linenum">232	</SPAN>	}
+<a name=233 class="linenum">233	</SPAN>	
+<a name=234 class="linenum">234	</SPAN>	public final void <a class="methodDef" name=mML_COMMENT(boolean) href=ANTLRTokdefLexer_java_ref.html#mML_COMMENT(boolean)>mML_COMMENT</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=235 class="linenum">235	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=236 class="linenum">236	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#ML_COMMENT>ML_COMMENT</a>;
+<a name=237 class="linenum">237	</SPAN>		int _saveIndex;
+<a name=238 class="linenum">238	</SPAN>		
+<a name=239 class="linenum">239	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>("/*");
+<a name=240 class="linenum">240	</SPAN>		{
+<a name=241 class="linenum">241	</SPAN>		_loop17:
+<a name=242 class="linenum">242	</SPAN>		do {
+<a name=243 class="linenum">243	</SPAN>			switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=244 class="linenum">244	</SPAN>			case '\n':
+<a name=245 class="linenum">245	</SPAN>			{
+<a name=246 class="linenum">246	</SPAN>				<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\n');
+<a name=247 class="linenum">247	</SPAN>				<a class="methodRef" href=CharScanner_java.html#newline()>newline</a>();
+<a name=248 class="linenum">248	</SPAN>				break;
+<a name=249 class="linenum">249	</SPAN>			}
+<a name=250 class="linenum">250	</SPAN>			case '\3':  case '\4':  case '\5':  case '\6':
+<a name=251 class="linenum">251	</SPAN>			case '\7':  case '\10':  case '\t':  case '\13':
+<a name=252 class="linenum">252	</SPAN>			case '\14':  case '\r':  case '\16':  case '\17':
+<a name=253 class="linenum">253	</SPAN>			case '\20':  case '\21':  case '\22':  case '\23':
+<a name=254 class="linenum">254	</SPAN>			case '\24':  case '\25':  case '\26':  case '\27':
+<a name=255 class="linenum">255	</SPAN>			case '\30':  case '\31':  case '\32':  case '\33':
+<a name=256 class="linenum">256	</SPAN>			case '\34':  case '\35':  case '\36':  case '\37':
+<a name=257 class="linenum">257	</SPAN>			case ' ':  case '!':  case '"':  case '#':
+<a name=258 class="linenum">258	</SPAN>			case '$':  case '%':  case '&':  case '\'':
+<a name=259 class="linenum">259	</SPAN>			case '(':  case ')':  case '+':  case ',':
+<a name=260 class="linenum">260	</SPAN>			case '-':  case '.':  case '/':  case '0':
+<a name=261 class="linenum">261	</SPAN>			case '1':  case '2':  case '3':  case '4':
+<a name=262 class="linenum">262	</SPAN>			case '5':  case '6':  case '7':  case '8':
+<a name=263 class="linenum">263	</SPAN>			case '9':  case ':':  case ';':  case '&lt;':
+<a name=264 class="linenum">264	</SPAN>			case '=':  case '>':  case '?':  case '@':
+<a name=265 class="linenum">265	</SPAN>			case 'A':  case 'B':  case 'C':  case 'D':
+<a name=266 class="linenum">266	</SPAN>			case 'E':  case 'F':  case 'G':  case 'H':
+<a name=267 class="linenum">267	</SPAN>			case 'I':  case 'J':  case 'K':  case 'L':
+<a name=268 class="linenum">268	</SPAN>			case 'M':  case 'N':  case 'O':  case 'P':
+<a name=269 class="linenum">269	</SPAN>			case 'Q':  case 'R':  case 'S':  case 'T':
+<a name=270 class="linenum">270	</SPAN>			case 'U':  case 'V':  case 'W':  case 'X':
+<a name=271 class="linenum">271	</SPAN>			case 'Y':  case 'Z':  case '[':  case '\\':
+<a name=272 class="linenum">272	</SPAN>			case ']':  case '^':  case '_':  case '`':
+<a name=273 class="linenum">273	</SPAN>			case 'a':  case 'b':  case 'c':  case 'd':
+<a name=274 class="linenum">274	</SPAN>			case 'e':  case 'f':  case 'g':  case 'h':
+<a name=275 class="linenum">275	</SPAN>			case 'i':  case 'j':  case 'k':  case 'l':
+<a name=276 class="linenum">276	</SPAN>			case 'm':  case 'n':  case 'o':  case 'p':
+<a name=277 class="linenum">277	</SPAN>			case 'q':  case 'r':  case 's':  case 't':
+<a name=278 class="linenum">278	</SPAN>			case 'u':  case 'v':  case 'w':  case 'x':
+<a name=279 class="linenum">279	</SPAN>			case 'y':  case 'z':  case '{':  case '|':
+<a name=280 class="linenum">280	</SPAN>			case '}':  case '~':
+<a name=281 class="linenum">281	</SPAN>			{
+<a name=282 class="linenum">282	</SPAN>				<a class="methodRef" href=CharScanner_java.html#matchNot(char)>matchNot</a>('*');
+<a name=283 class="linenum">283	</SPAN>				break;
+<a name=284 class="linenum">284	</SPAN>			}
+<a name=285 class="linenum">285	</SPAN>			default:
+<a name=286 class="linenum">286	</SPAN>				if ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)=='*') && (<a class="varRef" href=ANTLRTokdefLexer_java.html#_tokenSet_1>_tokenSet_1</a>.member(<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2)))) {
+<a name=287 class="linenum">287	</SPAN>					<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('*');
+<a name=288 class="linenum">288	</SPAN>					<a class="methodRef" href=CharScanner_java.html#matchNot(char)>matchNot</a>('/');
+<a name=289 class="linenum">289	</SPAN>				}
+<a name=290 class="linenum">290	</SPAN>			else {
+<a name=291 class="linenum">291	</SPAN>				break _loop17;
+<a name=292 class="linenum">292	</SPAN>			}
+<a name=293 class="linenum">293	</SPAN>			}
+<a name=294 class="linenum">294	</SPAN>		} while (true);
+<a name=295 class="linenum">295	</SPAN>		}
+<a name=296 class="linenum">296	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>("*/");
+<a name=297 class="linenum">297	</SPAN>		_ttype = <a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a>;
+<a name=298 class="linenum">298	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=299 class="linenum">299	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=300 class="linenum">300	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=301 class="linenum">301	</SPAN>		}
+<a name=302 class="linenum">302	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=303 class="linenum">303	</SPAN>	}
+<a name=304 class="linenum">304	</SPAN>	
+<a name=305 class="linenum">305	</SPAN>	public final void <a class="methodDef" name=mLPAREN(boolean) href=ANTLRTokdefLexer_java_ref.html#mLPAREN(boolean)>mLPAREN</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=306 class="linenum">306	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=307 class="linenum">307	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#LPAREN>LPAREN</a>;
+<a name=308 class="linenum">308	</SPAN>		int _saveIndex;
+<a name=309 class="linenum">309	</SPAN>		
+<a name=310 class="linenum">310	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('(');
+<a name=311 class="linenum">311	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=312 class="linenum">312	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=313 class="linenum">313	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=314 class="linenum">314	</SPAN>		}
+<a name=315 class="linenum">315	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=316 class="linenum">316	</SPAN>	}
+<a name=317 class="linenum">317	</SPAN>	
+<a name=318 class="linenum">318	</SPAN>	public final void <a class="methodDef" name=mRPAREN(boolean) href=ANTLRTokdefLexer_java_ref.html#mRPAREN(boolean)>mRPAREN</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=319 class="linenum">319	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=320 class="linenum">320	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#RPAREN>RPAREN</a>;
+<a name=321 class="linenum">321	</SPAN>		int _saveIndex;
+<a name=322 class="linenum">322	</SPAN>		
+<a name=323 class="linenum">323	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>(')');
+<a name=324 class="linenum">324	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=325 class="linenum">325	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=326 class="linenum">326	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=327 class="linenum">327	</SPAN>		}
+<a name=328 class="linenum">328	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=329 class="linenum">329	</SPAN>	}
+<a name=330 class="linenum">330	</SPAN>	
+<a name=331 class="linenum">331	</SPAN>	public final void <a class="methodDef" name=mASSIGN(boolean) href=ANTLRTokdefLexer_java_ref.html#mASSIGN(boolean)>mASSIGN</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=332 class="linenum">332	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=333 class="linenum">333	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#ASSIGN>ASSIGN</a>;
+<a name=334 class="linenum">334	</SPAN>		int _saveIndex;
+<a name=335 class="linenum">335	</SPAN>		
+<a name=336 class="linenum">336	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('=');
+<a name=337 class="linenum">337	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=338 class="linenum">338	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=339 class="linenum">339	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=340 class="linenum">340	</SPAN>		}
+<a name=341 class="linenum">341	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=342 class="linenum">342	</SPAN>	}
+<a name=343 class="linenum">343	</SPAN>	
+<a name=344 class="linenum">344	</SPAN>	public final void <a class="methodDef" name=mSTRING(boolean) href=ANTLRTokdefLexer_java_ref.html#mSTRING(boolean)>mSTRING</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=345 class="linenum">345	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=346 class="linenum">346	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#STRING>STRING</a>;
+<a name=347 class="linenum">347	</SPAN>		int _saveIndex;
+<a name=348 class="linenum">348	</SPAN>		
+<a name=349 class="linenum">349	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('"');
+<a name=350 class="linenum">350	</SPAN>		{
+<a name=351 class="linenum">351	</SPAN>		_loop23:
+<a name=352 class="linenum">352	</SPAN>		do {
+<a name=353 class="linenum">353	</SPAN>			switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=354 class="linenum">354	</SPAN>			case '\\':
+<a name=355 class="linenum">355	</SPAN>			{
+<a name=356 class="linenum">356	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mESC(boolean)>mESC</a>(false);
+<a name=357 class="linenum">357	</SPAN>				break;
+<a name=358 class="linenum">358	</SPAN>			}
+<a name=359 class="linenum">359	</SPAN>			case '\3':  case '\4':  case '\5':  case '\6':
+<a name=360 class="linenum">360	</SPAN>			case '\7':  case '\10':  case '\t':  case '\n':
+<a name=361 class="linenum">361	</SPAN>			case '\13':  case '\14':  case '\r':  case '\16':
+<a name=362 class="linenum">362	</SPAN>			case '\17':  case '\20':  case '\21':  case '\22':
+<a name=363 class="linenum">363	</SPAN>			case '\23':  case '\24':  case '\25':  case '\26':
+<a name=364 class="linenum">364	</SPAN>			case '\27':  case '\30':  case '\31':  case '\32':
+<a name=365 class="linenum">365	</SPAN>			case '\33':  case '\34':  case '\35':  case '\36':
+<a name=366 class="linenum">366	</SPAN>			case '\37':  case ' ':  case '!':  case '#':
+<a name=367 class="linenum">367	</SPAN>			case '$':  case '%':  case '&':  case '\'':
+<a name=368 class="linenum">368	</SPAN>			case '(':  case ')':  case '*':  case '+':
+<a name=369 class="linenum">369	</SPAN>			case ',':  case '-':  case '.':  case '/':
+<a name=370 class="linenum">370	</SPAN>			case '0':  case '1':  case '2':  case '3':
+<a name=371 class="linenum">371	</SPAN>			case '4':  case '5':  case '6':  case '7':
+<a name=372 class="linenum">372	</SPAN>			case '8':  case '9':  case ':':  case ';':
+<a name=373 class="linenum">373	</SPAN>			case '&lt;':  case '=':  case '>':  case '?':
+<a name=374 class="linenum">374	</SPAN>			case '@':  case 'A':  case 'B':  case 'C':
+<a name=375 class="linenum">375	</SPAN>			case 'D':  case 'E':  case 'F':  case 'G':
+<a name=376 class="linenum">376	</SPAN>			case 'H':  case 'I':  case 'J':  case 'K':
+<a name=377 class="linenum">377	</SPAN>			case 'L':  case 'M':  case 'N':  case 'O':
+<a name=378 class="linenum">378	</SPAN>			case 'P':  case 'Q':  case 'R':  case 'S':
+<a name=379 class="linenum">379	</SPAN>			case 'T':  case 'U':  case 'V':  case 'W':
+<a name=380 class="linenum">380	</SPAN>			case 'X':  case 'Y':  case 'Z':  case '[':
+<a name=381 class="linenum">381	</SPAN>			case ']':  case '^':  case '_':  case '`':
+<a name=382 class="linenum">382	</SPAN>			case 'a':  case 'b':  case 'c':  case 'd':
+<a name=383 class="linenum">383	</SPAN>			case 'e':  case 'f':  case 'g':  case 'h':
+<a name=384 class="linenum">384	</SPAN>			case 'i':  case 'j':  case 'k':  case 'l':
+<a name=385 class="linenum">385	</SPAN>			case 'm':  case 'n':  case 'o':  case 'p':
+<a name=386 class="linenum">386	</SPAN>			case 'q':  case 'r':  case 's':  case 't':
+<a name=387 class="linenum">387	</SPAN>			case 'u':  case 'v':  case 'w':  case 'x':
+<a name=388 class="linenum">388	</SPAN>			case 'y':  case 'z':  case '{':  case '|':
+<a name=389 class="linenum">389	</SPAN>			case '}':  case '~':
+<a name=390 class="linenum">390	</SPAN>			{
+<a name=391 class="linenum">391	</SPAN>				<a class="methodRef" href=CharScanner_java.html#matchNot(char)>matchNot</a>('"');
+<a name=392 class="linenum">392	</SPAN>				break;
+<a name=393 class="linenum">393	</SPAN>			}
+<a name=394 class="linenum">394	</SPAN>			default:
+<a name=395 class="linenum">395	</SPAN>			{
+<a name=396 class="linenum">396	</SPAN>				break _loop23;
+<a name=397 class="linenum">397	</SPAN>			}
+<a name=398 class="linenum">398	</SPAN>			}
+<a name=399 class="linenum">399	</SPAN>		} while (true);
+<a name=400 class="linenum">400	</SPAN>		}
+<a name=401 class="linenum">401	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('"');
+<a name=402 class="linenum">402	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=403 class="linenum">403	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=404 class="linenum">404	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=405 class="linenum">405	</SPAN>		}
+<a name=406 class="linenum">406	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=407 class="linenum">407	</SPAN>	}
+<a name=408 class="linenum">408	</SPAN>	
+<a name=409 class="linenum">409	</SPAN>	protected final void <a class="methodDef" name=mESC(boolean) href=ANTLRTokdefLexer_java_ref.html#mESC(boolean)>mESC</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=410 class="linenum">410	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=411 class="linenum">411	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#ESC>ESC</a>;
+<a name=412 class="linenum">412	</SPAN>		int _saveIndex;
+<a name=413 class="linenum">413	</SPAN>		
+<a name=414 class="linenum">414	</SPAN>		<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\\');
+<a name=415 class="linenum">415	</SPAN>		{
+<a name=416 class="linenum">416	</SPAN>		switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=417 class="linenum">417	</SPAN>		case 'n':
+<a name=418 class="linenum">418	</SPAN>		{
+<a name=419 class="linenum">419	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('n');
+<a name=420 class="linenum">420	</SPAN>			break;
+<a name=421 class="linenum">421	</SPAN>		}
+<a name=422 class="linenum">422	</SPAN>		case 'r':
+<a name=423 class="linenum">423	</SPAN>		{
+<a name=424 class="linenum">424	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('r');
+<a name=425 class="linenum">425	</SPAN>			break;
+<a name=426 class="linenum">426	</SPAN>		}
+<a name=427 class="linenum">427	</SPAN>		case 't':
+<a name=428 class="linenum">428	</SPAN>		{
+<a name=429 class="linenum">429	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('t');
+<a name=430 class="linenum">430	</SPAN>			break;
+<a name=431 class="linenum">431	</SPAN>		}
+<a name=432 class="linenum">432	</SPAN>		case 'b':
+<a name=433 class="linenum">433	</SPAN>		{
+<a name=434 class="linenum">434	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('b');
+<a name=435 class="linenum">435	</SPAN>			break;
+<a name=436 class="linenum">436	</SPAN>		}
+<a name=437 class="linenum">437	</SPAN>		case 'f':
+<a name=438 class="linenum">438	</SPAN>		{
+<a name=439 class="linenum">439	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('f');
+<a name=440 class="linenum">440	</SPAN>			break;
+<a name=441 class="linenum">441	</SPAN>		}
+<a name=442 class="linenum">442	</SPAN>		case '"':
+<a name=443 class="linenum">443	</SPAN>		{
+<a name=444 class="linenum">444	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('"');
+<a name=445 class="linenum">445	</SPAN>			break;
+<a name=446 class="linenum">446	</SPAN>		}
+<a name=447 class="linenum">447	</SPAN>		case '\'':
+<a name=448 class="linenum">448	</SPAN>		{
+<a name=449 class="linenum">449	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\'');
+<a name=450 class="linenum">450	</SPAN>			break;
+<a name=451 class="linenum">451	</SPAN>		}
+<a name=452 class="linenum">452	</SPAN>		case '\\':
+<a name=453 class="linenum">453	</SPAN>		{
+<a name=454 class="linenum">454	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('\\');
+<a name=455 class="linenum">455	</SPAN>			break;
+<a name=456 class="linenum">456	</SPAN>		}
+<a name=457 class="linenum">457	</SPAN>		case '0':  case '1':  case '2':  case '3':
+<a name=458 class="linenum">458	</SPAN>		{
+<a name=459 class="linenum">459	</SPAN>			{
+<a name=460 class="linenum">460	</SPAN>			<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('0','3');
+<a name=461 class="linenum">461	</SPAN>			}
+<a name=462 class="linenum">462	</SPAN>			{
+<a name=463 class="linenum">463	</SPAN>			if (((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) >= '0' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) &lt;= '9')) && ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2) >= '\3' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2) &lt;= '~'))) {
+<a name=464 class="linenum">464	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mDIGIT(boolean)>mDIGIT</a>(false);
+<a name=465 class="linenum">465	</SPAN>				{
+<a name=466 class="linenum">466	</SPAN>				if (((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) >= '0' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) &lt;= '9')) && ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2) >= '\3' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2) &lt;= '~'))) {
+<a name=467 class="linenum">467	</SPAN>					<a class="methodRef" href=ANTLRTokdefLexer_java.html#mDIGIT(boolean)>mDIGIT</a>(false);
+<a name=468 class="linenum">468	</SPAN>				}
+<a name=469 class="linenum">469	</SPAN>				else if (((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) >= '\3' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) &lt;= '~'))) {
+<a name=470 class="linenum">470	</SPAN>				}
+<a name=471 class="linenum">471	</SPAN>				else {
+<a name=472 class="linenum">472	</SPAN>					throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=473 class="linenum">473	</SPAN>				}
+<a name=474 class="linenum">474	</SPAN>				
+<a name=475 class="linenum">475	</SPAN>				}
+<a name=476 class="linenum">476	</SPAN>			}
+<a name=477 class="linenum">477	</SPAN>			else if (((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) >= '\3' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) &lt;= '~'))) {
+<a name=478 class="linenum">478	</SPAN>			}
+<a name=479 class="linenum">479	</SPAN>			else {
+<a name=480 class="linenum">480	</SPAN>				throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=481 class="linenum">481	</SPAN>			}
+<a name=482 class="linenum">482	</SPAN>			
+<a name=483 class="linenum">483	</SPAN>			}
+<a name=484 class="linenum">484	</SPAN>			break;
+<a name=485 class="linenum">485	</SPAN>		}
+<a name=486 class="linenum">486	</SPAN>		case '4':  case '5':  case '6':  case '7':
+<a name=487 class="linenum">487	</SPAN>		{
+<a name=488 class="linenum">488	</SPAN>			{
+<a name=489 class="linenum">489	</SPAN>			<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('4','7');
+<a name=490 class="linenum">490	</SPAN>			}
+<a name=491 class="linenum">491	</SPAN>			{
+<a name=492 class="linenum">492	</SPAN>			if (((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) >= '0' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) &lt;= '9')) && ((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2) >= '\3' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(2) &lt;= '~'))) {
+<a name=493 class="linenum">493	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mDIGIT(boolean)>mDIGIT</a>(false);
+<a name=494 class="linenum">494	</SPAN>			}
+<a name=495 class="linenum">495	</SPAN>			else if (((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) >= '\3' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) &lt;= '~'))) {
+<a name=496 class="linenum">496	</SPAN>			}
+<a name=497 class="linenum">497	</SPAN>			else {
+<a name=498 class="linenum">498	</SPAN>				throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=499 class="linenum">499	</SPAN>			}
+<a name=500 class="linenum">500	</SPAN>			
+<a name=501 class="linenum">501	</SPAN>			}
+<a name=502 class="linenum">502	</SPAN>			break;
+<a name=503 class="linenum">503	</SPAN>		}
+<a name=504 class="linenum">504	</SPAN>		case 'u':
+<a name=505 class="linenum">505	</SPAN>		{
+<a name=506 class="linenum">506	</SPAN>			<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('u');
+<a name=507 class="linenum">507	</SPAN>			<a class="methodRef" href=ANTLRTokdefLexer_java.html#mXDIGIT(boolean)>mXDIGIT</a>(false);
+<a name=508 class="linenum">508	</SPAN>			<a class="methodRef" href=ANTLRTokdefLexer_java.html#mXDIGIT(boolean)>mXDIGIT</a>(false);
+<a name=509 class="linenum">509	</SPAN>			<a class="methodRef" href=ANTLRTokdefLexer_java.html#mXDIGIT(boolean)>mXDIGIT</a>(false);
+<a name=510 class="linenum">510	</SPAN>			<a class="methodRef" href=ANTLRTokdefLexer_java.html#mXDIGIT(boolean)>mXDIGIT</a>(false);
+<a name=511 class="linenum">511	</SPAN>			break;
+<a name=512 class="linenum">512	</SPAN>		}
+<a name=513 class="linenum">513	</SPAN>		default:
+<a name=514 class="linenum">514	</SPAN>		{
+<a name=515 class="linenum">515	</SPAN>			throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=516 class="linenum">516	</SPAN>		}
+<a name=517 class="linenum">517	</SPAN>		}
+<a name=518 class="linenum">518	</SPAN>		}
+<a name=519 class="linenum">519	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=520 class="linenum">520	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=521 class="linenum">521	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=522 class="linenum">522	</SPAN>		}
+<a name=523 class="linenum">523	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=524 class="linenum">524	</SPAN>	}
+<a name=525 class="linenum">525	</SPAN>	
+<a name=526 class="linenum">526	</SPAN>	protected final void <a class="methodDef" name=mDIGIT(boolean) href=ANTLRTokdefLexer_java_ref.html#mDIGIT(boolean)>mDIGIT</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=527 class="linenum">527	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=528 class="linenum">528	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#DIGIT>DIGIT</a>;
+<a name=529 class="linenum">529	</SPAN>		int _saveIndex;
+<a name=530 class="linenum">530	</SPAN>		
+<a name=531 class="linenum">531	</SPAN>		<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('0','9');
+<a name=532 class="linenum">532	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=533 class="linenum">533	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=534 class="linenum">534	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=535 class="linenum">535	</SPAN>		}
+<a name=536 class="linenum">536	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=537 class="linenum">537	</SPAN>	}
+<a name=538 class="linenum">538	</SPAN>	
+<a name=539 class="linenum">539	</SPAN>	protected final void <a class="methodDef" name=mXDIGIT(boolean) href=ANTLRTokdefLexer_java_ref.html#mXDIGIT(boolean)>mXDIGIT</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=540 class="linenum">540	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=541 class="linenum">541	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#XDIGIT>XDIGIT</a>;
+<a name=542 class="linenum">542	</SPAN>		int _saveIndex;
+<a name=543 class="linenum">543	</SPAN>		
+<a name=544 class="linenum">544	</SPAN>		switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=545 class="linenum">545	</SPAN>		case '0':  case '1':  case '2':  case '3':
+<a name=546 class="linenum">546	</SPAN>		case '4':  case '5':  case '6':  case '7':
+<a name=547 class="linenum">547	</SPAN>		case '8':  case '9':
+<a name=548 class="linenum">548	</SPAN>		{
+<a name=549 class="linenum">549	</SPAN>			<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('0','9');
+<a name=550 class="linenum">550	</SPAN>			break;
+<a name=551 class="linenum">551	</SPAN>		}
+<a name=552 class="linenum">552	</SPAN>		case 'a':  case 'b':  case 'c':  case 'd':
+<a name=553 class="linenum">553	</SPAN>		case 'e':  case 'f':
+<a name=554 class="linenum">554	</SPAN>		{
+<a name=555 class="linenum">555	</SPAN>			<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('a','f');
+<a name=556 class="linenum">556	</SPAN>			break;
+<a name=557 class="linenum">557	</SPAN>		}
+<a name=558 class="linenum">558	</SPAN>		case 'A':  case 'B':  case 'C':  case 'D':
+<a name=559 class="linenum">559	</SPAN>		case 'E':  case 'F':
+<a name=560 class="linenum">560	</SPAN>		{
+<a name=561 class="linenum">561	</SPAN>			<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('A','F');
+<a name=562 class="linenum">562	</SPAN>			break;
+<a name=563 class="linenum">563	</SPAN>		}
+<a name=564 class="linenum">564	</SPAN>		default:
+<a name=565 class="linenum">565	</SPAN>		{
+<a name=566 class="linenum">566	</SPAN>			throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=567 class="linenum">567	</SPAN>		}
+<a name=568 class="linenum">568	</SPAN>		}
+<a name=569 class="linenum">569	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=570 class="linenum">570	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=571 class="linenum">571	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=572 class="linenum">572	</SPAN>		}
+<a name=573 class="linenum">573	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=574 class="linenum">574	</SPAN>	}
+<a name=575 class="linenum">575	</SPAN>	
+<a name=576 class="linenum">576	</SPAN>	protected final void <a class="methodDef" name=mVOCAB(boolean) href=ANTLRTokdefLexer_java_ref.html#mVOCAB(boolean)>mVOCAB</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=577 class="linenum">577	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=578 class="linenum">578	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#VOCAB>VOCAB</a>;
+<a name=579 class="linenum">579	</SPAN>		int _saveIndex;
+<a name=580 class="linenum">580	</SPAN>		
+<a name=581 class="linenum">581	</SPAN>		<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('\3','\176');
+<a name=582 class="linenum">582	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=583 class="linenum">583	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=584 class="linenum">584	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=585 class="linenum">585	</SPAN>		}
+<a name=586 class="linenum">586	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=587 class="linenum">587	</SPAN>	}
+<a name=588 class="linenum">588	</SPAN>	
+<a name=589 class="linenum">589	</SPAN>	public final void <a class="methodDef" name=mID(boolean) href=ANTLRTokdefLexer_java_ref.html#mID(boolean)>mID</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=590 class="linenum">590	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=591 class="linenum">591	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#ID>ID</a>;
+<a name=592 class="linenum">592	</SPAN>		int _saveIndex;
+<a name=593 class="linenum">593	</SPAN>		
+<a name=594 class="linenum">594	</SPAN>		{
+<a name=595 class="linenum">595	</SPAN>		switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=596 class="linenum">596	</SPAN>		case 'a':  case 'b':  case 'c':  case 'd':
+<a name=597 class="linenum">597	</SPAN>		case 'e':  case 'f':  case 'g':  case 'h':
+<a name=598 class="linenum">598	</SPAN>		case 'i':  case 'j':  case 'k':  case 'l':
+<a name=599 class="linenum">599	</SPAN>		case 'm':  case 'n':  case 'o':  case 'p':
+<a name=600 class="linenum">600	</SPAN>		case 'q':  case 'r':  case 's':  case 't':
+<a name=601 class="linenum">601	</SPAN>		case 'u':  case 'v':  case 'w':  case 'x':
+<a name=602 class="linenum">602	</SPAN>		case 'y':  case 'z':
+<a name=603 class="linenum">603	</SPAN>		{
+<a name=604 class="linenum">604	</SPAN>			<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('a','z');
+<a name=605 class="linenum">605	</SPAN>			break;
+<a name=606 class="linenum">606	</SPAN>		}
+<a name=607 class="linenum">607	</SPAN>		case 'A':  case 'B':  case 'C':  case 'D':
+<a name=608 class="linenum">608	</SPAN>		case 'E':  case 'F':  case 'G':  case 'H':
+<a name=609 class="linenum">609	</SPAN>		case 'I':  case 'J':  case 'K':  case 'L':
+<a name=610 class="linenum">610	</SPAN>		case 'M':  case 'N':  case 'O':  case 'P':
+<a name=611 class="linenum">611	</SPAN>		case 'Q':  case 'R':  case 'S':  case 'T':
+<a name=612 class="linenum">612	</SPAN>		case 'U':  case 'V':  case 'W':  case 'X':
+<a name=613 class="linenum">613	</SPAN>		case 'Y':  case 'Z':
+<a name=614 class="linenum">614	</SPAN>		{
+<a name=615 class="linenum">615	</SPAN>			<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('A','Z');
+<a name=616 class="linenum">616	</SPAN>			break;
+<a name=617 class="linenum">617	</SPAN>		}
+<a name=618 class="linenum">618	</SPAN>		default:
+<a name=619 class="linenum">619	</SPAN>		{
+<a name=620 class="linenum">620	</SPAN>			throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());
+<a name=621 class="linenum">621	</SPAN>		}
+<a name=622 class="linenum">622	</SPAN>		}
+<a name=623 class="linenum">623	</SPAN>		}
+<a name=624 class="linenum">624	</SPAN>		{
+<a name=625 class="linenum">625	</SPAN>		_loop37:
+<a name=626 class="linenum">626	</SPAN>		do {
+<a name=627 class="linenum">627	</SPAN>			switch ( <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1)) {
+<a name=628 class="linenum">628	</SPAN>			case 'a':  case 'b':  case 'c':  case 'd':
+<a name=629 class="linenum">629	</SPAN>			case 'e':  case 'f':  case 'g':  case 'h':
+<a name=630 class="linenum">630	</SPAN>			case 'i':  case 'j':  case 'k':  case 'l':
+<a name=631 class="linenum">631	</SPAN>			case 'm':  case 'n':  case 'o':  case 'p':
+<a name=632 class="linenum">632	</SPAN>			case 'q':  case 'r':  case 's':  case 't':
+<a name=633 class="linenum">633	</SPAN>			case 'u':  case 'v':  case 'w':  case 'x':
+<a name=634 class="linenum">634	</SPAN>			case 'y':  case 'z':
+<a name=635 class="linenum">635	</SPAN>			{
+<a name=636 class="linenum">636	</SPAN>				<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('a','z');
+<a name=637 class="linenum">637	</SPAN>				break;
+<a name=638 class="linenum">638	</SPAN>			}
+<a name=639 class="linenum">639	</SPAN>			case 'A':  case 'B':  case 'C':  case 'D':
+<a name=640 class="linenum">640	</SPAN>			case 'E':  case 'F':  case 'G':  case 'H':
+<a name=641 class="linenum">641	</SPAN>			case 'I':  case 'J':  case 'K':  case 'L':
+<a name=642 class="linenum">642	</SPAN>			case 'M':  case 'N':  case 'O':  case 'P':
+<a name=643 class="linenum">643	</SPAN>			case 'Q':  case 'R':  case 'S':  case 'T':
+<a name=644 class="linenum">644	</SPAN>			case 'U':  case 'V':  case 'W':  case 'X':
+<a name=645 class="linenum">645	</SPAN>			case 'Y':  case 'Z':
+<a name=646 class="linenum">646	</SPAN>			{
+<a name=647 class="linenum">647	</SPAN>				<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('A','Z');
+<a name=648 class="linenum">648	</SPAN>				break;
+<a name=649 class="linenum">649	</SPAN>			}
+<a name=650 class="linenum">650	</SPAN>			case '_':
+<a name=651 class="linenum">651	</SPAN>			{
+<a name=652 class="linenum">652	</SPAN>				<a class="methodRef" href=CharScanner_java.html#match(char)>match</a>('_');
+<a name=653 class="linenum">653	</SPAN>				break;
+<a name=654 class="linenum">654	</SPAN>			}
+<a name=655 class="linenum">655	</SPAN>			case '0':  case '1':  case '2':  case '3':
+<a name=656 class="linenum">656	</SPAN>			case '4':  case '5':  case '6':  case '7':
+<a name=657 class="linenum">657	</SPAN>			case '8':  case '9':
+<a name=658 class="linenum">658	</SPAN>			{
+<a name=659 class="linenum">659	</SPAN>				<a class="methodRef" href=CharScanner_java.html#matchRange(char,char)>matchRange</a>('0','9');
+<a name=660 class="linenum">660	</SPAN>				break;
+<a name=661 class="linenum">661	</SPAN>			}
+<a name=662 class="linenum">662	</SPAN>			default:
+<a name=663 class="linenum">663	</SPAN>			{
+<a name=664 class="linenum">664	</SPAN>				break _loop37;
+<a name=665 class="linenum">665	</SPAN>			}
+<a name=666 class="linenum">666	</SPAN>			}
+<a name=667 class="linenum">667	</SPAN>		} while (true);
+<a name=668 class="linenum">668	</SPAN>		}
+<a name=669 class="linenum">669	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=670 class="linenum">670	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=671 class="linenum">671	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=672 class="linenum">672	</SPAN>		}
+<a name=673 class="linenum">673	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=674 class="linenum">674	</SPAN>	}
+<a name=675 class="linenum">675	</SPAN>	
+<a name=676 class="linenum">676	</SPAN>	public final void <a class="methodDef" name=mINT(boolean) href=ANTLRTokdefLexer_java_ref.html#mINT(boolean)>mINT</a>(boolean _createToken) throws <a class="classRef" href=ScannerException_java.html#ScannerException>ScannerException</a>, IOException {
+<a name=677 class="linenum">677	</SPAN>		int _ttype; <a class="classRef" href=Token_java.html#Token>Token</a> _token=null; int _begin=<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>();
+<a name=678 class="linenum">678	</SPAN>		_ttype = <a class="varRef" href=ANTLRTokdefParserTokenTypes_java.html#INT>INT</a>;
+<a name=679 class="linenum">679	</SPAN>		int _saveIndex;
+<a name=680 class="linenum">680	</SPAN>		
+<a name=681 class="linenum">681	</SPAN>		{
+<a name=682 class="linenum">682	</SPAN>		int _cnt40=0;
+<a name=683 class="linenum">683	</SPAN>		_loop40:
+<a name=684 class="linenum">684	</SPAN>		do {
+<a name=685 class="linenum">685	</SPAN>			if (((<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) >= '0' && <a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1) &lt;= '9'))) {
+<a name=686 class="linenum">686	</SPAN>				<a class="methodRef" href=ANTLRTokdefLexer_java.html#mDIGIT(boolean)>mDIGIT</a>(false);
+<a name=687 class="linenum">687	</SPAN>			}
+<a name=688 class="linenum">688	</SPAN>			else {
+<a name=689 class="linenum">689	</SPAN>				if ( _cnt40>=1 ) { break _loop40; } else {throw new <a class="methodRef" href=ScannerException_java.html#ScannerException(String,int)>ScannerException</a>("no viable alt for char: "+(char)<a class="methodRef" href=CharScanner_java.html#LA(int)>LA</a>(1),<a class="methodRef" href=CharScanner_java.html#getLine()>getLine</a>());}
+<a name=690 class="linenum">690	</SPAN>			}
+<a name=691 class="linenum">691	</SPAN>			
+<a name=692 class="linenum">692	</SPAN>			_cnt40++;
+<a name=693 class="linenum">693	</SPAN>		} while (true);
+<a name=694 class="linenum">694	</SPAN>		}
+<a name=695 class="linenum">695	</SPAN>		if ( _createToken && _token==null && _ttype!=<a class="classRef" href=Token_java.html#Token>Token</a>.<a class="varRef" href=Token_java.html#SKIP>SKIP</a> ) {
+<a name=696 class="linenum">696	</SPAN>			_token = <a class="methodRef" href=CharScanner_java.html#makeToken(int)>makeToken</a>(_ttype);
+<a name=697 class="linenum">697	</SPAN>			_token.<a class="methodRef" href=Token_java.html#setText(String)>setText</a>(new String(<a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#getBuffer()>getBuffer</a>(), _begin, <a class="varRef" href=CharScanner_java.html#text>text</a>.<a class="methodRef" href=ANTLRStringBuffer_java.html#length()>length</a>()-_begin));
+<a name=698 class="linenum">698	</SPAN>		}
+<a name=699 class="linenum">699	</SPAN>		<a class="varRef" href=CharScanner_java.html#_returnToken>_returnToken</a> = _token;
+<a name=700 class="linenum">700	</SPAN>	}
+<a name=701 class="linenum">701	</SPAN>	
+<a name=702 class="linenum">702	</SPAN>	
+<a name=703 class="linenum">703	</SPAN>	private static final long <a class="varDef" name=_tokenSet_0_data_ href=ANTLRTokdefLexer_java_ref.html#_tokenSet_0_data_>_tokenSet_0_data_</a>[] = { -9224L, 9223372036854775807L, 0L, 0L };
+<a name=704 class="linenum">704	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_0 href=ANTLRTokdefLexer_java_ref.html#_tokenSet_0>_tokenSet_0</a> = new <a class="methodRef" href=../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=ANTLRTokdefLexer_java.html#_tokenSet_0_data_>_tokenSet_0_data_</a>);
+<a name=705 class="linenum">705	</SPAN>	private static final long <a class="varDef" name=_tokenSet_1_data_ href=ANTLRTokdefLexer_java_ref.html#_tokenSet_1_data_>_tokenSet_1_data_</a>[] = { -140737488355336L, 9223372036854775807L, 0L, 0L };
+<a name=706 class="linenum">706	</SPAN>	public static final BitSet <a class="varDef" name=_tokenSet_1 href=ANTLRTokdefLexer_java_ref.html#_tokenSet_1>_tokenSet_1</a> = new <a class="methodRef" href=../antlr/collections/impl/BitSet_java.html#BitSet(long)>BitSet</a>(<a class="varRef" href=ANTLRTokdefLexer_java.html#_tokenSet_1_data_>_tokenSet_1_data_</a>);
+<a name=707 class="linenum">707	</SPAN>	
+<a name=708 class="linenum">708	</SPAN>	}
+<a name=709 class="linenum">709	</SPAN></pre>

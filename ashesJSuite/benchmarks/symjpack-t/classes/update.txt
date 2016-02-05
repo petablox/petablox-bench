@@ -1,0 +1,14 @@
+Hi
+
+A new version of the java interpreter for symbolic
+manipulation of math. expressions can be downloaded
+from:
+
+http://www.mb.hs-wismar.de/Mitarbeiter/Pawletta/00Uwe/casE.html
+
+The symbolic library has been extended and a
+small bug in the numeric unit has been removed.
+
+
+regards
+Uwe

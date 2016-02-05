@@ -1,0 +1,52 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: MessageEvent');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug</A>: MessageEvent';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>public class <a class="classDef" name=MessageEvent href=MessageEvent_java_ref.html#MessageEvent>MessageEvent</a> extends <a class="classRef" href=Event_java.html#Event>Event</a> {
+<a name=4 class="linenum">4	</SPAN>	private String <a class="varDef" name=text href=MessageEvent_java_ref.html#text>text</a>;
+<a name=5 class="linenum">5	</SPAN>	public static int <a class="varDef" name=WARNING href=MessageEvent_java_ref.html#WARNING>WARNING</a> = 0;
+<a name=6 class="linenum">6	</SPAN>	public static int <a class="varDef" name=ERROR href=MessageEvent_java_ref.html#ERROR>ERROR</a> = 1;
+<a name=7 class="linenum">7	</SPAN>
+<a name=8 class="linenum">8	</SPAN>
+<a name=9 class="linenum">9	</SPAN>	public <a class="methodDef" name=MessageEvent(Object) href=MessageEvent_java_ref.html#MessageEvent(Object)>MessageEvent</a>(Object source) {
+<a name=10 class="linenum">10	</SPAN>		super(source);
+<a name=11 class="linenum">11	</SPAN>	}
+<a name=12 class="linenum">12	</SPAN>	public <a class="methodDef" name=MessageEvent(Object,int,String) href=MessageEvent_java_ref.html#MessageEvent(Object,int,String)>MessageEvent</a>(Object source, int type, String text) {
+<a name=13 class="linenum">13	</SPAN>		super(source);
+<a name=14 class="linenum">14	</SPAN>		<a class="methodRef" href=MessageEvent_java.html#setValues(int,String)>setValues</a>(type,text);
+<a name=15 class="linenum">15	</SPAN>	}
+<a name=16 class="linenum">16	</SPAN>	public String <a class="methodDef" name=getText() href=MessageEvent_java_ref.html#getText()>getText</a>() {
+<a name=17 class="linenum">17	</SPAN>		return <a class="varRef" href=MessageEvent_java.html#text>text</a>;
+<a name=18 class="linenum">18	</SPAN>	}
+<a name=19 class="linenum">19	</SPAN>	void <a class="methodDef" name=setText(String) href=MessageEvent_java_ref.html#setText(String)>setText</a>(String text) {
+<a name=20 class="linenum">20	</SPAN>		this.text = text;
+<a name=21 class="linenum">21	</SPAN>	}
+<a name=22 class="linenum">22	</SPAN>	<span class="comment">/** This should NOT be called from anyone other than ParserEventSupport! */</span>
+<a name=23 class="linenum">23	</SPAN>	void <a class="methodDef" name=setValues(int,String) href=MessageEvent_java_ref.html#setValues(int,String)>setValues</a>(int type, String text) {
+<a name=24 class="linenum">24	</SPAN>		super.setValues(type);
+<a name=25 class="linenum">25	</SPAN>		<a class="methodRef" href=MessageEvent_java.html#setText(String)>setText</a>(text);
+<a name=26 class="linenum">26	</SPAN>	}
+<a name=27 class="linenum">27	</SPAN>	public String <a class="methodDef" name=toString() href=MessageEvent_java_ref.html#toString()>toString</a>() {
+<a name=28 class="linenum">28	</SPAN>		return "ParserMessageEvent [" +
+<a name=29 class="linenum">29	</SPAN>		       (<a class="methodRef" href=Event_java.html#getType()>getType</a>()==<a class="varRef" href=MessageEvent_java.html#WARNING>WARNING</a>?"warning,":"error,") +
+<a name=30 class="linenum">30	</SPAN>		       <a class="methodRef" href=MessageEvent_java.html#getText()>getText</a>() + "]";
+<a name=31 class="linenum">31	</SPAN>	}
+<a name=32 class="linenum">32	</SPAN>}
+<a name=33 class="linenum">33	</SPAN></pre>

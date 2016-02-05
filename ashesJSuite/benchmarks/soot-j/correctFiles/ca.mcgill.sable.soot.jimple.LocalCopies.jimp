@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.LocalCopies extends java.lang.Object
+{
+
+    public abstract boolean isLocalCopyOfBefore(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Stmt);
+
+    public abstract ca.mcgill.sable.util.List getCopiesBefore(ca.mcgill.sable.soot.jimple.Stmt);
+}

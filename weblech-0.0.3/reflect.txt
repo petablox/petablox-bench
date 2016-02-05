@@ -1,0 +1,13 @@
+# resolvedClsForNameSites
+43!loadImpl:(Ljava/lang/String;)Ljava/lang/Object;@java.net.InetAddress->java.net.Inet6AddressImpl
+175!getURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@java.net.URL->sun.net.www.protocol.http.Handler
+1!class$:(Ljava/lang/String;)Ljava/lang/Class;@org.apache.log4j.CategoryKey->org.apache.log4j.CategoryKey
+10!<clinit>:()V@weblech.util.Logger->weblech.util.Log4j
+# resolvedObjNewInstSites
+46!loadImpl:(Ljava/lang/String;)Ljava/lang/Object;@java.net.InetAddress->java.net.Inet6AddressImpl
+211!getURLStreamHandler:(Ljava/lang/String;)Ljava/net/URLStreamHandler;@java.net.URL->sun.net.www.protocol.http.Handler
+42!newBundle:(Ljava/lang/String;Ljava/util/Locale;Ljava/lang/String;Ljava/lang/ClassLoader;Z)Ljava/util/ResourceBundle;@java.util.ResourceBundle$Control->sun.util.resources.CalendarData,sun.util.resources.CalendarData_en
+# resolvedConNewInstSites
+118!newInstance0:()Ljava/lang/Object;@java.lang.Class->sun.util.resources.CalendarData,sun.util.resources.CalendarData_en,sun.net.www.protocol.http.Handler,java.net.Inet6AddressImpl
+# resolvedAryNewInstSites
+22!copyOf:([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;@java.util.Arrays->java.lang.Thread[]

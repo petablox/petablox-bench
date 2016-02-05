@@ -1,0 +1,1069 @@
+class ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable extends java.lang.Object
+{
+    private final ca.mcgill.sable.soot.jimple.TypeResolver this$0;
+    private int id;
+    ca.mcgill.sable.util.IntSet parents;
+    ca.mcgill.sable.util.IntSet children;
+    private ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode typeNode;
+    private boolean cannotBeInt;
+    private boolean cannotBeLong;
+    private boolean cannotBeFloat;
+    private boolean cannotBeDouble;
+    private boolean cannotBeAddress;
+    private boolean cannotBeRef;
+    ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable isArrayOf;
+    ca.mcgill.sable.util.IntSet isElementOf;
+    int arrayDepth;
+    ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable base;
+    int count;
+    private ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable rep;
+    private int rank;
+    private java.util.BitSet ancestors;
+
+    void <init>(ca.mcgill.sable.soot.jimple.TypeResolver)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0;
+        ca.mcgill.sable.soot.jimple.TypeResolver r1;
+        ca.mcgill.sable.util.IntSet r2, r3, r4, r8;
+        java.util.BitSet r5;
+        java.util.Vector r6, r7;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        r0.this$0 = r1;
+        r2 = new ca.mcgill.sable.util.IntSet;
+        specialinvoke r2.<init>();
+        r0.parents = r2;
+        r3 = new ca.mcgill.sable.util.IntSet;
+        specialinvoke r3.<init>();
+        r0.children = r3;
+        r4 = new ca.mcgill.sable.util.IntSet;
+        specialinvoke r4.<init>();
+        r0.isElementOf = r4;
+        r0.rep = r0;
+        r5 = new java.util.BitSet;
+        specialinvoke r5.<init>();
+        r0.ancestors = r5;
+        r6 = r1.typeVariableInstances;
+        r0.id = r6.size();
+        r7 = r1.typeVariableInstances;
+        r7.addElement(r0);
+        r8 = r1.unresolvedTypeVariables;
+        i0 = r0.id;
+        r8.set(i0);
+        return;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.TypeResolver, ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0;
+        ca.mcgill.sable.soot.jimple.TypeResolver r1;
+        ca.mcgill.sable.soot.jimple.Local r2;
+        java.util.Hashtable r3, r5;
+        java.lang.Object r4, r7;
+        java.lang.String r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>(r1);
+        r3 = ca.mcgill.sable.soot.jimple.TypeResolver.access$0(r1);
+        r4 = r3.put(r2, r0);
+        r5 = ca.mcgill.sable.soot.jimple.TypeResolver.access$1(r1);
+        r6 = r2.toString();
+        r7 = r5.put(r0, r6);
+        return;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.TypeResolver, ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r14, r15, r16, r18, r19, r20;
+        ca.mcgill.sable.soot.jimple.TypeResolver r1;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r2;
+        java.util.Hashtable r3, r5;
+        java.lang.Object r4, r7;
+        java.lang.String r6;
+        ca.mcgill.sable.util.IntSet r8;
+        int i0, i1, i2, i3, i4;
+        ca.mcgill.sable.soot.Type r9, r10;
+        ca.mcgill.sable.soot.ArrayType r11, r13;
+        ca.mcgill.sable.soot.BaseType r12, r17;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>(r1);
+        r3 = ca.mcgill.sable.soot.jimple.TypeResolver.access$0(r1);
+        r4 = r3.put(r2, r0);
+        r5 = ca.mcgill.sable.soot.jimple.TypeResolver.access$1(r1);
+        r6 = r2.toString();
+        r7 = r5.put(r0, r6);
+        r0.typeNode = r2;
+        r8 = r1.unresolvedTypeVariables;
+        i0 = r0.id;
+        r8.clear(i0);
+        r9 = r2.getType();
+        i1 = r9 instanceof ca.mcgill.sable.soot.ArrayType;
+        if i1 == 0 goto label1;
+
+        r10 = r2.getType();
+        r11 = (ca.mcgill.sable.soot.ArrayType) r10;
+        i2 = r11.numDimensions;
+        if i2 <= 1 goto label0;
+
+        r1.new_relation = 1;
+        r12 = r11.baseType;
+        i3 = r11.numDimensions;
+        i4 = i3 - 1;
+        r13 = ca.mcgill.sable.soot.ArrayType.v(r12, i4);
+        r14 = r1.getTypeVariable(r13);
+        r15 = r0.getEcrIsArrayOf();
+        r16 = r14.ecrUnion(r15);
+        return;
+
+     label0:
+        r1.new_relation = 1;
+        r17 = r11.baseType;
+        r18 = r1.getTypeVariable(r17);
+        r19 = r0.getEcrIsArrayOf();
+        r20 = r18.ecrUnion(r19);
+
+     label1:
+        return;
+    }
+
+    ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable ecr()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1, r2, r3;
+
+        r0 := @this;
+        r1 = r0.rep;
+        if r1 == r0 goto label0;
+
+        r2 = r0.rep;
+        r0.rep = r2.ecr();
+
+     label0:
+        r3 = r0.rep;
+        return r3;
+    }
+
+    ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable ecrUnion(ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1, r3, r4;
+        ca.mcgill.sable.soot.jimple.TypeResolver r2;
+        int i0, i1, i2, i3, i4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.new_relation = 1;
+        r3 = r0.ecr();
+        r4 = r1.ecr();
+        if r3 != r4 goto label0;
+
+        return r3;
+
+     label0:
+        i0 = r3.rank;
+        i1 = r4.rank;
+        if i0 <= i1 goto label1;
+
+        specialinvoke r3.merge(r4);
+        r4.rep = r3;
+        return r3;
+
+     label1:
+        specialinvoke r4.merge(r3);
+        r3.rep = r4;
+        i2 = r4.rank;
+        i3 = r3.rank;
+        if i2 != i3 goto label2;
+
+        i4 = r4.rank;
+        r4.rank = i4 + 1;
+
+     label2:
+        return r4;
+    }
+
+    private void merge(ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1, r16, r17, r18, r19, r21, r23, r25, r26, r27, r28, r29, r31, r40, r50, r95, r108;
+        ca.mcgill.sable.soot.ErroneousType r2, r62, r67, r72, r77, r82, r89, r101, r114;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28, i29, i30, i31, i32, i33, i34, i35, i36, i37, i38, i39, i40, i41, i42, i43, i44, i45, i46, i47, i48, i49, i50, i51, i52;
+        ca.mcgill.sable.soot.jimple.TypeResolver r3, r6, r9, r12, r24, r37, r47, r60, r65, r70, r75, r80, r87, r92, r99, r105, r112;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r4, r5, r8, r11, r57, r58, r63, r68, r73, r78, r83, r85, r96, r97, r98, r102, r109, r110, r111, r115;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r7, r61, r66, r71, r76, r81, r88, r100, r113;
+        ca.mcgill.sable.util.IntSet r10, r13, r14, r15, r20, r22, r30, r32, r33, r34, r35, r41, r42, r43, r44, r45, r51, r52, r53, r54, r55, r56, r90, r103, r116, r117, r118;
+        int[] r36, r46, r91, r104;
+        java.util.Vector r38, r48, r93, r106;
+        java.lang.Object r39, r49, r94, r107;
+        ca.mcgill.sable.soot.Type r59, r64, r69, r74, r79, r84, r86;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r3 = r0.this$0;
+        r3.new_relation = 1;
+        r4 = r0.typeNode;
+        if r4 != null goto label0;
+
+        r0.typeNode = r1.typeNode;
+        goto label1;
+
+     label0:
+        r5 = r1.typeNode;
+        if r5 == null goto label1;
+
+        r6 = r0.this$0;
+        r7 = r6.classHierarchy;
+        r2 = ca.mcgill.sable.soot.ErroneousType.v();
+        r8 = r7.getTypeNode(r2);
+        r0.typeNode = r8;
+        r1.typeNode = r8;
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(1): Attempt to merge incompatible types.");
+
+     label1:
+        r9 = r0.this$0;
+        r10 = r9.unresolvedTypeVariables;
+        i1 = r1.id;
+        r10.clear(i1);
+        r11 = r0.typeNode;
+        if r11 == null goto label2;
+
+        r12 = r0.this$0;
+        r13 = r12.unresolvedTypeVariables;
+        i2 = r0.id;
+        r13.clear(i2);
+
+     label2:
+        i3 = r0.cannotBeInt;
+        i4 = r1.cannotBeInt;
+        r0.cannotBeInt = i3 | i4;
+        i5 = r0.cannotBeLong;
+        i6 = r1.cannotBeLong;
+        r0.cannotBeLong = i5 | i6;
+        i7 = r0.cannotBeFloat;
+        i8 = r1.cannotBeFloat;
+        r0.cannotBeFloat = i7 | i8;
+        i9 = r0.cannotBeDouble;
+        i10 = r1.cannotBeDouble;
+        r0.cannotBeDouble = i9 | i10;
+        i11 = r0.cannotBeAddress;
+        i12 = r1.cannotBeAddress;
+        r0.cannotBeAddress = i11 | i12;
+        i13 = r0.cannotBeRef;
+        i14 = r1.cannotBeRef;
+        r0.cannotBeRef = i13 | i14;
+        r14 = r0.isElementOf;
+        r15 = r1.isElementOf;
+        r14.or(r15);
+        r16 = r0.isArrayOf;
+        if r16 != null goto label3;
+
+        r17 = r1.isArrayOf;
+        if r17 == null goto label4;
+
+        r18 = r1.isArrayOf;
+        r0.isArrayOf = r18.ecr();
+        r19 = r0.isArrayOf;
+        r20 = r19.isElementOf;
+        i15 = r1.id;
+        r20.clear(i15);
+        r21 = r0.isArrayOf;
+        r22 = r21.isElementOf;
+        i16 = r0.id;
+        r22.set(i16);
+        goto label4;
+
+     label3:
+        r23 = r1.isArrayOf;
+        if r23 == null goto label4;
+
+        r24 = r0.this$0;
+        r24.new_relation = 1;
+        r25 = r0.isArrayOf;
+        r26 = r1.isArrayOf;
+        r27 = r25.ecrUnion(r26);
+        r28 = r0.isArrayOf;
+        r0.isArrayOf = r28.ecr();
+        r29 = r0.isArrayOf;
+        r30 = r29.isElementOf;
+        i17 = r1.id;
+        r30.clear(i17);
+        r31 = r0.isArrayOf;
+        r32 = r31.isElementOf;
+        i18 = r0.id;
+        r32.set(i18);
+
+     label4:
+        r33 = r0.parents;
+        r34 = r1.parents;
+        r33.or(r34);
+        r35 = r1.parents;
+        r36 = r35.elements();
+        i0 = 0;
+        goto label6;
+
+     label5:
+        r37 = r0.this$0;
+        r38 = r37.typeVariableInstances;
+        i19 = r36[i0];
+        r39 = r38.elementAt(i19);
+        r40 = (ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable) r39;
+        r41 = r40.children;
+        i20 = r1.id;
+        r41.clear(i20);
+        r42 = r40.children;
+        i21 = r0.id;
+        r42.set(i21);
+        i0 = i0 + 1;
+
+     label6:
+        i22 = r36.length;
+        if i0 < i22 goto label5;
+
+        r43 = r0.children;
+        r44 = r1.children;
+        r43.or(r44);
+        r45 = r1.children;
+        r46 = r45.elements();
+        i23 = 0;
+        goto label8;
+
+     label7:
+        r47 = r0.this$0;
+        r48 = r47.typeVariableInstances;
+        i24 = r46[i23];
+        r49 = r48.elementAt(i24);
+        r50 = (ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable) r49;
+        r51 = r50.parents;
+        i25 = r1.id;
+        r51.clear(i25);
+        r52 = r50.parents;
+        i26 = r0.id;
+        r52.set(i26);
+        i23 = i23 + 1;
+
+     label8:
+        i27 = r46.length;
+        if i23 < i27 goto label7;
+
+        r53 = r0.parents;
+        i28 = r0.id;
+        r53.clear(i28);
+        r54 = r0.children;
+        i29 = r0.id;
+        r54.clear(i29);
+        r55 = r0.parents;
+        i30 = r1.id;
+        r55.clear(i30);
+        r56 = r0.children;
+        i31 = r1.id;
+        r56.clear(i31);
+        r57 = r0.typeNode;
+        if r57 == null goto label22;
+
+        i32 = r0.cannotBeInt;
+        if i32 == 0 goto label9;
+
+        r58 = r0.typeNode;
+        r59 = r58.getType();
+        i33 = r59 instanceof ca.mcgill.sable.soot.IntType;
+        if i33 == 0 goto label9;
+
+        r60 = r0.this$0;
+        r61 = r60.classHierarchy;
+        r62 = ca.mcgill.sable.soot.ErroneousType.v();
+        r0.typeNode = r61.getTypeNode(r62);
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(2): Should not be an IntType.");
+
+     label9:
+        i34 = r0.cannotBeLong;
+        if i34 == 0 goto label10;
+
+        r63 = r0.typeNode;
+        r64 = r63.getType();
+        i35 = r64 instanceof ca.mcgill.sable.soot.LongType;
+        if i35 == 0 goto label10;
+
+        r65 = r0.this$0;
+        r66 = r65.classHierarchy;
+        r67 = ca.mcgill.sable.soot.ErroneousType.v();
+        r0.typeNode = r66.getTypeNode(r67);
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(3): Should not be a LongType.");
+
+     label10:
+        i36 = r0.cannotBeFloat;
+        if i36 == 0 goto label11;
+
+        r68 = r0.typeNode;
+        r69 = r68.getType();
+        i37 = r69 instanceof ca.mcgill.sable.soot.FloatType;
+        if i37 == 0 goto label11;
+
+        r70 = r0.this$0;
+        r71 = r70.classHierarchy;
+        r72 = ca.mcgill.sable.soot.ErroneousType.v();
+        r0.typeNode = r71.getTypeNode(r72);
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(4): Should not be a FloatType.");
+
+     label11:
+        i38 = r0.cannotBeDouble;
+        if i38 == 0 goto label12;
+
+        r73 = r0.typeNode;
+        r74 = r73.getType();
+        i39 = r74 instanceof ca.mcgill.sable.soot.DoubleType;
+        if i39 == 0 goto label12;
+
+        r75 = r0.this$0;
+        r76 = r75.classHierarchy;
+        r77 = ca.mcgill.sable.soot.ErroneousType.v();
+        r0.typeNode = r76.getTypeNode(r77);
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(5): Should not be a DoubleType.");
+
+     label12:
+        i40 = r0.cannotBeAddress;
+        if i40 == 0 goto label13;
+
+        r78 = r0.typeNode;
+        r79 = r78.getType();
+        i41 = r79 instanceof ca.mcgill.sable.soot.StmtAddressType;
+        if i41 == 0 goto label13;
+
+        r80 = r0.this$0;
+        r81 = r80.classHierarchy;
+        r82 = ca.mcgill.sable.soot.ErroneousType.v();
+        r0.typeNode = r81.getTypeNode(r82);
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(6): Should not be a StmtAddressType.");
+
+     label13:
+        i42 = r0.cannotBeRef;
+        if i42 == 0 goto label15;
+
+        r83 = r0.typeNode;
+        r84 = r83.getType();
+        i43 = r84 instanceof ca.mcgill.sable.soot.RefType;
+        if i43 != 0 goto label14;
+
+        r85 = r0.typeNode;
+        r86 = r85.getType();
+        i44 = r86 instanceof ca.mcgill.sable.soot.ArrayType;
+        if i44 == 0 goto label15;
+
+     label14:
+        r87 = r0.this$0;
+        r88 = r87.classHierarchy;
+        r89 = ca.mcgill.sable.soot.ErroneousType.v();
+        r0.typeNode = r88.getTypeNode(r89);
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(7): Should not be a RefType nor an ArrayType.");
+
+     label15:
+        r90 = r0.parents;
+        r91 = r90.elements();
+        i45 = 0;
+        goto label18;
+
+     label16:
+        r92 = r0.this$0;
+        r93 = r92.typeVariableInstances;
+        i46 = r91[i45];
+        r94 = r93.elementAt(i46);
+        r95 = (ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable) r94;
+        r96 = r95.typeNode;
+        if r96 == null goto label17;
+
+        r97 = r0.typeNode;
+        r98 = r95.typeNode;
+        i47 = r97.hasAncestor(r98);
+        if i47 != 0 goto label17;
+
+        r99 = r0.this$0;
+        r100 = r99.classHierarchy;
+        r101 = ca.mcgill.sable.soot.ErroneousType.v();
+        r102 = r100.getTypeNode(r101);
+        r0.typeNode = r102;
+        r95.typeNode = r102;
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(8): Parent type is not a valid ancestor.");
+
+     label17:
+        i45 = i45 + 1;
+
+     label18:
+        i48 = r91.length;
+        if i45 < i48 goto label16;
+
+        r103 = r0.children;
+        r104 = r103.elements();
+        i49 = 0;
+        goto label21;
+
+     label19:
+        r105 = r0.this$0;
+        r106 = r105.typeVariableInstances;
+        i50 = r104[i49];
+        r107 = r106.elementAt(i50);
+        r108 = (ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable) r107;
+        r109 = r108.typeNode;
+        if r109 == null goto label20;
+
+        r110 = r0.typeNode;
+        r111 = r108.typeNode;
+        i51 = r110.hasDescendant(r111);
+        if i51 != 0 goto label20;
+
+        r112 = r0.this$0;
+        r113 = r112.classHierarchy;
+        r114 = ca.mcgill.sable.soot.ErroneousType.v();
+        r115 = r113.getTypeNode(r114);
+        r0.typeNode = r115;
+        r108.typeNode = r115;
+        ca.mcgill.sable.soot.jimple.TypeResolver.access$2("Type Error(9): Child type is not a valid descendant.");
+
+     label20:
+        i49 = i49 + 1;
+
+     label21:
+        i52 = r104.length;
+        if i49 < i52 goto label19;
+
+     label22:
+        r116 = new ca.mcgill.sable.util.IntSet;
+        specialinvoke r116.<init>();
+        r1.parents = r116;
+        r117 = new ca.mcgill.sable.util.IntSet;
+        specialinvoke r117.<init>();
+        r1.children = r117;
+        r118 = new ca.mcgill.sable.util.IntSet;
+        specialinvoke r118.<init>();
+        r1.isElementOf = r118;
+        r1.isArrayOf = null;
+        return;
+    }
+
+    void removeEcrIndirectRelations()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r2, r5, r8, r10, r11, r14;
+        java.util.BitSet r1, r4, r6, r7, r13;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8;
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] r3;
+        ca.mcgill.sable.util.IntSet r9, r12;
+
+        r0 := @this;
+        r2 = r0.ecr();
+        r1 = new java.util.BitSet;
+        specialinvoke r1.<init>();
+        r2.ancestors = r1;
+        r3 = r0.getEcrParents();
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r4 = r2.ancestors;
+        r5 = r3[i0];
+        r6 = r5.ancestors;
+        r4.or(r6);
+        i0 = i0 + 1;
+
+     label1:
+        i2 = r3.length;
+        if i0 < i2 goto label0;
+
+        i1 = 0;
+        goto label5;
+
+     label2:
+        r7 = r2.ancestors;
+        r8 = r3[i1];
+        i3 = r8.id;
+        i4 = r7.get(i3);
+        if i4 == 0 goto label3;
+
+        r9 = r2.parents;
+        r10 = r3[i1];
+        i5 = r10.id;
+        r9.clear(i5);
+        r11 = r3[i1];
+        r12 = r11.children;
+        i6 = r2.id;
+        r12.clear(i6);
+        goto label4;
+
+     label3:
+        r13 = r2.ancestors;
+        r14 = r3[i1];
+        i7 = r14.id;
+        r13.set(i7);
+
+     label4:
+        i1 = i1 + 1;
+
+     label5:
+        i8 = r3.length;
+        if i1 < i8 goto label2;
+
+        return;
+    }
+
+    void ecrAddParent(ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1, r2, r3, r8, r14, r18, r20, r21, r23;
+        int i0, i1, i2;
+        java.io.PrintStream r4;
+        java.lang.StringBuffer r5, r11, r16;
+        ca.mcgill.sable.soot.jimple.TypeResolver r6, r12;
+        java.util.Hashtable r7, r13;
+        java.lang.Object r9, r15;
+        java.lang.String r10, r17;
+        ca.mcgill.sable.util.IntSet r19, r22;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.ecr();
+        r3 = r1.ecr();
+        if r2 == r3 goto label1;
+
+        i0 = ca.mcgill.sable.soot.jimple.TypeResolver.access$3();
+        if i0 == 0 goto label0;
+
+        r4 = java.lang.System.out;
+        r5 = new java.lang.StringBuffer;
+        r6 = r0.this$0;
+        r7 = ca.mcgill.sable.soot.jimple.TypeResolver.access$1(r6);
+        r8 = r1.ecr();
+        r9 = r7.get(r8);
+        r10 = java.lang.String.valueOf(r9);
+        specialinvoke r5.<init>(r10);
+        r11 = r5.append(" < ");
+        r12 = r0.this$0;
+        r13 = ca.mcgill.sable.soot.jimple.TypeResolver.access$1(r12);
+        r14 = r0.ecr();
+        r15 = r13.get(r14);
+        r16 = r11.append(r15);
+        r17 = r16.toString();
+        r4.println(r17);
+
+     label0:
+        r18 = r0.ecr();
+        r19 = r18.parents;
+        r20 = r1.ecr();
+        i1 = r20.id;
+        r19.set(i1);
+        r21 = r1.ecr();
+        r22 = r21.children;
+        r23 = r0.ecr();
+        i2 = r23.id;
+        r22.set(i2);
+
+     label1:
+        return;
+    }
+
+    void ecrAddChild(ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1, r2, r3, r8, r14, r18, r20, r21, r23;
+        int i0, i1, i2;
+        java.io.PrintStream r4;
+        java.lang.StringBuffer r5, r11, r16;
+        ca.mcgill.sable.soot.jimple.TypeResolver r6, r12;
+        java.util.Hashtable r7, r13;
+        java.lang.Object r9, r15;
+        java.lang.String r10, r17;
+        ca.mcgill.sable.util.IntSet r19, r22;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.ecr();
+        r3 = r1.ecr();
+        if r2 == r3 goto label1;
+
+        i0 = ca.mcgill.sable.soot.jimple.TypeResolver.access$3();
+        if i0 == 0 goto label0;
+
+        r4 = java.lang.System.out;
+        r5 = new java.lang.StringBuffer;
+        r6 = r0.this$0;
+        r7 = ca.mcgill.sable.soot.jimple.TypeResolver.access$1(r6);
+        r8 = r0.ecr();
+        r9 = r7.get(r8);
+        r10 = java.lang.String.valueOf(r9);
+        specialinvoke r5.<init>(r10);
+        r11 = r5.append(" < ");
+        r12 = r0.this$0;
+        r13 = ca.mcgill.sable.soot.jimple.TypeResolver.access$1(r12);
+        r14 = r1.ecr();
+        r15 = r13.get(r14);
+        r16 = r11.append(r15);
+        r17 = r16.toString();
+        r4.println(r17);
+
+     label0:
+        r18 = r0.ecr();
+        r19 = r18.children;
+        r20 = r1.ecr();
+        i1 = r20.id;
+        r19.set(i1);
+        r21 = r1.ecr();
+        r22 = r21.parents;
+        r23 = r0.ecr();
+        i2 = r23.id;
+        r22.set(i2);
+
+     label1:
+        return;
+    }
+
+    void ecrCannotBeInt()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r1.cannotBeInt = 1;
+        return;
+    }
+
+    void ecrCannotBeLong()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r1.cannotBeLong = 1;
+        return;
+    }
+
+    void ecrCannotBeFloat()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r1.cannotBeFloat = 1;
+        return;
+    }
+
+    void ecrCannotBeDouble()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r1.cannotBeDouble = 1;
+        return;
+    }
+
+    void ecrCannotBeAddress()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r1.cannotBeAddress = 1;
+        return;
+    }
+
+    void ecrCannotBeRef()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r1.cannotBeRef = 1;
+        return;
+    }
+
+    int getEcrId()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+        int i0;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        i0 = r1.id;
+        return i0;
+    }
+
+    boolean isEcrArray()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1, r2;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r2 = r1.isArrayOf;
+        if r2 != null goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    int ecrArrayDepth()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+        int i0;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        i0 = r1.arrayDepth;
+        return i0;
+    }
+
+    ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable getEcrIsArrayOf()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1, r2, r3, r5, r7;
+        ca.mcgill.sable.soot.jimple.TypeResolver r4;
+        ca.mcgill.sable.util.IntSet r6;
+        int i0;
+
+        r0 := @this;
+        r2 = r0.ecr();
+        r3 = r2.isArrayOf;
+        if r3 != null goto label0;
+
+        r1 = new ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable;
+        r4 = r0.this$0;
+        specialinvoke r1.<init>(r4);
+        r2.isArrayOf = r1;
+        r5 = r2.isArrayOf;
+        r6 = r5.isElementOf;
+        i0 = r2.id;
+        r6.set(i0);
+
+     label0:
+        r7 = r2.isArrayOf;
+        return r7;
+    }
+
+    ca.mcgill.sable.util.IntSet getEcrParentIds()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+        ca.mcgill.sable.util.IntSet r2, r4;
+        java.lang.Object r3;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r2 = r1.parents;
+        r3 = r2.clone();
+        r4 = (ca.mcgill.sable.util.IntSet) r3;
+        return r4;
+    }
+
+    ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] getEcrParents()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+        int i0, i1, i2, i3;
+        ca.mcgill.sable.util.IntSet r2;
+        int[] r3;
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] r4;
+        ca.mcgill.sable.soot.jimple.TypeResolver r5;
+        java.util.Vector r6;
+        java.lang.Object r7;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r2 = r1.parents;
+        r3 = r2.elements();
+        i1 = r3.length;
+        r4 = new ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[i1];
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r5 = r0.this$0;
+        r6 = r5.typeVariableInstances;
+        i2 = r3[i0];
+        r7 = r6.elementAt(i2);
+        r4[i0] = (ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable) r7;
+        i0 = i0 + 1;
+
+     label1:
+        i3 = r3.length;
+        if i0 < i3 goto label0;
+
+        return r4;
+    }
+
+    ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] getEcrChildren()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+        int i0, i1, i2, i3;
+        ca.mcgill.sable.util.IntSet r2;
+        int[] r3;
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] r4;
+        ca.mcgill.sable.soot.jimple.TypeResolver r5;
+        java.util.Vector r6;
+        java.lang.Object r7;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r2 = r1.children;
+        r3 = r2.elements();
+        i1 = r3.length;
+        r4 = new ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[i1];
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r5 = r0.this$0;
+        r6 = r5.typeVariableInstances;
+        i2 = r3[i0];
+        r7 = r6.elementAt(i2);
+        r4[i0] = (ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable) r7;
+        i0 = i0 + 1;
+
+     label1:
+        i3 = r3.length;
+        if i0 < i3 goto label0;
+
+        return r4;
+    }
+
+    ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode getEcrTypeNode()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r2;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r2 = r1.typeNode;
+        return r2;
+    }
+
+    boolean setEcrTypeNode(ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r3, r5, r7, r10, r12, r14, r27, r29;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy$TypeNode r1, r4, r6, r8, r11, r13, r15, r23, r28;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11;
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable[] r2, r9;
+        ca.mcgill.sable.soot.Type r16, r17;
+        ca.mcgill.sable.soot.ArrayType r18, r22;
+        ca.mcgill.sable.soot.jimple.TypeResolver r19, r24;
+        ca.mcgill.sable.soot.jimple.ClassHierarchy r20, r25;
+        ca.mcgill.sable.soot.BaseType r21, r26;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.getEcrParents();
+        i0 = 0;
+        goto label2;
+
+     label0:
+        r3 = r2[i0];
+        r4 = r3.typeNode;
+        if r4 == null goto label1;
+
+        r5 = r2[i0];
+        r6 = r5.typeNode;
+        i2 = r1.hasAncestor(r6);
+        if i2 != 0 goto label1;
+
+        r7 = r2[i0];
+        r8 = r7.typeNode;
+        if r1 == r8 goto label1;
+
+        return 0;
+
+     label1:
+        i0 = i0 + 1;
+
+     label2:
+        i3 = r2.length;
+        if i0 < i3 goto label0;
+
+        r9 = r0.getEcrChildren();
+        i1 = 0;
+        goto label5;
+
+     label3:
+        r10 = r9[i1];
+        r11 = r10.typeNode;
+        if r11 == null goto label4;
+
+        r12 = r9[i1];
+        r13 = r12.typeNode;
+        i4 = r1.hasDescendant(r13);
+        if i4 != 0 goto label4;
+
+        r14 = r9[i1];
+        r15 = r14.typeNode;
+        if r1 == r15 goto label4;
+
+        return 0;
+
+     label4:
+        i1 = i1 + 1;
+
+     label5:
+        i5 = r9.length;
+        if i1 < i5 goto label3;
+
+        i6 = r0.isEcrArray();
+        if i6 == 0 goto label9;
+
+        r16 = r1.getType();
+        i7 = r16 instanceof ca.mcgill.sable.soot.ArrayType;
+        if i7 != 0 goto label6;
+
+        return 0;
+
+     label6:
+        r17 = r1.getType();
+        r18 = (ca.mcgill.sable.soot.ArrayType) r17;
+        i8 = r18.numDimensions;
+        if i8 <= 1 goto label7;
+
+        r19 = r0.this$0;
+        r20 = r19.classHierarchy;
+        r21 = r18.baseType;
+        i9 = r18.numDimensions;
+        i10 = i9 - 1;
+        r22 = ca.mcgill.sable.soot.ArrayType.v(r21, i10);
+        r23 = r20.getTypeNode(r22);
+        goto label8;
+
+     label7:
+        r24 = r0.this$0;
+        r25 = r24.classHierarchy;
+        r26 = r18.baseType;
+        r23 = r25.getTypeNode(r26);
+
+     label8:
+        r27 = r0.getEcrIsArrayOf();
+        r28 = r27.getEcrTypeNode();
+        i11 = r23.hasDescendant(r28);
+        if i11 != 0 goto label9;
+
+        return 0;
+
+     label9:
+        r29 = r0.ecr();
+        r29.typeNode = r1;
+        return 1;
+    }
+
+    void unsetEcrTypeNode()
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0, r1;
+
+        r0 := @this;
+        r1 = r0.ecr();
+        r1.typeNode = null;
+        return;
+    }
+
+    static int access$0(ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable)
+    {
+        ca.mcgill.sable.soot.jimple.TypeResolver$TypeVariable r0;
+        int i0;
+
+        r0 := @parameter0;
+        i0 = r0.id;
+        return i0;
+    }
+}

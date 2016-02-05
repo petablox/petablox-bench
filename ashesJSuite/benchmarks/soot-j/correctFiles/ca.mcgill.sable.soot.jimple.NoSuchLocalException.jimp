@@ -1,0 +1,23 @@
+public class ca.mcgill.sable.soot.jimple.NoSuchLocalException extends java.lang.RuntimeException
+{
+
+    public void <init>(java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.NoSuchLocalException r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>(r1);
+        return;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.NoSuchLocalException r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

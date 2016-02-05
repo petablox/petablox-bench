@@ -1,0 +1,33 @@
+public interface ca.mcgill.sable.soot.jimple.TableSwitchStmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Stmt
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Unit getDefaultTarget();
+
+    public abstract void setDefaultTarget(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox getDefaultTargetBox();
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getKey();
+
+    public abstract void setKey(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getKeyBox();
+
+    public abstract void setLowIndex(int);
+
+    public abstract void setHighIndex(int);
+
+    public abstract int getLowIndex();
+
+    public abstract int getHighIndex();
+
+    public abstract ca.mcgill.sable.util.List getTargets();
+
+    public abstract ca.mcgill.sable.soot.jimple.Unit getTarget(int);
+
+    public abstract void setTarget(int, ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract void setTargets(ca.mcgill.sable.util.List);
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox getTargetBox(int);
+}

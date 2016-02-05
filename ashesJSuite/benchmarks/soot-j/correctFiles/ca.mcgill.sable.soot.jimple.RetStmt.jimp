@@ -1,0 +1,9 @@
+public interface ca.mcgill.sable.soot.jimple.RetStmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Stmt
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getStmtAddress();
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getStmtAddressBox();
+
+    public abstract void setStmtAddress(ca.mcgill.sable.soot.jimple.Value);
+}

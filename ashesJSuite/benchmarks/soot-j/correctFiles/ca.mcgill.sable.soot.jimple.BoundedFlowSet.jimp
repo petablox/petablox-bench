@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.BoundedFlowSet extends java.lang.Object implements ca.mcgill.sable.soot.jimple.FlowSet
+{
+
+    public abstract ca.mcgill.sable.util.List toList(int, int);
+
+    public abstract void complement(ca.mcgill.sable.soot.jimple.FlowSet);
+}

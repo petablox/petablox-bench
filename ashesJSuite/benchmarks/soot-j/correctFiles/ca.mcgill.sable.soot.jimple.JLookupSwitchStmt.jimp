@@ -1,0 +1,524 @@
+public class ca.mcgill.sable.soot.jimple.JLookupSwitchStmt extends ca.mcgill.sable.soot.jimple.AbstractStmt implements ca.mcgill.sable.soot.jimple.LookupSwitchStmt
+{
+    ca.mcgill.sable.soot.jimple.UnitBox defaultTargetBox;
+    ca.mcgill.sable.soot.jimple.ValueBox keyBox;
+    ca.mcgill.sable.util.List lookupValues;
+    protected ca.mcgill.sable.soot.jimple.UnitBox[] targetBoxes;
+    ca.mcgill.sable.util.List stmtBoxes;
+
+    private static ca.mcgill.sable.soot.jimple.UnitBox[] getTargetBoxesArray(ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.util.List r0;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.Jimple r1;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2;
+        java.lang.Object r3;
+        ca.mcgill.sable.soot.jimple.Stmt r4;
+
+        r0 := @parameter0;
+        i1 = r0.size();
+        r2 = new ca.mcgill.sable.soot.jimple.UnitBox[i1];
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r1 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r3 = r0.get(i0);
+        r4 = (ca.mcgill.sable.soot.jimple.Stmt) r3;
+        r2[i0] = r1.newStmtBox(r4);
+        i0 = i0 + 1;
+
+     label1:
+        i2 = r2.length;
+        if i0 < i2 goto label0;
+
+        return r2;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.util.List, ca.mcgill.sable.util.List, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.util.List r2, r3;
+        ca.mcgill.sable.soot.jimple.Unit r4;
+        ca.mcgill.sable.soot.jimple.Jimple r5, r6;
+        ca.mcgill.sable.soot.jimple.ValueBox r7;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r8;
+        ca.mcgill.sable.soot.jimple.UnitBox r9;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 := @parameter3;
+        r5 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r7 = r5.newImmediateBox(r1);
+        r8 = ca.mcgill.sable.soot.jimple.JLookupSwitchStmt.getTargetBoxesArray(r3);
+        r6 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r9 = r6.newStmtBox(r4);
+        specialinvoke r0.<init>(r7, r2, r8, r9);
+        return;
+    }
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox, ca.mcgill.sable.util.List, ca.mcgill.sable.soot.jimple.UnitBox[], ca.mcgill.sable.soot.jimple.UnitBox)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.util.List r2, r6, r8, r10, r11;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r3;
+        ca.mcgill.sable.soot.jimple.UnitBox r4, r9;
+        int i0, i1, i2, i3, i4;
+        ca.mcgill.sable.util.ArrayList r5, r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 := @parameter3;
+        specialinvoke r0.<init>();
+        r0.keyBox = r1;
+        r0.defaultTargetBox = r4;
+        r0.targetBoxes = r3;
+        r5 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r5.<init>();
+        r0.lookupValues = r5;
+        r6 = r0.lookupValues;
+        i1 = r6.addAll(r2);
+        r7 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r7.<init>();
+        r0.stmtBoxes = r7;
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r8 = r0.stmtBoxes;
+        r9 = r3[i0];
+        i2 = r8.add(r9);
+        i0 = i0 + 1;
+
+     label1:
+        i3 = r3.length;
+        if i0 < i3 goto label0;
+
+        r10 = r0.stmtBoxes;
+        i4 = r10.add(r4);
+        r11 = r0.stmtBoxes;
+        r0.stmtBoxes = ca.mcgill.sable.util.Collections.unmodifiableList(r11);
+        return;
+    }
+
+    protected java.lang.String toString(boolean, ca.mcgill.sable.util.Map, java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        int i0, i1, i2, i3;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2, r4, r5, r7, r12, r18, r21, r24, r27, r35, r39, r43, r47, r51, r54, r56, r58;
+        java.lang.StringBuffer r3, r6, r8, r15, r16, r17, r19, r20, r22, r23, r25, r26, r28, r31, r32, r36, r37, r38, r40, r42, r44, r48, r49, r50, r52, r53, r55, r57;
+        ca.mcgill.sable.soot.jimple.ValueBox r9, r13;
+        ca.mcgill.sable.soot.jimple.Value r10, r14;
+        ca.mcgill.sable.soot.ToBriefString r11;
+        ca.mcgill.sable.util.List r29, r41;
+        java.lang.Object r30, r34, r46;
+        ca.mcgill.sable.soot.jimple.Unit r33, r45;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 := @parameter2;
+        r3 = new java.lang.StringBuffer;
+        specialinvoke r3.<init>();
+        i2 = r2.equals("");
+        if i2 == 0 goto label0;
+
+        r5 = " ";
+        goto label1;
+
+     label0:
+        r5 = "
+";
+
+     label1:
+        r4 = r5;
+        r6 = new java.lang.StringBuffer;
+        r7 = java.lang.String.valueOf(r2);
+        specialinvoke r6.<init>(r7);
+        r8 = r6.append("lookupswitch(");
+        if i0 == 0 goto label2;
+
+        r9 = r0.keyBox;
+        r10 = r9.getValue();
+        r11 = (ca.mcgill.sable.soot.ToBriefString) r10;
+        r12 = r11.toBriefString();
+        goto label3;
+
+     label2:
+        r13 = r0.keyBox;
+        r14 = r13.getValue();
+        r12 = r14.toString();
+
+     label3:
+        r15 = r8.append(r12);
+        r16 = r15.append(")");
+        r17 = r16.append(r4);
+        r18 = r17.toString();
+        r19 = r3.append(r18);
+        r20 = new java.lang.StringBuffer;
+        r21 = java.lang.String.valueOf(r2);
+        specialinvoke r20.<init>(r21);
+        r22 = r20.append("{");
+        r23 = r22.append(r4);
+        r24 = r23.toString();
+        r25 = r3.append(r24);
+        i1 = 0;
+        goto label5;
+
+     label4:
+        r26 = new java.lang.StringBuffer;
+        r27 = java.lang.String.valueOf(r2);
+        specialinvoke r26.<init>(r27);
+        r28 = r26.append("    case ");
+        r29 = r0.lookupValues;
+        r30 = r29.get(i1);
+        r31 = r28.append(r30);
+        r32 = r31.append(": goto ");
+        r33 = r0.getTarget(i1);
+        r34 = r1.get(r33);
+        r35 = (java.lang.String) r34;
+        r36 = r32.append(r35);
+        r37 = r36.append(";");
+        r38 = r37.append(r4);
+        r39 = r38.toString();
+        r40 = r3.append(r39);
+        i1 = i1 + 1;
+
+     label5:
+        r41 = r0.lookupValues;
+        i3 = r41.size();
+        if i1 < i3 goto label4;
+
+        r42 = new java.lang.StringBuffer;
+        r43 = java.lang.String.valueOf(r2);
+        specialinvoke r42.<init>(r43);
+        r44 = r42.append("    default: goto ");
+        r45 = r0.getDefaultTarget();
+        r46 = r1.get(r45);
+        r47 = (java.lang.String) r46;
+        r48 = r44.append(r47);
+        r49 = r48.append(";");
+        r50 = r49.append(r4);
+        r51 = r50.toString();
+        r52 = r3.append(r51);
+        r53 = new java.lang.StringBuffer;
+        r54 = java.lang.String.valueOf(r2);
+        specialinvoke r53.<init>(r54);
+        r55 = r53.append("}");
+        r56 = r55.toString();
+        r57 = r3.append(r56);
+        r58 = r3.toString();
+        return r58;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Unit getDefaultTarget()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.UnitBox r1;
+        ca.mcgill.sable.soot.jimple.Unit r2;
+
+        r0 := @this;
+        r1 = r0.defaultTargetBox;
+        r2 = r1.getUnit();
+        return r2;
+    }
+
+    public void setDefaultTarget(ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.UnitBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.defaultTargetBox;
+        r2.setUnit(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.UnitBox getDefaultTargetBox()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.UnitBox r1;
+
+        r0 := @this;
+        r1 = r0.defaultTargetBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getKey()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.keyBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public void setKey(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.keyBox;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getKeyBox()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.keyBox;
+        return r1;
+    }
+
+    public void setLookupValues(ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.util.List r1, r3;
+        ca.mcgill.sable.util.ArrayList r2;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r2.<init>();
+        r0.lookupValues = r2;
+        r3 = r0.lookupValues;
+        i0 = r3.addAll(r1);
+        return;
+    }
+
+    public void setLookupValue(int, int)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        int i0, i1;
+        java.lang.Integer r1;
+        ca.mcgill.sable.util.List r2;
+        java.lang.Object r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        i1 := @parameter1;
+        r2 = r0.lookupValues;
+        r1 = new java.lang.Integer;
+        specialinvoke r1.<init>(i1);
+        r3 = r2.set(i0, r1);
+        return;
+    }
+
+    public int getLookupValue(int)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        int i0, i1;
+        ca.mcgill.sable.util.List r1;
+        java.lang.Object r2;
+        java.lang.Integer r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.lookupValues;
+        r2 = r1.get(i0);
+        r3 = (java.lang.Integer) r2;
+        i1 = r3.intValue();
+        return i1;
+    }
+
+    public ca.mcgill.sable.util.List getLookupValues()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.util.List r1, r2;
+
+        r0 := @this;
+        r1 = r0.lookupValues;
+        r2 = ca.mcgill.sable.util.Collections.unmodifiableList(r1);
+        return r2;
+    }
+
+    public int getTargetCount()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r1;
+        int i0;
+
+        r0 := @this;
+        r1 = r0.targetBoxes;
+        i0 = r1.length;
+        return i0;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Unit getTarget(int)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r1;
+        ca.mcgill.sable.soot.jimple.UnitBox r2;
+        ca.mcgill.sable.soot.jimple.Unit r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.targetBoxes;
+        r2 = r1[i0];
+        r3 = r2.getUnit();
+        return r3;
+    }
+
+    public ca.mcgill.sable.soot.jimple.UnitBox getTargetBox(int)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r1;
+        ca.mcgill.sable.soot.jimple.UnitBox r2;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.targetBoxes;
+        r2 = r1[i0];
+        return r2;
+    }
+
+    public void setTarget(int, ca.mcgill.sable.soot.jimple.Unit)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        int i0;
+        ca.mcgill.sable.soot.jimple.Unit r1;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2;
+        ca.mcgill.sable.soot.jimple.UnitBox r3;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 = r0.targetBoxes;
+        r3 = r2[i0];
+        r3.setUnit(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.util.List getTargets()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2, r5;
+        ca.mcgill.sable.soot.jimple.UnitBox r3;
+        ca.mcgill.sable.soot.jimple.Unit r4;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r2 = r0.targetBoxes;
+        r3 = r2[i0];
+        r4 = r3.getUnit();
+        i1 = r1.add(r4);
+        i0 = i0 + 1;
+
+     label1:
+        r5 = r0.targetBoxes;
+        i2 = r5.length;
+        if i0 < i2 goto label0;
+
+        return r1;
+    }
+
+    public void setTargets(ca.mcgill.sable.soot.jimple.Unit[])
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.soot.jimple.Unit[] r1;
+        int i0, i1;
+        ca.mcgill.sable.soot.jimple.UnitBox[] r2;
+        ca.mcgill.sable.soot.jimple.UnitBox r3;
+        ca.mcgill.sable.soot.jimple.Unit r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r2 = r0.targetBoxes;
+        r3 = r2[i0];
+        r4 = r1[i0];
+        r3.setUnit(r4);
+        i0 = i0 + 1;
+
+     label1:
+        i1 = r1.length;
+        if i0 < i1 goto label0;
+
+        return;
+    }
+
+    public ca.mcgill.sable.util.List getDefBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.util.List r4;
+        int i0, i1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.keyBox;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i0 = r1.addAll(r4);
+        r5 = r0.keyBox;
+        i1 = r1.add(r5);
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUnitBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = r0.stmtBoxes;
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.JLookupSwitchStmt r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.StmtSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.StmtSwitch) r1;
+        r2.caseLookupSwitchStmt(r0);
+        return;
+    }
+}

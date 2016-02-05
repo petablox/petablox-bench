@@ -1,0 +1,298 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.pool2.impl;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.commons.pool2.BasePooledObjectFactory;
+import org.apache.commons.pool2.PooledObject;
+import org.junit.After;
+import org.junit.Test;
+
+/**
+ * @version $Revision: 1627961 $
+ */
+public class TestSoftRefOutOfMemory {
+    private SoftReferenceObjectPool<String> pool;
+
+    @After
+    public void tearDown() throws Exception {
+        if (pool != null) {
+            pool.close();
+            pool = null;
+        }
+        System.gc();
+    }
+
+    @Test
+    public void testOutOfMemory() throws Exception {
+        pool = new SoftReferenceObjectPool<String>(new SmallPoolableObjectFactory());
+
+        String obj = pool.borrowObject();
+        assertEquals("1", obj);
+        pool.returnObject(obj);
+        obj = null;
+
+        assertEquals(1, pool.getNumIdle());
+
+        final List<byte[]> garbage = new LinkedList<byte[]>();
+        final Runtime runtime = Runtime.getRuntime();
+        while (pool.getNumIdle() > 0) {
+            try {
+                long freeMemory = runtime.freeMemory();
+                if (freeMemory > Integer.MAX_VALUE) {
+                    freeMemory = Integer.MAX_VALUE;
+                }
+                garbage.add(new byte[Math.min(1024 * 1024, (int)freeMemory/2)]);
+            } catch (OutOfMemoryError oome) {
+                System.gc();
+            }
+            System.gc();
+        }
+        garbage.clear();
+        System.gc();
+
+        obj = pool.borrowObject();
+        assertEquals("2", obj);
+        pool.returnObject(obj);
+        obj = null;
+
+        assertEquals(1, pool.getNumIdle());
+    }
+
+    @Test
+    public void testOutOfMemory1000() throws Exception {
+        pool = new SoftReferenceObjectPool<String>(new SmallPoolableObjectFactory());
+
+        for (int i = 0 ; i < 1000 ; i++) {
+            pool.addObject();
+        }
+
+        String obj = pool.borrowObject();
+        assertEquals("1000", obj);
+        pool.returnObject(obj);
+        obj = null;
+
+        assertEquals(1000, pool.getNumIdle());
+
+        final List<byte[]> garbage = new LinkedList<byte[]>();
+        final Runtime runtime = Runtime.getRuntime();
+        while (pool.getNumIdle() > 0) {
+            try {
+                long freeMemory = runtime.freeMemory();
+                if (freeMemory > Integer.MAX_VALUE) {
+                    freeMemory = Integer.MAX_VALUE;
+                }
+                garbage.add(new byte[Math.min(1024 * 1024, (int)freeMemory/2)]);
+            } catch (OutOfMemoryError oome) {
+                System.gc();
+            }
+            System.gc();
+        }
+        garbage.clear();
+        System.gc();
+
+        obj = pool.borrowObject();
+        assertEquals("1001", obj);
+        pool.returnObject(obj);
+        obj = null;
+
+        assertEquals(1, pool.getNumIdle());
+    }
+
+    @Test
+    public void testOutOfMemoryLarge() throws Exception {
+        pool = new SoftReferenceObjectPool<String>(new LargePoolableObjectFactory(1000000));
+
+        String obj = pool.borrowObject();
+        assertTrue(obj.startsWith("1."));
+        pool.returnObject(obj);
+        obj = null;
+
+        assertEquals(1, pool.getNumIdle());
+
+        final List<byte[]> garbage = new LinkedList<byte[]>();
+        final Runtime runtime = Runtime.getRuntime();
+        while (pool.getNumIdle() > 0) {
+            try {
+                long freeMemory = runtime.freeMemory();
+                if (freeMemory > Integer.MAX_VALUE) {
+                    freeMemory = Integer.MAX_VALUE;
+                }
+                garbage.add(new byte[Math.min(1024 * 1024, (int)freeMemory/2)]);
+            } catch (OutOfMemoryError oome) {
+                System.gc();
+            }
+            System.gc();
+        }
+        garbage.clear();
+        System.gc();
+
+        obj = pool.borrowObject();
+        assertTrue(obj.startsWith("2."));
+        pool.returnObject(obj);
+        obj = null;
+
+        assertEquals(1, pool.getNumIdle());
+    }
+
+    /**
+     * Makes sure an {@link OutOfMemoryError} isn't swallowed.
+     *
+     * @throws Exception May occur in some failure modes
+     */
+    @Test
+    public void testOutOfMemoryError() throws Exception {
+        pool = new SoftReferenceObjectPool<String>(
+                new OomeFactory(OomeTrigger.CREATE));
+
+        try {
+            pool.borrowObject();
+            fail("Expected out of memory.");
+        }
+        catch (OutOfMemoryError ex) {
+            // expected
+        }
+        pool.close();
+
+        pool = new SoftReferenceObjectPool<String>(
+                new OomeFactory(OomeTrigger.VALIDATE));
+
+        try {
+            pool.borrowObject();
+            fail("Expected out of memory.");
+        }
+        catch (OutOfMemoryError ex) {
+            // expected
+        }
+        pool.close();
+
+        pool = new SoftReferenceObjectPool<String>(
+                new OomeFactory(OomeTrigger.DESTROY));
+
+        try {
+            pool.borrowObject();
+            fail("Expected out of memory.");
+        }
+        catch (OutOfMemoryError ex) {
+            // expected
+        }
+        pool.close();
+    }
+
+
+    public static class SmallPoolableObjectFactory extends BasePooledObjectFactory<String> {
+        private int counter = 0;
+
+        @Override
+        public String create() {
+            counter++;
+            // It seems that as of Java 1.4 String.valueOf may return an
+            // intern()'ed String this may cause problems when the tests
+            // depend on the returned object to be eventually garbaged
+            // collected. Either way, making sure a new String instance
+            // is returned eliminated false failures.
+            return new String(String.valueOf(counter));
+        }
+        @Override
+        public PooledObject<String> wrap(String value) {
+            return new DefaultPooledObject<String>(value);
+        }
+    }
+
+    public static class LargePoolableObjectFactory extends BasePooledObjectFactory<String> {
+        private final String buffer;
+        private int counter = 0;
+
+        public LargePoolableObjectFactory(int size) {
+            char[] data = new char[size];
+            Arrays.fill(data, '.');
+            buffer = new String(data);
+        }
+
+        @Override
+        public String create() {
+            counter++;
+            return String.valueOf(counter) + buffer;
+        }
+
+        @Override
+        public PooledObject<String> wrap(String value) {
+            return new DefaultPooledObject<String>(value);
+        }
+    }
+
+    private static class OomeFactory extends BasePooledObjectFactory<String> {
+
+        private final OomeTrigger trigger;
+
+        public OomeFactory(OomeTrigger trigger) {
+            this.trigger = trigger;
+        }
+
+        @Override
+        public String create() throws Exception {
+            if (trigger.equals(OomeTrigger.CREATE)) {
+                throw new OutOfMemoryError();
+            }
+            // It seems that as of Java 1.4 String.valueOf may return an
+            // intern()'ed String this may cause problems when the tests
+            // depend on the returned object to be eventually garbaged
+            // collected. Either way, making sure a new String instance
+            // is returned eliminated false failures.
+            return new String();
+        }
+
+        @Override
+        public PooledObject<String> wrap(String value) {
+            return new DefaultPooledObject<String>(value);
+        }
+
+        @Override
+        public boolean validateObject(PooledObject<String> p) {
+            if (trigger.equals(OomeTrigger.VALIDATE)) {
+                throw new OutOfMemoryError();
+            }
+            if (trigger.equals(OomeTrigger.DESTROY)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        @Override
+        public void destroyObject(PooledObject<String> p) throws Exception {
+            if (trigger.equals(OomeTrigger.DESTROY)) {
+                throw new OutOfMemoryError();
+            }
+            super.destroyObject(p);
+        }
+    }
+
+    private static enum OomeTrigger {
+        CREATE,
+        VALIDATE,
+        DESTROY
+    }
+}

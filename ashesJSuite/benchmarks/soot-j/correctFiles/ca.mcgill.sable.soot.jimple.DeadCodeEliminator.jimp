@@ -1,0 +1,238 @@
+public class ca.mcgill.sable.soot.jimple.DeadCodeEliminator extends java.lang.Object
+{
+
+    public static void eliminateDeadCode(ca.mcgill.sable.soot.jimple.JimpleBody)
+    {
+        ca.mcgill.sable.soot.jimple.JimpleBody r0;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27;
+        java.lang.StringBuffer r1, r5, r6;
+        java.io.PrintStream r2;
+        ca.mcgill.sable.soot.SootMethod r3;
+        java.lang.String r4, r7;
+        ca.mcgill.sable.soot.Timer r8, r55;
+        ca.mcgill.sable.util.HashSet r9;
+        ca.mcgill.sable.util.LinkedList r10;
+        ca.mcgill.sable.soot.jimple.StmtList r11;
+        ca.mcgill.sable.util.Iterator r12, r36, r43, r46;
+        java.lang.Object r13, r33, r37, r44, r47;
+        ca.mcgill.sable.soot.jimple.Stmt r14, r34, r45, r48;
+        ca.mcgill.sable.soot.jimple.AssignStmt r15, r49, r51, r53;
+        ca.mcgill.sable.soot.jimple.Value r16, r17, r19, r22, r25, r28, r39, r40, r50, r52, r54;
+        ca.mcgill.sable.soot.jimple.BinopExpr r18;
+        ca.mcgill.sable.soot.Type r20, r23, r26, r29;
+        ca.mcgill.sable.soot.IntType r21, r24;
+        ca.mcgill.sable.soot.LongType r27, r30;
+        ca.mcgill.sable.soot.jimple.CompleteStmtGraph r31;
+        ca.mcgill.sable.soot.jimple.SimpleLocalDefs r32;
+        ca.mcgill.sable.util.List r35, r42;
+        ca.mcgill.sable.soot.jimple.ValueBox r38;
+        ca.mcgill.sable.soot.jimple.Local r41;
+
+        r0 := @parameter0;
+        i0 = ca.mcgill.sable.soot.jimple.Main.isVerbose;
+        if i0 == 0 goto label0;
+
+        r2 = java.lang.System.out;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("[");
+        r3 = r0.getMethod();
+        r4 = r3.getName();
+        r5 = r1.append(r4);
+        r6 = r5.append("] Eliminating dead code...");
+        r7 = r6.toString();
+        r2.println(r7);
+
+     label0:
+        i2 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i2 == 0 goto label1;
+
+        r8 = ca.mcgill.sable.soot.jimple.Main.deadCodeTimer;
+        r8.start();
+
+     label1:
+        r9 = new ca.mcgill.sable.util.HashSet;
+        specialinvoke r9.<init>();
+        r10 = new ca.mcgill.sable.util.LinkedList;
+        specialinvoke r10.<init>();
+        r11 = r0.getStmtList();
+        r12 = r11.iterator();
+        goto label9;
+
+     label2:
+        r13 = r12.next();
+        r14 = (ca.mcgill.sable.soot.jimple.Stmt) r13;
+        i1 = 1;
+        i3 = r14 instanceof ca.mcgill.sable.soot.jimple.NopStmt;
+        if i3 == 0 goto label3;
+
+        i1 = 0;
+
+     label3:
+        i4 = r14 instanceof ca.mcgill.sable.soot.jimple.AssignStmt;
+        if i4 == 0 goto label8;
+
+        r15 = (ca.mcgill.sable.soot.jimple.AssignStmt) r14;
+        r16 = r15.getLeftOp();
+        i5 = r16 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i5 == 0 goto label8;
+
+        r17 = r15.getRightOp();
+        i1 = 0;
+        i6 = r17 instanceof ca.mcgill.sable.soot.jimple.InvokeExpr;
+        if i6 != 0 goto label4;
+
+        i7 = r17 instanceof ca.mcgill.sable.soot.jimple.InstanceFieldRef;
+        if i7 != 0 goto label4;
+
+        i8 = r17 instanceof ca.mcgill.sable.soot.jimple.ArrayRef;
+        if i8 == 0 goto label5;
+
+     label4:
+        i1 = 1;
+        goto label8;
+
+     label5:
+        i9 = r17 instanceof ca.mcgill.sable.soot.jimple.DivExpr;
+        if i9 != 0 goto label6;
+
+        i10 = r17 instanceof ca.mcgill.sable.soot.jimple.RemExpr;
+        if i10 == 0 goto label8;
+
+     label6:
+        r18 = (ca.mcgill.sable.soot.jimple.BinopExpr) r17;
+        r19 = r18.getOp1();
+        r20 = r19.getType();
+        r21 = ca.mcgill.sable.soot.IntType.v();
+        i11 = r20.equals(r21);
+        if i11 != 0 goto label7;
+
+        r22 = r18.getOp2();
+        r23 = r22.getType();
+        r24 = ca.mcgill.sable.soot.IntType.v();
+        i12 = r23.equals(r24);
+        if i12 != 0 goto label7;
+
+        r25 = r18.getOp1();
+        r26 = r25.getType();
+        r27 = ca.mcgill.sable.soot.LongType.v();
+        i13 = r26.equals(r27);
+        if i13 != 0 goto label7;
+
+        r28 = r18.getOp2();
+        r29 = r28.getType();
+        r30 = ca.mcgill.sable.soot.LongType.v();
+        i14 = r29.equals(r30);
+        if i14 == 0 goto label8;
+
+     label7:
+        i1 = 1;
+
+     label8:
+        if i1 == 0 goto label9;
+
+        i15 = r9.add(r14);
+        r10.addLast(r14);
+
+     label9:
+        i16 = r12.hasNext();
+        if i16 != 0 goto label2;
+
+        r31 = new ca.mcgill.sable.soot.jimple.CompleteStmtGraph;
+        specialinvoke r31.<init>(r11);
+        r32 = new ca.mcgill.sable.soot.jimple.SimpleLocalDefs;
+        specialinvoke r32.<init>(r31);
+        goto label15;
+
+     label10:
+        r33 = r10.removeFirst();
+        r34 = (ca.mcgill.sable.soot.jimple.Stmt) r33;
+        r35 = r34.getUseBoxes();
+        r36 = r35.iterator();
+        goto label14;
+
+     label11:
+        r37 = r36.next();
+        r38 = (ca.mcgill.sable.soot.jimple.ValueBox) r37;
+        r39 = r38.getValue();
+        i17 = r39 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i17 == 0 goto label14;
+
+        r40 = r38.getValue();
+        r41 = (ca.mcgill.sable.soot.jimple.Local) r40;
+        r42 = r32.getDefsOfAt(r41, r34);
+        r43 = r42.iterator();
+        goto label13;
+
+     label12:
+        r44 = r43.next();
+        r45 = (ca.mcgill.sable.soot.jimple.Stmt) r44;
+        i18 = r9.contains(r45);
+        if i18 != 0 goto label13;
+
+        i19 = r9.add(r45);
+        r10.addLast(r45);
+
+     label13:
+        i20 = r43.hasNext();
+        if i20 != 0 goto label12;
+
+     label14:
+        i21 = r36.hasNext();
+        if i21 != 0 goto label11;
+
+     label15:
+        i22 = r10.isEmpty();
+        if i22 == 0 goto label10;
+
+        r46 = r11.iterator();
+        goto label18;
+
+     label16:
+        r47 = r46.next();
+        r48 = (ca.mcgill.sable.soot.jimple.Stmt) r47;
+        i23 = r9.contains(r48);
+        if i23 != 0 goto label17;
+
+        r46.remove();
+        goto label18;
+
+     label17:
+        i24 = r48 instanceof ca.mcgill.sable.soot.jimple.AssignStmt;
+        if i24 == 0 goto label18;
+
+        r49 = (ca.mcgill.sable.soot.jimple.AssignStmt) r48;
+        r50 = r49.getLeftOp();
+        r51 = (ca.mcgill.sable.soot.jimple.AssignStmt) r48;
+        r52 = r51.getRightOp();
+        if r50 != r52 goto label18;
+
+        r53 = (ca.mcgill.sable.soot.jimple.AssignStmt) r48;
+        r54 = r53.getLeftOp();
+        i25 = r54 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i25 == 0 goto label18;
+
+        r46.remove();
+
+     label18:
+        i26 = r46.hasNext();
+        if i26 != 0 goto label16;
+
+        i27 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i27 == 0 goto label19;
+
+        r55 = ca.mcgill.sable.soot.jimple.Main.deadCodeTimer;
+        r55.end();
+
+     label19:
+        return;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.DeadCodeEliminator r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

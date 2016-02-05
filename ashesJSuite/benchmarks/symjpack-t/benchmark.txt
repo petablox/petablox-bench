@@ -1,0 +1,12 @@
+Benchmark: symjpack
+
+Author: Jens-Uwe Dolinsky (dolinsky@amundsen.mb.hs-wismar.de)
+
+Packaged by: Patrick Lam (plam@sable.mcgill.ca)
+Packaged on: May 17, 1999
+
+Description: This is a version of the symjpack symbolic manipulation
+of mathematical expressions interpreter
+(http://www.mb.hs-wismar.de/Mitarbeiter/Pawletta/00Uwe/casE.html).
+The execution is tested on a number of cases, including a long Taylor
+series computation.

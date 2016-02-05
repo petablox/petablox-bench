@@ -1,0 +1,103 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.debug.misc</A>: JTreeASTModel');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.debug.misc</A>: JTreeASTModel';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.debug.misc;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>import antlr.collections.AST;
+<a name=4 class="linenum">4	</SPAN>import com.sun.java.swing.*;
+<a name=5 class="linenum">5	</SPAN>import com.sun.java.swing.event.*;
+<a name=6 class="linenum">6	</SPAN>import com.sun.java.swing.tree.*;
+<a name=7 class="linenum">7	</SPAN>
+<a name=8 class="linenum">8	</SPAN>public class <a class="classDef" name=JTreeASTModel href=JTreeASTModel_java_ref.html#JTreeASTModel>JTreeASTModel</a> implements TreeModel {
+<a name=9 class="linenum">9	</SPAN>
+<a name=10 class="linenum">10	</SPAN>  <a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> <a class="varDef" name=root href=JTreeASTModel_java_ref.html#root>root</a> = null;
+<a name=11 class="linenum">11	</SPAN>
+<a name=12 class="linenum">12	</SPAN>  public <a class="methodDef" name=JTreeASTModel(AST) href=JTreeASTModel_java_ref.html#JTreeASTModel(AST)>JTreeASTModel</a>(<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> t) {
+<a name=13 class="linenum">13	</SPAN>	if (t == null) {
+<a name=14 class="linenum">14	</SPAN>	  throw new IllegalArgumentException("root is null");
+<a name=15 class="linenum">15	</SPAN>	}
+<a name=16 class="linenum">16	</SPAN>	<a class="varRef" href=JTreeASTModel_java.html#root>root</a> = t;
+<a name=17 class="linenum">17	</SPAN>  }      
+<a name=18 class="linenum">18	</SPAN>  public void <a class="methodDef" name=addTreeModelListener(TreeModelListener) href=JTreeASTModel_java_ref.html#addTreeModelListener(TreeModelListener)>addTreeModelListener</a>(TreeModelListener l) {
+<a name=19 class="linenum">19	</SPAN>  }      
+<a name=20 class="linenum">20	</SPAN>  public Object <a class="methodDef" name=getChild(Object,int) href=JTreeASTModel_java_ref.html#getChild(Object,int)>getChild</a>(Object parent, int index) {
+<a name=21 class="linenum">21	</SPAN>	if (parent == null) {
+<a name=22 class="linenum">22	</SPAN>	  return null;
+<a name=23 class="linenum">23	</SPAN>	}
+<a name=24 class="linenum">24	</SPAN>	<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> p = (<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a>)parent;
+<a name=25 class="linenum">25	</SPAN>	<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> c = p.<a class="methodRef" href=../../../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>();
+<a name=26 class="linenum">26	</SPAN>	if ( c==null ) {
+<a name=27 class="linenum">27	</SPAN>	  throw new ArrayIndexOutOfBoundsException("node has no children");
+<a name=28 class="linenum">28	</SPAN>	}
+<a name=29 class="linenum">29	</SPAN>	int i = 0;
+<a name=30 class="linenum">30	</SPAN>	while ( c!=null && i&lt;index ) {
+<a name=31 class="linenum">31	</SPAN>	  c = c.<a class="methodRef" href=../../../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>();
+<a name=32 class="linenum">32	</SPAN>	  i++;
+<a name=33 class="linenum">33	</SPAN>	}
+<a name=34 class="linenum">34	</SPAN>	return c;
+<a name=35 class="linenum">35	</SPAN>  }      
+<a name=36 class="linenum">36	</SPAN>  public int <a class="methodDef" name=getChildCount(Object) href=JTreeASTModel_java_ref.html#getChildCount(Object)>getChildCount</a>(Object parent) {
+<a name=37 class="linenum">37	</SPAN>	if ( parent==null ) {
+<a name=38 class="linenum">38	</SPAN>	  throw new IllegalArgumentException("root is null");
+<a name=39 class="linenum">39	</SPAN>	}
+<a name=40 class="linenum">40	</SPAN>	<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> p = (<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a>)parent;
+<a name=41 class="linenum">41	</SPAN>	<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> c = p.<a class="methodRef" href=../../../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>();
+<a name=42 class="linenum">42	</SPAN>	int i = 0;
+<a name=43 class="linenum">43	</SPAN>	while ( c!=null ) {
+<a name=44 class="linenum">44	</SPAN>	  c = c.<a class="methodRef" href=../../../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>();
+<a name=45 class="linenum">45	</SPAN>	  i++;
+<a name=46 class="linenum">46	</SPAN>	}
+<a name=47 class="linenum">47	</SPAN>	return i;
+<a name=48 class="linenum">48	</SPAN>  }      
+<a name=49 class="linenum">49	</SPAN>  public int <a class="methodDef" name=getIndexOfChild(Object,Object) href=JTreeASTModel_java_ref.html#getIndexOfChild(Object,Object)>getIndexOfChild</a>(Object parent, Object child) {
+<a name=50 class="linenum">50	</SPAN>	if ( parent==null || child==null ) {
+<a name=51 class="linenum">51	</SPAN>	  throw new IllegalArgumentException("root or child is null");
+<a name=52 class="linenum">52	</SPAN>	}
+<a name=53 class="linenum">53	</SPAN>	<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> p = (<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a>)parent;
+<a name=54 class="linenum">54	</SPAN>	<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> c = p.<a class="methodRef" href=../../../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>();
+<a name=55 class="linenum">55	</SPAN>	if ( c==null ) {
+<a name=56 class="linenum">56	</SPAN>	  throw new ArrayIndexOutOfBoundsException("node has no children");
+<a name=57 class="linenum">57	</SPAN>	}
+<a name=58 class="linenum">58	</SPAN>	int i = 0;
+<a name=59 class="linenum">59	</SPAN>	while ( c!=null && c!=child ) {
+<a name=60 class="linenum">60	</SPAN>	  c = c.<a class="methodRef" href=../../../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>();
+<a name=61 class="linenum">61	</SPAN>	  i++;
+<a name=62 class="linenum">62	</SPAN>	}
+<a name=63 class="linenum">63	</SPAN>	if ( c==child ) {
+<a name=64 class="linenum">64	</SPAN>	  return i;
+<a name=65 class="linenum">65	</SPAN>	}
+<a name=66 class="linenum">66	</SPAN>	throw new java.util.NoSuchElementException("node is not a child");
+<a name=67 class="linenum">67	</SPAN>  }      
+<a name=68 class="linenum">68	</SPAN>  public Object <a class="methodDef" name=getRoot() href=JTreeASTModel_java_ref.html#getRoot()>getRoot</a>() {
+<a name=69 class="linenum">69	</SPAN>	return <a class="varRef" href=JTreeASTModel_java.html#root>root</a>;
+<a name=70 class="linenum">70	</SPAN>  }      
+<a name=71 class="linenum">71	</SPAN>  public boolean <a class="methodDef" name=isLeaf(Object) href=JTreeASTModel_java_ref.html#isLeaf(Object)>isLeaf</a>(Object node) {
+<a name=72 class="linenum">72	</SPAN>	if ( node == null ) {
+<a name=73 class="linenum">73	</SPAN>	  throw new IllegalArgumentException("node is null");
+<a name=74 class="linenum">74	</SPAN>	}
+<a name=75 class="linenum">75	</SPAN>	<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a> t = (<a class="classRef" href=../../../antlr/collections/AST_java.html#AST>AST</a>)node;
+<a name=76 class="linenum">76	</SPAN>	return t.<a class="methodRef" href=../../../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>()==null;
+<a name=77 class="linenum">77	</SPAN>  }      
+<a name=78 class="linenum">78	</SPAN>  public void <a class="methodDef" name=removeTreeModelListener(TreeModelListener) href=JTreeASTModel_java_ref.html#removeTreeModelListener(TreeModelListener)>removeTreeModelListener</a>(TreeModelListener l) {
+<a name=79 class="linenum">79	</SPAN>  }      
+<a name=80 class="linenum">80	</SPAN>  public void <a class="methodDef" name=valueForPathChanged(TreePath,Object) href=JTreeASTModel_java_ref.html#valueForPathChanged(TreePath,Object)>valueForPathChanged</a>(TreePath path, Object newValue) {
+<a name=81 class="linenum">81	</SPAN>	System.out.println("heh, who is calling this mystery method?");
+<a name=82 class="linenum">82	</SPAN>  }      
+<a name=83 class="linenum">83	</SPAN>}
+<a name=84 class="linenum">84	</SPAN></pre>

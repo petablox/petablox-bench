@@ -1,0 +1,70 @@
+class ca.mcgill.sable.soot.jimple.ArraySparseSet$SparseArrayList extends ca.mcgill.sable.util.AbstractList
+{
+    private java.lang.Object[] array;
+    private int realSize;
+
+    public void <init>(java.lang.Object[], int)
+    {
+        ca.mcgill.sable.soot.jimple.ArraySparseSet$SparseArrayList r0;
+        java.lang.Object[] r1;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.array = r1;
+        r0.realSize = i0;
+        return;
+    }
+
+    public java.lang.Object get(int)
+    {
+        ca.mcgill.sable.soot.jimple.ArraySparseSet$SparseArrayList r0;
+        int i0;
+        java.lang.Object[] r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 = r0.array;
+        r2 = r1[i0];
+        return r2;
+    }
+
+    public java.lang.Object set(int, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.ArraySparseSet$SparseArrayList r0;
+        int i0;
+        java.lang.Object r1;
+        ca.mcgill.sable.util.UnsupportedOperationException r2;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 = new ca.mcgill.sable.util.UnsupportedOperationException;
+        specialinvoke r2.<init>();
+        throw r2;
+    }
+
+    public int size()
+    {
+        ca.mcgill.sable.soot.jimple.ArraySparseSet$SparseArrayList r0;
+        int i0;
+
+        r0 := @this;
+        i0 = r0.realSize;
+        return i0;
+    }
+
+    public java.lang.Object clone()
+    {
+        ca.mcgill.sable.soot.jimple.ArraySparseSet$SparseArrayList r0;
+        java.lang.Object r1, r2;
+
+        r0 := @this;
+        r1 = r0.array;
+        r2 = r1.clone();
+        return r2;
+    }
+}

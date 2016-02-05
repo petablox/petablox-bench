@@ -1,0 +1,1090 @@
+public class ca.mcgill.sable.soot.jimple.Main extends java.lang.Object
+{
+    static boolean naiveJimplification;
+    static boolean onlyJimpleOutput;
+    public static boolean isVerbose;
+    static boolean onlyJasminOutput;
+    static boolean isProfilingOptimization;
+    static boolean isSubstractingGC;
+    static boolean oldTyping;
+    static boolean isInDebugMode;
+    static boolean usePackedLive;
+    static boolean usePackedDefs;
+    static boolean isTestingPerformance;
+    public static java.lang.String jimpleClassPath;
+    static boolean produceJimpleFile;
+    static boolean produceJasminFile;
+    static boolean produceJimpFile;
+    static int totalFlowNodes;
+    static int totalFlowComputations;
+    static ca.mcgill.sable.soot.Timer copiesTimer;
+    static ca.mcgill.sable.soot.Timer defsTimer;
+    static ca.mcgill.sable.soot.Timer usesTimer;
+    static ca.mcgill.sable.soot.Timer liveTimer;
+    static ca.mcgill.sable.soot.Timer splitTimer;
+    static ca.mcgill.sable.soot.Timer packTimer;
+    static ca.mcgill.sable.soot.Timer cleanup1Timer;
+    static ca.mcgill.sable.soot.Timer cleanup2Timer;
+    static ca.mcgill.sable.soot.Timer conversionTimer;
+    static ca.mcgill.sable.soot.Timer cleanupAlgorithmTimer;
+    static ca.mcgill.sable.soot.Timer graphTimer;
+    static ca.mcgill.sable.soot.Timer assignTimer;
+    static ca.mcgill.sable.soot.Timer resolveTimer;
+    static ca.mcgill.sable.soot.Timer totalTimer;
+    static ca.mcgill.sable.soot.Timer splitPhase1Timer;
+    static ca.mcgill.sable.soot.Timer splitPhase2Timer;
+    static ca.mcgill.sable.soot.Timer usePhase1Timer;
+    static ca.mcgill.sable.soot.Timer usePhase2Timer;
+    static ca.mcgill.sable.soot.Timer usePhase3Timer;
+    static ca.mcgill.sable.soot.Timer defsSetupTimer;
+    static ca.mcgill.sable.soot.Timer defsAnalysisTimer;
+    static ca.mcgill.sable.soot.Timer defsPostTimer;
+    static ca.mcgill.sable.soot.Timer liveSetupTimer;
+    static ca.mcgill.sable.soot.Timer liveAnalysisTimer;
+    static ca.mcgill.sable.soot.Timer livePostTimer;
+    static ca.mcgill.sable.soot.Timer aggregationTimer;
+    static ca.mcgill.sable.soot.Timer grimpAggregationTimer;
+    static ca.mcgill.sable.soot.Timer deadCodeTimer;
+    static ca.mcgill.sable.soot.Timer propagatorTimer;
+    static int conversionLocalCount;
+    static int cleanup1LocalCount;
+    static int splitLocalCount;
+    static int assignLocalCount;
+    static int packLocalCount;
+    static int cleanup2LocalCount;
+    static int conversionStmtCount;
+    static int cleanup1StmtCount;
+    static int splitStmtCount;
+    static int assignStmtCount;
+    static int packStmtCount;
+    static int cleanup2StmtCount;
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] r0;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28, i29, i30, i31, i32, i33, i34, i35, i36, i37, i38, i39, i40, i41, i42, i43, i44;
+        long l0, l1, l2, l3, l4, l5, l6, l7, l8;
+        java.io.PrintWriter r1, r86;
+        java.io.FileOutputStream r2, r80;
+        java.lang.String r3, r47, r48, r49, r50, r51, r52, r53, r54, r55, r56, r57, r58, r59, r60, r61, r62, r63, r64, r67, r69, r71, r75, r78, r82, r83, r85, r90, r93, r106, r108, r113, r118, r122, r125, r133, r142, r151, r153, r157, r159, r163, r165, r169, r171, r175, r177, r181, r183, r187, r189, r193, r195, r199, r201, r205, r207, r212, r214, r218, r220, r224, r226, r230, r232, r236, r238, r242, r244, r248, r250, r256, r258, r263, r265, r270, r275, r276, r278, r281, r282, r284, r292;
+        ca.mcgill.sable.soot.ClassFile r4;
+        ca.mcgill.sable.soot.Timer r5, r144, r145, r150, r156, r162, r168, r174, r180, r186, r192, r198, r204, r211, r217, r223, r229, r235, r241, r247, r255, r262;
+        ca.mcgill.sable.soot.SootClassManager r6;
+        java.io.PrintStream r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, r39, r40, r41, r42, r43, r44, r45, r46, r65, r73, r79, r88, r104, r110, r115, r120, r126, r127, r138, r143, r146, r147, r148, r154, r160, r166, r172, r178, r184, r190, r196, r202, r208, r209, r215, r221, r227, r233, r239, r245, r253, r259, r260, r266, r271, r272, r273, r279, r285;
+        java.lang.StringBuffer r66, r68, r74, r76, r77, r81, r84, r89, r91, r92, r105, r107, r111, r112, r116, r117, r121, r123, r124, r128, r129, r130, r131, r132, r139, r140, r141, r149, r152, r155, r158, r161, r164, r167, r170, r173, r176, r179, r182, r185, r188, r191, r194, r197, r200, r203, r206, r210, r213, r216, r219, r222, r225, r228, r231, r234, r237, r240, r243, r246, r249, r254, r257, r261, r264, r267, r268, r269, r274, r277, r280, r283, r286, r287, r288, r289, r290, r291;
+        ca.mcgill.sable.util.ArrayList r70;
+        ca.mcgill.sable.soot.SootClass r72;
+        java.io.IOException r87, r119;
+        ca.mcgill.sable.util.List r94;
+        ca.mcgill.sable.util.Iterator r95, r134;
+        java.lang.Object r96, r135;
+        ca.mcgill.sable.soot.SootMethod r97;
+        ca.mcgill.sable.soot.BuildBody r98;
+        ca.mcgill.sable.soot.jimple.Jimple r99;
+        ca.mcgill.sable.soot.StoredBody r100;
+        ca.mcgill.sable.soot.Body r101;
+        ca.mcgill.sable.soot.jimple.JimpleBody r102, r136;
+        ca.mcgill.sable.soot.jimple.StmtList r103, r137;
+        java.lang.Exception r109, r114;
+        float f0, f1, f2, f3, f4, f5, f6, f7;
+        java.lang.Runtime r251, r252;
+        double d0, d1, d2, d3, d4, d5;
+
+        r0 := @parameter0;
+        i0 = 0;
+        l0 = 0L;
+        i1 = 0;
+        r5 = ca.mcgill.sable.soot.jimple.Main.totalTimer;
+        r5.start();
+        r6 = new ca.mcgill.sable.soot.SootClassManager;
+        specialinvoke r6.<init>();
+        i6 = r0.length;
+        if i6 != 0 goto label0;
+
+        r7 = java.lang.System.out;
+        r7.println("Jimple version 1.beta.4.dev.6");
+        r8 = java.lang.System.out;
+        r8.println("Copyright (C) 1997, 1998 Raja Vallee-Rai (kor@sable.mcgill.ca).");
+        r9 = java.lang.System.out;
+        r9.println("All rights reserved.");
+        r10 = java.lang.System.out;
+        r10.println("");
+        r11 = java.lang.System.out;
+        r11.println("Portions copyright (C) 1997 Clark Verbrugge (clump@sable.mcgill.ca).");
+        r12 = java.lang.System.out;
+        r12.println("All rights reserved.");
+        r13 = java.lang.System.out;
+        r13.println("");
+        r14 = java.lang.System.out;
+        r14.println("Modifications are copyright (C) 1997, 1998 by their respective contributors.");
+        r15 = java.lang.System.out;
+        r15.println("See individual source files for details.");
+        r16 = java.lang.System.out;
+        r16.println("");
+        r17 = java.lang.System.out;
+        r17.println("Jimple comes with ABSOLUTELY NO WARRANTY.  This is free software,");
+        r18 = java.lang.System.out;
+        r18.println("and you are welcome to redistribute it under certain conditions.");
+        r19 = java.lang.System.out;
+        r19.println("See the accompanying file 'COPYING' for details.");
+        r20 = java.lang.System.out;
+        r20.println("");
+        r21 = java.lang.System.out;
+        r21.println("Syntax: java ca.mcgill.sable.soot.jimple.Main [options] class");
+        r22 = java.lang.System.out;
+        r22.println("");
+        r23 = java.lang.System.out;
+        r23.println("Classpath Option:");
+        r24 = java.lang.System.out;
+        r24.println("    -jimpleClassPath <path>   uses <path> as classpath for finding classes");
+        r25 = java.lang.System.out;
+        r25.println("");
+        r26 = java.lang.System.out;
+        r26.println("Output Options:");
+        r27 = java.lang.System.out;
+        r27.println("    -jimple                   produce .jimple code");
+        r28 = java.lang.System.out;
+        r28.println("    -jimp                     produce .jimp (abbreviated .jimple) code [default]");
+        r29 = java.lang.System.out;
+        r29.println("    -jasmin                   produce .jasmin code");
+        r30 = java.lang.System.out;
+        r30.println("");
+        r31 = java.lang.System.out;
+        r31.println("Jimplification Options:");
+        r32 = java.lang.System.out;
+        r32.println("    -nocleanup                no constant or copy propagation is performed");
+        r33 = java.lang.System.out;
+        r33.println("    -nosplitting              no splitting of variables is performed");
+        r34 = java.lang.System.out;
+        r34.println("    -nocleanup                no constant or copy propagation is performed");
+        r35 = java.lang.System.out;
+        r35.println("    -oldtyping                use old typing algorithm");
+        r36 = java.lang.System.out;
+        r36.println("    -typeless                 do not assign types.  Cannot be used with -jasmin");
+        r37 = java.lang.System.out;
+        r37.println("                              or -nolocalpacking ");
+        r38 = java.lang.System.out;
+        r38.println("    -nolocalpacking           do not re-use locals after jimplification");
+        r39 = java.lang.System.out;
+        r39.println("    -noaggregating            do not perform any Jimple-level aggregation");
+        r40 = java.lang.System.out;
+        r40.println("");
+        r41 = java.lang.System.out;
+        r41.println("Profiling/Debugging Options:");
+        r42 = java.lang.System.out;
+        r42.println("    -timetransform            perform full transformation and print timings");
+        r43 = java.lang.System.out;
+        r43.println("    -verbose                  print out jimplification process");
+        r44 = java.lang.System.out;
+        r44.println("    -debug                    avoid catching errors during jimplification");
+        r45 = java.lang.System.out;
+        r45.println("    -testperf                 jimplify all classes & methods and gather stats");
+        r46 = java.lang.System.out;
+        r46.println("                              does not throw exception if error in typing");
+        java.lang.System.exit(0);
+
+     label0:
+        i2 = 0;
+        goto label20;
+
+     label1:
+        r47 = r0[i2];
+        i7 = r47.equals("-jimple");
+        if i7 == 0 goto label2;
+
+        ca.mcgill.sable.soot.jimple.Main.produceJimpleFile = 1;
+        goto label19;
+
+     label2:
+        r48 = r0[i2];
+        i8 = r48.equals("-jasmin");
+        if i8 == 0 goto label3;
+
+        ca.mcgill.sable.soot.jimple.Main.produceJasminFile = 1;
+        goto label19;
+
+     label3:
+        r49 = r0[i2];
+        i9 = r49.equals("-jimp");
+        if i9 == 0 goto label4;
+
+        ca.mcgill.sable.soot.jimple.Main.produceJimpFile = 1;
+        goto label19;
+
+     label4:
+        r50 = r0[i2];
+        i10 = r50.equals("-nocleanup");
+        if i10 == 0 goto label5;
+
+        i1 = i1 | 8;
+        goto label19;
+
+     label5:
+        r51 = r0[i2];
+        i11 = r51.equals("-typeless");
+        if i11 == 0 goto label6;
+
+        i1 = i1 | 1;
+        goto label19;
+
+     label6:
+        r52 = r0[i2];
+        i12 = r52.equals("-nolocalpacking");
+        if i12 == 0 goto label7;
+
+        i1 = i1 | 16;
+        goto label19;
+
+     label7:
+        r53 = r0[i2];
+        i13 = r53.equals("-noaggregating");
+        if i13 == 0 goto label8;
+
+        i1 = i1 | 32;
+        goto label19;
+
+     label8:
+        r54 = r0[i2];
+        i14 = r54.equals("-timetransform");
+        if i14 == 0 goto label9;
+
+        ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization = 1;
+        goto label19;
+
+     label9:
+        r55 = r0[i2];
+        i15 = r55.equals("-substractgc");
+        if i15 == 0 goto label10;
+
+        ca.mcgill.sable.soot.Timer.setSubstractingGC(1);
+        ca.mcgill.sable.soot.jimple.Main.isSubstractingGC = 1;
+        goto label19;
+
+     label10:
+        r56 = r0[i2];
+        i16 = r56.equals("-verbose");
+        if i16 == 0 goto label11;
+
+        ca.mcgill.sable.soot.jimple.Main.isVerbose = 1;
+        goto label19;
+
+     label11:
+        r57 = r0[i2];
+        i17 = r57.equals("-nosplitting");
+        if i17 == 0 goto label12;
+
+        i1 = i1 | 4;
+        goto label19;
+
+     label12:
+        r58 = r0[i2];
+        i18 = r58.equals("-oldtyping");
+        if i18 == 0 goto label13;
+
+        ca.mcgill.sable.soot.jimple.Main.oldTyping = 1;
+        goto label19;
+
+     label13:
+        r59 = r0[i2];
+        i19 = r59.equals("-usepackedlive");
+        if i19 == 0 goto label14;
+
+        ca.mcgill.sable.soot.jimple.Main.usePackedLive = 1;
+        goto label19;
+
+     label14:
+        r60 = r0[i2];
+        i20 = r60.equals("-usepackeddefs");
+        if i20 == 0 goto label15;
+
+        ca.mcgill.sable.soot.jimple.Main.usePackedDefs = 1;
+        goto label19;
+
+     label15:
+        r61 = r0[i2];
+        i21 = r61.equals("-testperf");
+        if i21 == 0 goto label16;
+
+        ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization = 1;
+        ca.mcgill.sable.soot.jimple.Main.isTestingPerformance = 1;
+        goto label19;
+
+     label16:
+        r62 = r0[i2];
+        i22 = r62.equals("-jimpleClassPath");
+        if i22 == 0 goto label17;
+
+        i2 = i2 + 1;
+        i23 = r0.length;
+        if i2 >= i23 goto label19;
+
+        ca.mcgill.sable.soot.jimple.Main.jimpleClassPath = r0[i2];
+        goto label19;
+
+     label17:
+        r63 = r0[i2];
+        i24 = r63.equals("-debug");
+        if i24 == 0 goto label18;
+
+        ca.mcgill.sable.soot.jimple.Main.isInDebugMode = 1;
+        goto label19;
+
+     label18:
+        r64 = r0[i2];
+        i25 = r64.startsWith("-");
+        if i25 == 0 goto label21;
+
+        r65 = java.lang.System.out;
+        r66 = new java.lang.StringBuffer;
+        specialinvoke r66.<init>("Unrecognized option: ");
+        r67 = r0[i2];
+        r68 = r66.append(r67);
+        r69 = r68.toString();
+        r65.println(r69);
+        java.lang.System.exit(0);
+        goto label19;
+
+     label19:
+        i0 = i2 + 1;
+        i2 = i2 + 1;
+
+     label20:
+        i26 = r0.length;
+        if i2 < i26 goto label1;
+
+     label21:
+        i3 = 0;
+        i4 = 0;
+        r70 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r70.<init>();
+        i5 = i0;
+        goto label44;
+
+     label22:
+        r71 = r0[i5];
+        r72 = r6.getClass(r71);
+        r1 = null;
+        r2 = null;
+        r73 = java.lang.System.out;
+        r74 = new java.lang.StringBuffer;
+        specialinvoke r74.<init>("Jimplifying ");
+        r75 = r72.getName();
+        r76 = r74.append(r75);
+        r77 = r76.append("... ");
+        r78 = r77.toString();
+        r73.print(r78);
+        r79 = java.lang.System.out;
+        r79.flush();
+        i27 = ca.mcgill.sable.soot.jimple.Main.produceJasminFile;
+        if i27 == 0 goto label23;
+
+        r3 = ".jasmin";
+        goto label25;
+
+     label23:
+        i28 = ca.mcgill.sable.soot.jimple.Main.produceJimpleFile;
+        if i28 == 0 goto label24;
+
+        r3 = ".jimple";
+        goto label25;
+
+     label24:
+        r3 = ".jimp";
+
+     label25:
+        r80 = new java.io.FileOutputStream;
+        r81 = new java.lang.StringBuffer;
+        r82 = r72.getName();
+        r83 = java.lang.String.valueOf(r82);
+        specialinvoke r81.<init>(r83);
+        r84 = r81.append(r3);
+        r85 = r84.toString();
+        specialinvoke r80.<init>(r85);
+        r2 = r80;
+        r86 = new java.io.PrintWriter;
+        specialinvoke r86.<init>(r80);
+        r1 = r86;
+
+     label26:
+        goto label28;
+
+     label27:
+        r87 := @caughtexception;
+        r88 = java.lang.System.out;
+        r89 = new java.lang.StringBuffer;
+        specialinvoke r89.<init>("Cannot output file ");
+        r90 = r72.getName();
+        r91 = r89.append(r90);
+        r92 = r91.append(r3);
+        r93 = r92.toString();
+        r88.println(r93);
+
+     label28:
+        i29 = ca.mcgill.sable.soot.jimple.Main.isTestingPerformance;
+        if i29 == 0 goto label34;
+
+        r94 = r72.getMethods();
+        r95 = r94.iterator();
+        l1 = 0L;
+
+     label29:
+        goto label31;
+
+     label30:
+        r96 = r95.next();
+        r97 = (ca.mcgill.sable.soot.SootMethod) r96;
+        r98 = new ca.mcgill.sable.soot.BuildBody;
+        r99 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r100 = new ca.mcgill.sable.soot.StoredBody;
+        r4 = ca.mcgill.sable.soot.ClassFile.v();
+        specialinvoke r100.<init>(r4);
+        specialinvoke r98.<init>(r99, r100);
+        r101 = r98.resolveFor(r97);
+        r102 = (ca.mcgill.sable.soot.jimple.JimpleBody) r101;
+        i30 = r70.add(r102);
+        r103 = r102.getStmtList();
+        i31 = r103.size();
+        l2 = (long) i31;
+        l1 = l1 + l2;
+
+     label31:
+        i32 = r95.hasNext();
+        if i32 != 0 goto label30;
+
+        l0 = l0 + l1;
+        r104 = java.lang.System.out;
+        r105 = new java.lang.StringBuffer;
+        r106 = java.lang.String.valueOf(l1);
+        specialinvoke r105.<init>(r106);
+        r107 = r105.append(" stmts  ");
+        r108 = r107.toString();
+        r104.println(r108);
+        i4 = i4 + 1;
+
+     label32:
+        goto label43;
+
+     label33:
+        r109 := @caughtexception;
+        r110 = java.lang.System.out;
+        r111 = new java.lang.StringBuffer;
+        specialinvoke r111.<init>("failed due to: ");
+        r112 = r111.append(r109);
+        r113 = r112.toString();
+        r110.println(r113);
+        i3 = i3 + 1;
+        goto label43;
+
+     label34:
+        i33 = ca.mcgill.sable.soot.jimple.Main.isInDebugMode;
+        if i33 != 0 goto label38;
+
+     label35:
+        ca.mcgill.sable.soot.jimple.Main.handleClass(r72, r3, r1, i1);
+
+     label36:
+        goto label39;
+
+     label37:
+        r114 := @caughtexception;
+        r115 = java.lang.System.out;
+        r116 = new java.lang.StringBuffer;
+        specialinvoke r116.<init>("failed due to: ");
+        r117 = r116.append(r114);
+        r118 = r117.toString();
+        r115.println(r118);
+        goto label39;
+
+     label38:
+        ca.mcgill.sable.soot.jimple.Main.handleClass(r72, r3, r1, i1);
+
+     label39:
+        r1.flush();
+        r2.close();
+
+     label40:
+        goto label42;
+
+     label41:
+        r119 := @caughtexception;
+        r120 = java.lang.System.out;
+        r121 = new java.lang.StringBuffer;
+        specialinvoke r121.<init>("Cannot close output file ");
+        r122 = r72.getName();
+        r123 = r121.append(r122);
+        r124 = r123.append(r3);
+        r125 = r124.toString();
+        r120.println(r125);
+
+     label42:
+        r126 = java.lang.System.out;
+        r126.println();
+
+     label43:
+        i5 = i5 + 1;
+
+     label44:
+        i34 = r0.length;
+        if i5 < i34 goto label22;
+
+        i35 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i35 == 0 goto label50;
+
+        i36 = ca.mcgill.sable.soot.jimple.Main.isTestingPerformance;
+        if i36 == 0 goto label47;
+
+        r127 = java.lang.System.out;
+        r128 = new java.lang.StringBuffer;
+        specialinvoke r128.<init>("Successfully jimplified ");
+        r129 = r128.append(i4);
+        r130 = r129.append(" classfiles; failed on ");
+        r131 = r130.append(i3);
+        r132 = r131.append(".");
+        r133 = r132.toString();
+        r127.println(r133);
+        r134 = r70.iterator();
+        l3 = 0L;
+        goto label46;
+
+     label45:
+        r135 = r134.next();
+        r136 = (ca.mcgill.sable.soot.jimple.JimpleBody) r135;
+        r137 = r136.getStmtList();
+        i37 = r137.size();
+        l4 = (long) i37;
+        l3 = l3 + l4;
+
+     label46:
+        i38 = r134.hasNext();
+        if i38 != 0 goto label45;
+
+        r138 = java.lang.System.out;
+        r139 = new java.lang.StringBuffer;
+        specialinvoke r139.<init>("Confirmed ");
+        r140 = r139.append(l3);
+        r141 = r140.append(" stored statements.");
+        r142 = r141.toString();
+        r138.println(r142);
+        r143 = java.lang.System.out;
+        r143.println();
+
+     label47:
+        r144 = ca.mcgill.sable.soot.jimple.Main.totalTimer;
+        r144.end();
+        r145 = ca.mcgill.sable.soot.jimple.Main.totalTimer;
+        l5 = r145.getTime();
+        r146 = java.lang.System.out;
+        r146.println("Time measurements");
+        r147 = java.lang.System.out;
+        r147.println();
+        r148 = java.lang.System.out;
+        r149 = new java.lang.StringBuffer;
+        specialinvoke r149.<init>("      Building graphs: ");
+        r150 = ca.mcgill.sable.soot.jimple.Main.graphTimer;
+        r151 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r150, l5);
+        r152 = r149.append(r151);
+        r153 = r152.toString();
+        r148.println(r153);
+        r154 = java.lang.System.out;
+        r155 = new java.lang.StringBuffer;
+        specialinvoke r155.<init>("  Computing LocalDefs: ");
+        r156 = ca.mcgill.sable.soot.jimple.Main.defsTimer;
+        r157 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r156, l5);
+        r158 = r155.append(r157);
+        r159 = r158.toString();
+        r154.println(r159);
+        r160 = java.lang.System.out;
+        r161 = new java.lang.StringBuffer;
+        specialinvoke r161.<init>("  Computing LocalUses: ");
+        r162 = ca.mcgill.sable.soot.jimple.Main.usesTimer;
+        r163 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r162, l5);
+        r164 = r161.append(r163);
+        r165 = r164.toString();
+        r160.println(r165);
+        r166 = java.lang.System.out;
+        r167 = new java.lang.StringBuffer;
+        specialinvoke r167.<init>("            Use phase1: ");
+        r168 = ca.mcgill.sable.soot.jimple.Main.usePhase1Timer;
+        r169 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r168, l5);
+        r170 = r167.append(r169);
+        r171 = r170.toString();
+        r166.println(r171);
+        r172 = java.lang.System.out;
+        r173 = new java.lang.StringBuffer;
+        specialinvoke r173.<init>("            Use phase2: ");
+        r174 = ca.mcgill.sable.soot.jimple.Main.usePhase2Timer;
+        r175 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r174, l5);
+        r176 = r173.append(r175);
+        r177 = r176.toString();
+        r172.println(r177);
+        r178 = java.lang.System.out;
+        r179 = new java.lang.StringBuffer;
+        specialinvoke r179.<init>("            Use phase3: ");
+        r180 = ca.mcgill.sable.soot.jimple.Main.usePhase3Timer;
+        r181 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r180, l5);
+        r182 = r179.append(r181);
+        r183 = r182.toString();
+        r178.println(r183);
+        r184 = java.lang.System.out;
+        r185 = new java.lang.StringBuffer;
+        specialinvoke r185.<init>("     Cleaning up code: ");
+        r186 = ca.mcgill.sable.soot.jimple.Main.cleanupAlgorithmTimer;
+        r187 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r186, l5);
+        r188 = r185.append(r187);
+        r189 = r188.toString();
+        r184.println(r189);
+        r190 = java.lang.System.out;
+        r191 = new java.lang.StringBuffer;
+        specialinvoke r191.<init>("Computing LocalCopies: ");
+        r192 = ca.mcgill.sable.soot.jimple.Main.copiesTimer;
+        r193 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r192, l5);
+        r194 = r191.append(r193);
+        r195 = r194.toString();
+        r190.println(r195);
+        r196 = java.lang.System.out;
+        r197 = new java.lang.StringBuffer;
+        specialinvoke r197.<init>(" Computing LiveLocals: ");
+        r198 = ca.mcgill.sable.soot.jimple.Main.liveTimer;
+        r199 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r198, l5);
+        r200 = r197.append(r199);
+        r201 = r200.toString();
+        r196.println(r201);
+        r202 = java.lang.System.out;
+        r203 = new java.lang.StringBuffer;
+        specialinvoke r203.<init>("Coading coffi structs: ");
+        r204 = ca.mcgill.sable.soot.jimple.Main.resolveTimer;
+        r205 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r204, l5);
+        r206 = r203.append(r205);
+        r207 = r206.toString();
+        r202.println(r207);
+        r208 = java.lang.System.out;
+        r208.println();
+        r209 = java.lang.System.out;
+        r210 = new java.lang.StringBuffer;
+        specialinvoke r210.<init>(" Bytecode -> jimple (naive): ");
+        r211 = ca.mcgill.sable.soot.jimple.Main.conversionTimer;
+        r212 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r211, l5);
+        r213 = r210.append(r212);
+        r214 = r213.toString();
+        r209.println(r214);
+        r215 = java.lang.System.out;
+        r216 = new java.lang.StringBuffer;
+        specialinvoke r216.<init>("        Splitting variables: ");
+        r217 = ca.mcgill.sable.soot.jimple.Main.splitTimer;
+        r218 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r217, l5);
+        r219 = r216.append(r218);
+        r220 = r219.toString();
+        r215.println(r220);
+        r221 = java.lang.System.out;
+        r222 = new java.lang.StringBuffer;
+        specialinvoke r222.<init>("            Assigning types: ");
+        r223 = ca.mcgill.sable.soot.jimple.Main.assignTimer;
+        r224 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r223, l5);
+        r225 = r222.append(r224);
+        r226 = r225.toString();
+        r221.println(r226);
+        r227 = java.lang.System.out;
+        r228 = new java.lang.StringBuffer;
+        specialinvoke r228.<init>("  Propagating copies & csts: ");
+        r229 = ca.mcgill.sable.soot.jimple.Main.propagatorTimer;
+        r230 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r229, l5);
+        r231 = r228.append(r230);
+        r232 = r231.toString();
+        r227.println(r232);
+        r233 = java.lang.System.out;
+        r234 = new java.lang.StringBuffer;
+        specialinvoke r234.<init>("      Eliminating dead code: ");
+        r235 = ca.mcgill.sable.soot.jimple.Main.deadCodeTimer;
+        r236 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r235, l5);
+        r237 = r234.append(r236);
+        r238 = r237.toString();
+        r233.println(r238);
+        r239 = java.lang.System.out;
+        r240 = new java.lang.StringBuffer;
+        specialinvoke r240.<init>("                Aggregation: ");
+        r241 = ca.mcgill.sable.soot.jimple.Main.aggregationTimer;
+        r242 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r241, l5);
+        r243 = r240.append(r242);
+        r244 = r243.toString();
+        r239.println(r244);
+        r245 = java.lang.System.out;
+        r246 = new java.lang.StringBuffer;
+        specialinvoke r246.<init>("            Coloring locals: ");
+        r247 = ca.mcgill.sable.soot.jimple.Main.packTimer;
+        r248 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r247, l5);
+        r249 = r246.append(r248);
+        r250 = r249.toString();
+        r245.println(r250);
+        f0 = (float) l5;
+        f1 = f0 / 1000.0F;
+        r251 = java.lang.Runtime.getRuntime();
+        l6 = r251.totalMemory();
+        r252 = java.lang.Runtime.getRuntime();
+        l7 = r252.freeMemory();
+        l8 = l6 - l7;
+        f2 = (float) l8;
+        f3 = f2 / 1000.0F;
+        r253 = java.lang.System.out;
+        r254 = new java.lang.StringBuffer;
+        specialinvoke r254.<init>("totalTime:");
+        r255 = ca.mcgill.sable.soot.jimple.Main.totalTimer;
+        r256 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r255, l5);
+        r257 = r254.append(r256);
+        r258 = r257.toString();
+        r253.println(r258);
+        i39 = ca.mcgill.sable.soot.jimple.Main.isSubstractingGC;
+        if i39 == 0 goto label48;
+
+        r259 = java.lang.System.out;
+        r259.println("Garbage collection was substracted from these numbers.");
+        r260 = java.lang.System.out;
+        r261 = new java.lang.StringBuffer;
+        specialinvoke r261.<init>("           forcedGC:");
+        r262 = ca.mcgill.sable.soot.Timer.forcedGarbageCollectionTimer;
+        r263 = ca.mcgill.sable.soot.jimple.Main.toTimeString(r262, l5);
+        r264 = r261.append(r263);
+        r265 = r264.toString();
+        r260.println(r265);
+
+     label48:
+        r266 = java.lang.System.out;
+        r267 = new java.lang.StringBuffer;
+        specialinvoke r267.<init>("totalMemory:");
+        r268 = r267.append(f3);
+        r269 = r268.append("k  ");
+        r270 = r269.toString();
+        r266.println(r270);
+        i40 = ca.mcgill.sable.soot.jimple.Main.isTestingPerformance;
+        if i40 == 0 goto label49;
+
+        r271 = java.lang.System.out;
+        r271.println("Time/Space performance");
+        r272 = java.lang.System.out;
+        r272.println();
+        r273 = java.lang.System.out;
+        r274 = new java.lang.StringBuffer;
+        f4 = (float) l0;
+        f5 = f4 / f1;
+        d0 = (double) f5;
+        r275 = ca.mcgill.sable.soot.jimple.Main.toFormattedString(d0);
+        r276 = java.lang.String.valueOf(r275);
+        specialinvoke r274.<init>(r276);
+        r277 = r274.append(" stmt/s");
+        r278 = r277.toString();
+        r273.println(r278);
+        r279 = java.lang.System.out;
+        r280 = new java.lang.StringBuffer;
+        f6 = (float) l0;
+        f7 = f3 / f6;
+        d1 = (double) f7;
+        r281 = ca.mcgill.sable.soot.jimple.Main.toFormattedString(d1);
+        r282 = java.lang.String.valueOf(r281);
+        specialinvoke r280.<init>(r282);
+        r283 = r280.append(" k/stmt");
+        r284 = r283.toString();
+        r279.println(r284);
+
+     label49:
+        r285 = java.lang.System.out;
+        r286 = new java.lang.StringBuffer;
+        specialinvoke r286.<init>("totalFlowNodes: ");
+        i41 = ca.mcgill.sable.soot.jimple.Main.totalFlowNodes;
+        r287 = r286.append(i41);
+        r288 = r287.append(" totalFlowComputations: ");
+        i42 = ca.mcgill.sable.soot.jimple.Main.totalFlowComputations;
+        r289 = r288.append(i42);
+        r290 = r289.append(" avg: ");
+        i43 = ca.mcgill.sable.soot.jimple.Main.totalFlowComputations;
+        d2 = (double) i43;
+        i44 = ca.mcgill.sable.soot.jimple.Main.totalFlowNodes;
+        d3 = (double) i44;
+        d4 = d2 / d3;
+        d5 = ca.mcgill.sable.soot.jimple.Main.truncatedOf(d4, 2);
+        r291 = r290.append(d5);
+        r292 = r291.toString();
+        r285.println(r292);
+
+     label50:
+        return;
+
+        .catch java.io.IOException from label25 to label26 with label27
+        .catch java.lang.Exception from label29 to label32 with label33
+        .catch java.lang.Exception from label35 to label36 with label37
+        .catch java.io.IOException from label39 to label40 with label41
+    }
+
+    private static java.lang.String toTimeString(ca.mcgill.sable.soot.Timer, long)
+    {
+        ca.mcgill.sable.soot.Timer r0;
+        long l0, l1;
+        java.text.DecimalFormat r1, r2;
+        double d0, d1, d2, d3, d4, d5;
+        java.lang.String r3, r5, r8, r12;
+        java.lang.StringBuffer r4, r6, r7, r9, r10, r11;
+
+        r0 := @parameter0;
+        l0 := @parameter1;
+        r1 = new java.text.DecimalFormat;
+        specialinvoke r1.<init>("0.000");
+        r2 = new java.text.DecimalFormat;
+        specialinvoke r2.<init>("0.0");
+        l1 = r0.getTime();
+        d0 = (double) l1;
+        d1 = d0 / 1000.0;
+        r3 = r1.format(d1);
+        r4 = new java.lang.StringBuffer;
+        r5 = java.lang.String.valueOf(r3);
+        specialinvoke r4.<init>(r5);
+        r6 = r4.append("s");
+        r7 = r6.append(" (");
+        d2 = (double) l1;
+        d3 = d2 * 100.0;
+        d4 = (double) l0;
+        d5 = d3 / d4;
+        r8 = r2.format(d5);
+        r9 = r7.append(r8);
+        r10 = r9.append("%");
+        r11 = r10.append(")");
+        r12 = r11.toString();
+        return r12;
+    }
+
+    private static java.lang.String toFormattedString(double)
+    {
+        double d0, d1;
+        java.lang.Double r0;
+        java.lang.String r1, r2;
+
+        d0 := @parameter0;
+        r0 = new java.lang.Double;
+        d1 = ca.mcgill.sable.soot.jimple.Main.truncatedOf(d0, 2);
+        specialinvoke r0.<init>(d1);
+        r1 = r0.toString();
+        r2 = ca.mcgill.sable.soot.jimple.Main.paddedLeftOf(r1, 5);
+        return r2;
+    }
+
+    private static void handleClass(ca.mcgill.sable.soot.SootClass, java.lang.String, java.io.PrintWriter, int)
+    {
+        ca.mcgill.sable.soot.SootClass r0;
+        java.lang.String r1;
+        java.io.PrintWriter r2;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.BuildBody r3, r8, r12;
+        ca.mcgill.sable.soot.grimp.Grimp r4;
+        ca.mcgill.sable.soot.StoredBody r5, r10, r14;
+        ca.mcgill.sable.soot.ClassFile r6, r11, r15;
+        ca.mcgill.sable.soot.jimple.JasminClass r7;
+        ca.mcgill.sable.soot.jimple.Jimple r9, r13;
+
+        r0 := @parameter0;
+        r1 := @parameter1;
+        r2 := @parameter2;
+        i0 := @parameter3;
+        i1 = r1.equals(".jasmin");
+        if i1 == 0 goto label0;
+
+        r7 = new ca.mcgill.sable.soot.jimple.JasminClass;
+        r3 = new ca.mcgill.sable.soot.BuildBody;
+        r4 = ca.mcgill.sable.soot.grimp.Grimp.v();
+        r5 = new ca.mcgill.sable.soot.StoredBody;
+        r6 = ca.mcgill.sable.soot.ClassFile.v();
+        specialinvoke r5.<init>(r6);
+        specialinvoke r3.<init>(r4, r5);
+        specialinvoke r7.<init>(r0, r3);
+        r7.print(r2);
+        return;
+
+     label0:
+        i2 = r1.equals(".jimp");
+        if i2 == 0 goto label1;
+
+        r8 = new ca.mcgill.sable.soot.BuildBody;
+        r9 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r10 = new ca.mcgill.sable.soot.StoredBody;
+        r11 = ca.mcgill.sable.soot.ClassFile.v();
+        specialinvoke r10.<init>(r11);
+        specialinvoke r8.<init>(r9, r10, i0);
+        r0.printTo(r8, r2, 1);
+        return;
+
+     label1:
+        r12 = new ca.mcgill.sable.soot.BuildBody;
+        r13 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r14 = new ca.mcgill.sable.soot.StoredBody;
+        r15 = ca.mcgill.sable.soot.ClassFile.v();
+        specialinvoke r14.<init>(r15);
+        specialinvoke r12.<init>(r13, r14, i0);
+        r0.printTo(r12, r2);
+        return;
+    }
+
+    public static double truncatedOf(double, int)
+    {
+        double d0, d1, d2, d3, d4;
+        int i0, i1;
+        long l0;
+
+        d0 := @parameter0;
+        i0 := @parameter1;
+        d1 = 1.0;
+        i1 = 0;
+        goto label1;
+
+     label0:
+        d1 = d1 * 10.0;
+        i1 = i1 + 1;
+
+     label1:
+        if i1 < i0 goto label0;
+
+        d2 = d0 * d1;
+        l0 = (long) d2;
+        d3 = (double) l0;
+        d4 = d3 / d1;
+        return d4;
+    }
+
+    public static java.lang.String paddedLeftOf(java.lang.String, int)
+    {
+        java.lang.String r0, r3, r4, r6;
+        int i0, i1, i2, i3, i4;
+        char[] r1;
+        java.lang.StringBuffer r2, r5;
+
+        r0 := @parameter0;
+        i0 := @parameter1;
+        i2 = r0.length();
+        if i2 < i0 goto label0;
+
+        return r0;
+
+     label0:
+        i3 = r0.length();
+        i4 = i0 - i3;
+        r1 = new char[i4];
+        i1 = 0;
+        goto label2;
+
+     label1:
+        r1[i1] = 32;
+        i1 = i1 + 1;
+
+     label2:
+        if i1 < i4 goto label1;
+
+        r2 = new java.lang.StringBuffer;
+        r3 = new java.lang.String;
+        specialinvoke r3.<init>(r1);
+        r4 = java.lang.String.valueOf(r3);
+        specialinvoke r2.<init>(r4);
+        r5 = r2.append(r0);
+        r6 = r5.toString();
+        return r6;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.Main r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    static void <clinit>()
+    {
+        ca.mcgill.sable.soot.Timer r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28;
+
+        ca.mcgill.sable.soot.jimple.Main.usePackedDefs = 1;
+        ca.mcgill.sable.soot.jimple.Main.produceJimpFile = 1;
+        r0 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r0.<init>("copies");
+        ca.mcgill.sable.soot.jimple.Main.copiesTimer = r0;
+        r1 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r1.<init>("defs");
+        ca.mcgill.sable.soot.jimple.Main.defsTimer = r1;
+        r2 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r2.<init>("uses");
+        ca.mcgill.sable.soot.jimple.Main.usesTimer = r2;
+        r3 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r3.<init>("live");
+        ca.mcgill.sable.soot.jimple.Main.liveTimer = r3;
+        r4 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r4.<init>("split");
+        ca.mcgill.sable.soot.jimple.Main.splitTimer = r4;
+        r5 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r5.<init>("pack");
+        ca.mcgill.sable.soot.jimple.Main.packTimer = r5;
+        r6 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r6.<init>("cleanup1");
+        ca.mcgill.sable.soot.jimple.Main.cleanup1Timer = r6;
+        r7 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r7.<init>("cleanup2");
+        ca.mcgill.sable.soot.jimple.Main.cleanup2Timer = r7;
+        r8 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r8.<init>("conversionm");
+        ca.mcgill.sable.soot.jimple.Main.conversionTimer = r8;
+        r9 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r9.<init>("cleanupAlgorithm");
+        ca.mcgill.sable.soot.jimple.Main.cleanupAlgorithmTimer = r9;
+        r10 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r10.<init>("graphTimer");
+        ca.mcgill.sable.soot.jimple.Main.graphTimer = r10;
+        r11 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r11.<init>("assignTimer");
+        ca.mcgill.sable.soot.jimple.Main.assignTimer = r11;
+        r12 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r12.<init>("resolveTimer");
+        ca.mcgill.sable.soot.jimple.Main.resolveTimer = r12;
+        r13 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r13.<init>("totalTimer");
+        ca.mcgill.sable.soot.jimple.Main.totalTimer = r13;
+        r14 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r14.<init>("splitPhase1");
+        ca.mcgill.sable.soot.jimple.Main.splitPhase1Timer = r14;
+        r15 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r15.<init>("splitPhase2");
+        ca.mcgill.sable.soot.jimple.Main.splitPhase2Timer = r15;
+        r16 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r16.<init>("usePhase1");
+        ca.mcgill.sable.soot.jimple.Main.usePhase1Timer = r16;
+        r17 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r17.<init>("usePhase2");
+        ca.mcgill.sable.soot.jimple.Main.usePhase2Timer = r17;
+        r18 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r18.<init>("usePhase3");
+        ca.mcgill.sable.soot.jimple.Main.usePhase3Timer = r18;
+        r19 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r19.<init>("defsSetup");
+        ca.mcgill.sable.soot.jimple.Main.defsSetupTimer = r19;
+        r20 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r20.<init>("defsAnalysis");
+        ca.mcgill.sable.soot.jimple.Main.defsAnalysisTimer = r20;
+        r21 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r21.<init>("defsPost");
+        ca.mcgill.sable.soot.jimple.Main.defsPostTimer = r21;
+        r22 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r22.<init>("liveSetup");
+        ca.mcgill.sable.soot.jimple.Main.liveSetupTimer = r22;
+        r23 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r23.<init>("liveAnalysis");
+        ca.mcgill.sable.soot.jimple.Main.liveAnalysisTimer = r23;
+        r24 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r24.<init>("livePost");
+        ca.mcgill.sable.soot.jimple.Main.livePostTimer = r24;
+        r25 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r25.<init>("aggregation");
+        ca.mcgill.sable.soot.jimple.Main.aggregationTimer = r25;
+        r26 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r26.<init>("grimpAggregation");
+        ca.mcgill.sable.soot.jimple.Main.grimpAggregationTimer = r26;
+        r27 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r27.<init>("deadCode");
+        ca.mcgill.sable.soot.jimple.Main.deadCodeTimer = r27;
+        r28 = new ca.mcgill.sable.soot.Timer;
+        specialinvoke r28.<init>("propagator");
+        ca.mcgill.sable.soot.jimple.Main.propagatorTimer = r28;
+        return;
+    }
+}

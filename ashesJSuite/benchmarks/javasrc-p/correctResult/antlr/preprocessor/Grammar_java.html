@@ -1,0 +1,238 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr.preprocessor</A>: Grammar');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr.preprocessor</A>: Grammar';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr.preprocessor;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>import antlr.collections.impl.IndexedVector;
+<a name=4 class="linenum">4	</SPAN>import java.util.Hashtable;
+<a name=5 class="linenum">5	</SPAN>import java.util.Enumeration;
+<a name=6 class="linenum">6	</SPAN>import java.io.IOException;
+<a name=7 class="linenum">7	</SPAN>
+<a name=8 class="linenum">8	</SPAN>class <a class="classDef" name=Grammar href=Grammar_java_ref.html#Grammar>Grammar</a> {
+<a name=9 class="linenum">9	</SPAN>	protected String <a class="varDef" name=name href=Grammar_java_ref.html#name>name</a>;
+<a name=10 class="linenum">10	</SPAN>	protected String <a class="varDef" name=fileName href=Grammar_java_ref.html#fileName>fileName</a>;		<span class="comment">// where does it come from?
+<a name=11 class="linenum">11	</SPAN></span>	protected String <a class="varDef" name=superGrammar href=Grammar_java_ref.html#superGrammar>superGrammar</a>;	<span class="comment">// null if no super class
+<a name=12 class="linenum">12	</SPAN></span>	protected String <a class="varDef" name=type href=Grammar_java_ref.html#type>type</a>;				<span class="comment">// lexer? parser? tree parser?
+<a name=13 class="linenum">13	</SPAN></span>	protected <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> <a class="varDef" name=rules href=Grammar_java_ref.html#rules>rules</a>;	<span class="comment">// text of rules as they were read in
+<a name=14 class="linenum">14	</SPAN></span>	protected <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> <a class="varDef" name=options href=Grammar_java_ref.html#options>options</a>;<span class="comment">// rule options
+<a name=15 class="linenum">15	</SPAN></span>	protected String <a class="varDef" name=preambleAction href=Grammar_java_ref.html#preambleAction>preambleAction</a>;<span class="comment">// action right before grammar
+<a name=16 class="linenum">16	</SPAN></span>	protected String <a class="varDef" name=memberAction href=Grammar_java_ref.html#memberAction>memberAction</a>;	<span class="comment">// action inside grammar
+<a name=17 class="linenum">17	</SPAN></span>	protected <a class="classRef" href=Hierarchy_java.html#Hierarchy>Hierarchy</a> <a class="varDef" name=hier href=Grammar_java_ref.html#hier>hier</a>;			<span class="comment">// hierarchy of grammars
+<a name=18 class="linenum">18	</SPAN></span>	protected boolean <a class="varDef" name=predefined href=Grammar_java_ref.html#predefined>predefined</a>=false;	<span class="comment">// one of the predefined grammars?
+<a name=19 class="linenum">19	</SPAN></span>	protected boolean <a class="varDef" name=alreadyExpanded href=Grammar_java_ref.html#alreadyExpanded>alreadyExpanded</a> = false;
+<a name=20 class="linenum">20	</SPAN>	protected boolean <a class="varDef" name=specifiedVocabulary href=Grammar_java_ref.html#specifiedVocabulary>specifiedVocabulary</a>=false;	<span class="comment">// found tokdef option?
+<a name=21 class="linenum">21	</SPAN></span>
+<a name=22 class="linenum">22	</SPAN>	public <a class="methodDef" name=Grammar(String,String,IndexedVector) href=Grammar_java_ref.html#Grammar(String,String,IndexedVector)>Grammar</a>(String name, String superGrammar, <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> rules) {
+<a name=23 class="linenum">23	</SPAN>		this.name = name;
+<a name=24 class="linenum">24	</SPAN>		this.superGrammar = superGrammar;
+<a name=25 class="linenum">25	</SPAN>		this.rules = rules;
+<a name=26 class="linenum">26	</SPAN>	}
+<a name=27 class="linenum">27	</SPAN>	public void <a class="methodDef" name=addOption(Option) href=Grammar_java_ref.html#addOption(Option)>addOption</a>(<a class="classRef" href=Option_java.html#Option>Option</a> o) {
+<a name=28 class="linenum">28	</SPAN>		if ( <a class="varRef" href=Grammar_java.html#options>options</a>==null ) {	<span class="comment">// if not already there, create it
+<a name=29 class="linenum">29	</SPAN></span>			<a class="varRef" href=Grammar_java.html#options>options</a> = new <a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector()>IndexedVector</a>();
+<a name=30 class="linenum">30	</SPAN>		}
+<a name=31 class="linenum">31	</SPAN>		<a class="varRef" href=Grammar_java.html#options>options</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#appendElement(Object,Object)>appendElement</a>(o.<a class="methodRef" href=Option_java.html#getName()>getName</a>(), o);
+<a name=32 class="linenum">32	</SPAN>	}
+<a name=33 class="linenum">33	</SPAN>	public void <a class="methodDef" name=addRule(Rule) href=Grammar_java_ref.html#addRule(Rule)>addRule</a>(<a class="classRef" href=Rule_java.html#Rule>Rule</a> r) {
+<a name=34 class="linenum">34	</SPAN>		<a class="varRef" href=Grammar_java.html#rules>rules</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#appendElement(Object,Object)>appendElement</a>(r.<a class="methodRef" href=Rule_java.html#getName()>getName</a>(), r);
+<a name=35 class="linenum">35	</SPAN>	}
+<a name=36 class="linenum">36	</SPAN>	<span class="comment">/** Copy all nonoverridden rules, vocabulary, and options into this grammar from
+<a name=37 class="linenum">37	</SPAN>	 *  supergrammar chain.  The change is made in place; e.g., this grammar's vector
+<a name=38 class="linenum">38	</SPAN>	 *  of rules gets bigger.  This has side-effects: all grammars on path to
+<a name=39 class="linenum">39	</SPAN>	 *  root of hierarchy are expanded also.
+<a name=40 class="linenum">40	</SPAN>	 */</span>
+<a name=41 class="linenum">41	</SPAN>	public void <a class="methodDef" name=expandInPlace() href=Grammar_java_ref.html#expandInPlace()>expandInPlace</a>() {
+<a name=42 class="linenum">42	</SPAN>		<span class="comment">// if this grammar already expanded, just return
+<a name=43 class="linenum">43	</SPAN></span>		if ( <a class="varRef" href=Grammar_java.html#alreadyExpanded>alreadyExpanded</a> ) {
+<a name=44 class="linenum">44	</SPAN>			return;
+<a name=45 class="linenum">45	</SPAN>		}
+<a name=46 class="linenum">46	</SPAN>		
+<a name=47 class="linenum">47	</SPAN>		<span class="comment">// Expand super grammar first (unless it's a predefined or subgrammar of predefined)
+<a name=48 class="linenum">48	</SPAN></span>		<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> superG = <a class="methodRef" href=Grammar_java.html#getSuperGrammar()>getSuperGrammar</a>();
+<a name=49 class="linenum">49	</SPAN>		if ( superG == null ) return;				<span class="comment">// error (didn't provide superclass)
+<a name=50 class="linenum">50	</SPAN></span>		if ( superG.<a class="methodRef" href=Grammar_java.html#isPredefined()>isPredefined</a>() ) return;		<span class="comment">// can't expand Lexer, Parser, ...
+<a name=51 class="linenum">51	</SPAN></span>		superG.<a class="methodRef" href=Grammar_java.html#expandInPlace()>expandInPlace</a>();
+<a name=52 class="linenum">52	</SPAN>		
+<a name=53 class="linenum">53	</SPAN>		<span class="comment">// expand current grammar now.
+<a name=54 class="linenum">54	</SPAN></span>		<a class="varRef" href=Grammar_java.html#alreadyExpanded>alreadyExpanded</a> = true;
+<a name=55 class="linenum">55	</SPAN>		<span class="comment">// track whether a grammar file needed to have a grammar expanded
+<a name=56 class="linenum">56	</SPAN></span>		<a class="classRef" href=GrammarFile_java.html#GrammarFile>GrammarFile</a> gf = <a class="varRef" href=Grammar_java.html#hier>hier</a>.<a class="methodRef" href=Hierarchy_java.html#getFile(String)>getFile</a>(<a class="methodRef" href=Grammar_java.html#getFileName()>getFileName</a>());
+<a name=57 class="linenum">57	</SPAN>		gf.<a class="methodRef" href=GrammarFile_java.html#setExpanded(boolean)>setExpanded</a>(true);
+<a name=58 class="linenum">58	</SPAN>		
+<a name=59 class="linenum">59	</SPAN>		<span class="comment">// Copy rules from supergrammar into this grammar
+<a name=60 class="linenum">60	</SPAN></span>		<a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> inhRules = superG.<a class="methodRef" href=Grammar_java.html#getRules()>getRules</a>();
+<a name=61 class="linenum">61	</SPAN>		for (Enumeration e = inhRules.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#elements()>elements</a>() ; e.hasMoreElements() ;) {
+<a name=62 class="linenum">62	</SPAN>			<a class="classRef" href=Rule_java.html#Rule>Rule</a> r = (<a class="classRef" href=Rule_java.html#Rule>Rule</a>)e.nextElement();
+<a name=63 class="linenum">63	</SPAN>			<a class="methodRef" href=Grammar_java.html#inherit(Option,Grammar)>inherit</a>(r, superG);
+<a name=64 class="linenum">64	</SPAN>		}
+<a name=65 class="linenum">65	</SPAN>					
+<a name=66 class="linenum">66	</SPAN>		<span class="comment">// Copy options from supergrammar into this grammar
+<a name=67 class="linenum">67	</SPAN></span>		<span class="comment">// Modify tokdef options so that they point to dir of enclosing grammar
+<a name=68 class="linenum">68	</SPAN></span>		<a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> inhOptions = superG.<a class="methodRef" href=Grammar_java.html#getOptions()>getOptions</a>();
+<a name=69 class="linenum">69	</SPAN>		if ( inhOptions==null ) return;
+<a name=70 class="linenum">70	</SPAN>		for (Enumeration e = inhOptions.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#elements()>elements</a>() ; e.hasMoreElements() ;) {
+<a name=71 class="linenum">71	</SPAN>			<a class="classRef" href=Option_java.html#Option>Option</a> o = (<a class="classRef" href=Option_java.html#Option>Option</a>)e.nextElement();
+<a name=72 class="linenum">72	</SPAN>			<a class="methodRef" href=Grammar_java.html#inherit(Option,Grammar)>inherit</a>(o, superG);
+<a name=73 class="linenum">73	</SPAN>		}
+<a name=74 class="linenum">74	</SPAN>		
+<a name=75 class="linenum">75	</SPAN>		<span class="comment">// copy member action from supergrammar into this grammar
+<a name=76 class="linenum">76	</SPAN></span>		<a class="methodRef" href=Grammar_java.html#inherit(Option,Grammar)>inherit</a>(superG.<a class="varRef" href=Grammar_java.html#memberAction>memberAction</a>, superG);
+<a name=77 class="linenum">77	</SPAN>		
+<a name=78 class="linenum">78	</SPAN><span class="comment">/*
+<a name=79 class="linenum">79	</SPAN>		if ( !specifiedVocabulary ) {
+<a name=80 class="linenum">80	</SPAN>			antlr.Tool.warning("you probably want a tokdef option in the supergrammar");
+<a name=81 class="linenum">81	</SPAN>		}	
+<a name=82 class="linenum">82	</SPAN>*/</span>
+<a name=83 class="linenum">83	</SPAN>		
+<a name=84 class="linenum">84	</SPAN>	}
+<a name=85 class="linenum">85	</SPAN>	public String <a class="methodDef" name=getFileName() href=Grammar_java_ref.html#getFileName()>getFileName</a>() { return <a class="varRef" href=Grammar_java.html#fileName>fileName</a>; }
+<a name=86 class="linenum">86	</SPAN>	public String <a class="methodDef" name=getName() href=Grammar_java_ref.html#getName()>getName</a>() {
+<a name=87 class="linenum">87	</SPAN>		return <a class="varRef" href=Grammar_java.html#name>name</a>;
+<a name=88 class="linenum">88	</SPAN>	}
+<a name=89 class="linenum">89	</SPAN>	public <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> <a class="methodDef" name=getOptions() href=Grammar_java_ref.html#getOptions()>getOptions</a>() { return <a class="varRef" href=Grammar_java.html#options>options</a>; }
+<a name=90 class="linenum">90	</SPAN>	public <a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> <a class="methodDef" name=getRules() href=Grammar_java_ref.html#getRules()>getRules</a>() { return <a class="varRef" href=Grammar_java.html#rules>rules</a>; }
+<a name=91 class="linenum">91	</SPAN>	public <a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> <a class="methodDef" name=getSuperGrammar() href=Grammar_java_ref.html#getSuperGrammar()>getSuperGrammar</a>() {
+<a name=92 class="linenum">92	</SPAN>		if ( <a class="varRef" href=Grammar_java.html#superGrammar>superGrammar</a>==null ) return null;
+<a name=93 class="linenum">93	</SPAN>		<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> g = (<a class="classRef" href=Grammar_java.html#Grammar>Grammar</a>)<a class="varRef" href=Grammar_java.html#hier>hier</a>.<a class="methodRef" href=Hierarchy_java.html#getGrammar(String)>getGrammar</a>(<a class="varRef" href=Grammar_java.html#superGrammar>superGrammar</a>);
+<a name=94 class="linenum">94	</SPAN>		return g;
+<a name=95 class="linenum">95	</SPAN>	}
+<a name=96 class="linenum">96	</SPAN>	public String <a class="methodDef" name=getSuperGrammarName() href=Grammar_java_ref.html#getSuperGrammarName()>getSuperGrammarName</a>() {
+<a name=97 class="linenum">97	</SPAN>		return <a class="varRef" href=Grammar_java.html#superGrammar>superGrammar</a>;
+<a name=98 class="linenum">98	</SPAN>	}
+<a name=99 class="linenum">99	</SPAN>	public String <a class="methodDef" name=getType() href=Grammar_java_ref.html#getType()>getType</a>() {
+<a name=100 class="linenum">100	</SPAN>		return <a class="varRef" href=Grammar_java.html#type>type</a>;
+<a name=101 class="linenum">101	</SPAN>	}
+<a name=102 class="linenum">102	</SPAN>	public void <a class="methodDef" name=inherit(Option,Grammar) href=Grammar_java_ref.html#inherit(Option,Grammar)>inherit</a>(<a class="classRef" href=Option_java.html#Option>Option</a> o, <a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> superG) {
+<a name=103 class="linenum">103	</SPAN>		<a class="classRef" href=Option_java.html#Option>Option</a> overriddenOption = null;
+<a name=104 class="linenum">104	</SPAN>		if ( <a class="varRef" href=Grammar_java.html#options>options</a>!=null ) {	<span class="comment">// do we even have options?
+<a name=105 class="linenum">105	</SPAN></span>			overriddenOption = (<a class="classRef" href=Option_java.html#Option>Option</a>)<a class="varRef" href=Grammar_java.html#options>options</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#getElement(Object)>getElement</a>(o.<a class="methodRef" href=Option_java.html#getName()>getName</a>());
+<a name=106 class="linenum">106	</SPAN>		}	
+<a name=107 class="linenum">107	</SPAN>		<span class="comment">// if overridden, do not add to this grammar
+<a name=108 class="linenum">108	</SPAN></span>		if ( overriddenOption==null ) {
+<a name=109 class="linenum">109	</SPAN>			if ( o.<a class="methodRef" href=Option_java.html#getName()>getName</a>().equals("tokdef") ) {
+<a name=110 class="linenum">110	</SPAN>				<span class="comment">// get rid of leading/trailing " of tokdef RHS
+<a name=111 class="linenum">111	</SPAN></span>				String rhs = antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#stripFrontBack(String,String,String)>stripFrontBack</a>(o.<a class="methodRef" href=Option_java.html#getRHS()>getRHS</a>(), "\"", "\"");
+<a name=112 class="linenum">112	</SPAN>
+<a name=113 class="linenum">113	</SPAN>				<span class="comment">// make a copy of tokdef file in current directory.
+<a name=114 class="linenum">114	</SPAN></span>				String originatingGrFileName = o.<a class="methodRef" href=Option_java.html#getEnclosingGrammar()>getEnclosingGrammar</a>().<a class="methodRef" href=Grammar_java.html#getFileName()>getFileName</a>();
+<a name=115 class="linenum">115	</SPAN>				String path = antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#pathToFile(String)>pathToFile</a>(originatingGrFileName);
+<a name=116 class="linenum">116	</SPAN>				String originalTokdefFileName = path+rhs;
+<a name=117 class="linenum">117	</SPAN>				String newTokdefFileName = antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#fileMinusPath(String)>fileMinusPath</a>(rhs);
+<a name=118 class="linenum">118	</SPAN>				try {
+<a name=119 class="linenum">119	</SPAN>					antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#copyFile(String,String)>copyFile</a>(originalTokdefFileName, newTokdefFileName);
+<a name=120 class="linenum">120	</SPAN>				}
+<a name=121 class="linenum">121	</SPAN>				catch (IOException io) {
+<a name=122 class="linenum">122	</SPAN>					antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#toolError(String)>toolError</a>("cannot find tokdef file "+originalTokdefFileName);
+<a name=123 class="linenum">123	</SPAN>					return;
+<a name=124 class="linenum">124	</SPAN>				}		
+<a name=125 class="linenum">125	</SPAN>
+<a name=126 class="linenum">126	</SPAN>				<span class="comment">// need to modify tokdef option so "tokenfile" is converted
+<a name=127 class="linenum">127	</SPAN></span>				<span class="comment">// to simply "tokenfile"; i.e., get rid of path in front
+<a name=128 class="linenum">128	</SPAN></span>				o.<a class="methodRef" href=Option_java.html#setRHS(String)>setRHS</a>("\""+newTokdefFileName+"\";");
+<a name=129 class="linenum">129	</SPAN>
+<a name=130 class="linenum">130	</SPAN><span class="comment">/*
+<a name=131 class="linenum">131	</SPAN>				if ( rhs.charAt(0)!=System.getProperty("file.separator").charAt(0) ) {
+<a name=132 class="linenum">132	</SPAN>					// does not begin with /, must not be absolute path
+<a name=133 class="linenum">133	</SPAN>					// prefix the file (or relative path) with the path to
+<a name=134 class="linenum">134	</SPAN>					// the associated grammar file
+<a name=135 class="linenum">135	</SPAN>					String originatingGrFileName = o.getEnclosingGrammar().getFileName();
+<a name=136 class="linenum">136	</SPAN>					String path = antlr.Tool.pathToFile(originatingGrFileName);
+<a name=137 class="linenum">137	</SPAN>					if ( path.equals("."+System.getProperty("file.separator")) ) {
+<a name=138 class="linenum">138	</SPAN>						path = "";	// don't bother putting "./" on front
+<a name=139 class="linenum">139	</SPAN>					}	
+<a name=140 class="linenum">140	</SPAN>					o.setRHS("\""+path+rhs);
+<a name=141 class="linenum">141	</SPAN>				}
+<a name=142 class="linenum">142	</SPAN>*/</span>
+<a name=143 class="linenum">143	</SPAN>			}	
+<a name=144 class="linenum">144	</SPAN>			<a class="methodRef" href=Grammar_java.html#addOption(Option)>addOption</a>(o);	<span class="comment">// copy option into this
+<a name=145 class="linenum">145	</SPAN></span>		}
+<a name=146 class="linenum">146	</SPAN>	}
+<a name=147 class="linenum">147	</SPAN>	public void <a class="methodDef" name=inherit(Rule,Grammar) href=Grammar_java_ref.html#inherit(Rule,Grammar)>inherit</a>(<a class="classRef" href=Rule_java.html#Rule>Rule</a> r, <a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> superG) {
+<a name=148 class="linenum">148	</SPAN>		<span class="comment">// if overridden, do not add to this grammar
+<a name=149 class="linenum">149	</SPAN></span>		<a class="classRef" href=Rule_java.html#Rule>Rule</a> overriddenRule = (<a class="classRef" href=Rule_java.html#Rule>Rule</a>)<a class="varRef" href=Grammar_java.html#rules>rules</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#getElement(Object)>getElement</a>(r.<a class="methodRef" href=Rule_java.html#getName()>getName</a>());
+<a name=150 class="linenum">150	</SPAN>		if ( overriddenRule!=null ) {
+<a name=151 class="linenum">151	</SPAN>			<span class="comment">// rule is overridden in this grammar.
+<a name=152 class="linenum">152	</SPAN></span>			if ( !overriddenRule.<a class="methodRef" href=Rule_java.html#sameSignature(Rule)>sameSignature</a>(r) ) {
+<a name=153 class="linenum">153	</SPAN>				<span class="comment">// warn if different sig
+<a name=154 class="linenum">154	</SPAN></span>				antlr.<a class="classRef" href=../../antlr/Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=../../antlr/Tool_java.html#warning(String)>warning</a>("rule "+<a class="methodRef" href=Grammar_java.html#getName()>getName</a>()+"."+overriddenRule.<a class="methodRef" href=Rule_java.html#getName()>getName</a>()+
+<a name=155 class="linenum">155	</SPAN>					" has different signature than "+
+<a name=156 class="linenum">156	</SPAN>					superG.<a class="methodRef" href=Grammar_java.html#getName()>getName</a>()+"."+overriddenRule.<a class="methodRef" href=Rule_java.html#getName()>getName</a>());
+<a name=157 class="linenum">157	</SPAN>			}
+<a name=158 class="linenum">158	</SPAN>		}
+<a name=159 class="linenum">159	</SPAN>		else {  <span class="comment">// not overridden, copy rule into this
+<a name=160 class="linenum">160	</SPAN></span>			<a class="methodRef" href=Grammar_java.html#addRule(Rule)>addRule</a>(r);
+<a name=161 class="linenum">161	</SPAN>		}
+<a name=162 class="linenum">162	</SPAN>	}
+<a name=163 class="linenum">163	</SPAN>	public void <a class="methodDef" name=inherit(String,Grammar) href=Grammar_java_ref.html#inherit(String,Grammar)>inherit</a>(String memberAction, <a class="classRef" href=Grammar_java.html#Grammar>Grammar</a> superG) {
+<a name=164 class="linenum">164	</SPAN>		if ( this.memberAction!=null ) return;	<span class="comment">// do nothing if already have member action
+<a name=165 class="linenum">165	</SPAN></span>		if ( memberAction != null ) { <span class="comment">// don't have one here, use supergrammar's action
+<a name=166 class="linenum">166	</SPAN></span>			this.memberAction = memberAction;
+<a name=167 class="linenum">167	</SPAN>		}
+<a name=168 class="linenum">168	</SPAN>	}
+<a name=169 class="linenum">169	</SPAN>	public boolean <a class="methodDef" name=isPredefined() href=Grammar_java_ref.html#isPredefined()>isPredefined</a>() { return <a class="varRef" href=Grammar_java.html#predefined>predefined</a>; }
+<a name=170 class="linenum">170	</SPAN>	public void <a class="methodDef" name=setFileName(String) href=Grammar_java_ref.html#setFileName(String)>setFileName</a>(String f) { <a class="varRef" href=GrammarFile_java.html#fileName>fileName</a>=f; }
+<a name=171 class="linenum">171	</SPAN>	public void <a class="methodDef" name=setHierarchy(Hierarchy) href=Grammar_java_ref.html#setHierarchy(Hierarchy)>setHierarchy</a>(<a class="classRef" href=Hierarchy_java.html#Hierarchy>Hierarchy</a> hier) { this.hier = hier; }
+<a name=172 class="linenum">172	</SPAN>	public void <a class="methodDef" name=setMemberAction(String) href=Grammar_java_ref.html#setMemberAction(String)>setMemberAction</a>(String a) {<a class="varRef" href=Grammar_java.html#memberAction>memberAction</a>=a;}
+<a name=173 class="linenum">173	</SPAN>	public void <a class="methodDef" name=setOptions(IndexedVector) href=Grammar_java_ref.html#setOptions(IndexedVector)>setOptions</a>(<a class="classRef" href=../../antlr/collections/impl/IndexedVector_java.html#IndexedVector>IndexedVector</a> options) {
+<a name=174 class="linenum">174	</SPAN>		this.options = options;
+<a name=175 class="linenum">175	</SPAN>	}
+<a name=176 class="linenum">176	</SPAN>	public void <a class="methodDef" name=setPreambleAction(String) href=Grammar_java_ref.html#setPreambleAction(String)>setPreambleAction</a>(String a) {<a class="varRef" href=Grammar_java.html#preambleAction>preambleAction</a>=a;}
+<a name=177 class="linenum">177	</SPAN>	public void <a class="methodDef" name=setPredefined(boolean) href=Grammar_java_ref.html#setPredefined(boolean)>setPredefined</a>(boolean b) { <a class="varRef" href=Grammar_java.html#predefined>predefined</a>=b; }
+<a name=178 class="linenum">178	</SPAN>	public void <a class="methodDef" name=setType(String) href=Grammar_java_ref.html#setType(String)>setType</a>(String t) {
+<a name=179 class="linenum">179	</SPAN>		<a class="varRef" href=Grammar_java.html#type>type</a> = t;
+<a name=180 class="linenum">180	</SPAN>	}
+<a name=181 class="linenum">181	</SPAN>	public String <a class="methodDef" name=toString() href=Grammar_java_ref.html#toString()>toString</a>() {
+<a name=182 class="linenum">182	</SPAN>		String s="";
+<a name=183 class="linenum">183	</SPAN>		if ( <a class="varRef" href=Grammar_java.html#preambleAction>preambleAction</a>!=null ) {
+<a name=184 class="linenum">184	</SPAN>			s += <a class="varRef" href=Grammar_java.html#preambleAction>preambleAction</a>;
+<a name=185 class="linenum">185	</SPAN>		}
+<a name=186 class="linenum">186	</SPAN>		if ( <a class="varRef" href=Grammar_java.html#superGrammar>superGrammar</a>==null ) {
+<a name=187 class="linenum">187	</SPAN>			return "class "+<a class="varRef" href=Grammar_java.html#name>name</a>+";";
+<a name=188 class="linenum">188	</SPAN>		}
+<a name=189 class="linenum">189	</SPAN><span class="comment">/*		DO NOT HAVE SUBGRAMMAR INHERIT FROM SUPERGRAMMAR FOR NOW
+<a name=190 class="linenum">190	</SPAN>		String sup="("+superGrammar+")";
+<a name=191 class="linenum">191	</SPAN>		if (	superGrammar.equals("Parser") ||
+<a name=192 class="linenum">192	</SPAN>				superGrammar.equals("Lexer") ||
+<a name=193 class="linenum">193	</SPAN>				superGrammar.equals("TreeParser") ) {
+<a name=194 class="linenum">194	</SPAN>			sup = "";
+<a name=195 class="linenum">195	</SPAN>		}
+<a name=196 class="linenum">196	</SPAN>*/</span>
+<a name=197 class="linenum">197	</SPAN>		String sup = "";
+<a name=198 class="linenum">198	</SPAN>		s+="class "+<a class="varRef" href=Grammar_java.html#name>name</a>+" extends "+<a class="varRef" href=Grammar_java.html#type>type</a>+sup+";"+
+<a name=199 class="linenum">199	</SPAN>			System.getProperty("line.separator")+
+<a name=200 class="linenum">200	</SPAN>			System.getProperty("line.separator");
+<a name=201 class="linenum">201	</SPAN>		if ( <a class="varRef" href=Grammar_java.html#options>options</a>!=null ) {
+<a name=202 class="linenum">202	</SPAN>			s += <a class="classRef" href=Hierarchy_java.html#Hierarchy>Hierarchy</a>.<a class="methodRef" href=Hierarchy_java.html#optionsToString(IndexedVector)>optionsToString</a>(<a class="varRef" href=Grammar_java.html#options>options</a>);
+<a name=203 class="linenum">203	</SPAN>		}
+<a name=204 class="linenum">204	</SPAN>		if ( <a class="varRef" href=Grammar_java.html#memberAction>memberAction</a>!=null ) {
+<a name=205 class="linenum">205	</SPAN>			s += <a class="varRef" href=Grammar_java.html#memberAction>memberAction</a>+System.getProperty("line.separator");
+<a name=206 class="linenum">206	</SPAN>		}
+<a name=207 class="linenum">207	</SPAN>		for (int i=0; i&lt;<a class="varRef" href=Grammar_java.html#rules>rules</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#size()>size</a>(); i++) {
+<a name=208 class="linenum">208	</SPAN>			<a class="classRef" href=Rule_java.html#Rule>Rule</a> r = (<a class="classRef" href=Rule_java.html#Rule>Rule</a>)<a class="varRef" href=Grammar_java.html#rules>rules</a>.<a class="methodRef" href=../../antlr/collections/impl/IndexedVector_java.html#elementAt(int)>elementAt</a>(i);
+<a name=209 class="linenum">209	</SPAN>			if ( !<a class="methodRef" href=Grammar_java.html#getName()>getName</a>().equals(r.<a class="varRef" href=Rule_java.html#enclosingGrammar>enclosingGrammar</a>.<a class="methodRef" href=Grammar_java.html#getName()>getName</a>()) ) {
+<a name=210 class="linenum">210	</SPAN>				s += "// inherited from grammar "+r.<a class="varRef" href=Rule_java.html#enclosingGrammar>enclosingGrammar</a>.<a class="methodRef" href=Grammar_java.html#getName()>getName</a>()+System.getProperty("line.separator");
+<a name=211 class="linenum">211	</SPAN>			}	
+<a name=212 class="linenum">212	</SPAN>			s += r+
+<a name=213 class="linenum">213	</SPAN>				System.getProperty("line.separator")+
+<a name=214 class="linenum">214	</SPAN>				System.getProperty("line.separator");
+<a name=215 class="linenum">215	</SPAN>		}
+<a name=216 class="linenum">216	</SPAN>		return s;
+<a name=217 class="linenum">217	</SPAN>	}
+<a name=218 class="linenum">218	</SPAN>}
+<a name=219 class="linenum">219	</SPAN></pre>

@@ -1,0 +1,9 @@
+public interface ca.mcgill.sable.soot.jimple.GotoStmt extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Stmt
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Unit getTarget();
+
+    public abstract void setTarget(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox getTargetBox();
+}

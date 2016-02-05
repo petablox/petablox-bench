@@ -1,0 +1,23 @@
+public interface ca.mcgill.sable.soot.jimple.NewMultiArrayExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Expr, ca.mcgill.sable.soot.ToBriefString
+{
+
+    public abstract ca.mcgill.sable.soot.ArrayType getBaseType();
+
+    public abstract void setBaseType(ca.mcgill.sable.soot.ArrayType);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getSizeBox(int);
+
+    public abstract int getSizeCount();
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getSize(int);
+
+    public abstract ca.mcgill.sable.util.List getSizes();
+
+    public abstract void setSize(int, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract ca.mcgill.sable.soot.Type getType();
+
+    public abstract void apply(ca.mcgill.sable.util.Switch);
+}

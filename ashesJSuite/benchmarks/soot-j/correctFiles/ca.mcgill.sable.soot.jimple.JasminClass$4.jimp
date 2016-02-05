@@ -1,0 +1,345 @@
+final class ca.mcgill.sable.soot.jimple.JasminClass$4 extends ca.mcgill.sable.soot.TypeSwitch
+{
+    private final int val$slot;
+    private final ca.mcgill.sable.soot.jimple.JasminClass this$0;
+    private final ca.mcgill.sable.soot.jimple.Value val$rvalue;
+
+    public void caseArrayType(ca.mcgill.sable.soot.ArrayType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.ArrayType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        int i0, i1, i2, i3;
+        java.lang.StringBuffer r5, r6, r9, r10;
+        java.lang.String r7, r11;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r0.val$rvalue;
+        r2.emitValue(r3);
+        i0 = r0.val$slot;
+        if i0 < 0 goto label0;
+
+        i1 = r0.val$slot;
+        if i1 > 3 goto label0;
+
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("astore_");
+        i2 = r0.val$slot;
+        r6 = r5.append(i2);
+        r7 = r6.toString();
+        r4.emit(r7, -1);
+        return;
+
+     label0:
+        r8 = r0.this$0;
+        r9 = new java.lang.StringBuffer;
+        specialinvoke r9.<init>("astore ");
+        i3 = r0.val$slot;
+        r10 = r9.append(i3);
+        r11 = r10.toString();
+        r8.emit(r11, -1);
+        return;
+    }
+
+    public void caseDoubleType(ca.mcgill.sable.soot.DoubleType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.DoubleType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        int i0, i1, i2, i3;
+        java.lang.StringBuffer r5, r6, r9, r10;
+        java.lang.String r7, r11;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r0.val$rvalue;
+        r2.emitValue(r3);
+        i0 = r0.val$slot;
+        if i0 < 0 goto label0;
+
+        i1 = r0.val$slot;
+        if i1 > 3 goto label0;
+
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("dstore_");
+        i2 = r0.val$slot;
+        r6 = r5.append(i2);
+        r7 = r6.toString();
+        r4.emit(r7, -2);
+        return;
+
+     label0:
+        r8 = r0.this$0;
+        r9 = new java.lang.StringBuffer;
+        specialinvoke r9.<init>("dstore ");
+        i3 = r0.val$slot;
+        r10 = r9.append(i3);
+        r11 = r10.toString();
+        r8.emit(r11, -2);
+        return;
+    }
+
+    public void caseFloatType(ca.mcgill.sable.soot.FloatType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.FloatType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        int i0, i1, i2, i3;
+        java.lang.StringBuffer r5, r6, r9, r10;
+        java.lang.String r7, r11;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r0.val$rvalue;
+        r2.emitValue(r3);
+        i0 = r0.val$slot;
+        if i0 < 0 goto label0;
+
+        i1 = r0.val$slot;
+        if i1 > 3 goto label0;
+
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("fstore_");
+        i2 = r0.val$slot;
+        r6 = r5.append(i2);
+        r7 = r6.toString();
+        r4.emit(r7, -1);
+        return;
+
+     label0:
+        r8 = r0.this$0;
+        r9 = new java.lang.StringBuffer;
+        specialinvoke r9.<init>("fstore ");
+        i3 = r0.val$slot;
+        r10 = r9.append(i3);
+        r11 = r10.toString();
+        r8.emit(r11, -1);
+        return;
+    }
+
+    public void caseIntType(ca.mcgill.sable.soot.IntType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.IntType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        int i0, i1, i2, i3;
+        java.lang.StringBuffer r5, r6, r9, r10;
+        java.lang.String r7, r11;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r0.val$rvalue;
+        r2.emitValue(r3);
+        i0 = r0.val$slot;
+        if i0 < 0 goto label0;
+
+        i1 = r0.val$slot;
+        if i1 > 3 goto label0;
+
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("istore_");
+        i2 = r0.val$slot;
+        r6 = r5.append(i2);
+        r7 = r6.toString();
+        r4.emit(r7, -1);
+        return;
+
+     label0:
+        r8 = r0.this$0;
+        r9 = new java.lang.StringBuffer;
+        specialinvoke r9.<init>("istore ");
+        i3 = r0.val$slot;
+        r10 = r9.append(i3);
+        r11 = r10.toString();
+        r8.emit(r11, -1);
+        return;
+    }
+
+    public void caseLongType(ca.mcgill.sable.soot.LongType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.LongType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        int i0, i1, i2, i3;
+        java.lang.StringBuffer r5, r6, r9, r10;
+        java.lang.String r7, r11;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r0.val$rvalue;
+        r2.emitValue(r3);
+        i0 = r0.val$slot;
+        if i0 < 0 goto label0;
+
+        i1 = r0.val$slot;
+        if i1 > 3 goto label0;
+
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("lstore_");
+        i2 = r0.val$slot;
+        r6 = r5.append(i2);
+        r7 = r6.toString();
+        r4.emit(r7, -2);
+        return;
+
+     label0:
+        r8 = r0.this$0;
+        r9 = new java.lang.StringBuffer;
+        specialinvoke r9.<init>("lstore ");
+        i3 = r0.val$slot;
+        r10 = r9.append(i3);
+        r11 = r10.toString();
+        r8.emit(r11, -2);
+        return;
+    }
+
+    public void caseRefType(ca.mcgill.sable.soot.RefType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.RefType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        int i0, i1, i2, i3;
+        java.lang.StringBuffer r5, r6, r9, r10;
+        java.lang.String r7, r11;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r0.val$rvalue;
+        r2.emitValue(r3);
+        i0 = r0.val$slot;
+        if i0 < 0 goto label0;
+
+        i1 = r0.val$slot;
+        if i1 > 3 goto label0;
+
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("astore_");
+        i2 = r0.val$slot;
+        r6 = r5.append(i2);
+        r7 = r6.toString();
+        r4.emit(r7, -1);
+        return;
+
+     label0:
+        r8 = r0.this$0;
+        r9 = new java.lang.StringBuffer;
+        specialinvoke r9.<init>("astore ");
+        i3 = r0.val$slot;
+        r10 = r9.append(i3);
+        r11 = r10.toString();
+        r8.emit(r11, -1);
+        return;
+    }
+
+    public void caseStmtAddressType(ca.mcgill.sable.soot.StmtAddressType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.StmtAddressType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.isNextGotoAJsr = 1;
+        r3 = r0.this$0;
+        r3.returnAddressSlot = r0.val$slot;
+        return;
+    }
+
+    public void caseNullType(ca.mcgill.sable.soot.NullType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.NullType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2, r4, r8;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        int i0, i1, i2, i3;
+        java.lang.StringBuffer r5, r6, r9, r10;
+        java.lang.String r7, r11;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r3 = r0.val$rvalue;
+        r2.emitValue(r3);
+        i0 = r0.val$slot;
+        if i0 < 0 goto label0;
+
+        i1 = r0.val$slot;
+        if i1 > 3 goto label0;
+
+        r4 = r0.this$0;
+        r5 = new java.lang.StringBuffer;
+        specialinvoke r5.<init>("astore_");
+        i2 = r0.val$slot;
+        r6 = r5.append(i2);
+        r7 = r6.toString();
+        r4.emit(r7, -1);
+        return;
+
+     label0:
+        r8 = r0.this$0;
+        r9 = new java.lang.StringBuffer;
+        specialinvoke r9.<init>("astore ");
+        i3 = r0.val$slot;
+        r10 = r9.append(i3);
+        r11 = r10.toString();
+        r8.emit(r11, -1);
+        return;
+    }
+
+    public void defaultCase(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.Type r1;
+        java.lang.RuntimeException r2;
+        java.lang.StringBuffer r3, r4;
+        java.lang.String r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new java.lang.RuntimeException;
+        r3 = new java.lang.StringBuffer;
+        specialinvoke r3.<init>("Invalid local type: ");
+        r4 = r3.append(r1);
+        r5 = r4.toString();
+        specialinvoke r2.<init>(r5);
+        throw r2;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value, int, ca.mcgill.sable.soot.jimple.JasminClass)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$4 r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        int i0;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 := @parameter1;
+        r2 := @parameter2;
+        specialinvoke r0.<init>();
+        r0.val$rvalue = r1;
+        r0.val$slot = i0;
+        r0.this$0 = r2;
+        return;
+    }
+}

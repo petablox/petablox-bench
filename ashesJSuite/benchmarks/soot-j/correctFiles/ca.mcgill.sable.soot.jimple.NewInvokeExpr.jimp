@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.NewInvokeExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.StaticInvokeExpr
+{
+
+    public abstract ca.mcgill.sable.soot.RefType getBaseType();
+
+    public abstract void setBaseType(ca.mcgill.sable.soot.RefType);
+}

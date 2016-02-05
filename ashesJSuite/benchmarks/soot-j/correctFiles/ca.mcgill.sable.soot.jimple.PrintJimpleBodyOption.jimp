@@ -1,0 +1,42 @@
+public class ca.mcgill.sable.soot.jimple.PrintJimpleBodyOption extends java.lang.Object
+{
+    public static final int USE_ABBREVIATIONS;
+    public static final int DEBUG_MODE;
+
+    protected void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.PrintJimpleBodyOption r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public static boolean useAbbreviations(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 1;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public static boolean debugMode(int)
+    {
+        int i0, i1;
+
+        i0 := @parameter0;
+        i1 = i0 & 2;
+        if i1 != 0 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+}

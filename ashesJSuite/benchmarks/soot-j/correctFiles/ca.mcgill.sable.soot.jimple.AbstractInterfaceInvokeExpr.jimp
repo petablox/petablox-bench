@@ -1,0 +1,143 @@
+public class ca.mcgill.sable.soot.jimple.AbstractInterfaceInvokeExpr extends ca.mcgill.sable.soot.jimple.AbstractNonStaticInvokeExpr implements ca.mcgill.sable.soot.jimple.InterfaceInvokeExpr
+{
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.soot.jimple.ValueBox[])
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInterfaceInvokeExpr r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        specialinvoke r0.<init>();
+        r0.baseBox = r1;
+        r0.method = r2;
+        r0.argBoxes = r3;
+        return;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInterfaceInvokeExpr r0;
+        java.lang.StringBuffer r1, r2, r6, r7, r10, r11, r13, r14, r19, r21;
+        int i0, i1;
+        ca.mcgill.sable.soot.jimple.ValueBox r3, r16;
+        ca.mcgill.sable.soot.jimple.Value r4, r17;
+        java.lang.String r5, r9, r12, r18, r22;
+        ca.mcgill.sable.soot.SootMethod r8;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r15, r20;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>();
+        r2 = new java.lang.StringBuffer;
+        specialinvoke r2.<init>("interfaceinvoke ");
+        r3 = r0.baseBox;
+        r4 = r3.getValue();
+        r5 = r4.toString();
+        r6 = r2.append(r5);
+        r7 = r6.append(".[");
+        r8 = r0.method;
+        r9 = r8.getSignature();
+        r10 = r7.append(r9);
+        r11 = r10.append("](");
+        r12 = r11.toString();
+        r13 = r1.append(r12);
+        i0 = 0;
+        goto label2;
+
+     label0:
+        if i0 == 0 goto label1;
+
+        r14 = r1.append(", ");
+
+     label1:
+        r15 = r0.argBoxes;
+        r16 = r15[i0];
+        r17 = r16.getValue();
+        r18 = r17.toString();
+        r19 = r1.append(r18);
+        i0 = i0 + 1;
+
+     label2:
+        r20 = r0.argBoxes;
+        i1 = r20.length;
+        if i0 < i1 goto label0;
+
+        r21 = r1.append(")");
+        r22 = r1.toString();
+        return r22;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInterfaceInvokeExpr r0;
+        java.lang.StringBuffer r1, r2, r8, r11, r12, r14, r15, r21, r23;
+        int i0, i1;
+        ca.mcgill.sable.soot.jimple.ValueBox r3, r17;
+        ca.mcgill.sable.soot.jimple.Value r4, r18;
+        ca.mcgill.sable.soot.ToBriefString r5, r19;
+        java.lang.String r6, r7, r10, r13, r20, r24;
+        ca.mcgill.sable.soot.SootMethod r9;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r16, r22;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>();
+        r2 = new java.lang.StringBuffer;
+        r3 = r0.baseBox;
+        r4 = r3.getValue();
+        r5 = (ca.mcgill.sable.soot.ToBriefString) r4;
+        r6 = r5.toBriefString();
+        r7 = java.lang.String.valueOf(r6);
+        specialinvoke r2.<init>(r7);
+        r8 = r2.append(".");
+        r9 = r0.method;
+        r10 = r9.getName();
+        r11 = r8.append(r10);
+        r12 = r11.append("(");
+        r13 = r12.toString();
+        r14 = r1.append(r13);
+        i0 = 0;
+        goto label2;
+
+     label0:
+        if i0 == 0 goto label1;
+
+        r15 = r1.append(", ");
+
+     label1:
+        r16 = r0.argBoxes;
+        r17 = r16[i0];
+        r18 = r17.getValue();
+        r19 = (ca.mcgill.sable.soot.ToBriefString) r18;
+        r20 = r19.toBriefString();
+        r21 = r1.append(r20);
+        i0 = i0 + 1;
+
+     label2:
+        r22 = r0.argBoxes;
+        i1 = r22.length;
+        if i0 < i1 goto label0;
+
+        r23 = r1.append(")");
+        r24 = r1.toString();
+        return r24;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractInterfaceInvokeExpr r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ExprSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ExprSwitch) r1;
+        r2.caseInterfaceInvokeExpr(r0);
+        return;
+    }
+}

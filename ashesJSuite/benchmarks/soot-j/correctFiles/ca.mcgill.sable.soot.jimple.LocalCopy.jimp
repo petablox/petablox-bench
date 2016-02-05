@@ -1,0 +1,86 @@
+public class ca.mcgill.sable.soot.jimple.LocalCopy extends java.lang.Object
+{
+    ca.mcgill.sable.soot.jimple.Local leftLocal;
+    ca.mcgill.sable.soot.jimple.Local rightLocal;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Local)
+    {
+        ca.mcgill.sable.soot.jimple.LocalCopy r0;
+        ca.mcgill.sable.soot.jimple.Local r1, r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        specialinvoke r0.<init>();
+        r0.leftLocal = r1;
+        r0.rightLocal = r2;
+        return;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.LocalCopy r0, r3, r6;
+        java.lang.Object r1;
+        int i0;
+        ca.mcgill.sable.soot.jimple.Local r2, r4, r5, r7;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.LocalCopy;
+        if i0 == 0 goto label0;
+
+        r2 = r0.leftLocal;
+        r3 = (ca.mcgill.sable.soot.jimple.LocalCopy) r1;
+        r4 = r3.leftLocal;
+        if r2 != r4 goto label0;
+
+        r5 = r0.rightLocal;
+        r6 = (ca.mcgill.sable.soot.jimple.LocalCopy) r1;
+        r7 = r6.rightLocal;
+        if r5 == r7 goto label1;
+
+     label0:
+        return 0;
+
+     label1:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.LocalCopy r0;
+        java.lang.StringBuffer r1, r5, r8;
+        ca.mcgill.sable.soot.jimple.Local r2, r6;
+        java.lang.String r3, r4, r7, r9;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        r2 = r0.leftLocal;
+        r3 = r2.toString();
+        r4 = java.lang.String.valueOf(r3);
+        specialinvoke r1.<init>(r4);
+        r5 = r1.append(" = ");
+        r6 = r0.rightLocal;
+        r7 = r6.toString();
+        r8 = r5.append(r7);
+        r9 = r8.toString();
+        return r9;
+    }
+
+    public int hashCode()
+    {
+        ca.mcgill.sable.soot.jimple.LocalCopy r0;
+        ca.mcgill.sable.soot.jimple.Local r1, r2;
+        int i0, i1, i2, i3, i4;
+
+        r0 := @this;
+        r1 = r0.leftLocal;
+        i0 = r1.hashCode();
+        i1 = i0 * 7;
+        r2 = r0.rightLocal;
+        i2 = r2.hashCode();
+        i3 = i2 * 13;
+        i4 = i1 + i3;
+        return i4;
+    }
+}

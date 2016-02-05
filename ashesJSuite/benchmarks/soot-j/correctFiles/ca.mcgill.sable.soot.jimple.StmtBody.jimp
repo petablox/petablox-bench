@@ -1,0 +1,17 @@
+public interface ca.mcgill.sable.soot.jimple.StmtBody extends java.lang.Object implements ca.mcgill.sable.soot.Body
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.StmtList getStmtList();
+
+    public abstract void redirectJumps(ca.mcgill.sable.soot.jimple.Stmt, ca.mcgill.sable.soot.jimple.Stmt);
+
+    public abstract void eliminateBackPointersTo(ca.mcgill.sable.soot.jimple.Stmt);
+
+    public abstract ca.mcgill.sable.util.List getTraps();
+
+    public abstract int getLocalCount();
+
+    public abstract ca.mcgill.sable.util.List getLocals();
+
+    public abstract ca.mcgill.sable.util.List getUnitBoxes();
+}

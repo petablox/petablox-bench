@@ -1,0 +1,160 @@
+public class ca.mcgill.sable.soot.jimple.JInvokeStmt extends ca.mcgill.sable.soot.jimple.AbstractStmt implements ca.mcgill.sable.soot.jimple.InvokeStmt
+{
+    ca.mcgill.sable.soot.jimple.ValueBox invokeExprBox;
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.Jimple r2;
+        ca.mcgill.sable.soot.jimple.ValueBox r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r3 = r2.newInvokeExprBox(r1);
+        specialinvoke r0.<init>(r3);
+        return;
+    }
+
+    protected void <init>(ca.mcgill.sable.soot.jimple.ValueBox)
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.invokeExprBox = r1;
+        return;
+    }
+
+    protected java.lang.String toString(boolean, ca.mcgill.sable.util.Map, java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        int i0;
+        ca.mcgill.sable.util.Map r1;
+        java.lang.String r2, r4, r8, r10, r12, r15, r17;
+        java.lang.StringBuffer r3, r9, r11, r16;
+        ca.mcgill.sable.soot.jimple.ValueBox r5, r13;
+        ca.mcgill.sable.soot.jimple.Value r6, r14;
+        ca.mcgill.sable.soot.ToBriefString r7;
+
+        r0 := @this;
+        i0 := @parameter0;
+        r1 := @parameter1;
+        r2 := @parameter2;
+        if i0 == 0 goto label0;
+
+        r3 = new java.lang.StringBuffer;
+        r4 = java.lang.String.valueOf(r2);
+        specialinvoke r3.<init>(r4);
+        r5 = r0.invokeExprBox;
+        r6 = r5.getValue();
+        r7 = (ca.mcgill.sable.soot.ToBriefString) r6;
+        r8 = r7.toBriefString();
+        r9 = r3.append(r8);
+        r10 = r9.toString();
+        return r10;
+
+     label0:
+        r11 = new java.lang.StringBuffer;
+        r12 = java.lang.String.valueOf(r2);
+        specialinvoke r11.<init>(r12);
+        r13 = r0.invokeExprBox;
+        r14 = r13.getValue();
+        r15 = r14.toString();
+        r16 = r11.append(r15);
+        r17 = r16.toString();
+        return r17;
+    }
+
+    public void setInvokeExpr(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.invokeExprBox;
+        r2.setValue(r1);
+        return;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getInvokeExpr()
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+        ca.mcgill.sable.soot.jimple.Value r2;
+
+        r0 := @this;
+        r1 = r0.invokeExprBox;
+        r2 = r1.getValue();
+        return r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.ValueBox getInvokeExprBox()
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.soot.jimple.ValueBox r1;
+
+        r0 := @this;
+        r1 = r0.invokeExprBox;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getDefBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.util.ArrayList r1;
+        ca.mcgill.sable.soot.jimple.ValueBox r2, r5;
+        ca.mcgill.sable.soot.jimple.Value r3;
+        ca.mcgill.sable.util.List r4;
+        int i0, i1;
+
+        r0 := @this;
+        r1 = new ca.mcgill.sable.util.ArrayList;
+        specialinvoke r1.<init>();
+        r2 = r0.invokeExprBox;
+        r3 = r2.getValue();
+        r4 = r3.getUseBoxes();
+        i0 = r1.addAll(r4);
+        r5 = r0.invokeExprBox;
+        i1 = r1.add(r5);
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUnitBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.JInvokeStmt r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.StmtSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.StmtSwitch) r1;
+        r2.caseInvokeStmt(r0);
+        return;
+    }
+}

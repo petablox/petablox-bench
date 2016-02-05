@@ -1,0 +1,46 @@
+public abstract class ca.mcgill.sable.soot.jimple.AbstractValueBox extends java.lang.Object implements ca.mcgill.sable.soot.jimple.ValueBox
+{
+    ca.mcgill.sable.soot.jimple.Value value;
+
+    public void setValue(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractValueBox r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        int i0;
+        java.lang.RuntimeException r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r0.canContainValue(r1);
+        if i0 == 0 goto label0;
+
+        r0.value = r1;
+        return;
+
+     label0:
+        r2 = new java.lang.RuntimeException;
+        specialinvoke r2.<init>("Box cannot contain given value.");
+        throw r2;
+    }
+
+    public ca.mcgill.sable.soot.jimple.Value getValue()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractValueBox r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+
+        r0 := @this;
+        r1 = r0.value;
+        return r1;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractValueBox r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public abstract boolean canContainValue(ca.mcgill.sable.soot.jimple.Value);
+}

@@ -1,0 +1,4 @@
+ - Modified on July 21, 1998 by Raja Vallee-Rai (kor@sable.mcgill.ca). (*)
+
+   Replaced Hashtable with HashMap.
+

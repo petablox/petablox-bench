@@ -1,0 +1,17 @@
+public interface ca.mcgill.sable.soot.jimple.InvokeExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.Expr
+{
+
+    public abstract ca.mcgill.sable.soot.SootMethod getMethod();
+
+    public abstract void setMethod(ca.mcgill.sable.soot.SootMethod);
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getArg(int);
+
+    public abstract int getArgCount();
+
+    public abstract void setArg(int, ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getArgBox(int);
+
+    public abstract ca.mcgill.sable.soot.Type getType();
+}

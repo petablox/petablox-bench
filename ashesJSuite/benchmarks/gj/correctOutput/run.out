@@ -1,0 +1,4 @@
+executionInput/soot/Type.java:36: cannot access class java.lang.Object; bad file: /usr/lib/jvm/java-6-oracle/jre/lib/rt.jar(java/lang/Object.class), class file has wrong version 49.0, should be 45.3. Please remove or make sure it appears in correct subdirectory of the classpath
+public abstract class Type implements Switchable, ToBriefString
+                                      ^
+1 error

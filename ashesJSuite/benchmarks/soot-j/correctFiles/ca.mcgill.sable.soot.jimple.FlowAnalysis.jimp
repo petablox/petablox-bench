@@ -1,0 +1,72 @@
+public abstract class ca.mcgill.sable.soot.jimple.FlowAnalysis extends java.lang.Object
+{
+    protected ca.mcgill.sable.util.Map stmtToAfterFlow;
+    protected ca.mcgill.sable.util.Map stmtToBeforeFlow;
+    ca.mcgill.sable.soot.jimple.StmtGraph graph;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.StmtGraph)
+    {
+        ca.mcgill.sable.soot.jimple.FlowAnalysis r0;
+        ca.mcgill.sable.soot.jimple.StmtGraph r1;
+        ca.mcgill.sable.util.HashMap r2, r3;
+        int i0, i1, i2, i3, i4, i5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r2 = new ca.mcgill.sable.util.HashMap;
+        i0 = r1.size();
+        i1 = i0 * 2;
+        i2 = i1 + 1;
+        specialinvoke r2.<init>(i2, 0.7F);
+        r0.stmtToAfterFlow = r2;
+        r3 = new ca.mcgill.sable.util.HashMap;
+        i3 = r1.size();
+        i4 = i3 * 2;
+        i5 = i4 + 1;
+        specialinvoke r3.<init>(i5, 0.7F);
+        r0.stmtToBeforeFlow = r3;
+        r0.graph = r1;
+        return;
+    }
+
+    protected abstract java.lang.Object newInitialFlow();
+
+    protected abstract boolean isForward();
+
+    protected abstract void flowThrough(java.lang.Object, ca.mcgill.sable.soot.jimple.Stmt, java.lang.Object);
+
+    protected abstract void merge(java.lang.Object, java.lang.Object, java.lang.Object);
+
+    protected abstract void copy(java.lang.Object, java.lang.Object);
+
+    protected abstract void doAnalysis();
+
+    public java.lang.Object getFlowAfterStmt(ca.mcgill.sable.soot.jimple.Stmt)
+    {
+        ca.mcgill.sable.soot.jimple.FlowAnalysis r0;
+        ca.mcgill.sable.soot.jimple.Stmt r1;
+        ca.mcgill.sable.util.Map r2;
+        java.lang.Object r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.stmtToAfterFlow;
+        r3 = r2.get(r1);
+        return r3;
+    }
+
+    public java.lang.Object getFlowBeforeStmt(ca.mcgill.sable.soot.jimple.Stmt)
+    {
+        ca.mcgill.sable.soot.jimple.FlowAnalysis r0;
+        ca.mcgill.sable.soot.jimple.Stmt r1;
+        ca.mcgill.sable.util.Map r2;
+        java.lang.Object r3;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.stmtToBeforeFlow;
+        r3 = r2.get(r1);
+        return r3;
+    }
+}

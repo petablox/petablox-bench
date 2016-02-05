@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build">
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="target" value="1.4"/>
+	<property name="source" value="1.4"/>
+	<target name="clean">
+        <delete includeemptydirs="true" quiet="true">
+		    <fileset dir="classes" includes="**/*"/>
+        </delete>
+	</target>
+	<target name="build">
+		<javac debug="true" debuglevel="${debuglevel}"
+			source="${source}" target="${target}"
+			srcdir="src" destdir="classes">
+           <classpath>
+                <fileset dir="lib" includes="*.jar"/>
+            </classpath>
+		</javac>
+	</target>
+</project>

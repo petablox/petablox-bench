@@ -1,0 +1,28 @@
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+Font specified in font.properties not found [--zapf dingbats-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]
+java.lang.NullPointerException
+	at schroeder.ImageIconFactory.getImageIcon(Compiled Code)
+	at schroeder.SplashScreen.<init>(Compiled Code)
+	at schroeder.SplashScreen.instance(Compiled Code)
+	at Schroeder.main(Compiled Code)
+java.lang.NoClassDefFoundError: schroeder/AssertionFailedException
+	at schroeder.SoundFileAdapterManager.init(Compiled Code)
+	at Schroeder.main(Compiled Code)

@@ -1,0 +1,78 @@
+#!/bin/sh
+# $Id: genFID,v 1.9 1999/01/05 18:44:14 pab Exp $
+# Generate enumerations that need to be the same in both java and C code,
+# as well as additional code that connects them.
+
+# Function address names: FID_name and C name
+cat >/tmp/fid$$ <<__EOF
+new 
+anewarray
+initclass
+vmnewarray
+throwAIOBE throwArrayIndexOutOfBoundsException
+geteltoffs
+intdiv
+intrem
+longdiv
+longrem
+longmul
+remdr
+dtoi
+dtol
+longshift
+long2f
+long2d
+longcmp
+puts
+throwNPE throwNullPointerException
+mythread
+sthread_got_exc sthread_got_exception
+setjmp SETJMP_FNAME
+longjmp
+findhandler
+athrow
+monitorenter
+monitorexit
+throwCCE throwClassCastException
+instanceof
+findinterface
+throwNASE throwNegativeArraySizeException
+enterclass
+exitclass
+backjumpfn YIELD_FN
+timeNow &timeNow
+timeSliceEnd &timeSliceEnd
+throwJITIntErr
+CodeBlock_resolveCode resolveCode__juyFn
+__EOF
+
+exec < /tmp/fid$$
+rm -f fid.java fid.c fid.h
+cat >fid.c <<__EOF
+Long
+getFuncAddr_i_m3SYh (int fid)
+{
+   switch (fid) {
+__EOF
+
+fn=1
+while read fid rem ; do
+  if [ -z "${rem}" ] ; then
+    rem="${fid}"
+  fi
+  echo "    static final int FID_${fid} = ${fn};" >> fid.java
+  echo "#define FID_${fid} (${fn})" >> fid.h
+  echo "      case FID_${fid}:" >> fid.c
+  echo "         return addressToLong (${rem});" >> fid.c
+  fn=`expr $fn + 1`
+done
+
+cat >>fid.c <<__EOF
+      default:
+         assert (0);
+   }
+   return 0L;
+}
+__EOF
+
+rm -f /tmp/fid$$

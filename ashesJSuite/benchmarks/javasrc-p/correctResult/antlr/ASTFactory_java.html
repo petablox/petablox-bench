@@ -1,0 +1,202 @@
+<head>
+<LINK rel="stylesheet" type="text/css" name="style1"href="../styles.css">
+</head>
+<script language=javascript>
+<!-- Hide from non-javascript browsers
+browserName=navigator.appName;
+if (browserName.indexOf('Netscape')>=0)
+{
+parent.filenameFrame.document.layers[0].document.clear();
+parent.filenameFrame.document.layers[0].document.open();
+parent.filenameFrame.document.layers[0].document.write(
+'<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ASTFactory');
+parent.filenameFrame.document.layers[0].document.close();
+}
+if (browserName.indexOf('Microsoft')>=0)
+{
+parent.frames.filenameFrame.textDiv.innerHTML='<A HREF="classList.html" TARGET="packageFrame">antlr</A>: ASTFactory';}
+//-->
+</script><pre>
+<a name=1 class="linenum">1	</SPAN>package antlr;
+<a name=2 class="linenum">2	</SPAN>
+<a name=3 class="linenum">3	</SPAN>import antlr.collections.AST;
+<a name=4 class="linenum">4	</SPAN>import antlr.collections.impl.ASTArray;
+<a name=5 class="linenum">5	</SPAN>
+<a name=6 class="linenum">6	</SPAN><span class="comment">/** AST Support code shared by TreeParser and Parser.
+<a name=7 class="linenum">7	</SPAN> *  We use delegation to share code (and have only one
+<a name=8 class="linenum">8	</SPAN> *  bit of code to maintain) rather than subclassing
+<a name=9 class="linenum">9	</SPAN> *  or superclassing (forces AST support code to be
+<a name=10 class="linenum">10	</SPAN> *  loaded even when you don't want to do AST stuff).
+<a name=11 class="linenum">11	</SPAN> *
+<a name=12 class="linenum">12	</SPAN> *  Typically, setASTNodeType is used to specify the
+<a name=13 class="linenum">13	</SPAN> *  type of node to create, but you can override
+<a name=14 class="linenum">14	</SPAN> *  create to make heterogeneous nodes etc...
+<a name=15 class="linenum">15	</SPAN> */</span>
+<a name=16 class="linenum">16	</SPAN>public class <a class="classDef" name=ASTFactory href=ASTFactory_java_ref.html#ASTFactory>ASTFactory</a> {
+<a name=17 class="linenum">17	</SPAN>	<span class="comment">/** Name of AST class to create during tree construction.
+<a name=18 class="linenum">18	</SPAN>	 *  Null implies that the create method should create
+<a name=19 class="linenum">19	</SPAN>	 *  a default AST type such as CommonAST.
+<a name=20 class="linenum">20	</SPAN>	 */</span>
+<a name=21 class="linenum">21	</SPAN>	protected String <a class="varDef" name=theASTNodeType href=ASTFactory_java_ref.html#theASTNodeType>theASTNodeType</a> = null;
+<a name=22 class="linenum">22	</SPAN>	protected Class <a class="varDef" name=theASTNodeTypeClass href=ASTFactory_java_ref.html#theASTNodeTypeClass>theASTNodeTypeClass</a> = null;
+<a name=23 class="linenum">23	</SPAN>
+<a name=24 class="linenum">24	</SPAN>
+<a name=25 class="linenum">25	</SPAN>	<span class="comment">/** Add a child to the current AST */</span>
+<a name=26 class="linenum">26	</SPAN>	public void <a class="methodDef" name=addASTChild(ASTPair,AST) href=ASTFactory_java_ref.html#addASTChild(ASTPair,AST)>addASTChild</a>(<a class="classRef" href=ASTPair_java.html#ASTPair>ASTPair</a> currentAST, <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> child) {
+<a name=27 class="linenum">27	</SPAN>		if (child != null) {
+<a name=28 class="linenum">28	</SPAN>			if (currentAST.<a class="varRef" href=ASTPair_java.html#root>root</a> == null) {
+<a name=29 class="linenum">29	</SPAN>				<span class="comment">// Make new child the current root
+<a name=30 class="linenum">30	</SPAN></span>				currentAST.<a class="varRef" href=ASTPair_java.html#root>root</a> = child;
+<a name=31 class="linenum">31	</SPAN>			} 
+<a name=32 class="linenum">32	</SPAN>			else {
+<a name=33 class="linenum">33	</SPAN>				if (currentAST.<a class="varRef" href=ASTPair_java.html#child>child</a> == null) {
+<a name=34 class="linenum">34	</SPAN>					<span class="comment">// Add new child to current root
+<a name=35 class="linenum">35	</SPAN></span>					currentAST.<a class="varRef" href=ASTPair_java.html#root>root</a>.<a class="methodRef" href=../antlr/collections/AST_java.html#setFirstChild(AST)>setFirstChild</a>(child);
+<a name=36 class="linenum">36	</SPAN>				}
+<a name=37 class="linenum">37	</SPAN>				else {
+<a name=38 class="linenum">38	</SPAN>					currentAST.<a class="varRef" href=ASTPair_java.html#child>child</a>.<a class="methodRef" href=../antlr/collections/AST_java.html#setNextSibling(AST)>setNextSibling</a>(child);
+<a name=39 class="linenum">39	</SPAN>				}
+<a name=40 class="linenum">40	</SPAN>			}
+<a name=41 class="linenum">41	</SPAN>			<span class="comment">// Make new child the current child
+<a name=42 class="linenum">42	</SPAN></span>			currentAST.<a class="varRef" href=ASTPair_java.html#child>child</a> = child;
+<a name=43 class="linenum">43	</SPAN>			currentAST.<a class="methodRef" href=ASTPair_java.html#advanceChildToEnd()>advanceChildToEnd</a>();
+<a name=44 class="linenum">44	</SPAN>		}
+<a name=45 class="linenum">45	</SPAN>	}
+<a name=46 class="linenum">46	</SPAN><span class="comment">/** Create a new empty AST node; if the user did not specify
+<a name=47 class="linenum">47	</SPAN> *  an AST node type, then create a default one: CommonAST.
+<a name=48 class="linenum">48	</SPAN> */</span>
+<a name=49 class="linenum">49	</SPAN>public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=create() href=ASTFactory_java_ref.html#create()>create</a>() {
+<a name=50 class="linenum">50	</SPAN>	<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t = null;
+<a name=51 class="linenum">51	</SPAN>	if (<a class="varRef" href=ASTFactory_java.html#theASTNodeTypeClass>theASTNodeTypeClass</a> == null) {
+<a name=52 class="linenum">52	</SPAN>		t = new CommonAST();
+<a name=53 class="linenum">53	</SPAN>	} else {
+<a name=54 class="linenum">54	</SPAN>		try {
+<a name=55 class="linenum">55	</SPAN>			t = (<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a>) <a class="varRef" href=ASTFactory_java.html#theASTNodeTypeClass>theASTNodeTypeClass</a>.newInstance(); <span class="comment">// make a new one
+<a name=56 class="linenum">56	</SPAN></span>		} catch (Exception e) {
+<a name=57 class="linenum">57	</SPAN>			antlr.<a class="classRef" href=Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=Tool_java.html#warning(String)>warning</a>("Can't create AST Node " + <a class="varRef" href=ASTFactory_java.html#theASTNodeType>theASTNodeType</a>);
+<a name=58 class="linenum">58	</SPAN>			return null;
+<a name=59 class="linenum">59	</SPAN>		}
+<a name=60 class="linenum">60	</SPAN>	}
+<a name=61 class="linenum">61	</SPAN>	return t;
+<a name=62 class="linenum">62	</SPAN>}
+<a name=63 class="linenum">63	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=create(int) href=ASTFactory_java_ref.html#create(int)>create</a>(int type) { 
+<a name=64 class="linenum">64	</SPAN>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t = <a class="methodRef" href=ASTFactory_java.html#create()>create</a>();
+<a name=65 class="linenum">65	</SPAN>		t.initialize(type,"");
+<a name=66 class="linenum">66	</SPAN>		return t;	
+<a name=67 class="linenum">67	</SPAN>	}
+<a name=68 class="linenum">68	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=create(int,String) href=ASTFactory_java_ref.html#create(int,String)>create</a>(int type, String txt) { 
+<a name=69 class="linenum">69	</SPAN>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t = <a class="methodRef" href=ASTFactory_java.html#create()>create</a>();
+<a name=70 class="linenum">70	</SPAN>		t.initialize(type,txt);
+<a name=71 class="linenum">71	</SPAN>		return t;	
+<a name=72 class="linenum">72	</SPAN>	}
+<a name=73 class="linenum">73	</SPAN>	<span class="comment">/** Create a new empty AST node; if the user did not specify
+<a name=74 class="linenum">74	</SPAN>	 *  an AST node type, then create a default one: CommonAST.
+<a name=75 class="linenum">75	</SPAN>	 */</span>
+<a name=76 class="linenum">76	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=create(AST) href=ASTFactory_java_ref.html#create(AST)>create</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> tr) { 
+<a name=77 class="linenum">77	</SPAN>		if ( tr==null ) return null;		<span class="comment">// create(null) == null
+<a name=78 class="linenum">78	</SPAN></span>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t = <a class="methodRef" href=ASTFactory_java.html#create()>create</a>();
+<a name=79 class="linenum">79	</SPAN>		t.initialize(tr);
+<a name=80 class="linenum">80	</SPAN>		return t;	
+<a name=81 class="linenum">81	</SPAN>	}
+<a name=82 class="linenum">82	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=create(Token) href=ASTFactory_java_ref.html#create(Token)>create</a>(<a class="classRef" href=Token_java.html#Token>Token</a> tok) { 
+<a name=83 class="linenum">83	</SPAN>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t = <a class="methodRef" href=ASTFactory_java.html#create()>create</a>();
+<a name=84 class="linenum">84	</SPAN>		t.initialize(tok);
+<a name=85 class="linenum">85	</SPAN>		return t;	
+<a name=86 class="linenum">86	</SPAN>	}
+<a name=87 class="linenum">87	</SPAN>	<span class="comment">/** Copy a single node.  clone() is not used because
+<a name=88 class="linenum">88	</SPAN>	 *  we want to return an AST not a plain object...a type
+<a name=89 class="linenum">89	</SPAN>	 *  safety issue.  Further, we want to have all AST node
+<a name=90 class="linenum">90	</SPAN>	 *  creation go through the factory so creation can be
+<a name=91 class="linenum">91	</SPAN>	 *  tracked.  Returns null if t is null.
+<a name=92 class="linenum">92	</SPAN>	 */</span>
+<a name=93 class="linenum">93	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=dup(AST) href=ASTFactory_java_ref.html#dup(AST)>dup</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t) {
+<a name=94 class="linenum">94	</SPAN>		return <a class="methodRef" href=ASTFactory_java.html#create(int)>create</a>(t);		<span class="comment">// if t==null, create returns null
+<a name=95 class="linenum">95	</SPAN></span>	}
+<a name=96 class="linenum">96	</SPAN>	<span class="comment">/** Duplicate tree including siblings of root. */</span>
+<a name=97 class="linenum">97	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=dupList(AST) href=ASTFactory_java_ref.html#dupList(AST)>dupList</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t) {
+<a name=98 class="linenum">98	</SPAN>	<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> result = <a class="methodRef" href=ASTFactory_java.html#dupTree(AST)>dupTree</a>(t);            <span class="comment">// if t == null, then result==null
+<a name=99 class="linenum">99	</SPAN></span>	<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> nt = result;
+<a name=100 class="linenum">100	</SPAN>	while (t != null) {						<span class="comment">// for each sibling of the root
+<a name=101 class="linenum">101	</SPAN></span>		t = t.getNextSibling();
+<a name=102 class="linenum">102	</SPAN>		nt.<a class="methodRef" href=../antlr/collections/AST_java.html#setNextSibling(AST)>setNextSibling</a>(<a class="methodRef" href=ASTFactory_java.html#dupTree(AST)>dupTree</a>(t));	<span class="comment">// dup each subtree, building new tree
+<a name=103 class="linenum">103	</SPAN></span>		nt = nt.<a class="methodRef" href=../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>();
+<a name=104 class="linenum">104	</SPAN>	}
+<a name=105 class="linenum">105	</SPAN>	return result;
+<a name=106 class="linenum">106	</SPAN>}
+<a name=107 class="linenum">107	</SPAN>	<span class="comment">/**Duplicate a tree, assuming this is a root node of a tree--
+<a name=108 class="linenum">108	</SPAN>	 * duplicate that node and what's below; ignore siblings of root node.
+<a name=109 class="linenum">109	</SPAN>	 */</span>
+<a name=110 class="linenum">110	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=dupTree(AST) href=ASTFactory_java_ref.html#dupTree(AST)>dupTree</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> t) {
+<a name=111 class="linenum">111	</SPAN>	<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> result = <a class="methodRef" href=ASTFactory_java.html#dup(AST)>dup</a>(t);		<span class="comment">// make copy of root
+<a name=112 class="linenum">112	</SPAN></span>	<span class="comment">// copy all children of root.
+<a name=113 class="linenum">113	</SPAN></span>	if ( t!=null ) {
+<a name=114 class="linenum">114	</SPAN>		result.<a class="methodRef" href=../antlr/collections/AST_java.html#setFirstChild(AST)>setFirstChild</a>( <a class="methodRef" href=ASTFactory_java.html#dupList(AST)>dupList</a>(t.getFirstChild()) );
+<a name=115 class="linenum">115	</SPAN>	}
+<a name=116 class="linenum">116	</SPAN>	return result;
+<a name=117 class="linenum">117	</SPAN>	}
+<a name=118 class="linenum">118	</SPAN>	<span class="comment">/** Make a tree from a list of nodes.  The first element in the
+<a name=119 class="linenum">119	</SPAN>	 *  array is the root.  If the root is null, then the tree is
+<a name=120 class="linenum">120	</SPAN>	 *  a simple list not a tree.  Handles null children nodes correctly.
+<a name=121 class="linenum">121	</SPAN>	 *  For example, build(a, b, null, c) yields tree (a b c).  build(null,a,b)
+<a name=122 class="linenum">122	</SPAN>	 *  yields tree (nil a b).
+<a name=123 class="linenum">123	</SPAN>	 */</span>
+<a name=124 class="linenum">124	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=make(AST) href=ASTFactory_java_ref.html#make(AST)>make</a>(<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a>[] nodes) {
+<a name=125 class="linenum">125	</SPAN>		if ( nodes==null || nodes.length==0 ) return null;
+<a name=126 class="linenum">126	</SPAN>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> root = nodes[0];
+<a name=127 class="linenum">127	</SPAN>		<a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> tail = null;
+<a name=128 class="linenum">128	</SPAN>		if (root != null) {
+<a name=129 class="linenum">129	</SPAN>			root.<a class="methodRef" href=../antlr/collections/AST_java.html#setFirstChild(AST)>setFirstChild</a>(null);	<span class="comment">// don't leave any old pointers set
+<a name=130 class="linenum">130	</SPAN></span>		}
+<a name=131 class="linenum">131	</SPAN>		<span class="comment">// link in children;
+<a name=132 class="linenum">132	</SPAN></span>		for (int i=1; i&lt;nodes.length; i++) {
+<a name=133 class="linenum">133	</SPAN>			if ( nodes[i]==null ) continue;	<span class="comment">// ignore null nodes
+<a name=134 class="linenum">134	</SPAN></span>			if (root == null) {
+<a name=135 class="linenum">135	</SPAN>				<span class="comment">// Set the root and set it up for a flat list
+<a name=136 class="linenum">136	</SPAN></span>				root = tail = nodes[i];
+<a name=137 class="linenum">137	</SPAN>			}
+<a name=138 class="linenum">138	</SPAN>			else if ( tail==null ) {
+<a name=139 class="linenum">139	</SPAN>				root.<a class="methodRef" href=../antlr/collections/AST_java.html#setFirstChild(AST)>setFirstChild</a>(nodes[i]);
+<a name=140 class="linenum">140	</SPAN>				tail = root.<a class="methodRef" href=../antlr/collections/AST_java.html#getFirstChild()>getFirstChild</a>();
+<a name=141 class="linenum">141	</SPAN>			}
+<a name=142 class="linenum">142	</SPAN>			else {
+<a name=143 class="linenum">143	</SPAN>				tail.<a class="methodRef" href=../antlr/collections/AST_java.html#setNextSibling(AST)>setNextSibling</a>(nodes[i]);
+<a name=144 class="linenum">144	</SPAN>				tail = tail.<a class="methodRef" href=../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>();
+<a name=145 class="linenum">145	</SPAN>			}
+<a name=146 class="linenum">146	</SPAN>			<span class="comment">// Chase tail to last sibling
+<a name=147 class="linenum">147	</SPAN></span>			while (tail.<a class="methodRef" href=../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>() != null) {
+<a name=148 class="linenum">148	</SPAN>				tail = tail.<a class="methodRef" href=../antlr/collections/AST_java.html#getNextSibling()>getNextSibling</a>();
+<a name=149 class="linenum">149	</SPAN>			}
+<a name=150 class="linenum">150	</SPAN>		}
+<a name=151 class="linenum">151	</SPAN>		return root;
+<a name=152 class="linenum">152	</SPAN>	}
+<a name=153 class="linenum">153	</SPAN>	<span class="comment">/** Make a tree from a list of nodes, where the nodes are contained
+<a name=154 class="linenum">154	</SPAN>	  * in an ASTArray object
+<a name=155 class="linenum">155	</SPAN>	  */</span>
+<a name=156 class="linenum">156	</SPAN>	public <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> <a class="methodDef" name=make(ASTArray) href=ASTFactory_java_ref.html#make(ASTArray)>make</a>(<a class="classRef" href=../antlr/collections/impl/ASTArray_java.html#ASTArray>ASTArray</a> nodes) {
+<a name=157 class="linenum">157	</SPAN>		return <a class="methodRef" href=ASTFactory_java.html#make(AST)>make</a>(nodes.<a class="varRef" href=../antlr/collections/impl/ASTArray_java.html#array>array</a>);
+<a name=158 class="linenum">158	</SPAN>	}
+<a name=159 class="linenum">159	</SPAN>	<span class="comment">/** Make an AST the root of current AST */</span>
+<a name=160 class="linenum">160	</SPAN>	public void <a class="methodDef" name=makeASTRoot(ASTPair,AST) href=ASTFactory_java_ref.html#makeASTRoot(ASTPair,AST)>makeASTRoot</a>(<a class="classRef" href=ASTPair_java.html#ASTPair>ASTPair</a> currentAST, <a class="classRef" href=../antlr/collections/AST_java.html#AST>AST</a> root) {
+<a name=161 class="linenum">161	</SPAN>		if (root != null) {
+<a name=162 class="linenum">162	</SPAN>			<span class="comment">// Add the current root as a child of new root
+<a name=163 class="linenum">163	</SPAN></span>			root.<a class="methodRef" href=../antlr/collections/AST_java.html#addChild(AST)>addChild</a>(currentAST.<a class="varRef" href=ASTPair_java.html#root>root</a>);
+<a name=164 class="linenum">164	</SPAN>			<span class="comment">// The new current child is the last sibling of the old root
+<a name=165 class="linenum">165	</SPAN></span>			currentAST.<a class="varRef" href=ASTPair_java.html#child>child</a> = currentAST.<a class="varRef" href=ASTPair_java.html#root>root</a>;
+<a name=166 class="linenum">166	</SPAN>			currentAST.<a class="methodRef" href=ASTPair_java.html#advanceChildToEnd()>advanceChildToEnd</a>();
+<a name=167 class="linenum">167	</SPAN>			<span class="comment">// Set the new root
+<a name=168 class="linenum">168	</SPAN></span>			currentAST.<a class="varRef" href=ASTPair_java.html#root>root</a> = root;
+<a name=169 class="linenum">169	</SPAN>		}
+<a name=170 class="linenum">170	</SPAN>	}
+<a name=171 class="linenum">171	</SPAN>public void <a class="methodDef" name=setASTNodeType(String) href=ASTFactory_java_ref.html#setASTNodeType(String)>setASTNodeType</a>(String t) {
+<a name=172 class="linenum">172	</SPAN>	theASTNodeType = t;
+<a name=173 class="linenum">173	</SPAN>	try {
+<a name=174 class="linenum">174	</SPAN>		theASTNodeTypeClass = Class.forName(t); <span class="comment">// get class def
+<a name=175 class="linenum">175	</SPAN></span>	} catch (Exception e) {
+<a name=176 class="linenum">176	</SPAN>		<span class="comment">// either class not found,
+<a name=177 class="linenum">177	</SPAN></span>		<span class="comment">// class is interface/abstract, or
+<a name=178 class="linenum">178	</SPAN></span>		<span class="comment">// class or initializer is not accessible.
+<a name=179 class="linenum">179	</SPAN></span>		antlr.<a class="classRef" href=Tool_java.html#Tool>Tool</a>.<a class="methodRef" href=Tool_java.html#warning(String)>warning</a>("Can't find/access AST Node type"+t);
+<a name=180 class="linenum">180	</SPAN>	}
+<a name=181 class="linenum">181	</SPAN>}
+<a name=182 class="linenum">182	</SPAN>}
+<a name=183 class="linenum">183	</SPAN></pre>

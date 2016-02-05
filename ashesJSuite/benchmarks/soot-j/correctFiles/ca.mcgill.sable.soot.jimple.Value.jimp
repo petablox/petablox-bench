@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.Value extends java.lang.Object implements ca.mcgill.sable.util.Switchable
+{
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+
+    public abstract ca.mcgill.sable.soot.Type getType();
+}

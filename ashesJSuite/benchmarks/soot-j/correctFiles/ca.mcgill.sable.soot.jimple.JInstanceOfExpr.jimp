@@ -1,0 +1,22 @@
+class ca.mcgill.sable.soot.jimple.JInstanceOfExpr extends ca.mcgill.sable.soot.jimple.AbstractInstanceOfExpr implements ca.mcgill.sable.soot.jimple.InstanceOfExpr
+{
+    ca.mcgill.sable.soot.jimple.ValueBox opBox;
+    ca.mcgill.sable.soot.Type checkType;
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value, ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.JInstanceOfExpr r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        ca.mcgill.sable.soot.Type r2;
+        ca.mcgill.sable.soot.jimple.Jimple r3;
+        ca.mcgill.sable.soot.jimple.ValueBox r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r4 = r3.newImmediateBox(r1);
+        specialinvoke r0.<init>(r4, r2);
+        return;
+    }
+}

@@ -1,0 +1,165 @@
+final class ca.mcgill.sable.soot.jimple.JasminClass$3 extends ca.mcgill.sable.soot.TypeSwitch
+{
+    private final ca.mcgill.sable.soot.jimple.JasminClass this$0;
+
+    public void caseArrayType(ca.mcgill.sable.soot.ArrayType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.ArrayType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("aastore", -3);
+        return;
+    }
+
+    public void caseDoubleType(ca.mcgill.sable.soot.DoubleType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.DoubleType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("dastore", -4);
+        return;
+    }
+
+    public void caseFloatType(ca.mcgill.sable.soot.FloatType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.FloatType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("fastore", -3);
+        return;
+    }
+
+    public void caseIntType(ca.mcgill.sable.soot.IntType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.IntType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("iastore", -3);
+        return;
+    }
+
+    public void caseLongType(ca.mcgill.sable.soot.LongType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.LongType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("lastore", -4);
+        return;
+    }
+
+    public void caseRefType(ca.mcgill.sable.soot.RefType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.RefType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("aastore", -3);
+        return;
+    }
+
+    public void caseByteType(ca.mcgill.sable.soot.ByteType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.ByteType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("bastore", -3);
+        return;
+    }
+
+    public void caseBooleanType(ca.mcgill.sable.soot.BooleanType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.BooleanType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("bastore", -3);
+        return;
+    }
+
+    public void caseCharType(ca.mcgill.sable.soot.CharType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.CharType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("castore", -3);
+        return;
+    }
+
+    public void caseShortType(ca.mcgill.sable.soot.ShortType)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.ShortType r1;
+        ca.mcgill.sable.soot.jimple.JasminClass r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = r0.this$0;
+        r2.emit("sastore", -3);
+        return;
+    }
+
+    public void defaultCase(ca.mcgill.sable.soot.Type)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.Type r1;
+        java.lang.RuntimeException r2;
+        java.lang.StringBuffer r3, r4;
+        java.lang.String r5;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = new java.lang.RuntimeException;
+        r3 = new java.lang.StringBuffer;
+        specialinvoke r3.<init>("Invalid type: ");
+        r4 = r3.append(r1);
+        r5 = r4.toString();
+        specialinvoke r2.<init>(r5);
+        throw r2;
+    }
+
+    void <init>(ca.mcgill.sable.soot.jimple.JasminClass)
+    {
+        ca.mcgill.sable.soot.jimple.JasminClass$3 r0;
+        ca.mcgill.sable.soot.jimple.JasminClass r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.this$0 = r1;
+        return;
+    }
+}

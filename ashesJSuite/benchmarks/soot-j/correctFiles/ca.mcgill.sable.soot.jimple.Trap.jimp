@@ -1,0 +1,27 @@
+public interface ca.mcgill.sable.soot.jimple.Trap extends java.lang.Object
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Unit getBeginUnit();
+
+    public abstract ca.mcgill.sable.soot.jimple.Unit getEndUnit();
+
+    public abstract ca.mcgill.sable.soot.jimple.Unit getHandlerUnit();
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox getHandlerUnitBox();
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox getBeginUnitBox();
+
+    public abstract ca.mcgill.sable.soot.jimple.UnitBox getEndUnitBox();
+
+    public abstract ca.mcgill.sable.util.List getUnitBoxes();
+
+    public abstract ca.mcgill.sable.soot.SootClass getException();
+
+    public abstract void setBeginUnit(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract void setEndUnit(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract void setHandlerUnit(ca.mcgill.sable.soot.jimple.Unit);
+
+    public abstract void setException(ca.mcgill.sable.soot.SootClass);
+}

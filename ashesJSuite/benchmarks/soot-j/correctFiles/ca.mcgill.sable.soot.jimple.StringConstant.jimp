@@ -1,0 +1,101 @@
+public class ca.mcgill.sable.soot.jimple.StringConstant extends ca.mcgill.sable.soot.jimple.Constant implements ca.mcgill.sable.util.Switchable, ca.mcgill.sable.soot.ToBriefString
+{
+    public final java.lang.String value;
+
+    private void <init>(java.lang.String)
+    {
+        ca.mcgill.sable.soot.jimple.StringConstant r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.value = r1;
+        return;
+    }
+
+    public static ca.mcgill.sable.soot.jimple.StringConstant v(java.lang.String)
+    {
+        java.lang.String r0;
+        ca.mcgill.sable.soot.jimple.StringConstant r1;
+
+        r0 := @parameter0;
+        r1 = new ca.mcgill.sable.soot.jimple.StringConstant;
+        specialinvoke r1.<init>(r0);
+        return r1;
+    }
+
+    public boolean equals(ca.mcgill.sable.soot.jimple.Constant)
+    {
+        ca.mcgill.sable.soot.jimple.StringConstant r0, r2;
+        ca.mcgill.sable.soot.jimple.Constant r1;
+        int i0, i1;
+        java.lang.String r3, r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.StringConstant;
+        if i0 == 0 goto label0;
+
+        r2 = (ca.mcgill.sable.soot.jimple.StringConstant) r1;
+        r3 = r2.value;
+        r4 = r0.value;
+        i1 = r3.equals(r4);
+        if i1 != 0 goto label1;
+
+     label0:
+        return 0;
+
+     label1:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.StringConstant r0;
+        java.lang.StringBuffer r1, r3, r4;
+        java.lang.String r2, r5;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>(""");
+        r2 = r0.value;
+        r3 = r1.append(r2);
+        r4 = r3.append(""");
+        r5 = r4.toString();
+        return r5;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.StringConstant r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.StringConstant r0;
+        ca.mcgill.sable.soot.RefType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.RefType.v("java.lang.String");
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.StringConstant r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ConstantSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ConstantSwitch) r1;
+        r2.caseStringConstant(r0);
+        return;
+    }
+}

@@ -1,0 +1,88 @@
+public class ca.mcgill.sable.soot.jimple.NullConstant extends ca.mcgill.sable.soot.jimple.Constant implements ca.mcgill.sable.util.Switchable, ca.mcgill.sable.soot.ToBriefString
+{
+    private static final ca.mcgill.sable.soot.jimple.NullConstant constant;
+
+    private void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public static ca.mcgill.sable.soot.jimple.NullConstant v()
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0;
+
+        r0 = ca.mcgill.sable.soot.jimple.NullConstant.constant;
+        return r0;
+    }
+
+    public boolean equals(ca.mcgill.sable.soot.jimple.Constant)
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0, r2;
+        ca.mcgill.sable.soot.jimple.Constant r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = ca.mcgill.sable.soot.jimple.NullConstant.constant;
+        if r1 == r2 goto label0;
+
+        return 0;
+
+     label0:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0;
+
+        r0 := @this;
+        return "null";
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0;
+        ca.mcgill.sable.soot.NullType r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.NullType.v();
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ConstantSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ConstantSwitch) r1;
+        r2.caseNullConstant(r0);
+        return;
+    }
+
+    static void <clinit>()
+    {
+        ca.mcgill.sable.soot.jimple.NullConstant r0;
+
+        r0 = new ca.mcgill.sable.soot.jimple.NullConstant;
+        specialinvoke r0.<init>();
+        ca.mcgill.sable.soot.jimple.NullConstant.constant = r0;
+        return;
+    }
+}

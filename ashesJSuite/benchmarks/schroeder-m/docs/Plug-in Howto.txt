@@ -1,0 +1,334 @@
+Schroeder 0.2
+Plug-In How-To
+
+This is not really documentation, but it's a start.
+Questions are expected and welcome. ;-)
+
+PLEASE NOTE that this is an early development release.
+The plug-in framework has been evolving for about a
+month and is approaching some sort of stability; but
+it's still pretty likely to change. Please send me
+your comments.
+
+David Veldhuizen <david@interlog.com>
+
+
+--
+Plug-ins for Schroeder can provide synthesis or transform
+(effects) functions; the API and framework is the same.
+I'll include examples of each.
+
+Plug-ins extend the abstract base class schroeder.MonitoredAction
+(see source/schroeder/MonitoredAction.java). Here's the
+relevant part of the file, annoted where necessary. If you
+want to get started right away, you can skip this and go
+to the examples that follow; they're shorter. ;-)
+
+
+public abstract class MonitoredAction
+		extends AbstractAction
+		implements Runnable, ChainableTransform, EnableDisableable
+	{
+	public MonitoredAction( String name, Icon icon ) {
+		super( name, icon );
+	}
+
+Subclass constructors should provide the icon and string
+that will identify their plug-in in its menu. Most will
+probably use a blank icon. Don't return null; the menu
+will look wierd. See the example for how to get a blank
+icon.
+
+
+	public String getInfo() {
+		return( null );
+	}
+
+Return a non-null String from the getInfo() method if
+you want the About Schroeder... window to include your
+contact information, a credit, description, or whatever.
+
+
+	public void enableDisable( SoundWindow active ) {
+		setEnabled(
+				active != null
+			&&	active.getModel().getSelection() != null
+			&&	active.getModel().getSelection().getLength() > 0
+		);
+	}
+
+The plug-in manager asks plug-ins to update their own
+enabled status based on the current active window. The
+above default implementation disables the action unless
+a selection has been made, which is usually correct for
+effects. Synthesis plug-ins will want to permit an insertion
+point or selection, like this:
+
+	public void enableDisable( SoundWindow active ) {
+		setEnabled(
+				active != null
+			&&	active.getModel().getSelection() != null
+		);
+	}
+
+
+	public abstract String getNote();
+
+If the transform takes a significant amount of time, a
+progress dialog appears. The string returned from the above
+method is displayed in that dialog.
+
+	
+	public boolean mustReplaceAll() {
+		return( false );
+	}
+
+A few transforms, notably those that change fundamental aspects
+of the sound like its sample rate, size, or number of channels,
+can't operate on a selection. Most plug-ins shouldn't override
+this method.
+
+
+The following methods are the way they are because of future
+plans for Schroeder's plug-ins. I'd like to include a visual
+synth voice or effects chain construction kit, in which a user
+could arrange available plug-ins in sequence, configure each
+by double-clicking on it, and invoke the entire chain with a
+single action.
+
+That's not built yet, but hopefully this approach to the
+framework will permit it. What I've done is separated the
+configuration of the plug-in from its actual transform code.
+
+
+	public abstract SoundModel transform(
+			SoundModel source,
+			PlugInParameters param,
+			ProgressMonitor monitor,
+			int progressPre,
+			int progressSize
+		)
+	;
+
+Here's where the action happens. In a menu-invoked interactive
+context, the parameters to this method are obtained by calling
+getCustomParameters(). In the hypothetical custom chain situation
+above, they will have been stored between application invocations.
+
+The last three arguments exist so that the plug-in can reflect
+its progress in the larger context of a chain of transforms. The
+progressPre argument is the percent of the total action complete
+so far; the progress size is the percent of the total action that
+this plug-in is responsible for. In a chain of five effects, the
+third effect would be called with values of 40 and 20. It would
+be expected to scale its progress between those values in calls
+to monitor.setProgress( int ).
+
+
+	public int getOutputChannelCount(
+			int inputChannelCount,
+			PlugInParameters param
+		) {
+		return( inputChannelCount );
+	}
+
+Most plug-ins won't need to override this method. But effects that
+return a stereo sound for a mono input, or that mix channels, etc.,
+should reflect that here. (They should also override mustReplaceAll()
+to return true, or they will not work.)
+
+
+	public PlugInParameters getDefaultParameters( int inputChannelCount ) {
+		return( new PlugInParameters() );
+	}
+
+	public PlugInParameters getCustomParameters( SoundWindow active, int inputChannelCount ) {
+		return( getDefaultParameters( inputChannelCount ) );
+	}
+
+Simple plug-ins won't require input from the user before performing
+their transform, but most will. See the source of the existing plug-ins
+for examples of implementations of these methods.
+
+}
+
+
+EXAMPLE 1
+---------
+
+Synthesis -- Insert Noise
+
+The actual InsertNoiseAction class included as a plug-in
+with this distribution includes interactive user input.
+For this example, I've stripped that code out and replaced
+the length parameter with a constant. See the real source
+at source/plug-ins/InsertNoiseAction.java for more.
+
+
+--
+public class InsertNoiseAction
+		extends MonitoredAction
+	{
+	public InsertNoiseAction() {
+		super(
+			"Insert Noise...",
+			ImageIconFactory.instance().getImageIcon( "/images/blank.gif" )
+		);
+	
+		ActionManager.instance().add( this );
+	}
+
+	public String getNote() {
+		return( "Inserting noise..." );
+	}
+
+	public void enableDisable( SoundWindow active ) {
+		setEnabled(
+				active != null
+			&&	active.getModel().getSelection() != null
+		);
+	}
+	
+	public SoundModel transform(
+				SoundModel model,
+				PlugInParameters param,
+				ProgressMonitor monitor,
+				int progressPre,
+				int progressSize
+			)
+		{
+		SoundModel newModel = null;
+		
+		try {
+			boolean canceled = false;
+			
+			double seconds = 1.0;
+			int frames = (int) Math.round( (double) model.getSampleRate() * seconds );
+	
+			int channels = model.getSelection().getChannel();
+			if( channels == Selection.ALL_CHANNELS ) {
+				channels = model.getNumChannels();
+			}
+			else {
+				channels = 1;
+			}
+	
+			newModel = new SoundModel(
+				channels,
+				frames,
+				model.getSampleSize(),
+				model.getSampleRate()
+			);
+			
+			// for monitor
+			int mDen = channels * frames;
+			int mNum = 0;
+			
+			for( int ch=0; ! canceled && ch<channels; ch++ ) {
+				for( int i=0; ! canceled && i<frames; i++ ) {
+					int sample = (int) Math.round(
+							( Math.random() * 2.0 - 1.0 )
+						*	(double) newModel.getMaxValue()
+					);
+					
+					newModel.setSample( ch, i, sample );
+				
+					if( monitor != null ) {
+						monitor.setProgress( progressPre + progressSize * mNum++ / mDen );
+						canceled = monitor.isCanceled();
+					}
+				}
+			}
+		}
+		catch( Exception e ) {
+			if( schroeder.Constants.DEBUG ) {
+				e.printStackTrace();
+			}
+		}
+		
+		if( monitor != null )
+			monitor.setProgress( progressPre + progressSize );
+		
+		return( newModel );
+	}
+}
+
+
+
+EXAMPLE 2
+---------
+
+Effect -- Invert
+
+
+--
+public class InvertAction
+		extends MonitoredAction
+	{
+	public InvertAction() {
+		super(
+			"Invert",
+			ImageIconFactory.instance().getImageIcon( "/images/blank.gif" )
+		);
+	
+		ActionManager.instance().add( this );
+	}
+
+	public String getNote() {
+		return( "Inverting selection..." );
+	}
+	
+	public SoundModel transform(
+				SoundModel model,
+				PlugInParameters param,
+				ProgressMonitor monitor,
+				int progressPre,
+				int progressSize
+			)
+		{
+		SoundModel newModel = null;
+		
+		try {
+			int numChannels = model.getNumChannels();
+			int numFrames = model.getNumSampleFrames();
+
+			newModel = new SoundModel(
+				numChannels,
+				numFrames,
+				model.getSampleSize(),
+				model.getSampleRate()
+			);
+			
+			// for monitor
+			int mDen = numChannels * numFrames;
+			int mNum = 0;
+			
+			boolean canceled = false;
+			for( int ch=0; ! canceled && ch<numChannels; ch++ ) {
+				for( int i=0; ! canceled && i<numFrames; i++ ) {
+					newModel.setSample(
+						ch,
+						i,
+						-1 - model.getSample( ch, i )
+					);
+				
+					if( monitor != null ) {
+						monitor.setProgress( progressPre + progressSize * mNum++ / mDen );
+						canceled = monitor.isCanceled();
+					}
+				}
+			}
+		}
+		catch( Exception e ) {
+			if( schroeder.Constants.DEBUG ) {
+				e.printStackTrace();
+			}
+		}
+
+		if( monitor != null )
+			monitor.setProgress( progressPre + progressSize );
+
+		return( newModel );
+	}
+}
+

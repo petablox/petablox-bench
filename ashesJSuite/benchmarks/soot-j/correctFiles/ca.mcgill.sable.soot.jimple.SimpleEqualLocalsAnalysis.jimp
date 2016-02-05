@@ -1,0 +1,201 @@
+class ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis extends ca.mcgill.sable.soot.jimple.ForwardFlowAnalysis
+{
+    ca.mcgill.sable.soot.jimple.FlowSet emptySet;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.StmtGraph)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r0;
+        ca.mcgill.sable.soot.jimple.StmtGraph r1;
+        ca.mcgill.sable.soot.jimple.ArraySparseSet r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>(r1);
+        r2 = new ca.mcgill.sable.soot.jimple.ArraySparseSet;
+        specialinvoke r2.<init>();
+        r0.emptySet = r2;
+        r0.doAnalysis();
+        return;
+    }
+
+    protected java.lang.Object newInitialFlow()
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r0;
+        ca.mcgill.sable.soot.jimple.FlowSet r1;
+        java.lang.Object r2;
+
+        r0 := @this;
+        r1 = r0.emptySet;
+        r2 = r1.clone();
+        return r2;
+    }
+
+    protected void flowThrough(java.lang.Object, ca.mcgill.sable.soot.jimple.Stmt, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r0;
+        java.lang.Object r1, r3, r12, r23;
+        ca.mcgill.sable.soot.jimple.Stmt r2;
+        ca.mcgill.sable.soot.jimple.FlowSet r4, r5;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10;
+        ca.mcgill.sable.soot.jimple.DefinitionStmt r6;
+        ca.mcgill.sable.soot.jimple.Value r7, r8, r16, r17;
+        ca.mcgill.sable.soot.jimple.Local r9, r14, r15, r18, r25, r26, r28, r29, r30, r32;
+        ca.mcgill.sable.util.List r10, r21;
+        ca.mcgill.sable.util.Iterator r11, r22;
+        ca.mcgill.sable.soot.jimple.LocalCopy r13, r19, r20, r24, r27, r31;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = (ca.mcgill.sable.soot.jimple.FlowSet) r1;
+        r5 = (ca.mcgill.sable.soot.jimple.FlowSet) r3;
+        r4.copy(r5);
+        i0 = r2 instanceof ca.mcgill.sable.soot.jimple.DefinitionStmt;
+        if i0 == 0 goto label14;
+
+        r6 = (ca.mcgill.sable.soot.jimple.DefinitionStmt) r2;
+        r7 = r6.getLeftOp();
+        i1 = r7 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i1 == 0 goto label14;
+
+        r8 = r6.getLeftOp();
+        r9 = (ca.mcgill.sable.soot.jimple.Local) r8;
+        r10 = r4.toList();
+        r11 = r10.iterator();
+        goto label2;
+
+     label0:
+        r12 = r11.next();
+        r13 = (ca.mcgill.sable.soot.jimple.LocalCopy) r12;
+        r14 = r13.leftLocal;
+        if r14 == r9 goto label1;
+
+        r15 = r13.rightLocal;
+        if r15 != r9 goto label2;
+
+     label1:
+        r5.remove(r13, r5);
+
+     label2:
+        i2 = r11.hasNext();
+        if i2 != 0 goto label0;
+
+        r16 = r6.getRightOp();
+        i3 = r16 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i3 == 0 goto label14;
+
+        r17 = r6.getRightOp();
+        r18 = (ca.mcgill.sable.soot.jimple.Local) r17;
+        if r9 == r18 goto label14;
+
+        r19 = new ca.mcgill.sable.soot.jimple.LocalCopy;
+        specialinvoke r19.<init>(r9, r18);
+        r5.add(r19, r5);
+        r20 = new ca.mcgill.sable.soot.jimple.LocalCopy;
+        specialinvoke r20.<init>(r18, r9);
+        r5.add(r20, r5);
+        r21 = r4.toList();
+        r22 = r21.iterator();
+        goto label13;
+
+     label3:
+        r23 = r22.next();
+        r24 = (ca.mcgill.sable.soot.jimple.LocalCopy) r23;
+        r25 = r24.leftLocal;
+        if r25 == r18 goto label4;
+
+        i4 = 0;
+        goto label5;
+
+     label4:
+        i4 = 1;
+
+     label5:
+        r26 = r24.rightLocal;
+        if r26 != r9 goto label6;
+
+        i5 = 0;
+        goto label7;
+
+     label6:
+        i5 = 1;
+
+     label7:
+        i6 = i4 & i5;
+        if i6 == 0 goto label8;
+
+        r27 = new ca.mcgill.sable.soot.jimple.LocalCopy;
+        r28 = r24.rightLocal;
+        specialinvoke r27.<init>(r9, r28);
+        r5.add(r27, r5);
+
+     label8:
+        r29 = r24.rightLocal;
+        if r29 == r18 goto label9;
+
+        i7 = 0;
+        goto label10;
+
+     label9:
+        i7 = 1;
+
+     label10:
+        r30 = r24.leftLocal;
+        if r30 != r9 goto label11;
+
+        i8 = 0;
+        goto label12;
+
+     label11:
+        i8 = 1;
+
+     label12:
+        i9 = i7 & i8;
+        if i9 == 0 goto label13;
+
+        r31 = new ca.mcgill.sable.soot.jimple.LocalCopy;
+        r32 = r24.leftLocal;
+        specialinvoke r31.<init>(r32, r9);
+        r5.add(r31, r5);
+
+     label13:
+        i10 = r22.hasNext();
+        if i10 != 0 goto label3;
+
+     label14:
+        return;
+    }
+
+    protected void copy(java.lang.Object, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r0;
+        java.lang.Object r1, r2;
+        ca.mcgill.sable.soot.jimple.FlowSet r3, r4;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = (ca.mcgill.sable.soot.jimple.FlowSet) r1;
+        r4 = (ca.mcgill.sable.soot.jimple.FlowSet) r2;
+        r3.copy(r4);
+        return;
+    }
+
+    protected void merge(java.lang.Object, java.lang.Object, java.lang.Object)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleEqualLocalsAnalysis r0;
+        java.lang.Object r1, r2, r3;
+        ca.mcgill.sable.soot.jimple.FlowSet r4, r5, r6;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = (ca.mcgill.sable.soot.jimple.FlowSet) r1;
+        r5 = (ca.mcgill.sable.soot.jimple.FlowSet) r2;
+        r6 = (ca.mcgill.sable.soot.jimple.FlowSet) r3;
+        r4.intersection(r5, r6);
+        return;
+    }
+}

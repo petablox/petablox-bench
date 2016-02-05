@@ -1,0 +1,3 @@
+run 'ant release'.
+run chord.
+

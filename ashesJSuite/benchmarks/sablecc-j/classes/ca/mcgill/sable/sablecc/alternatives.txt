@@ -1,0 +1,375 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * SableCC, an object-oriented compiler framework.                   *
+ * Copyright (C) 1997, 1998 Etienne Gagnon (gagnon@sable.mcgill.ca). *
+ * All rights reserved.                                              *
+ *                                                                   *
+ * This work was done as a project of the Sable Research Group,      *
+ * School of Computer Science, McGill University, Canada             *
+ * (http://www.sable.mcgill.ca/).  It is understood that any         *
+ * modification not identified as such is not covered by the         *
+ * preceding statement.                                              *
+ *                                                                   *
+ * This work is free software; you can redistribute it and/or        *
+ * modify it under the terms of the GNU Library General Public       *
+ * License as published by the Free Software Foundation; either      *
+ * version 2 of the License, or (at your option) any later version.  *
+ *                                                                   *
+ * This work is distributed in the hope that it will be useful,      *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of    *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU *
+ * Library General Public License for more details.                  *
+ *                                                                   *
+ * You should have received a copy of the GNU Library General Public *
+ * License along with this library; if not, write to the             *
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,      *
+ * Boston, MA  02111-1307, USA.                                      *
+ *                                                                   *
+ * To submit a bug report, send a comment, or get the latest news on *
+ * this project and other Sable Research Group projects, please      *
+ * visit the web site: http://www.sable.mcgill.ca/                   *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*
+ Reference Version
+ -----------------
+ This is the latest official version on which this file is based.
+ The reference version is: $SableCCVersion: 2.8 $
+
+ Change History
+ --------------
+ A) Notes:
+
+ Please use the following template.  Most recent changes should
+ appear at the top of the list.
+
+ - Modified on [date (March 1, 1900)] by [name]. [(*) if appropriate]
+   [description of modification].
+
+ Any Modification flagged with "(*)" was done as a project of the
+ Sable Research Group, School of Computer Science,
+ McGill University, Canada (http://www.sable.mcgill.ca/).
+
+ You should add your copyright, using the following template, at
+ the top of this file, along with other copyrights.
+
+ *                                                                   *
+ * Modifications by [name] are                                       *
+ * Copyright (C) [year(s)] [your name (or company)].  All rights     *
+ * reserved.                                                         *
+ *                                                                   *
+
+ B) Changes:
+
+ - Modified on June 7, 1998 by Etienne Gagnon (gagnon@sable.mcgill.ca). (*)
+   Changed the license.
+*/
+
+Macro:AlternativeHeader
+package $0$;
+
+import ca.mcgill.sable.util.*;
+import $1$.*;
+
+public final class $2$ extends $3$
+{
+
+$
+
+Macro:NodeElement
+    private $0$ _$1$_;
+
+$
+
+Macro:ListElement
+    private final LinkedList _$1$_ = new TypedLinkedList(new $0$_Cast());
+
+$
+
+Macro:ConstructorHeader
+
+    public $0$(
+$
+
+Macro:ConstructorHeaderDeclNode
+
+        $0$ _$1$_$2$
+$
+
+Macro:ConstructorHeaderDeclList
+
+        $0$ _$1$_$2$
+$
+
+Macro:ConstructorBodyHeader
+)
+    {
+
+$
+
+Macro:ConstructorBodyNode
+        set$0$(_$1$_);
+
+
+$
+
+Macro:ConstructorBodyList
+        {
+            Object temp[] = _$0$_.toArray();
+            for(int i = 0; i < temp.length; i++)
+            {
+                this._$0$_.add(temp[i]);
+            }
+        }
+
+
+$
+
+Macro:ConstructorBodyQMark
+        if(_$2$_ instanceof X1QMark$1$)
+        {
+            set$0$(((X1QMark$1$) _$2$_).get$1$());
+        }
+        else
+        {
+            set$0$(null);
+        }
+
+
+$
+
+Macro:ConstructorBodyStar
+        while(_$0$_ instanceof X1Star$1$)
+        {
+            this._$0$_.add(((X1Star$1$) _$0$_).get$1$());
+            _$0$_ = ((X1Star$1$) _$0$_).getXStar$1$();
+        }
+
+
+$
+
+Macro:ConstructorBodyPlus
+        if(_$0$_ != null)
+        {
+            while(_$0$_ instanceof X1$1$)
+            {
+                this._$0$_.addFirst(((X1$1$) _$0$_).get$1$());
+                _$0$_ = ((X1$1$) _$0$_).getX$1$();
+            }
+            this._$0$_.addFirst(((X2$1$) _$0$_).get$1$());
+        }
+
+
+$
+
+Macro:ConstructorBodyTail
+    }
+
+$
+
+Macro:CloneHeader
+    public Object clone()
+    {
+        return new $0$(
+$
+
+Macro:CloneBodyNode
+
+            ($0$) cloneNode(_$1$_)$2$
+$
+
+Macro:CloneBodyList
+
+            cloneList(_$0$_)$1$
+$
+
+Macro:CloneTail
+);
+    }
+
+$
+
+Macro:Apply
+
+    public void apply(Switch sw)
+    {
+        ((Analysis) sw).case$0$(this);
+    }
+
+$
+
+Macro:GetSetNode
+
+    public $0$ get$1$()
+    {
+        return _$2$_;
+    }
+
+    public void set$1$($0$ node)
+    {
+        if(_$2$_ != null)
+        {
+            _$2$_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        _$2$_ = node;
+    }
+
+$
+
+Macro:GetSetList
+
+    public LinkedList get$0$()
+    {
+        return _$1$_;
+    }
+
+    public void set$0$(List list)
+    {
+        Object temp[] = list.toArray();
+        for(int i = 0; i < temp.length; i++)
+        {
+            _$1$_.add(temp[i]);
+        }
+    }
+
+$
+
+Macro:ToStringHeader
+
+    public String toString()
+    {
+        return ""
+$
+
+Macro:ToStringBodyNode
+
+            + toString(_$0$_)
+$
+
+Macro:ToStringBodyList
+
+            + toString(_$0$_)
+$
+
+Macro:ToStringTail
+;
+    }
+
+$
+
+Macro:RemoveChildHeader
+
+    void removeChild(Node child)
+    {
+
+$
+
+Macro:RemoveChildNode
+        if(_$0$_ == child)
+        {
+            _$0$_ = null;
+            return;
+        }
+
+
+$
+
+Macro:RemoveChildList
+        if(_$0$_.remove(child))
+        {
+            return;
+        }
+
+
+$
+
+Macro:RemoveChildTail
+    }
+
+$
+
+Macro:ReplaceChildHeader
+
+    void replaceChild(Node oldChild, Node newChild)
+    {
+
+$
+
+Macro:ReplaceChildNode
+        if(_$0$_ == oldChild)
+        {
+            set$1$(($2$) newChild);
+            return;
+        }
+
+
+$
+
+Macro:ReplaceChildList
+        for(ListIterator i = _$0$_.listIterator(); i.hasNext();)
+        {
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set(newChild);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
+        }
+
+
+$
+
+Macro:ReplaceChildTail
+    }
+
+$
+
+Macro:Cast
+
+    private class $0$_Cast implements Cast
+    {
+        public Object cast(Object o)
+        {
+            $1$ node = ($1$) o;
+
+            if((node.parent() != null) &&
+                (node.parent() != $2$.this))
+            {
+                node.parent().removeChild(node);
+            }
+
+            if((node.parent() == null) ||
+                (node.parent() != $2$.this))
+            {
+                node.parent($2$.this);
+            }
+
+            return node;
+        }
+    }
+
+$
+
+Macro:AlternativeTail
+}
+
+$
+
+

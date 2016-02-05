@@ -1,0 +1,63 @@
+			Javasrc Credits
+			===============
+
+ANTLR:
+The Parsing Technology is all ANTLR
+antlr can be found at www.antlr.org
+
+XREF:
+All the code in javasrc.xref and javasrc.symtab came originally
+from an article in the Java Developer's Connection: 
+"Parsers, Part IV: A Java Cross-Reference Tool"
+http://developer.java.sun.com/developer/technicalArticles/parser/xref/
+by Scott Stanchfield and Terence Parr of the MageLang Institute
+(www.magelang.com).
+
+v1.0:
+Keith Johnston
+
+v1.01:
+Fixed minor bug with overridden methods
+
+v1.02:
+Brian Nelson:
+ - added Frame with classname to top of source page
+ - added package name to top of package frame
+ - Sorted Package List in Overview frame
+Keith Johnston:
+ - Fixed bug where second java class in a file was not linked properly
+
+v1.1:
+ - Works with Java 1.1
+
+v1.2:
+ - Added title flag
+ - Variables are now cross-referenced
+ - Fixed bug where overridden methods were not cross-referenced
+ - Classname frame uses layers to avoid adding history entry
+ - Stylesheet now has entries for links
+
+v1.3:
+ - Fixed bug where only last item is referenced in "a.b.c"
+ - Fixed bug where some superclass references were not linked
+ - Fixed bug where some methods weren't linked
+
+v1.3.1:
+ - Fixed bug where in-class methods weren't linked
+
+v1.4:
+ - Enhanced reference page
+ - fixed bug where overloaded methods did not appear on the   
+   reference page.
+ - fixed overloaded method links
+ - fixed bug where volatile was not recognized
+
+v1.4.1:
+ - Fixed bug where packageName was always "?" when comments
+   were at the top
+ - Fixed bug where reference page had className twice instead
+   of className,methodName
+
+v1.4.2: 5/11
+ - Added comments to paramater strings in methods
+ - Shortened method names in links

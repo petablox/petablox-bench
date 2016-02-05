@@ -1,0 +1,23 @@
+Build report for JSpider.
+This file summarizes the configuration used to build this distribution.
+
+System summary :
+----------------
+
+Java version : 1.4.1_01
+Java vendor  : Sun Microsystems Inc.
+Ant version  : Apache Ant version 1.5.2 compiled on February 28 2003
+OS name      : Windows 2000
+OS arch      : x86
+OS version   : 5.0
+
+Project summary :
+-----------------
+
+JSpider version number : 0.4.0-dev
+JSpider version string : JSpider v0.4.0 DEV (http://j-spider.sourceforge.net)
+
+Build summary :
+---------------
+
+Build timestamp : 2003/04/06 13:33

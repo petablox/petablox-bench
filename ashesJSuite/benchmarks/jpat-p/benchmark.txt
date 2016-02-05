@@ -1,0 +1,8 @@
+Benchmark: jpat
+
+Author: Michael Jones (mjones@netgenics.com)
+
+Packaged by: Patrick Lam (plam@sable.mcgill.ca)
+Packaged on: June 4, 1999
+
+Description: This is a copy of the Java Protein Analysis Tools.

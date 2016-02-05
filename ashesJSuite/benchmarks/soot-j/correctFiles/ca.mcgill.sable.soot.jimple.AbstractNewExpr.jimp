@@ -1,0 +1,94 @@
+public class ca.mcgill.sable.soot.jimple.AbstractNewExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.NewExpr
+{
+    ca.mcgill.sable.soot.RefType type;
+
+    public java.lang.String toString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+        java.lang.StringBuffer r1, r4;
+        ca.mcgill.sable.soot.RefType r2;
+        java.lang.String r3, r5;
+
+        r0 := @this;
+        r1 = new java.lang.StringBuffer;
+        specialinvoke r1.<init>("new ");
+        r2 = r0.type;
+        r3 = r2.toString();
+        r4 = r1.append(r3);
+        r5 = r4.toString();
+        return r5;
+    }
+
+    public java.lang.String toBriefString()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+        java.lang.String r1;
+
+        r0 := @this;
+        r1 = r0.toString();
+        return r1;
+    }
+
+    public ca.mcgill.sable.soot.RefType getBaseType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+        ca.mcgill.sable.soot.RefType r1;
+
+        r0 := @this;
+        r1 = r0.type;
+        return r1;
+    }
+
+    public void setBaseType(ca.mcgill.sable.soot.RefType)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+        ca.mcgill.sable.soot.RefType r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r0.type = r1;
+        return;
+    }
+
+    public ca.mcgill.sable.soot.Type getType()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+        ca.mcgill.sable.soot.RefType r1;
+
+        r0 := @this;
+        r1 = r0.type;
+        return r1;
+    }
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public void apply(ca.mcgill.sable.util.Switch)
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+        ca.mcgill.sable.util.Switch r1;
+        ca.mcgill.sable.soot.jimple.ExprSwitch r2;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 = (ca.mcgill.sable.soot.jimple.ExprSwitch) r1;
+        r2.caseNewExpr(r0);
+        return;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.AbstractNewExpr r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+}

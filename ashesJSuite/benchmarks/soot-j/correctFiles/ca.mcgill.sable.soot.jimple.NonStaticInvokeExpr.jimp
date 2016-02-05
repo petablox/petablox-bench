@@ -1,0 +1,11 @@
+public interface ca.mcgill.sable.soot.jimple.NonStaticInvokeExpr extends java.lang.Object implements ca.mcgill.sable.soot.jimple.InvokeExpr
+{
+
+    public abstract ca.mcgill.sable.soot.jimple.Value getBase();
+
+    public abstract ca.mcgill.sable.soot.jimple.ValueBox getBaseBox();
+
+    public abstract void setBase(ca.mcgill.sable.soot.jimple.Value);
+
+    public abstract ca.mcgill.sable.util.List getUseBoxes();
+}

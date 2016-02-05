@@ -1,0 +1,44 @@
+class ca.mcgill.sable.soot.jimple.JSpecialInvokeExpr extends ca.mcgill.sable.soot.jimple.AbstractSpecialInvokeExpr implements ca.mcgill.sable.soot.jimple.SpecialInvokeExpr
+{
+
+    void <init>(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.SootMethod, ca.mcgill.sable.util.List)
+    {
+        ca.mcgill.sable.soot.jimple.JSpecialInvokeExpr r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.SootMethod r2;
+        ca.mcgill.sable.util.List r3;
+        ca.mcgill.sable.soot.jimple.Jimple r4, r8;
+        int i0, i1, i2;
+        ca.mcgill.sable.soot.jimple.ValueBox r5;
+        ca.mcgill.sable.soot.jimple.ImmediateBox[] r6;
+        ca.mcgill.sable.soot.jimple.ValueBox[] r7;
+        java.lang.Object r9;
+        ca.mcgill.sable.soot.jimple.Value r10;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 := @parameter2;
+        r4 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r5 = r4.newLocalBox(r1);
+        i1 = r3.size();
+        r6 = new ca.mcgill.sable.soot.jimple.ImmediateBox[i1];
+        specialinvoke r0.<init>(r5, r2, r6);
+        i0 = 0;
+        goto label1;
+
+     label0:
+        r7 = r0.argBoxes;
+        r8 = ca.mcgill.sable.soot.jimple.Jimple.v();
+        r9 = r3.get(i0);
+        r10 = (ca.mcgill.sable.soot.jimple.Value) r9;
+        r7[i0] = r8.newImmediateBox(r10);
+        i0 = i0 + 1;
+
+     label1:
+        i2 = r3.size();
+        if i0 < i2 goto label0;
+
+        return;
+    }
+}

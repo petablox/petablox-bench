@@ -1,0 +1,169 @@
+public class ca.mcgill.sable.soot.jimple.SimpleLocalDefs extends java.lang.Object implements ca.mcgill.sable.soot.jimple.LocalDefs
+{
+    ca.mcgill.sable.util.Map localStmtPairToDefs;
+
+    public void <init>(ca.mcgill.sable.soot.jimple.CompleteStmtGraph)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleLocalDefs r0;
+        ca.mcgill.sable.soot.jimple.CompleteStmtGraph r1;
+        java.lang.StringBuffer r2, r8, r9;
+        int i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13;
+        ca.mcgill.sable.soot.Timer r3, r12, r35, r36;
+        java.io.PrintStream r4;
+        ca.mcgill.sable.soot.jimple.StmtBody r5;
+        ca.mcgill.sable.soot.SootMethod r6;
+        java.lang.String r7, r10;
+        ca.mcgill.sable.soot.jimple.LocalDefsFlowAnalysis r11;
+        ca.mcgill.sable.util.Iterator r13, r18;
+        ca.mcgill.sable.util.HashMap r14;
+        java.lang.Object r15, r19, r27, r29, r34;
+        ca.mcgill.sable.soot.jimple.Stmt r16;
+        ca.mcgill.sable.util.List r17, r31, r33;
+        ca.mcgill.sable.soot.jimple.ValueBox r20;
+        ca.mcgill.sable.soot.jimple.Value r21, r22;
+        ca.mcgill.sable.soot.jimple.Local r23;
+        ca.mcgill.sable.soot.jimple.LocalStmtPair r24;
+        ca.mcgill.sable.util.Map r25, r26, r32;
+        ca.mcgill.sable.soot.jimple.IntPair r28;
+        ca.mcgill.sable.soot.jimple.BoundedFlowSet r30;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        i0 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i0 == 0 goto label0;
+
+        r3 = ca.mcgill.sable.soot.jimple.Main.defsTimer;
+        r3.start();
+
+     label0:
+        i1 = ca.mcgill.sable.soot.jimple.Main.isVerbose;
+        if i1 == 0 goto label1;
+
+        r4 = java.lang.System.out;
+        r2 = new java.lang.StringBuffer;
+        specialinvoke r2.<init>("[");
+        r5 = r1.getBody();
+        r6 = r5.getMethod();
+        r7 = r6.getName();
+        r8 = r2.append(r7);
+        r9 = r8.append("]     Constructing SimpleLocalDefs...");
+        r10 = r9.toString();
+        r4.println(r10);
+
+     label1:
+        r11 = new ca.mcgill.sable.soot.jimple.LocalDefsFlowAnalysis;
+        specialinvoke r11.<init>(r1);
+        i2 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i2 == 0 goto label2;
+
+        r12 = ca.mcgill.sable.soot.jimple.Main.defsPostTimer;
+        r12.start();
+
+     label2:
+        r13 = r1.iterator();
+        r14 = new ca.mcgill.sable.util.HashMap;
+        i3 = r1.size();
+        i4 = i3 * 2;
+        i5 = i4 + 1;
+        specialinvoke r14.<init>(i5, 0.7F);
+        r0.localStmtPairToDefs = r14;
+        goto label6;
+
+     label3:
+        r15 = r13.next();
+        r16 = (ca.mcgill.sable.soot.jimple.Stmt) r15;
+        r17 = r16.getUseBoxes();
+        r18 = r17.iterator();
+        goto label5;
+
+     label4:
+        r19 = r18.next();
+        r20 = (ca.mcgill.sable.soot.jimple.ValueBox) r19;
+        r21 = r20.getValue();
+        i6 = r21 instanceof ca.mcgill.sable.soot.jimple.Local;
+        if i6 == 0 goto label5;
+
+        r22 = r20.getValue();
+        r23 = (ca.mcgill.sable.soot.jimple.Local) r22;
+        r24 = new ca.mcgill.sable.soot.jimple.LocalStmtPair;
+        specialinvoke r24.<init>(r23, r16);
+        r25 = r0.localStmtPairToDefs;
+        i7 = r25.containsKey(r24);
+        if i7 != 0 goto label5;
+
+        r26 = r11.localToIntPair;
+        r27 = r26.get(r23);
+        r28 = (ca.mcgill.sable.soot.jimple.IntPair) r27;
+        r29 = r11.getFlowBeforeStmt(r16);
+        r30 = (ca.mcgill.sable.soot.jimple.BoundedFlowSet) r29;
+        i8 = r28.op1;
+        i9 = r28.op2;
+        r31 = r30.toList(i8, i9);
+        r32 = r0.localStmtPairToDefs;
+        r33 = ca.mcgill.sable.util.Collections.unmodifiableList(r31);
+        r34 = r32.put(r24, r33);
+
+     label5:
+        i10 = r18.hasNext();
+        if i10 != 0 goto label4;
+
+     label6:
+        i11 = r13.hasNext();
+        if i11 != 0 goto label3;
+
+        i12 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i12 == 0 goto label7;
+
+        r35 = ca.mcgill.sable.soot.jimple.Main.defsPostTimer;
+        r35.end();
+
+     label7:
+        i13 = ca.mcgill.sable.soot.jimple.Main.isProfilingOptimization;
+        if i13 == 0 goto label8;
+
+        r36 = ca.mcgill.sable.soot.jimple.Main.defsTimer;
+        r36.end();
+
+     label8:
+        return;
+    }
+
+    public ca.mcgill.sable.util.List getDefsOfAt(ca.mcgill.sable.soot.jimple.Local, ca.mcgill.sable.soot.jimple.Stmt)
+    {
+        ca.mcgill.sable.soot.jimple.SimpleLocalDefs r0;
+        ca.mcgill.sable.soot.jimple.Local r1;
+        ca.mcgill.sable.soot.jimple.Stmt r2;
+        ca.mcgill.sable.soot.jimple.LocalStmtPair r3;
+        ca.mcgill.sable.util.Map r4;
+        java.lang.Object r5;
+        ca.mcgill.sable.util.List r6;
+        java.lang.RuntimeException r7;
+        java.lang.StringBuffer r8, r9, r10, r12;
+        java.lang.String r11, r13;
+
+        r0 := @this;
+        r1 := @parameter0;
+        r2 := @parameter1;
+        r3 = new ca.mcgill.sable.soot.jimple.LocalStmtPair;
+        specialinvoke r3.<init>(r1, r2);
+        r4 = r0.localStmtPairToDefs;
+        r5 = r4.get(r3);
+        r6 = (ca.mcgill.sable.util.List) r5;
+        if r6 != null goto label0;
+
+        r7 = new java.lang.RuntimeException;
+        r8 = new java.lang.StringBuffer;
+        specialinvoke r8.<init>("Illegal LocalDefs query; local ");
+        r9 = r8.append(r1);
+        r10 = r9.append(" has no definition at ");
+        r11 = r2.toBriefString();
+        r12 = r10.append(r11);
+        r13 = r12.toString();
+        specialinvoke r7.<init>(r13);
+        throw r7;
+
+     label0:
+        return r6;
+    }
+}

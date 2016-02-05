@@ -1,0 +1,7 @@
+public interface ca.mcgill.sable.soot.jimple.LiveLocals extends java.lang.Object
+{
+
+    public abstract ca.mcgill.sable.util.List getLiveLocalsAfter(ca.mcgill.sable.soot.jimple.Stmt);
+
+    public abstract ca.mcgill.sable.util.List getLiveLocalsBefore(ca.mcgill.sable.soot.jimple.Stmt);
+}

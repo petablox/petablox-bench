@@ -1,0 +1,27 @@
+class ca.mcgill.sable.soot.jimple.IdentityRefBox extends ca.mcgill.sable.soot.jimple.AbstractValueBox
+{
+
+    void <init>(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.IdentityRefBox r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+
+        r0 := @this;
+        r1 := @parameter0;
+        specialinvoke r0.<init>();
+        r0.setValue(r1);
+        return;
+    }
+
+    public boolean canContainValue(ca.mcgill.sable.soot.jimple.Value)
+    {
+        ca.mcgill.sable.soot.jimple.IdentityRefBox r0;
+        ca.mcgill.sable.soot.jimple.Value r1;
+        int i0;
+
+        r0 := @this;
+        r1 := @parameter0;
+        i0 = r1 instanceof ca.mcgill.sable.soot.jimple.IdentityRef;
+        return i0;
+    }
+}

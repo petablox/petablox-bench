@@ -1,0 +1,363 @@
+<HTML>
+<HEAD>
+<!-- $Format: "  <TITLE>SableCC $SableCCVersion$ - Read Me</TITLE>"$ -->
+  <TITLE>SableCC 2.8 - Read Me</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<P >
+<A NAME="top"></A>
+<CENTER>
+  <TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+    <TR ALIGN=Center>
+      <TD><H1>
+<!-- $Format: "          <I><B><BIG>SableCC</BIG></B></I> version $SableCCVersion$"$ -->
+          <I><B><BIG>SableCC</BIG></B></I> version 2.8
+	</H1>
+	<H2>
+	  ReadMe
+	</H2>
+      </TD>
+    </TR>
+  </TABLE>
+</CENTER>
+<P >
+<!-- $Format: "Welcome to <I><B><BIG>SableCC</BIG></B></I> version $SableCCVersion$."$ -->
+Welcome to <I><B><BIG>SableCC</BIG></B></I> version 2.8.
+<P >
+Please read this document carefully.
+<P >
+<A NAME="content"></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      Content
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#top">top</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<UL>
+  <LI>
+    <A HREF="#start">Getting Started</A>
+  <LI>
+    <A HREF="#license">License</A>
+  <LI>
+    <A HREF="#pgp">Integrity of Distribution</A>
+  <LI>
+    <A HREF="#documentation">Documentation</A>
+  <LI>
+    <A HREF="#examples">Examples</A>
+  <LI>
+    <A HREF="#source">Source Code</A>
+  <LI>
+    <A HREF="#help">Getting Help</A>
+</UL>
+<P >
+<A NAME="start"></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      Getting Started
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#content">content</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<P>
+Here are the minimal steps to get <I><B><BIG>SableCC</BIG></B></I> running.
+<OL>
+  <LI>
+    <P >
+    If it is not already done, download and install the Sun Java Development
+    Kit (JDK) version 1.1 or newer from
+    <A HREF="http://java.sun.com/">http://java.sun.com/</A>.
+  <LI>
+    If it is not already done, download the latest version of
+<!-- $Format: "    <I><B><BIG>SableCC</BIG></B></I> (\"<TT>sablecc-$SableCCVersion$.jar</TT>\") from"$ -->
+    <I><B><BIG>SableCC</BIG></B></I> ("<TT>sablecc-2.8.jar</TT>") from
+    <A HREF="http://www.sable.mcgill.ca/sablecc/">http://www.sable.mcgill.ca/sablecc/</A>.
+  <LI>
+    Using the <I>jar</I> packager utility (that comes with the JDK 1.1), uncompress
+<!-- $Format: "    the file \"<TT>sablecc-$SableCCVersion$.jar</TT>\". This will create a subdirectory called"$ -->
+    the file "<TT>sablecc-2.8.jar</TT>". This will create a subdirectory called
+<!-- $Format: "    \"<TT>sablecc-$SableCCVersion$</TT>\" in the current directory."$ -->
+    "<TT>sablecc-2.8</TT>" in the current directory.
+    <DL>
+      <DT>
+	<B>Example (Windows 95/NT):</B>
+      <DD>
+	<PRE><TT>cd \</TT>
+<!-- $Format: "<TT>jar -xvf </TT><I>DownloadDirectory</I><TT>\\sablecc-$SableCCVersion$.jar</TT>"$ -->
+<TT>jar -xvf </TT><I>DownloadDirectory</I><TT>\sablecc-2.8.jar</TT>
+</PRE>
+      <DT>
+	<B>Example (Unix)</B>:
+      <DD>
+	<PRE><TT>cd ~</TT>
+<!-- $Format: "<TT>jar -xvf </TT><I>DownloadDirectory<TT></TT></I><TT>/sablecc-$SableCCVersion$.jar</TT><I><TT></TT></I>"$ -->
+<TT>jar -xvf </TT><I>DownloadDirectory<TT></TT></I><TT>/sablecc-2.8.jar</TT><I><TT></TT></I>
+</PRE>
+    </DL>
+  <LI>
+    <P >
+<!-- $Format: "    Go to the \"<TT>sablecc-$SableCCVersion$</TT>\" subdirectory."$ -->
+    Go to the "<TT>sablecc-2.8</TT>" subdirectory.
+    <DL>
+      <DT>
+	<B>Example:</B>
+      <DD>
+<!-- $Format: "        <PRE><TT>cd sablecc-$SableCCVersion$</TT>"$ -->
+        <PRE><TT>cd sablecc-2.8</TT>
+</PRE>
+    </DL>
+  <LI>
+    <P >
+    <I>(optional)</I> If you have <I>PGP version 5.0</I> or newer installed,
+    you can verify the integrity of the uncompressed files in the
+    "<TT>sablecc</TT>" subdirectory using the "<TT>*.sig</TT>" files. You can
+    fin the signing public key at:
+    <A HREF="http://www.sable.mcgill.ca/~gagnon/pgpkey.html">http://www.sable.mcgill.ca/~gagnon/pgpkey.html</A>.
+  <LI>
+    <P >
+    Read the "<TT>Readme.html</TT>" and the "<TT>License.html</TT>" files using
+    a web browser.
+  <LI>
+    Uncompress the "<TT>examples.jar</TT>" file.
+    <DL>
+      <DT>
+	<B>Example:</B>
+      <DD>
+	<PRE><TT>jar -xvf examples.jar</TT>
+</PRE>
+    </DL>
+  <LI>
+    Set the <TT>CLASSPATH</TT> environment variable to contain the files
+    "sablecc.jar" and "sableutil.jar".
+    <DL>
+      <DT>
+	<B>Example (Windows 95/NT):</B>
+      <DD>
+<!-- $Format: "	<PRE><TT>set CLASSPATH=.;c:\\sablecc-$SableCCVersion$\\sablecc.jar</TT>;<TT>c:\\sablecc-$SableCCVersion$\\sableutil.jar</TT>"$ -->
+	<PRE><TT>set CLASSPATH=.;c:\sablecc-2.8\sablecc.jar</TT>;<TT>c:\sablecc-2.8\sableutil.jar</TT>
+</PRE>
+      <DT>
+	<TT></TT><B>Example (Unix csh):</B>
+      <DD>
+<!-- $Format: "	<PRE><TT>setenv CLASSPATH .:$HOME/sablecc-$SableCCVersion$/sablecc.jar</TT>:<TT>$HOME/sablecc-$SableCCVersion$/sableutil.jar</TT>"$ -->
+	<PRE><TT>setenv CLASSPATH .:$HOME/sablecc-2.8/sablecc.jar</TT>:<TT>$HOME/sablecc-2.8/sableutil.jar</TT>
+</PRE>
+      <DT>
+	<B>Example (Unix bash):</B>
+      <DD>
+<!-- $Format: "	<PRE><TT>CLASSPATH=.:$HOME/sablecc-$SableCCVersion$/sablecc.jar</TT>:<TT>$HOME/sablecc-$SableCCVersion$/sableutil.jar</TT>"$ -->
+	<PRE><TT>CLASSPATH=.:$HOME/sablecc-2.8/sablecc.jar</TT>:<TT>$HOME/sablecc-2.8/sableutil.jar</TT>
+<TT>export CLASSPATH</TT>
+</PRE>
+    </DL>
+  <LI>
+    Verify that <I><B><BIG>SableCC</BIG></B></I> works. (It is important to use
+    the <TT>-mx</TT> option to avoid <I>out of memory</I> problems).
+    <DL>
+      <DT>
+	<B>Example:</B>
+      <DD>
+	<PRE><TT>java -mx1024m SableCC -license</TT>
+</PRE>
+    </DL>
+  <LI>
+    Try to generate, compile, and execute the MiniBasic example.
+    <DL>
+      <DT>
+	<B>Example:</B>
+      <DD>
+	<PRE><TT>cd examples</TT>
+<TT>cd MiniBasic</TT>
+<TT>java -mx1024m SableCC minibasic.txt</TT>
+<TT>javac -J-mx1024m Main.java</TT>
+<TT>java -mx1024m Main test.basic</TT>
+</PRE>
+    </DL>
+</OL>
+<P >
+<A NAME="license"></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      License
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#content">content</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<P >
+<I><B><BIG>SableCC</BIG></B></I> and the SableUtil library are covered by
+the GNU Library General Public License. You can view the copyright notice
+and the exact terms of the license in the file
+<A HREF="License.html">License.html</A>.
+<P>
+<A NAME="pgp"><!-- --></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      Integrity of Distribution
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#content">content</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<P >
+If you have <I>PGP version 5.0</I> or newer (USA/Canada:
+<A HREF="http://web.mit.edu/network/pgp.html">http://web.mit.edu/network/pgp.html</A>,
+International: <A HREF="http://www.pgpi.com/">http://www.pgpi.com/</A>),
+you can verify the integrity of this distribution using the signature files
+(*.sig). You can find the public key of the author at
+<A HREF="http://www.sable.mcgill.ca/~gagnon/pgpkey.html">http://www.sable.mcgill.ca/~gagnon/pgpkey.html</A>.
+<P>
+<A NAME="documentation"><!-- --></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      Documentation
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#content">content</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<P >
+You can find complete and detailed documentation on the
+<B><I><BIG>SableCC</BIG></I><BIG> </BIG></B>framework and syntax at the following
+site:
+<A HREF="http://www.sable.mcgill.ca/sablecc/">http://www.sable.mcgill.ca/sablecc/</A>.
+<P>
+<A NAME="examples"><!-- --></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      Examples
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#content">content</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<P >
+Some example grammars are included in the file "<TT>examples.jar</TT>".
+<P>
+<FONT COLOR="Red"><B>Be warned:</B></FONT> The Java 1.02 and Java 1.1 grammars
+are correct from a parsing point of view. BUT, <B><U>the name</U></B> of
+tokens, productions and alternatives should be <B><U>changed and
+simplified</U></B> before you build a compiler or pretty-printer using these
+grammars. For example, the existing grammars would generate the following
+class: <TT>AContinueStatementStatementWithoutTrailingSubstatement</TT>. This
+is clearly unusable!!! It would be nice if someone could fix this, and send
+the result to the
+<I><A HREF="#mailing-list"><B><BIG>SableCC</BIG></B> mailing-list</A></I>.
+<P>
+<A NAME="source"><!-- --></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      Source Code
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#content">content</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<P >
+<I><B><BIG>SableCC</BIG></B></I> is distributed along with its source code.
+To get the source code you need only to uncompress the
+"<TT>sablecc.jar</TT>" file .
+<DL>
+  <DT>
+    <B>Example:</B>
+  <DD>
+    <PRE><TT>jar -xvf sablecc.jar</TT>
+</PRE>
+</DL>
+<P>
+The same applies to SableUtil.
+<P>
+<A NAME="help"><!-- --></A>
+<TABLE WIDTH="100%" BGCOLOR="#f2ff80">
+  <TR>
+    <TD><TABLE WIDTH=100%>
+	<TR VALIGN="Top">
+	  <TD><H2>
+	      Getting Help
+	    </H2>
+	  </TD>
+	  <TD ALIGN=Right><A HREF="#content">content</A></TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<P>
+The easiest way of obtaining help is to get on the
+<I><A HREF="#mailing-list"><B><BIG>SableCC</BIG></B> mailing-list</A></I>.
+Many <I><B><BIG>SableCC</BIG></B></I> users around the world are already
+on this mailing-list. This is the best pool of information available to you.
+<H3>
+  <A NAME="mailing-list"></A> Mailing-list
+</H3>
+<P>
+To get on the <I><B><BIG>SableCC</BIG></B> mailing-list</I>, send an e-mail
+message to
+<A HREF="mailto:sablecc-list-request@sable.mcgill.ca">sablecc-list-request@sable.mcgill.ca</A>.
+Put '<B>subscribe sablecc-list your@email.address</B>' in the <B>body</B>
+of the message. Once you are on the list, you can send your questions.
+<H3>
+  Paid Support
+</H3>
+<P>
+If you have a pressing need for <I><B><BIG>SableCC</BIG></B></I> to include
+an additional feature that is key to your work, or if you want some help
+with a grammar, you get paid support from the author of
+<I><B><BIG>SableCC</BIG></B></I>. For further information, send an email
+to Etienne Gagnon
+(<A HREF="mailto:gagnon@sable.mcgill.ca">gagnon@sable.mcgill.ca</A>).
+<H3>
+  <P >
+  Bug reports and wish-list
+</H3>
+<P>
+You are welcome to send your comments and bug reports using the
+<I><A HREF="#mailing-list"><B><BIG>SableCC</BIG></B> mailing-list</A></I>.
+This helps improving <I><B><BIG>SableCC</BIG></B></I>.
+<P>
+</BODY></HTML>
+

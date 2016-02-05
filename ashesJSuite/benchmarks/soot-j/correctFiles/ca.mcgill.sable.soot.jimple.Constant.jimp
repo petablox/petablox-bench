@@ -1,0 +1,28 @@
+public abstract class ca.mcgill.sable.soot.jimple.Constant extends java.lang.Object implements ca.mcgill.sable.util.ValueObject, ca.mcgill.sable.soot.jimple.Value
+{
+
+    public abstract boolean equals(ca.mcgill.sable.soot.jimple.Constant);
+
+    public ca.mcgill.sable.util.List getUseBoxes()
+    {
+        ca.mcgill.sable.soot.jimple.Constant r0;
+        ca.mcgill.sable.util.List r1;
+
+        r0 := @this;
+        r1 = ca.mcgill.sable.soot.jimple.AbstractStmt.emptyList;
+        return r1;
+    }
+
+    public void <init>()
+    {
+        ca.mcgill.sable.soot.jimple.Constant r0;
+
+        r0 := @this;
+        specialinvoke r0.<init>();
+        return;
+    }
+
+    public abstract ca.mcgill.sable.soot.Type getType();
+
+    public abstract void apply(ca.mcgill.sable.util.Switch);
+}
