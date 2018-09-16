@@ -49,4 +49,5 @@ build java_grande/raytracer
 build sor
 build tsp
 build weblech-0.0.3
-build hedc
+pushd jspider; ./compile.sh; popd
+pushd hedc; ./compile.sh; popd
