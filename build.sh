@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 function build {
@@ -49,4 +49,4 @@ build java_grande/raytracer
 build sor
 build tsp
 build weblech-0.0.3
-#build hedc
+build hedc
