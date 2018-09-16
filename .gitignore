@@ -1,2 +1,7 @@
-dacapo/benchmarks/*/classes
-dacapo/benchmarks/*/petablox_output
+classes
+petablox_output*
+
+jspider/src/stage/
+
+# vim swp files
+.*.sw?
